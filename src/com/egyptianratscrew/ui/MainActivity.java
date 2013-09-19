@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
 
 import com.egyptianratscrew.R;
 
@@ -34,7 +35,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void viewRules() {
+	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
 		startActivity(viewRules);
 	}
