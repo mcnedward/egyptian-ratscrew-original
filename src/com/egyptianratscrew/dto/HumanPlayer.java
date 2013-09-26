@@ -74,4 +74,15 @@ public class HumanPlayer implements IPlayer {
 		// TODO Auto-generated method stub
 		return playerID;
 	}
+
+	@Override
+	public boolean hasAllCards() {
+		// TODO Auto-generated method stub
+		if (hand.size() == 52) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 }

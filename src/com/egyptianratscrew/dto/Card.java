@@ -7,10 +7,10 @@ public class Card {
 	public String cardSuit;
 	public int tillFaceValue;
 	
-	public Card(String ct, int cv, String cs) {
-		cardType = ct;
-		cardValue = cv;
-		cardSuit = cs;
+	public Card(String type, int value, String suit) {
+		cardType = type;
+		cardValue = value;
+		cardSuit = suit;
 		
 		if (cardType.equalsIgnoreCase("jack")) {
 			tillFaceValue = 1;

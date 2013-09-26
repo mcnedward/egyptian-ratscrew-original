@@ -14,31 +14,46 @@ public class Game {
 	private IPlayer player2;
 	private List<Card> theStack;
 	
-	
+	/**	
+	 * Game Constructor, creates a new instance of the game class
+	 * sets up players, creates deck, shuffles and deals cards
+	 * 
+	 * @param onePlayerGame
+	 * @param names
+	 */
 	public Game(boolean onePlayerGame, String[] names){
 		//set player variables
 		player1 = new HumanPlayer(names[0],0);
 		
 		if (onePlayerGame) {
-			player2 = new ComputerPlayer("Android");
+			player2 = new ComputerPlayer("Android",1);
 		}
 		else {
 			player2 = new HumanPlayer(names[1],1);
 		}
 		
 		
-		//create deck 
+		//create deck
 		
 		//shuffle cards
 		
 		//deal cards
 				
 	}
-	
+	/**
+	 * Play Card Method
+	 * will get called each time either player plays a card, only needs a player ID
+	 * 
+	 * @param playerID
+	 * @return
+	 */
 	public boolean playCard(int playerID) {
 		IPlayer p = getPlayerFromID(playerID);
 		IPlayer p2 = new HumanPlayer("empty", -1);
 		theStack.add(p.playCard());
+		
+		//need to update graphics here
+		
 		//if player needs to play a face and didnt
 			//decrement turns left to play face
 		if (p.needsToPlayFace() && !isFace(theStack.get(theStack.size()))) {
@@ -78,6 +93,12 @@ public class Game {
 		return true;
 	}
 	
+	/**
+	 * Saves temp players to the local variables player1 and player2
+	 * 
+	 * @param p
+	 * @param p2
+	 */
 	private void savePlayers(IPlayer p, IPlayer p2) {
 		if (p.getID() == player1.getID()) {
 			player1 = p;
@@ -89,6 +110,12 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * returns IPlayer the coresponds with playerID
+	 * 
+	 * @param playerID
+	 * @return
+	 */
 	private IPlayer getPlayerFromID(int playerID) {
 		if (player1.getID() == playerID) {
 			return player1;
@@ -97,6 +124,13 @@ public class Game {
 			return player2;
 		}
 	}
+	
+	/**
+	 * returns the opposite player
+	 * 
+	 * @param p
+	 * @return
+	 */
 	private IPlayer getOtherPlayer(IPlayer p) {
 		if (p.getName().equals(player1.getName())) {
 			return player2;
@@ -106,6 +140,12 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * returns true if the passed in card is a face or ace
+	 * 
+	 * @param c
+	 * @return
+	 */
 	private boolean isFace(Card c) {
 		if (c.cardType.equalsIgnoreCase("jack") || c.cardType.equalsIgnoreCase("queen") ||c.cardType.equalsIgnoreCase("king") ||c.cardType.equalsIgnoreCase("ace")) {
 			return true;			
@@ -116,6 +156,12 @@ public class Game {
 			
 	}
 	
+	/**
+	 * gets called with each attempt to slap the stack
+	 * also declares winner happens here
+	 * 
+	 * @param playerID
+	 */
 	public void slapStack(int playerID) {
 		IPlayer p = getPlayerFromID(playerID);
 		
@@ -124,10 +170,21 @@ public class Game {
 				p.addCard(c);
 			}
 			theStack.removeAll(theStack);
+			
+			//need to update graphics here
+			
 			savePlayers(p,getOtherPlayer(p));
+			if (p.hasAllCards()) {
+				DeclareWinner(p);
+			}
 		}
 	}
 	
+	/**
+	 * returns true if the stack is slappable
+	 * 
+	 * @return
+	 */
 	public boolean slappable() {
 		
 		boolean retBool = false;
@@ -149,6 +206,15 @@ public class Game {
 		}
 		
 		return retBool;
+	}
+	
+	/**
+	 * do stuff with the winning player
+	 * 
+	 * @param p
+	 */
+	private void DeclareWinner(IPlayer p) {
+		//do stuff with winner
 	}
 	
 }
