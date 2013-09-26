@@ -116,12 +116,15 @@ public class Game {
 			
 	}
 	
-	public void slapStack(IPlayer p) {
+	public void slapStack(int playerID) {
+		IPlayer p = getPlayerFromID(playerID);
+		
 		if (slappable()) {
 			for (Card c : theStack) {
 				p.addCard(c);
 			}
 			theStack.removeAll(theStack);
+			savePlayers(p,getOtherPlayer(p));
 		}
 	}
 	
