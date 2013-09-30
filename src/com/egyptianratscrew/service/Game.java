@@ -7,9 +7,15 @@ import com.egyptianratscrew.dto.ComputerPlayer;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
 
-
+/**
+ * Game Class
+ * 
+ * @author AJ
+ *
+ */
 public class Game {
 
+	private static final String COMPUTER_PLAYER_NAME = "Android";
 	private IPlayer player1;
 	private IPlayer player2;
 	private List<Card> theStack;
@@ -26,7 +32,7 @@ public class Game {
 		player1 = new HumanPlayer(names[0],0);
 		
 		if (onePlayerGame) {
-			player2 = new ComputerPlayer("Android",1);
+			player2 = new ComputerPlayer(COMPUTER_PLAYER_NAME, 1);
 		}
 		else {
 			player2 = new HumanPlayer(names[1],1);
