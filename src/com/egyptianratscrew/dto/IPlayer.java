@@ -10,4 +10,5 @@ public interface IPlayer {
 	public boolean myTurn();
 	public void setMyTurn(boolean b);
 	public int getID();
+	public boolean hasAllCards();
 }

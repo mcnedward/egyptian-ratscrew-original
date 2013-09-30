@@ -1,16 +1,16 @@
 package com.egyptianratscrew.dto;
 
-public class Card2 {
+public class Card {
 
 	public String cardType;
 	public int cardValue;
 	public String cardSuit;
 	public int tillFaceValue;
 	
-	public Card2(String ct, int cv, String cs) {
-		cardType = ct;
-		cardValue = cv;
-		cardSuit = cs;
+	public Card(String type, int value, String suit) {
+		cardType = type;
+		cardValue = value;
+		cardSuit = suit;
 		
 		if (cardType.equalsIgnoreCase("jack")) {
 			tillFaceValue = 1;
