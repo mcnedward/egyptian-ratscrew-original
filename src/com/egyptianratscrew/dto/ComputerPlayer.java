@@ -5,13 +5,13 @@ public class ComputerPlayer implements IPlayer {
 	}
 
 	@Override
-	public void addCard(Card c) {
+	public void addCard(Card2 c) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public Card playCard() {
+	public Card2 playCard() {
 		// TODO Auto-generated method stub
 		return null;
 	}

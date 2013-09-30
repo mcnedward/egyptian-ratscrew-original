@@ -4,7 +4,7 @@ import java.util.List;
 
 public class HumanPlayer implements IPlayer {
 	private String playerName;
-	private List<Card> hand;
+	private List<Card2> hand;
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
@@ -15,15 +15,15 @@ public class HumanPlayer implements IPlayer {
 	}
 
 	@Override
-	public void addCard(Card c) {
+	public void addCard(Card2 c) {
 		// TODO Auto-generated method stub
 		hand.add(c);
 	}
 
 	@Override
-	public Card playCard() {
+	public Card2 playCard() {
 		// TODO Auto-generated method stub
-		Card retCard = hand.get(0);
+		Card2 retCard = hand.get(0);
 		hand.remove(0);
 		return retCard;
 	}

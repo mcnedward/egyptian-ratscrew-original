@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.service.Game;
 
 /**
  * This page is the Main Menu for the Egyptian Ratscrew game
@@ -16,8 +17,9 @@ import com.egyptianratscrew.R;
  * - Starting a new game against a human
  * 
  * Created 9/12/13
+ * 
  * @author Edward
- *
+ * 
  */
 
 public class MainActivity extends Activity {
@@ -38,6 +40,11 @@ public class MainActivity extends Activity {
 	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
 		startActivity(viewRules);
+	}
+
+	public void startNewGame(View view) {
+		Intent game = new Intent(this, Game.class);
+		startActivity(game);
 	}
 
 }

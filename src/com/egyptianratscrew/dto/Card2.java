@@ -1,13 +1,13 @@
 package com.egyptianratscrew.dto;
 
-public class Card {
+public class Card2 {
 
 	public String cardType;
 	public int cardValue;
 	public String cardSuit;
 	public int tillFaceValue;
 	
-	public Card(String ct, int cv, String cs) {
+	public Card2(String ct, int cv, String cs) {
 		cardType = ct;
 		cardValue = cv;
 		cardSuit = cs;

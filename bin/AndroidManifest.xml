@@ -7,7 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-
+    
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -23,6 +23,8 @@
             </intent-filter>
         </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewRules" >
+        </activity>
+        <activity android:name="com.egyptianratscrew.service.Game" >
         </activity>
     </application>
 
