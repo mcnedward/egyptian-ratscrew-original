@@ -54,7 +54,7 @@ public class CardDeck {
 			} else
 				value = Integer.parseInt(type);
 
-			Card card = new Card(suit, type, value, imageName, context);
+			Card card = new Card(type, value, suit, imageName, context);
 			cardDeck.add(card);
 		}
 	}
@@ -64,11 +64,11 @@ public class CardDeck {
 	}
 
 	public String getCardType(int position) {
-		return cardDeck.get(position).type;
+		return cardDeck.get(position).cardType;
 	}
 
 	public int getCardValue(int position) {
-		return cardDeck.get(position).value;
+		return cardDeck.get(position).cardValue;
 	}
 
 }
