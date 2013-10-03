@@ -4,7 +4,7 @@ import java.util.List;
 
 public class HumanPlayer implements IPlayer {
 	private String playerName;
-	private List<Card2> hand;
+	private List<Card> hand;
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
@@ -15,15 +15,15 @@ public class HumanPlayer implements IPlayer {
 	}
 
 	@Override
-	public void addCard(Card2 c) {
+	public void addCard(Card c) {
 		// TODO Auto-generated method stub
 		hand.add(c);
 	}
 
 	@Override
-	public Card2 playCard() {
+	public Card playCard() {
 		// TODO Auto-generated method stub
-		Card2 retCard = hand.get(0);
+		Card retCard = hand.get(0);
 		hand.remove(0);
 		return retCard;
 	}
@@ -73,5 +73,16 @@ public class HumanPlayer implements IPlayer {
 	public int getID() {
 		// TODO Auto-generated method stub
 		return playerID;
+	}
+
+	@Override
+	public boolean hasAllCards() {
+		// TODO Auto-generated method stub
+		if (hand.size() == 52) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
