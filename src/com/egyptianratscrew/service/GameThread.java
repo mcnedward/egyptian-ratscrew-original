@@ -1,6 +1,7 @@
 package com.egyptianratscrew.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -149,6 +150,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		// Display the cards in player 1's hand
 		for (Card card : player1) {
 			canvas.drawBitmap(card.getCardBitmap(), topX, topY, null);
+			topX += 5;
 			topY += 0.5;
 		}
 		// Display the cards in player 2's hand
@@ -159,18 +161,19 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		}
 
 		// Display the cards in the middle of the table
-		int x = 0;
 		if (middleDeck != null) {
-			for (Card card : middleDeck) {
+			Iterator<Card> it = middleDeck.iterator();
+			// Display the first card centered
+			if (it.hasNext()) {
+				canvas.drawBitmap(it.next().getCardBitmap(), middleX, middleY, null);
 				// Rotate every other card
-				if ((x & 1) == 0) {
-					canvas.drawBitmap(card.getCardBitmap(), middleX, middleY, null);
-				} else {
-					Bitmap b = rotateBitmap(card.getCardBitmap(), 90);
+				int degree = 20;
+				while (it.hasNext()) {
+					Bitmap b = rotateBitmap(it.next().getCardBitmap(), degree);
 					canvas.drawBitmap(b, ((gameSurface.getWidth() - b.getWidth()) / 2),
 							((gameSurface.getHeight() - b.getHeight()) / 2), null);
+					degree += 20;
 				}
-				x++;
 			}
 		}
 
@@ -292,7 +295,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		float scaleHeight = ((float) 150) / faceDownCard.getHeight();
 		Matrix matrix = new Matrix();
 		matrix.postScale(scaleWidth, scaleHeight);
-		matrix.postRotate(90);
+		matrix.postRotate(degree);
 		b = Bitmap.createBitmap(b, 0, 0, faceDownCard.getWidth(), faceDownCard.getHeight(), matrix, true);
 		return b;
 	}
