@@ -6,6 +6,7 @@ import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+
 public class RatscrewDatabase {
 	private static String TAG = "MusicDatabase";
 
@@ -52,7 +53,7 @@ public class RatscrewDatabase {
 			final int numberOfWins = user.getNumberOfWins();
 			final int numberOfLosses = user.getNumberOfLosses();
 			final int highestWinningStreak = user.getHighestWinningStreak();
-			final int highestLosingStreak = user.getHighestLossingStreak();
+			final int highestLosingStreak = user.getHighestLosingStreak();
 			final int numberOfTies = user.getNumberOfTies();
 			final int totalGames = user.getTotalGames();
 			final int highScore = user.getHighScore();
@@ -66,7 +67,7 @@ public class RatscrewDatabase {
 			final int numberOfWinsColumn = ih.getColumnIndex(NUMBER_OF_WINS);
 			final int numberOfLossesColumn = ih.getColumnIndex(NUMBER_OF_LOSSES);
 			final int highestWinningStreakColumn = ih.getColumnIndex(HIGHEST_WINNING_STREAK);
-			final int highestLossingStreakColumn = ih.getColumnIndex(HIGHEST_LOSING_STREAK);
+			final int highestLosingStreakColumn = ih.getColumnIndex(HIGHEST_LOSING_STREAK);
 			final int numberOfTiesColumn = ih.getColumnIndex(NUMBER_OF_TIES);
 			final int totalGamesColumn = ih.getColumnIndex(TOTAL_GAMES);
 			final int highScoreColumn = ih.getColumnIndex(HIGH_SCORE);
@@ -87,7 +88,7 @@ public class RatscrewDatabase {
 				ih.bind(numberOfWinsColumn, numberOfWins);
 				ih.bind(numberOfLossesColumn, numberOfLosses);
 				ih.bind(highestWinningStreakColumn, highestWinningStreak);
-				ih.bind(highestLossingStreakColumn, highestLosingStreak);
+				ih.bind(highestLosingStreakColumn, highestLosingStreak);
 				ih.bind(numberOfTiesColumn, numberOfTies);
 				ih.bind(totalGamesColumn, totalGames);
 				ih.bind(highScoreColumn, highScore);
