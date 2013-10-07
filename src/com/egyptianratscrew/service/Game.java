@@ -1,8 +1,17 @@
 package com.egyptianratscrew.service;
 
 import java.util.List;
+import java.util.Random;
+import com.egyptianratscrew.R;
+
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.RelativeLayout;
 
 import com.egyptianratscrew.dto.Card;
+
+import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.ComputerPlayer;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
@@ -13,13 +22,34 @@ import com.egyptianratscrew.dto.IPlayer;
  * @author AJ
  *
  */
-public class Game {
+public class Game extends Activity{
 
 	private static final String COMPUTER_PLAYER_NAME = "Android";
 	private IPlayer player1;
 	private IPlayer player2;
 	private List<Card> theStack;
 	
+	private CardDeck cd;
+	private List<Card> cardDeck;
+	private RelativeLayout table;
+	private GameSurface tableCardSurface;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState){
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.game_layout);
+		
+		table = (RelativeLayout) findViewById(R.id.Table);
+		tableCardSurface = new GameSurface(this);
+		table.addView(tableCardSurface);
+		
+		
+	}
+	
+	public Game() {
+		
+	}
 	/**	
 	 * Game Constructor, creates a new instance of the game class
 	 * sets up players, creates deck, shuffles and deals cards
@@ -40,10 +70,16 @@ public class Game {
 		
 		
 		//create deck
+		shuffleCards(cardDeck);
 		
 		//shuffle cards
-		
+	}	
 		//deal cards
+		public void dealCards(){
+			tableCardSurface = new GameSurface(this);
+			table.addView(tableCardSurface);
+			cd = new CardDeck(this);
+			cardDeck = cd.cardDeck;
 				
 	}
 	/**
@@ -221,6 +257,17 @@ public class Game {
 	 */
 	private void DeclareWinner(IPlayer p) {
 		//do stuff with winner
+	}
+	
+	public void shuffleCards(List<Card> cardDeck){
+		int arrayLength = cardDeck.size();
+		Random random = new Random();
+		while (arrayLength > 1){
+			int nextRandom = random.nextInt(arrayLength--);
+			Card card = cardDeck.get(nextRandom);
+			cardDeck.set(nextRandom, cardDeck.get(arrayLength));
+			cardDeck.set(arrayLength, card);
+		}
 	}
 	
 }
