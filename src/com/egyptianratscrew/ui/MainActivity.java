@@ -37,14 +37,18 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	public void viewRules(View view) {
-		Intent viewRules = new Intent(this, ViewRules.class);
-		startActivity(viewRules);
-	}
-
 	public void startNewGame(View view) {
 		Intent game = new Intent(this, Game.class);
 		startActivity(game);
 	}
 
+	public void viewRules(View view) {
+		Intent viewRules = new Intent(this, ViewRules.class);
+		startActivity(viewRules);
+	}
+
+	public void viewStatistics(View view) {
+		Intent viewStatistics = new Intent(this, ViewStatistics.class);
+		startActivity(viewStatistics);
+	}
 }

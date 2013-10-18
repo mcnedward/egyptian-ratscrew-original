@@ -256,67 +256,81 @@ public final class R {
         public static final int c8=0x7f020014;
         public static final int c9=0x7f020015;
         public static final int ca=0x7f020016;
-        public static final int cj=0x7f020017;
-        public static final int ck=0x7f020018;
-        public static final int cq=0x7f020019;
-        public static final int d10=0x7f02001a;
-        public static final int d2=0x7f02001b;
-        public static final int d3=0x7f02001c;
-        public static final int d4=0x7f02001d;
-        public static final int d5=0x7f02001e;
-        public static final int d6=0x7f02001f;
-        public static final int d7=0x7f020020;
-        public static final int d8=0x7f020021;
-        public static final int d9=0x7f020022;
-        public static final int da=0x7f020023;
-        public static final int dj=0x7f020024;
-        public static final int dk=0x7f020025;
-        public static final int dq=0x7f020026;
-        public static final int h10=0x7f020027;
-        public static final int h2=0x7f020028;
-        public static final int h3=0x7f020029;
-        public static final int h4=0x7f02002a;
-        public static final int h5=0x7f02002b;
-        public static final int h6=0x7f02002c;
-        public static final int h7=0x7f02002d;
-        public static final int h8=0x7f02002e;
-        public static final int h9=0x7f02002f;
-        public static final int ha=0x7f020030;
-        public static final int hj=0x7f020031;
-        public static final int hk=0x7f020032;
-        public static final int hq=0x7f020033;
-        public static final int ic_launcher=0x7f020034;
-        public static final int jokerblue=0x7f020035;
-        public static final int jokerred=0x7f020036;
-        public static final int s10=0x7f020037;
-        public static final int s2=0x7f020038;
-        public static final int s3=0x7f020039;
-        public static final int s4=0x7f02003a;
-        public static final int s5=0x7f02003b;
-        public static final int s6=0x7f02003c;
-        public static final int s7=0x7f02003d;
-        public static final int s8=0x7f02003e;
-        public static final int s9=0x7f02003f;
-        public static final int sa=0x7f020040;
-        public static final int sj=0x7f020041;
-        public static final int sk=0x7f020042;
-        public static final int sq=0x7f020043;
+        public static final int cell_shape=0x7f020017;
+        public static final int cj=0x7f020018;
+        public static final int ck=0x7f020019;
+        public static final int cq=0x7f02001a;
+        public static final int d10=0x7f02001b;
+        public static final int d2=0x7f02001c;
+        public static final int d3=0x7f02001d;
+        public static final int d4=0x7f02001e;
+        public static final int d5=0x7f02001f;
+        public static final int d6=0x7f020020;
+        public static final int d7=0x7f020021;
+        public static final int d8=0x7f020022;
+        public static final int d9=0x7f020023;
+        public static final int da=0x7f020024;
+        public static final int dj=0x7f020025;
+        public static final int dk=0x7f020026;
+        public static final int dq=0x7f020027;
+        public static final int h10=0x7f020028;
+        public static final int h2=0x7f020029;
+        public static final int h3=0x7f02002a;
+        public static final int h4=0x7f02002b;
+        public static final int h5=0x7f02002c;
+        public static final int h6=0x7f02002d;
+        public static final int h7=0x7f02002e;
+        public static final int h8=0x7f02002f;
+        public static final int h9=0x7f020030;
+        public static final int ha=0x7f020031;
+        public static final int hj=0x7f020032;
+        public static final int hk=0x7f020033;
+        public static final int hq=0x7f020034;
+        public static final int ic_launcher=0x7f020035;
+        public static final int jokerblue=0x7f020036;
+        public static final int jokerred=0x7f020037;
+        public static final int s10=0x7f020038;
+        public static final int s2=0x7f020039;
+        public static final int s3=0x7f02003a;
+        public static final int s4=0x7f02003b;
+        public static final int s5=0x7f02003c;
+        public static final int s6=0x7f02003d;
+        public static final int s7=0x7f02003e;
+        public static final int s8=0x7f02003f;
+        public static final int s9=0x7f020040;
+        public static final int sa=0x7f020041;
+        public static final int sj=0x7f020042;
+        public static final int sk=0x7f020043;
+        public static final int sq=0x7f020044;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f090004;
-        public static final int Table=0x7f090005;
-        public static final int action_settings=0x7f090008;
+        public static final int LinearLayout1=0x7f090005;
+        public static final int Table=0x7f090006;
+        public static final int action_settings=0x7f090014;
         public static final int btnComputer=0x7f090002;
         public static final int btnHuman=0x7f090003;
         public static final int btnRules=0x7f090001;
+        public static final int btnStatistics=0x7f090004;
         public static final int txtAppName=0x7f090000;
-        public static final int txtRules=0x7f090006;
-        public static final int txtRulesDescription=0x7f090007;
+        public static final int txtDisplayEmail=0x7f09000a;
+        public static final int txtDisplayName=0x7f09000b;
+        public static final int txtDisplayNumberOfLosses=0x7f090011;
+        public static final int txtDisplayNumberOfTies=0x7f090012;
+        public static final int txtDisplayNumberOfWins=0x7f090010;
+        public static final int txtDisplayTotalGames=0x7f090013;
+        public static final int txtDisplayUserName=0x7f090009;
+        public static final int txtRules=0x7f090007;
+        public static final int txtRulesDescription=0x7f090008;
+        public static final int txtStatLoss=0x7f09000d;
+        public static final int txtStatTies=0x7f09000e;
+        public static final int txtStatTotal=0x7f09000f;
+        public static final int txtStatWin=0x7f09000c;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int game_layout=0x7f030001;
         public static final int rules=0x7f030002;
+        public static final int statistics=0x7f030003;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -324,11 +338,20 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        /**  Strings for Buttons 
+         */
         public static final int computer=0x7f060004;
         public static final int hello_world=0x7f060002;
         public static final int human=0x7f060005;
-        public static final int rules=0x7f060003;
-        public static final int rulesDescription=0x7f060006;
+        public static final int numberOfLosses=0x7f060009;
+        public static final int numberOfTies=0x7f06000a;
+        /**  Strings for Statistics Layout 
+         */
+        public static final int numberOfWins=0x7f060008;
+        public static final int rules=0x7f060006;
+        public static final int rulesDescription=0x7f060003;
+        public static final int statistics=0x7f060007;
+        public static final int totalGames=0x7f06000b;
     }
     public static final class style {
         /** 
