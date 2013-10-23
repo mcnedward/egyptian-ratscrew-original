@@ -26,5 +26,6 @@
     <string name="numberOfLosses">Number of Losses:</string>
     <string name="numberOfTies">Number of Ties:</string>
     <string name="totalGames">Total Games:</string>
+    <string name="highScore">High Score:</string>
 
 </resources>

@@ -36,6 +36,7 @@ public class ViewStatistics extends Activity {
 		user.setNumberOfLosses(2);
 		user.setNumberOfTies(1);
 		user.setTotalGames(13);
+		user.setHighScore(50);
 
 		displayUserData(user);
 	}
@@ -62,6 +63,7 @@ public class ViewStatistics extends Activity {
 		TextView txtDisplayNumberOfLosses = (TextView) findViewById(R.id.txtDisplayNumberOfLosses);
 		TextView txtDisplayNumberOfTies = (TextView) findViewById(R.id.txtDisplayNumberOfTies);
 		TextView txtDisplayTotalGames = (TextView) findViewById(R.id.txtDisplayTotalGames);
+		TextView txtDisplayHighScore = (TextView) findViewById(R.id.txtDisplayHighScore);
 
 		txtDisplayUserName.setText(user.getUserName());
 		txtDisplayEmail.setText(user.getEmail());
@@ -71,6 +73,7 @@ public class ViewStatistics extends Activity {
 		txtDisplayNumberOfLosses.setText(String.valueOf(user.getNumberOfLosses()));
 		txtDisplayNumberOfTies.setText(String.valueOf(user.getNumberOfTies()));
 		txtDisplayTotalGames.setText(String.valueOf(user.getTotalGames()));
+		txtDisplayHighScore.setText(String.valueOf(user.getHighScore()));
 	}
 
 }

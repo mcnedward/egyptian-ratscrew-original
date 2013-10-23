@@ -83,6 +83,15 @@
                 android:padding="5dp"
                 android:text="@string/totalGames"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+            <TextView
+                android:id="@+id/txtStatHighScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="5dp"
+                android:text="@string/highScore"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
         <LinearLayout
@@ -122,6 +131,16 @@
 
             <TextView
                 android:id="@+id/txtDisplayTotalGames"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="5dp"
+                android:text="Number"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+            
+            <TextView
+                android:id="@+id/txtDisplayHighScore"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
