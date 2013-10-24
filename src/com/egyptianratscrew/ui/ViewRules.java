@@ -10,8 +10,9 @@ import com.egyptianratscrew.R;
  * Activity for viewing the rules to Egyptian Ratscrew
  * 
  * Created 9/12/13
+ * 
  * @author Edward
- *
+ * 
  */
 
 public class ViewRules extends Activity {
