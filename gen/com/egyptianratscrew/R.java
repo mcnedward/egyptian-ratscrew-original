@@ -306,11 +306,16 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f090005;
         public static final int Table=0x7f090006;
-        public static final int action_settings=0x7f090016;
+        public static final int action_settings=0x7f09001f;
         public static final int btnComputer=0x7f090002;
         public static final int btnHuman=0x7f090003;
         public static final int btnRules=0x7f090001;
         public static final int btnStatistics=0x7f090004;
+        public static final int lblEmail=0x7f09001b;
+        public static final int lblFirstName=0x7f090017;
+        public static final int lblPassword=0x7f09001d;
+        public static final int lblUserId=0x7f090016;
+        public static final int lblUserName=0x7f09001a;
         public static final int txtAppName=0x7f090000;
         public static final int txtDisplayEmail=0x7f09000a;
         public static final int txtDisplayHighScore=0x7f090015;
@@ -320,6 +325,10 @@ public final class R {
         public static final int txtDisplayNumberOfWins=0x7f090011;
         public static final int txtDisplayTotalGames=0x7f090014;
         public static final int txtDisplayUserName=0x7f090009;
+        public static final int txtEmail=0x7f09001c;
+        public static final int txtFirstName=0x7f090018;
+        public static final int txtLastName=0x7f090019;
+        public static final int txtPassword=0x7f09001e;
         public static final int txtRules=0x7f090007;
         public static final int txtRulesDescription=0x7f090008;
         public static final int txtStatHighScore=0x7f090010;
@@ -333,6 +342,7 @@ public final class R {
         public static final int game_layout=0x7f030001;
         public static final int rules=0x7f030002;
         public static final int statistics=0x7f030003;
+        public static final int user=0x7f030004;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -346,6 +356,12 @@ public final class R {
         public static final int hello_world=0x7f060002;
         public static final int highScore=0x7f06000c;
         public static final int human=0x7f060005;
+        public static final int lblEmail=0x7f060011;
+        public static final int lblFirstName=0x7f06000e;
+        public static final int lblLastName=0x7f06000f;
+        public static final int lblPassword=0x7f060012;
+        public static final int lblUserID=0x7f06000d;
+        public static final int lblUserName=0x7f060010;
         public static final int numberOfLosses=0x7f060009;
         public static final int numberOfTies=0x7f06000a;
         /**  Strings for Statistics Layout 
@@ -355,6 +371,12 @@ public final class R {
         public static final int rulesDescription=0x7f060003;
         public static final int statistics=0x7f060007;
         public static final int totalGames=0x7f06000b;
+        public static final int txtEmail=0x7f060017;
+        public static final int txtFirstName=0x7f060014;
+        public static final int txtLastName=0x7f060015;
+        public static final int txtPassword=0x7f060018;
+        public static final int txtUserId=0x7f060013;
+        public static final int txtUserName=0x7f060016;
     }
     public static final class style {
         /** 

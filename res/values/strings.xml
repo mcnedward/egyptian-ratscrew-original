@@ -27,5 +27,17 @@
     <string name="numberOfTies">Number of Ties:</string>
     <string name="totalGames">Total Games:</string>
     <string name="highScore">High Score:</string>
+    <string name="lblUserID">User ID</string>
+    <string name="lblFirstName">First Name</string>
+    <string name="lblLastName">Last Name</string>
+    <string name="lblUserName">User Name</string>
+    <string name="lblEmail">Email</string>
+    <string name="lblPassword">Password</string>
+    <string name="txtUserId"></string>
+    <string name="txtFirstName"></string>
+    <string name="txtLastName"></string>
+    <string name="txtUserName"></string>
+    <string name="txtEmail"></string>
+    <string name="txtPassword"></string>
 
 </resources>
