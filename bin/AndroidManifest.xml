@@ -7,12 +7,15 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
-    
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
+        <!-- Activities -->
+
         <activity
             android:name="com.egyptianratscrew.ui.MainActivity"
             android:label="@string/app_name" >
@@ -22,10 +25,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.egyptianratscrew.ui.ViewRules" >
-        </activity>
         <activity android:name="com.egyptianratscrew.service.Game" >
         </activity>
+        <activity android:name="com.egyptianratscrew.ui.ViewRules" >
+        </activity>
+        <activity android:name="com.egyptianratscrew.ui.ViewStatistics" >
+        </activity>
+        
+        <!-- End Activities -->
     </application>
 
 </manifest>
