@@ -2,15 +2,12 @@ package com.egyptianratscrew.service;
 
 import java.util.List;
 import java.util.Random;
-import com.egyptianratscrew.R;
+import java.util.Timer;
+import java.util.TimerTask;
 
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.RelativeLayout;
+import android.content.Context;
 
 import com.egyptianratscrew.dto.Card;
-
 import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.ComputerPlayer;
 import com.egyptianratscrew.dto.HumanPlayer;
@@ -22,34 +19,21 @@ import com.egyptianratscrew.dto.IPlayer;
  * @author AJ
  *
  */
-public class Game extends Activity{
+public class Game {
 
 	private static final String COMPUTER_PLAYER_NAME = "Android";
-	private IPlayer player1;
-	private IPlayer player2;
-	private List<Card> theStack;
+	private static final int DELAY_INTERVAL = 500;
+	private static final long TIME_BETWEEN_TURNS = 1500;
+	public IPlayer player1;
+	public IPlayer player2;
+	public List<Card> theStack;
 	
 	private CardDeck cd;
 	private List<Card> cardDeck;
-	private RelativeLayout table;
-	private GameSurface tableCardSurface;
+	private Context context;
 	
+	private long compSlapDelay;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState){
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.game_layout);
-		
-		table = (RelativeLayout) findViewById(R.id.Table);
-		tableCardSurface = new GameSurface(this);
-		table.addView(tableCardSurface);
-		
-		
-	}
-	
-	public Game() {
-		
-	}
 	/**	
 	 * Game Constructor, creates a new instance of the game class
 	 * sets up players, creates deck, shuffles and deals cards
@@ -57,30 +41,55 @@ public class Game extends Activity{
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, String[] names){
+	public Game(boolean onePlayerGame, int difficulty, String[] names, Context con){
+		context = con;
 		//set player variables
-		player1 = new HumanPlayer(names[0],0);
+		if (names.length > 0 ) player1 = new HumanPlayer(names[0],0);
 		
-		if (onePlayerGame) {
+		if (onePlayerGame && names.length > 1) {
 			player2 = new ComputerPlayer(COMPUTER_PLAYER_NAME, 1);
 		}
 		else {
 			player2 = new HumanPlayer(names[1],1);
 		}
 		
+		compSlapDelay = difficulty * DELAY_INTERVAL;
+	
+		
+		
+		player1.setMyTurn(true);
+		player2.setMyTurn(false);
+		player1.setTillFace(0);
+		player2.setTillFace(0);
+		
 		
 		//create deck
-		shuffleCards(cardDeck);
 		
-		//shuffle cards
+		cd = new CardDeck(context);
+		cardDeck = cd.cardDeck;
+		shuffleCards(cardDeck);
+		dealCards();
+		
+		//update graphics
+		
 	}	
 		//deal cards
-		public void dealCards(){
-			tableCardSurface = new GameSurface(this);
-			table.addView(tableCardSurface);
-			cd = new CardDeck(this);
-			cardDeck = cd.cardDeck;
+	public void dealCards(){
+			
+		for (int i = 0; i > cardDeck.size(); i++)
+		{
+			if ((i % 2) == 0 )
+			{
 				
+				player1.addCard(cardDeck.get(i));
+				
+			}
+			else
+			{
+				player2.addCard(cardDeck.get(i));
+				
+			}
+		}
 	}
 	/**
 	 * Play Card Method
@@ -131,6 +140,18 @@ public class Game extends Activity{
 		}
 		
 		savePlayers(p,p2);
+		
+		//if the stack is slappable, start timer to slap stack
+		if (slappable()) {
+			Timer compSlapTimer = new Timer();
+			compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
+		}
+		
+		//if it is the computers turn (player 2) start timer to play card
+		if (player2.myTurn()) {
+			Timer compTurnTimer = new Timer();
+			compTurnTimer.schedule(new CompTurnTask(), TIME_BETWEEN_TURNS);
+		}
 		
 		return true;
 	}
@@ -268,6 +289,29 @@ public class Game extends Activity{
 			cardDeck.set(nextRandom, cardDeck.get(arrayLength));
 			cardDeck.set(arrayLength, card);
 		}
+	}
+	
+	class CompSlapTask extends TimerTask  {
+	     
+	     public CompSlapTask() {
+	    
+	     }
+
+	     @Override
+	     public void run() {
+	         slapStack(player2.getID());
+	     }
+	}
+	class CompTurnTask extends TimerTask  {
+	     
+	     public CompTurnTask() {
+	    
+	     }
+
+	     @Override
+	     public void run() {
+	         playCard(player2.getID());
+	     }
 	}
 	
 }

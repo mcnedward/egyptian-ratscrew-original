@@ -43,7 +43,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void startNewGame(View view) {
-		Intent game = new Intent(this, Game.class);
+		Intent game = new Intent(this, GameActivity.class);
 		startActivity(game);
 	}
 

@@ -85,4 +85,9 @@ public class HumanPlayer implements IPlayer {
 			return false;
 		}
 	}
+	
+	@Override
+	public List<Card> getHand(){
+		return hand;
+	}
 }

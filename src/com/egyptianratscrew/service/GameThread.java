@@ -44,12 +44,17 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 	private List<Card> player2;					// List of cards for player 2
 	private List<Card> middleDeck;				// List of cards for the middle of the game table
 	private Bitmap faceDownCard;				// Bitmap image of the face down card
-
+	private Game game;
+	private int topID;
+	private int botID;
+	
 	// Coordinates for the top and bottom player's cards
 	private float topX;
 	private float topY;
 	private float bottomX;
 	private float bottomY;
+	private float middleY;
+	private float middleX;
 
 	/**
 	 * Creates a new GameThread. All variables are initialized here, and the face down card bitmap is set here to be
@@ -60,13 +65,15 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 	 * @param gameSurface
 	 *            - The game surface that the UI of the thread is using
 	 */
-	public GameThread(Context context, GameSurface gameSurface) {
+	public GameThread(Context context, GameSurface gameSurface, Game game) {
 		this.context = context;
 		this.gameSurface = gameSurface;
 		this.surfaceHolder = gameSurface.getHolder();
-		cd = new CardDeck(context);
-		cardDeck = cd.cardDeck;
-		shuffleCards(cardDeck);
+		this.game = game;
+		
+		topID = 1; //game.player2.getID();
+		botID = 0; //game.player1.getID();
+		
 		player1 = new ArrayList<Card>();
 		player2 = new ArrayList<Card>();
 		middleDeck = new ArrayList<Card>();
@@ -118,15 +125,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 	 * Deal cards to the top and bottom players
 	 */
 	public void dealCards() {
-		int x = 0;
-		for (Card card : cardDeck) {
-			if ((x & 1) == 0) {
-				player1.add(card);
-			} else {
-				player2.add(card);
-			}
-			x++;
-		}
+		game.dealCards();
 
 		displayCards();
 	}
@@ -144,25 +143,25 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		topY = 10;
 		bottomX = 10;
 		bottomY = gameSurface.getBottom() - 20;
-		float middleX = (gameSurface.getWidth() - faceDownCard.getWidth()) / 2;
-		float middleY = (gameSurface.getHeight() - faceDownCard.getHeight()) / 2;
+		middleX = (gameSurface.getWidth() - faceDownCard.getWidth()) / 2;
+		middleY = (gameSurface.getHeight() - faceDownCard.getHeight()) / 2;
 
 		// Display the cards in player 1's hand
-		for (Card card : player1) {
+		for (Card card : game.player1.getHand()) {
 			canvas.drawBitmap(card.getCardBitmap(), topX, topY, null);
 			topX += 5;
 			topY += 0.5;
 		}
 		// Display the cards in player 2's hand
-		for (Card card : player2) {
+		for (Card card : game.player2.getHand()) {
 			canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY - faceDownCard.getHeight(), null);
 			bottomX += 5;
 			bottomY -= 0.5;
 		}
 
 		// Display the cards in the middle of the table
-		if (middleDeck != null) {
-			Iterator<Card> it = middleDeck.iterator();
+		if (game.theStack != null) {
+			Iterator<Card> it = game.theStack.iterator();
 			// Display the first card centered
 			if (it.hasNext()) {
 				canvas.drawBitmap(it.next().getCardBitmap(), middleX, middleY, null);
@@ -179,6 +178,8 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 
 		surfaceHolder.unlockCanvasAndPost(canvas);	// Unlock and post the canvas
 		setCardListeners();							// Reset the card listeners to the new coordinates
+		
+		//start new thread for the computer to slap
 	}
 
 	/**
@@ -206,49 +207,72 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 
 				// Touch was a fling
 				if (gestureDetector.onTouchEvent(event)) {
-					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-							&& eventY < (topY + faceDownCard.getHeight())) {
-						Log.i(TAG, "Swiped!!!");
-						if (!player1.isEmpty()) {
-							Card card = player1.get(player1.size() - 1);
-							player1.remove(card);
-							middleDeck.add(card);
-							displayCards();
-						}
-					} else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
+//					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+//							&& eventY < (topY + faceDownCard.getHeight())) {
+//						Log.i(TAG, "Swiped!!!");
+//						if (!game.player2.getHand().isEmpty()) {
+//							if (game.playCard(topID))
+//							{
+//								displayCards();	
+//							}
+//						}
+//					} else 
+					if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
 							&& eventY >= bottomY - faceDownCard.getHeight()
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Swiped!!!");
-						if (!player2.isEmpty()) {
-							Card card = player2.get(player2.size() - 1);
-							player2.remove(card);
-							middleDeck.add(card);
-							displayCards();
+						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
+							if (game.playCard(botID))
+							{
+								displayCards();
+							}
 						}
+					} else if (eventX >= middleX && eventX < (middleX + faceDownCard.getWidth())
+							&& eventY >= middleY - faceDownCard.getHeight()
+							&& eventY < (middleY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
+						Log.i(TAG, "Swiped!!!");
+						
+							//******************************
+							//need way for computer to slap
+							//******************************
+							game.slapStack(botID); 
+							displayCards();
+						
 					}
+					
 				}
 				// Touch was tap and release
 				else if (action == MotionEvent.ACTION_UP) {
-					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-							&& eventY < (topY + faceDownCard.getHeight())) {
-						Log.i(TAG, "Touched!!!");
-						if (!player1.isEmpty()) {
-							Card card = player1.get(player1.size() - 1);
-							player1.remove(card);
-							middleDeck.add(card);
-							displayCards();
-						}
-					} else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
+//					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+//							&& eventY < (topY + faceDownCard.getHeight())) {
+//						Log.i(TAG, "Touched!!!");
+//						if (!game.player2.getHand().isEmpty()) {
+//							if (game.playCard(topID))
+//							{
+//								displayCards();	
+//							}
+//						}
+//					} else 
+						if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
 							&& eventY >= bottomY - faceDownCard.getHeight()
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Touched!!!");
-						if (!player2.isEmpty()) {
-							Card card = player2.get(player2.size() - 1);
-							player2.remove(card);
-							middleDeck.add(card);
-							displayCards();
+						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
+							if (game.playCard(botID))
+							{
+								displayCards();
+							}
 						}
+					} else if (eventX >= middleX && eventX < (middleX + faceDownCard.getWidth())
+							&& eventY >= middleY - faceDownCard.getHeight()
+							&& eventY < (middleY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
+						Log.i(TAG, "Touched!!!");
+						
+							game.slapStack(botID);
+							displayCards();
+						
 					}
+					
 				}
 				return true;
 			}

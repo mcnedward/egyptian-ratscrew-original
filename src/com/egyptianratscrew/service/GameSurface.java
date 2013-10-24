@@ -8,10 +8,13 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 	private static final String TAG = "GameSurface";
 
 	private final Context context;
+	private Game game;
 
-	public GameSurface(Context context) {
+	public GameSurface(Context context, Game game) {
 		super(context);
 		this.context = context;
+		this.game = game;
+		
 		getHolder().addCallback(this);
 		setFocusable(true);
 	}
@@ -23,7 +26,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 	@Override
 	public void surfaceCreated(SurfaceHolder holder) {
-		new GameThread(context, this).execute();
+		new GameThread(context, this, game).execute();
 	}
 
 	@Override

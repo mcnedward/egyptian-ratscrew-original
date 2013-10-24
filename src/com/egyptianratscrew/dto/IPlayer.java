@@ -1,5 +1,7 @@
 package com.egyptianratscrew.dto;
 
+import java.util.List;
+
 public interface IPlayer {
 	public String getName();
 	public void addCard(Card c);
@@ -11,4 +13,5 @@ public interface IPlayer {
 	public void setMyTurn(boolean b);
 	public int getID();
 	public boolean hasAllCards();
+	public List<Card> getHand();
 }
