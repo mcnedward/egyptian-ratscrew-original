@@ -1,10 +1,11 @@
 package com.egyptianratscrew.ui;
 
+
+import com.egyptianratscrew.R;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
-
-import com.egyptianratscrew.R;
 
 /**
  * Activity for viewing the rules to Egyptian Ratscrew

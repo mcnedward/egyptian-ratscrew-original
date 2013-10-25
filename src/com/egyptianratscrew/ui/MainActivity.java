@@ -1,13 +1,13 @@
 package com.egyptianratscrew.ui;
 
+
+import com.egyptianratscrew.R;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
-
-import com.egyptianratscrew.R;
-import com.egyptianratscrew.service.Game;
 
 /**
  * This page is the Main Menu for the Egyptian Ratscrew game
@@ -45,6 +45,11 @@ public class MainActivity extends Activity {
 	public void startNewGame(View view) {
 		Intent game = new Intent(this, GameActivity.class);
 		startActivity(game);
+	}
+	
+	public void viewStatistics(View view) {
+		Intent stats = new Intent(this, ViewStatistics.class);
+		startActivity(stats);
 	}
 
 }
