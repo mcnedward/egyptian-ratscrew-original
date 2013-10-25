@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -25,14 +26,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.egyptianratscrew.service.Game" >
-        </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewRules" >
         </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewStatistics" >
         </activity>
         
         <!-- End Activities -->
+        <activity android:name="com.egyptianratscrew.ui.GameActivity"></activity>
+        <activity android:name="com.egyptianratscrew.ui.fbLoginActivity"></activity>
     </application>
 
 </manifest>

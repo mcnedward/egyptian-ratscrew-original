@@ -45,10 +45,9 @@
         android:id="@+id/btnStatistics"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="viewStatistics"
         android:paddingBottom="10dip"
         android:paddingTop="10dip"
-        android:onClick="viewStatistics"
         android:text="@string/statistics" />
-        
 
 </LinearLayout>
