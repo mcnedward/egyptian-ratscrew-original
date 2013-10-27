@@ -50,4 +50,11 @@
         android:paddingTop="10dip"
         android:text="@string/statistics" />
 
+    <Button
+        android:id="@+id/btnFBLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="fbLogin"
+        android:text="Login with Facbook" />
+
 </LinearLayout>

@@ -46,11 +46,11 @@ public class Game {
 		//set player variables
 		if (names.length > 0 ) player1 = new HumanPlayer(names[0],0);
 		
-		if (onePlayerGame && names.length > 1) {
-			player2 = new ComputerPlayer(COMPUTER_PLAYER_NAME, 1);
+		if (!onePlayerGame && names.length > 1) {
+			player2 = new HumanPlayer(names[1],1);		
 		}
 		else {
-			player2 = new HumanPlayer(names[1],1);
+			player2 = new ComputerPlayer(COMPUTER_PLAYER_NAME, 1);
 		}
 		
 		compSlapDelay = difficulty * DELAY_INTERVAL;

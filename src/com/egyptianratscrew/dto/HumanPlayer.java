@@ -1,5 +1,6 @@
 package com.egyptianratscrew.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class HumanPlayer implements IPlayer {
@@ -12,6 +13,7 @@ public class HumanPlayer implements IPlayer {
 	public HumanPlayer(String name, int id) {
 		playerName = name;
 		playerID = id;
+		hand = new ArrayList<Card>();
 	}
 
 	@Override

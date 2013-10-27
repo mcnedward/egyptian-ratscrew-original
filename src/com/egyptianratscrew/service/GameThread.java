@@ -41,10 +41,6 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 	private Canvas canvas;						// Canvas for the UI the thread is running
 	private boolean run = false;				// Boolean for determining if the thread is running
 	private CardDeck cd;						// CardDeck object
-	private List<Card> cardDeck;				// List of cards for the card deck for each new game
-	private List<Card> player1;					// List of cards for player 1
-	private List<Card> player2;					// List of cards for player 2
-	private List<Card> middleDeck;				// List of cards for the middle of the game table
 	private Bitmap faceDownCard;				// Bitmap image of the face down card
 	private Game game;
 	private int topID;
@@ -75,18 +71,11 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		
 		topID = 1; //game.player2.getID();
 		botID = 0; //game.player1.getID();
-		
-		player1 = new ArrayList<Card>();
-		player2 = new ArrayList<Card>();
-		middleDeck = new ArrayList<Card>();
 
 		int cardId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
 		faceDownCard = BitmapFactory.decodeResource(context.getResources(), cardId);
 	}
 
-	public void setCardDeck(List<Card> cardDeck) {
-		this.cardDeck = cardDeck;
-	}
 
 	/**
 	 * Used to set the card deck image in the middle of the game surface. Also sets the onTouchListener to deal cards to
@@ -148,19 +137,23 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		middleX = (gameSurface.getWidth() - faceDownCard.getWidth()) / 2;
 		middleY = (gameSurface.getHeight() - faceDownCard.getHeight()) / 2;
 
-		// Display the cards in player 1's hand
-		for (Card card : game.player1.getHand()) {
-			canvas.drawBitmap(card.getCardBitmap(), topX, topY, null);
-			topX += 5;
-			topY += 0.5;
+		if (!game.player1.getHand().isEmpty()) {
+			// Display the cards in player 1's hand
+			for (Card card : game.player1.getHand()) {
+				canvas.drawBitmap(card.getCardBitmap(), topX, topY, null);
+				topX += 5;
+				topY += 0.5;
+			}
 		}
-		// Display the cards in player 2's hand
-		for (Card card : game.player2.getHand()) {
-			canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY - faceDownCard.getHeight(), null);
-			bottomX += 5;
-			bottomY -= 0.5;
+		if (!game.player2.getHand().isEmpty()) {
+			// Display the cards in player 2's hand
+			for (Card card : game.player2.getHand()) {
+				canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY
+						- faceDownCard.getHeight(), null);
+				bottomX += 5;
+				bottomY -= 0.5;
+			}
 		}
-
 		// Display the cards in the middle of the table
 		if (game.theStack != null) {
 			Iterator<Card> it = game.theStack.iterator();
