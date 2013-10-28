@@ -103,6 +103,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 				case MotionEvent.ACTION_DOWN:
 					if (x >= bitX && x < (bitX + b.getWidth()) && y >= bitY && y < (bitY + b.getHeight())) {
 						Log.i(TAG, "Card Deck Touched!!!");
+						dealCards();
 						publishProgress();
 					}
 				}
