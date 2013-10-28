@@ -68,27 +68,28 @@ public class Game {
 		cd = new CardDeck(context);
 		cardDeck = cd.cardDeck;
 		shuffleCards(cardDeck);
-		dealCards();
+		//dealCards();
 		
 		//update graphics
 		
 	}	
 		//deal cards
 	public void dealCards(){
-			
-		for (int i = 0; i > cardDeck.size(); i++)
+		int i = 0;	
+		for (Card c : cardDeck)//for (int i = 0; i > cardDeck.size(); i++)
 		{
 			if ((i % 2) == 0 )
 			{
 				
-				player1.addCard(cardDeck.get(i));
+				player1.addCard(c);//cardDeck.get(i));
 				
 			}
 			else
 			{
-				player2.addCard(cardDeck.get(i));
+				player2.addCard(c);//cardDeck.get(i));
 				
 			}
+			i++;
 		}
 	}
 	/**
