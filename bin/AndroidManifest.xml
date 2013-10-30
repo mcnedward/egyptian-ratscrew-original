@@ -31,6 +31,8 @@
         </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewStatistics" >
         </activity>
+        <activity android:name="com.egyptianratscrew.ui.GameActivity" >
+        </activity>
         
         <!-- End Activities -->
     </application>
