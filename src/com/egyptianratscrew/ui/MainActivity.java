@@ -35,6 +35,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
+	
+	//go to the registration page
+	public void viewRegistration (View view) {
+		Intent viewRegistration = new Intent(this, ViewRegistration.class);
+		startActivity(viewRegistration);
+	}
 
 	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
@@ -45,6 +51,7 @@ public class MainActivity extends Activity {
 		Intent viewStatistics = new Intent(this, ViewStatistics.class);
 		startActivity(viewStatistics);
 	}
+	
 
 	public void startNewGame(View view) {
 		Intent game = new Intent(this, GameActivity.class);
