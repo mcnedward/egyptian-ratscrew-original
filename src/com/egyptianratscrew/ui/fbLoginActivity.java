@@ -4,6 +4,7 @@ package com.egyptianratscrew.ui;
 import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.easy.facebook.android.apicall.GraphApi;
 import com.easy.facebook.android.error.EasyFacebookError;
@@ -32,44 +33,44 @@ public class fbLoginActivity extends Activity implements LoginListener {
 	  //http://developers.facebook.com/docs/reference/api/permissions/
 	  String permissions[] = {
 	    "user_about_me",
-	    "user_activities",
+	    //"user_activities",
 	    "user_birthday",
-	    "user_checkins",
-	    "user_education_history",
-	    "user_events",
-	    "user_groups",
+	    //"user_checkins",
+	    //"user_education_history",
+	    //"user_events",
+	    //"user_groups",
 	    "user_hometown",
-	    "user_interests",
-	    "user_likes",
+	    //"user_interests",
+	    //"user_likes",
 	    "user_location",
-	    "user_notes",
-	    "user_online_presence",
-	    "user_photo_video_tags",
+	    //"user_notes",
+	    //"user_online_presence",
+	    //"user_photo_video_tags",
 	    "user_photos",
-	    "user_relationships",
-	    "user_relationship_details",
-	    "user_religion_politics",
+	    //"user_relationships",
+	    //"user_relationship_details",
+	    //"user_religion_politics",
 	    "user_status",
-	    "user_videos",
-	    "user_website",
-	    "user_work_history",
+	    //"user_videos",
+	    //"user_website",
+	    //"user_work_history",
 	    "email",
 
 	    "read_friendlists",
-	    "read_insights",
-	    "read_mailbox",
-	    "read_requests",
+	    //"read_insights",
+	    //"read_mailbox",
+	    //"read_requests",
 	    "read_stream",
 	    "xmpp_login",
-	    "ads_management",
-	    "create_event",
+	    //"ads_management",
+	    //"create_event",
 	    "manage_friendlists",
 	    "manage_notifications",
 	    "offline_access",
-	    "publish_checkins",
+	    //"publish_checkins",
 	    "publish_stream",
-	    "rsvp_event",
-	    "sms",
+	    //"rsvp_event",
+	    //"sms",
 	    //"publish_actions",
 
 	    "manage_pages"
@@ -101,9 +102,9 @@ public class fbLoginActivity extends Activity implements LoginListener {
 
 	  try{
 	   user = graphApi.getMyAccountInfo();
-
+	   Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
 	   //update your status if logged in
-	   graphApi.setStatus("Hello, world!");
+	   //graphApi.setStatus("Hello, world!");
 	  } catch(EasyFacebookError e){
 	   Log.d("TAG: ", e.toString());
 	  }
