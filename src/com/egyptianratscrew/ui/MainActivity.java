@@ -36,7 +36,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	//go to the registration page
+	//go to the register page
 	public void viewRegistration (View view) {
 		Intent viewRegistration = new Intent(this, ViewRegistration.class);
 		startActivity(viewRegistration);
