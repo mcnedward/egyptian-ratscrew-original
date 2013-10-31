@@ -5,87 +5,68 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/lblUserId"
-        android:layout_width="136dp"
+        android:id="@+id/lblRegistration"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/lblUserID"
+        android:gravity="center"
+        android:text="@string/lblRegistration"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/DarkBlue"
+        android:textSize="12pt" />
+
+    <TextView
+        android:id="@+id/lblFirst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblFirst"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
-        android:id="@+id/lblUserId"
+        android:id="@+id/txtFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="@string/txtUserId" >
+        android:hint="@string/lblFirst"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/lblLast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblLast"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/txtLast"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/lblLast"
+        android:inputType="text|textPersonName" />
+
+    <TextView
+        android:id="@+id/lblUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblUser"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/txtUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/lblUser"
+        android:inputType="text" >
 
         <requestFocus />
     </EditText>
 
     <TextView
-        android:id="@+id/lblFirstName"
+        android:id="@+id/lblPass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lblFirstName"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/txtFirstName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/txtFirstName" />
-
-    <TextView
-        android:id="@+id/txtLastName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lblLastName"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/txtLastName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/txtLastName" />
-
-    <TextView
-        android:id="@+id/lblUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lblUserName"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/lblUserName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/txtUserName" />
-
-    <TextView
-        android:id="@+id/lblEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lblEmail"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        android:text="@string/txtEmail" />
-
-    <TextView
-        android:id="@+id/lblPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/lblPassword"
+        android:text="@string/lblPass"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <EditText
@@ -93,7 +74,29 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textPassword"
-        android:text="@string/txtPassword" />
+        android:hint="@string/lblPassword"
+        android:inputType="textPassword" />
+
+    <TextView
+        android:id="@+id/lblEmailAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/lblEmailAddress"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="@string/lblEmailAddress"
+        android:inputType="textEmailAddress"
+        android:text="@string/lblEmailAddress" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnSubmit" />
 
 </LinearLayout>

@@ -306,45 +306,48 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f090006;
         public static final int Table=0x7f090007;
-        public static final int action_settings=0x7f090020;
+        public static final int action_settings=0x7f090023;
         public static final int btnComputer=0x7f090002;
         public static final int btnFBLogin=0x7f090005;
         public static final int btnHuman=0x7f090003;
         public static final int btnRules=0x7f090001;
         public static final int btnStatistics=0x7f090004;
-        public static final int lblEmail=0x7f09001c;
-        public static final int lblFirstName=0x7f090018;
-        public static final int lblPassword=0x7f09001e;
-        public static final int lblUserId=0x7f090017;
-        public static final int lblUserName=0x7f09001b;
+        public static final int btnSubmit=0x7f090013;
+        public static final int lblEmailAddress=0x7f090011;
+        public static final int lblFirst=0x7f090009;
+        public static final int lblLast=0x7f09000b;
+        public static final int lblPass=0x7f09000f;
+        public static final int lblRegistration=0x7f090008;
+        public static final int lblUser=0x7f09000d;
         public static final int txtAppName=0x7f090000;
-        public static final int txtDisplayEmail=0x7f09000b;
-        public static final int txtDisplayHighScore=0x7f090016;
-        public static final int txtDisplayName=0x7f09000c;
-        public static final int txtDisplayNumberOfLosses=0x7f090013;
-        public static final int txtDisplayNumberOfTies=0x7f090014;
-        public static final int txtDisplayNumberOfWins=0x7f090012;
-        public static final int txtDisplayTotalGames=0x7f090015;
-        public static final int txtDisplayUserName=0x7f09000a;
-        public static final int txtEmail=0x7f09001d;
-        public static final int txtFirstName=0x7f090019;
-        public static final int txtLastName=0x7f09001a;
-        public static final int txtPassword=0x7f09001f;
-        public static final int txtRules=0x7f090008;
-        public static final int txtRulesDescription=0x7f090009;
-        public static final int txtStatHighScore=0x7f090011;
-        public static final int txtStatLoss=0x7f09000e;
-        public static final int txtStatTies=0x7f09000f;
-        public static final int txtStatTotal=0x7f090010;
-        public static final int txtStatWin=0x7f09000d;
+        public static final int txtDisplayEmail=0x7f090017;
+        public static final int txtDisplayHighScore=0x7f090022;
+        public static final int txtDisplayName=0x7f090018;
+        public static final int txtDisplayNumberOfLosses=0x7f09001f;
+        public static final int txtDisplayNumberOfTies=0x7f090020;
+        public static final int txtDisplayNumberOfWins=0x7f09001e;
+        public static final int txtDisplayTotalGames=0x7f090021;
+        public static final int txtDisplayUserName=0x7f090016;
+        public static final int txtEmail=0x7f090012;
+        public static final int txtFirst=0x7f09000a;
+        public static final int txtLast=0x7f09000c;
+        public static final int txtPassword=0x7f090010;
+        public static final int txtRules=0x7f090014;
+        public static final int txtRulesDescription=0x7f090015;
+        public static final int txtStatHighScore=0x7f09001d;
+        public static final int txtStatLoss=0x7f09001a;
+        public static final int txtStatTies=0x7f09001b;
+        public static final int txtStatTotal=0x7f09001c;
+        public static final int txtStatWin=0x7f090019;
+        public static final int txtUser=0x7f09000e;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int fblogin=0x7f030001;
         public static final int game_layout=0x7f030002;
-        public static final int rules=0x7f030003;
-        public static final int statistics=0x7f030004;
-        public static final int user=0x7f030005;
+        public static final int register=0x7f030003;
+        public static final int rules=0x7f030004;
+        public static final int statistics=0x7f030005;
     }
     public static final class menu {
         public static final int main=0x7f080000;
@@ -352,6 +355,8 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int btnRegister=0x7f06001b;
+        public static final int btnSubmit=0x7f060029;
         /**  Strings for Buttons 
          */
         public static final int computer=0x7f060004;
@@ -359,11 +364,26 @@ public final class R {
         public static final int highScore=0x7f06000c;
         public static final int human=0x7f060005;
         public static final int lblEmail=0x7f060011;
+        public static final int lblEmailAddress=0x7f060028;
+        public static final int lblEmails=0x7f060022;
+        public static final int lblFirst=0x7f060024;
         public static final int lblFirstName=0x7f06000e;
+        public static final int lblFirstNames=0x7f06001c;
+        public static final int lblFirstNames2=0x7f06001e;
+        public static final int lblLast=0x7f060025;
         public static final int lblLastName=0x7f06000f;
+        public static final int lblLastNames=0x7f06001d;
+        public static final int lblPass=0x7f060027;
         public static final int lblPassword=0x7f060012;
+        public static final int lblPasswords=0x7f060021;
+        public static final int lblRegister=0x7f060019;
+        public static final int lblRegisters=0x7f06001a;
+        public static final int lblRegistration=0x7f060023;
+        public static final int lblUser=0x7f060026;
         public static final int lblUserID=0x7f06000d;
         public static final int lblUserName=0x7f060010;
+        public static final int lblUserNames=0x7f06001f;
+        public static final int lblUserNames2=0x7f060020;
         public static final int numberOfLosses=0x7f060009;
         public static final int numberOfTies=0x7f06000a;
         /**  Strings for Statistics Layout 

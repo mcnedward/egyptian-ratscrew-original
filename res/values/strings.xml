@@ -39,5 +39,22 @@
     <string name="txtUserName"></string>
     <string name="txtEmail"></string>
     <string name="txtPassword"></string>
+    <string name="lblRegister">Register</string>
+    <string name="lblRegisters">Please Register Below</string>
+    <string name="btnRegister">Register</string>
+    <string name="lblFirstNames">First Name</string>
+    <string name="lblLastNames">Last Name:</string>
+    <string name="lblFirstNames2">First Name:</string>
+    <string name="lblUserNames">User Name:</string>
+    <string name="lblUserNames2">User Name:</string>
+    <string name="lblPasswords">Password:</string>
+    <string name="lblEmails">Email:</string>
+    <string name="lblRegistration">Registration</string>
+    <string name="lblFirst">"First Name : "</string>
+    <string name="lblLast">"Last Name : "</string>
+    <string name="lblUser">User Name :</string>
+    <string name="lblPass">"Password : "</string>
+    <string name="lblEmailAddress">Email Address :</string>
+    <string name="btnSubmit">Submit</string>
 
 </resources>
