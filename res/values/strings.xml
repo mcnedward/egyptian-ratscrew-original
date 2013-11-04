@@ -56,5 +56,6 @@
     <string name="lblPass">"Password : "</string>
     <string name="lblEmailAddress">Email Address :</string>
     <string name="btnSubmit">Submit</string>
+    <string name="btnUser">New User</string>
 
 </resources>
