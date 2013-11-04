@@ -15,12 +15,11 @@ public class ViewRegistration extends Activity{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.register);
 		
-		User user = new User();
-		displayUserData(user);
+		User player = new User();
+		displayPlayerData(player);
 		
   }
-	private void displayUserData(User user) {
-		// TODO Auto-generated method stub
+	private void displayPlayerData(User user) {
 		
 		
 	}
