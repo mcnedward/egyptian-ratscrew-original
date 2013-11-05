@@ -37,10 +37,7 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void viewRegister(View view){
-	Intent viewRegistration = new Intent(this, ViewRegister.class);
-	startActivity(viewRegistration);
-	}
+
 	
 	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
@@ -60,6 +57,11 @@ public class MainActivity extends Activity {
 	public void fbLogin(View view) {
 		Intent fblogin = new Intent(this, fbLoginActivity.class);
 		startActivity(fblogin);
+	}
+	
+	public void startNewUser(View view){
+	Intent user = new Intent(this, RegisterActivity.class);
+	startActivity(user);
 	}
 
 }
