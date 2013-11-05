@@ -37,8 +37,8 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void viewRegistration(View view){
-	Intent viewRegistration = new Intent(this, ViewRegistration.class);
+	public void viewRegister(View view){
+	Intent viewRegistration = new Intent(this, ViewRegister.class);
 	startActivity(viewRegistration);
 	}
 	
