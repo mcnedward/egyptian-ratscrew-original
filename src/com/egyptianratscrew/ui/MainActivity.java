@@ -36,7 +36,12 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
+	public void viewRegistration(View view){
+	Intent viewRegistration = new Intent(this, ViewRegistration.class);
+	startActivity(viewRegistration);
+	}
+	
 	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
 		startActivity(viewRules);
