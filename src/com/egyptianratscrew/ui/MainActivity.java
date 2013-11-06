@@ -63,5 +63,10 @@ public class MainActivity extends Activity {
 	Intent user = new Intent(this, RegisterActivity.class);
 	startActivity(user);
 	}
+	
+	public void startDeveloper(View view){
+		Intent developer = new Intent(this, DeveloperActivity.class);
+		startActivity(developer);
+	}
 
 }
