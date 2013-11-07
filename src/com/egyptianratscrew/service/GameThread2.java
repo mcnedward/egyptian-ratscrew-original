@@ -204,85 +204,87 @@ public class GameThread2 extends Thread {
 		 * };
 		 */
 		// TODO Is this sync needed?
-		synchronized (surfaceHolder) {
-			// Set the touch listener for the game surface
-			gameSurface.setOnTouchListener(new OnTouchListener() {
-				@Override
-				public boolean onTouch(View v, MotionEvent event) {
-					final int action = MotionEventCompat.getActionMasked(event);	// Get the action for the motion
-					int eventX = (int) event.getX();	// Get the x-coordinates for the action
-					int eventY = (int) event.getY();	// Get the y-coordinates for the action
+		// synchronized (surfaceHolder) {
+		// Set the touch listener for the game surface
+		gameSurface.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				final int action = MotionEventCompat.getActionMasked(event);	// Get the action for the motion
+				int eventX = (int) event.getX();	// Get the x-coordinates for the action
+				int eventY = (int) event.getY();	// Get the y-coordinates for the action
 
-					/*
-					 * // Touch was a fling
-					 * if (gestureDetector.onTouchEvent(event)) {
-					 * if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-					 * && eventY < (topY + faceDownCard.getHeight())) {
-					 * Log.i(TAG, "Swiped!!!");
-					 * if (!player1.isEmpty()) {
-					 * Card card = player1.get(player1.size() - 1);
-					 * player1.remove(card);
-					 * middleDeck.add(card);
-					 * displayCards();
-					 * }
-					 * } else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
-					 * && eventY >= bottomY - faceDownCard.getHeight()
-					 * && eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
-					 * Log.i(TAG, "Swiped!!!");
-					 * if (!player2.isEmpty()) {
-					 * Card card = player2.get(player2.size() - 1);
-					 * player2.remove(card);
-					 * middleDeck.add(card);
-					 * displayCards();
-					 * }
-					 * }
-					 * }
-					 * // Touch was tap and release
-					 * else
-					 */if (action == MotionEvent.ACTION_UP) {
-						if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-								&& eventY < (topY + faceDownCard.getHeight())) {
-							Log.i(TAG, "Touched!!!");
+				/*
+				 * // Touch was a fling
+				 * if (gestureDetector.onTouchEvent(event)) {
+				 * if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+				 * && eventY < (topY + faceDownCard.getHeight())) {
+				 * Log.i(TAG, "Swiped!!!");
+				 * if (!player1.isEmpty()) {
+				 * Card card = player1.get(player1.size() - 1);
+				 * player1.remove(card);
+				 * middleDeck.add(card);
+				 * displayCards();
+				 * }
+				 * } else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
+				 * && eventY >= bottomY - faceDownCard.getHeight()
+				 * && eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
+				 * Log.i(TAG, "Swiped!!!");
+				 * if (!player2.isEmpty()) {
+				 * Card card = player2.get(player2.size() - 1);
+				 * player2.remove(card);
+				 * middleDeck.add(card);
+				 * displayCards();
+				 * }
+				 * }
+				 * }
+				 * // Touch was tap and release
+				 * else
+				 */if (action == MotionEvent.ACTION_UP) {
+					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+							&& eventY < (topY + faceDownCard.getHeight())) {
+						Log.i(TAG, "Touched!!!");
 
-							// Unlock the lock so that the cards can be removed and added without throwing
-							// ConcurrentModificationException
-							synchronized (lock) {
-								try {
-									lock.wait();
-									if (!player1.isEmpty()) {
-										Card card = player1.get(player1.size() - 1);
-										Log.i(TAG, "Player 1 played a card!!!");
-										player1.remove(card);
-										middleDeck.add(card);
-									}
-								} catch (InterruptedException e) {
-									e.printStackTrace();
+						// Unlock the lock so that the cards can be removed and added without throwing
+						// ConcurrentModificationException
+						synchronized (lock) {
+							try {
+								lock.wait();
+								if (!player1.isEmpty()) {
+									Card card = player1.get(player1.size() - 1);
+									Log.i(TAG, "Player 1 played a card!!!");
+									player1.remove(card);
+									middleDeck.add(card);
 								}
+								lock.notify();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
-						} else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
-								&& eventY >= bottomY - faceDownCard.getHeight()
-								&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
-							Log.i(TAG, "Touched!!!");
+						}
+					} else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
+							&& eventY >= bottomY - faceDownCard.getHeight()
+							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
+						Log.i(TAG, "Touched!!!");
 
-							synchronized (lock) {
-								try {
-									lock.wait();
-									if (!player2.isEmpty()) {
-										Card card = player2.get(player2.size() - 1);
-										player2.remove(card);
-										middleDeck.add(card);
-									}
-								} catch (InterruptedException e) {
-									e.printStackTrace();
+						synchronized (lock) {
+							try {
+								lock.wait();
+								if (!player2.isEmpty()) {
+									Card card = player2.get(player2.size() - 1);
+									player2.remove(card);
+									middleDeck.add(card);
 								}
+								lock.notify();
+							} catch (InterruptedException e) {
+								e.printStackTrace();
 							}
 						}
 					}
-					return true;
 				}
-			});
-			surfaceHolder.notify();
-		}
+				return true;
+			}
+		});
+		// surfaceHolder.notify();
+		// }
 	}
 
 	/**

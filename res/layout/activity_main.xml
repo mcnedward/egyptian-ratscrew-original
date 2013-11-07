@@ -49,6 +49,13 @@
         android:paddingBottom="10dip"
         android:paddingTop="10dip"
         android:text="@string/statistics" />
+    
+    <Button
+        android:id="@+id/btnUserRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startNewUser"
+        android:text="Register a New User" />
 
     <Button
         android:id="@+id/btnFBLogin"
