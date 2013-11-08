@@ -65,21 +65,12 @@
         android:text="Login with Facbook" />
 
     <Button
-        android:id="@+id/btnRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="startNewUser"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/btnUser" />
-
-    <Button
         android:id="@+id/btnDeveloper"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="startDeveloper"
         android:paddingBottom="10dip"
         android:paddingTop="10dip"
-        android:text="@string/btnDeveloper" />
+        android:text="Developer" />
 
 </LinearLayout>
