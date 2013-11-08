@@ -1,13 +1,12 @@
 package com.egyptianratscrew.ui;
 
-
-import com.egyptianratscrew.R;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+
+import com.egyptianratscrew.R;
 
 /**
  * This page is the Main Menu for the Egyptian Ratscrew game
@@ -36,9 +35,7 @@ public class MainActivity extends Activity {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-	
 
-	
 	public void viewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
 		startActivity(viewRules);
@@ -48,25 +45,26 @@ public class MainActivity extends Activity {
 		Intent game = new Intent(this, GameActivity.class);
 		startActivity(game);
 	}
-	
+
 	public void viewStatistics(View view) {
 		Intent stats = new Intent(this, ViewStatistics.class);
 		startActivity(stats);
 	}
-	
+
 	public void fbLogin(View view) {
 		Intent fblogin = new Intent(this, fbLoginActivity.class);
 		startActivity(fblogin);
 	}
-	
-	public void startNewUser(View view){
-	Intent user = new Intent(this, RegisterActivity.class);
-	startActivity(user);
+
+	public void startNewUser(View view) {
+		Intent user = new Intent(this, RegisterActivity.class);
+		startActivity(user);
 	}
-	
-	public void startDeveloper(View view){
-		Intent developer = new Intent(this, DeveloperActivity.class);
-		startActivity(developer);
-	}
+
+	// No layout made for this activity yet...
+	// public void startDeveloper(View view){
+	// Intent developer = new Intent(this, DeveloperActivity.class);
+	// startActivity(developer);
+	// }
 
 }

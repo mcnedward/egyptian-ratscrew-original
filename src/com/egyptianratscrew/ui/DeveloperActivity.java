@@ -1,17 +1,17 @@
 package com.egyptianratscrew.ui;
 
-import com.egyptianratscrew.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 
-public class DeveloperActivity extends Activity{
-	
+import com.egyptianratscrew.R;
+
+public class DeveloperActivity extends Activity {
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.developer);
+		// setContentView(R.layout.developer);
 	}
 
 	@Override
