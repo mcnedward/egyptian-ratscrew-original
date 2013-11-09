@@ -56,15 +56,13 @@ public class MainActivity extends Activity {
 		startActivity(fblogin);
 	}
 
+	public void viewDevelopers(View view){
+		Intent developers = new Intent (this, ViewDevelopers.class);
+		startActivity(developers);
+	}
 	public void startNewUser(View view) {
 		Intent user = new Intent(this, RegisterActivity.class);
 		startActivity(user);
 	}
-
-	// No layout made for this activity yet...
-	// public void startDeveloper(View view){
-	// Intent developer = new Intent(this, DeveloperActivity.class);
-	// startActivity(developer);
-	// }
-
+	
 }

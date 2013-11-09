@@ -37,6 +37,8 @@
         </activity>
         <activity android:name="com.egyptianratscrew.ui.RegisterActivity" >
         </activity>
+        <activity android:name="com.egyptianratscrew.ui.ViewDevelopers"></activity>
+       
 
         <!-- End Activities -->
 
