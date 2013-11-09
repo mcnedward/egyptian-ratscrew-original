@@ -39,9 +39,6 @@
     <string name="txtUserName"></string>
     <string name="txtEmail"></string>
     <string name="txtPassword"></string>
-    <string name="lblRegister">Register</string>
-    <string name="lblRegisters">Please Register Below</string>
-    <string name="btnRegister">Register</string>
     <string name="lblFirstNames">First Name</string>
     <string name="lblLastNames">Last Name:</string>
     <string name="lblFirstNames2">First Name:</string>
@@ -57,5 +54,15 @@
     <string name="lblEmailAddress">Email Address :</string>
     <string name="btnSubmit">Submit</string>
     <string name="btnUser">New User</string>
+    <string name="txtDevelopers"><b>Developers</b></string>
+    <string name="development"></string>
+    <string name="txtCopyright">Copyright 2013</string>
+    <string name="names">AJ Gold \n\
+        Julie Frazee \n\
+        Edward McNealy</string>
+    <string name="developing"></string>
+    <string name="btnDevelopment">Developers</string>
+
+    
 
 </resources>

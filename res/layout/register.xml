@@ -16,4 +16,14 @@
         android:textSize="@dimen/text"
     -->
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/lblRegistration"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/DarkViolet"
+        android:textSize="@dimen/developer" />
+
 </LinearLayout>
