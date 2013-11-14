@@ -19,6 +19,10 @@
     <string name="human">Human</string>
     <string name="rules">Rules</string>
     <string name="statistics">Statistics</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="btnUser">New User</string>
+    <string name="btnDevelopment">Developers</string>
+    
     
     <!-- Strings for Statistics Layout -->
     
@@ -47,13 +51,9 @@
     <string name="lblPasswords">Password:</string>
     <string name="lblEmails">Email:</string>
     <string name="lblRegistration">Registration</string>
-    <string name="lblFirst">"First Name : "</string>
-    <string name="lblLast">"Last Name : "</string>
     <string name="lblUser">User Name :</string>
     <string name="lblPass">"Password : "</string>
     <string name="lblEmailAddress">Email Address :</string>
-    <string name="btnSubmit">Submit</string>
-    <string name="btnUser">New User</string>
     <string name="txtDevelopers"><b>Developers</b></string>
     <string name="development"></string>
     <string name="txtCopyright">Copyright 2013</string>
@@ -61,7 +61,15 @@
         Julie Frazee \n\
         Edward McNealy</string>
     <string name="developing"></string>
-    <string name="btnDevelopment">Developers</string>
+    <string name="lblConfirm">Confirm Password:</string>
+    <string name="lblConfirmation">Confirm Password:</string>
+    <string name="lblName">Name :</string>
+    <string name="btnReset">Reset</string>
+    
+    
+
+   
+
 
     
 
