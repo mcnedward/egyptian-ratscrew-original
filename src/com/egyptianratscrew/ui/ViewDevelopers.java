@@ -17,7 +17,7 @@ public class ViewDevelopers extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.manager);
+		setContentView(R.layout.developers);
 	}
 
 	@Override
