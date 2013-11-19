@@ -14,14 +14,14 @@
             android:id="@+id/txtDisplayUserName"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="User Name"
+            android:text="@string/lblUser"
             android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <TextView
             android:id="@+id/txtDisplayEmail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Email"
+            android:text="@string/lblEmailAddress"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
@@ -34,7 +34,7 @@
             android:id="@+id/txtDisplayName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/lblName"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
 
@@ -106,7 +106,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="5dp"
-                android:text="Number"
+                android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -116,7 +116,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="5dp"
-                android:text="Number"
+                android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
