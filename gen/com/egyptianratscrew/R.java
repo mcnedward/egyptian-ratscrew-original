@@ -408,6 +408,7 @@ public final class R {
         public static final int rulesDescription=0x7f060003;
         public static final int statistics=0x7f060007;
         public static final int totalGames=0x7f06000e;
+        public static final int txtBlank=0x7f060030;
         public static final int txtCopyright=0x7f060029;
         public static final int txtDevelopers=0x7f060027;
         public static final int txtEmail=0x7f06001a;

@@ -65,6 +65,7 @@
     <string name="lblConfirmation">Confirm Password:</string>
     <string name="lblName">Name :</string>
     <string name="btnReset">Reset</string>
+    <string name="txtBlank"></string>
     
     
 
