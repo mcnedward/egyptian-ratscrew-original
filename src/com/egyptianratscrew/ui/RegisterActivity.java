@@ -7,6 +7,8 @@ import android.view.Menu;
 import com.egyptianratscrew.R;
 
 public class RegisterActivity extends Activity{
+	
+	//creatingthe register contentview
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

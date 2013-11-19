@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/lblRegistration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
@@ -15,14 +15,14 @@
         android:textSize="@dimen/developer" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/lblConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0.07"
         android:text="@string/developing" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lblPassword"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.50"
