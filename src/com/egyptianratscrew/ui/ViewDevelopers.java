@@ -14,6 +14,7 @@ import android.view.Menu;
 
 public class ViewDevelopers extends Activity {
 
+	//creating the developers contentview
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

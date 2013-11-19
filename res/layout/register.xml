@@ -5,7 +5,7 @@
     android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/lblRegistration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -16,20 +16,20 @@
         android:textSize="@dimen/developer" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/blank"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/developing" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/lblFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblFirstNames2"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/txtFirst"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -39,70 +39,70 @@
     </EditText>
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/lblLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblLastNames"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/txtLast"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/lblUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblUserNames"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText3"
+        android:id="@+id/txtUserName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/lblPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblPasswords"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/txtPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/lblConfirmPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblConfirm"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText5"
+        android:id="@+id/txtConfirmPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPassword" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/lblEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/lblEmailAddress"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
-        android:id="@+id/editText6"
+        android:id="@+id/txtEmailAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -113,7 +113,7 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/btnSubmit"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -121,7 +121,7 @@
             android:text="@string/btnSubmit" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/btnReset"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,11 +129,6 @@
             android:text="@string/btnReset" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="103dp"
-        android:layout_height="0dip"
-        android:layout_weight="1"
-        android:text="@string/developing" />
+
 
 </LinearLayout>
