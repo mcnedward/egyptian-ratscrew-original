@@ -66,6 +66,10 @@
     <string name="lblName">Name :</string>
     <string name="btnReset">Reset</string>
     <string name="txtBlank"></string>
+    <string name="registration"></string>
+    <string name="register"></string>
+    <string name="registering">Registration</string>
+    <string name="facebook">Login with Facebook</string>
     
     
 

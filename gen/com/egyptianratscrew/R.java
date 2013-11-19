@@ -375,6 +375,7 @@ public final class R {
         public static final int computer=0x7f060004;
         public static final int developing=0x7f06002b;
         public static final int development=0x7f060028;
+        public static final int facebook=0x7f060034;
         public static final int hello_world=0x7f060002;
         public static final int highScore=0x7f06000f;
         public static final int human=0x7f060005;
@@ -404,6 +405,9 @@ public final class R {
         /**  Strings for Statistics Layout 
          */
         public static final int numberOfWins=0x7f06000b;
+        public static final int register=0x7f060032;
+        public static final int registering=0x7f060033;
+        public static final int registration=0x7f060031;
         public static final int rules=0x7f060006;
         public static final int rulesDescription=0x7f060003;
         public static final int statistics=0x7f060007;

@@ -126,7 +126,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="5dp"
-                android:text="Number"
+                android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
@@ -136,7 +136,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="5dp"
-                android:text="Number"
+                android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
             
             <TextView
@@ -146,7 +146,7 @@
                 android:background="@drawable/cell_shape"
                 android:gravity="center_vertical|center_horizontal"
                 android:padding="5dp"
-                android:text="Number"
+                android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
     </LinearLayout>
