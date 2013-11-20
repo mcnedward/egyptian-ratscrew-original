@@ -1,11 +1,8 @@
 package com.egyptianratscrew.service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -45,7 +42,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 	private Game game;
 	private int topID;
 	private int botID;
-	
+
 	// Coordinates for the top and bottom player's cards
 	private float topX;
 	private float topY;
@@ -68,14 +65,13 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		this.gameSurface = gameSurface;
 		this.surfaceHolder = gameSurface.getHolder();
 		this.game = game;
-		
-		topID = 1; //game.player2.getID();
-		botID = 0; //game.player1.getID();
+
+		topID = 1; // game.player2.getID();
+		botID = 0; // game.player1.getID();
 
 		int cardId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
 		faceDownCard = BitmapFactory.decodeResource(context.getResources(), cardId);
 	}
-
 
 	/**
 	 * Used to set the card deck image in the middle of the game surface. Also sets the onTouchListener to deal cards to
@@ -149,8 +145,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 		if (!game.player2.getHand().isEmpty()) {
 			// Display the cards in player 2's hand
 			for (Card card : game.player2.getHand()) {
-				canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY
-						- faceDownCard.getHeight(), null);
+				canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY - faceDownCard.getHeight(), null);
 				bottomX += 5;
 				bottomY -= 0.5;
 			}
@@ -174,8 +169,8 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 
 		surfaceHolder.unlockCanvasAndPost(canvas);	// Unlock and post the canvas
 		setCardListeners();							// Reset the card listeners to the new coordinates
-		
-		//start new thread for the computer to slap
+
+		// start new thread for the computer to slap
 	}
 
 	/**
@@ -203,23 +198,22 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 
 				// Touch was a fling
 				if (gestureDetector.onTouchEvent(event)) {
-//					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-//							&& eventY < (topY + faceDownCard.getHeight())) {
-//						Log.i(TAG, "Swiped!!!");
-//						if (!game.player2.getHand().isEmpty()) {
-//							if (game.playCard(topID))
-//							{
-//								displayCards();	
-//							}
-//						}
-//					} else 
+					// if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+					// && eventY < (topY + faceDownCard.getHeight())) {
+					// Log.i(TAG, "Swiped!!!");
+					// if (!game.player2.getHand().isEmpty()) {
+					// if (game.playCard(topID))
+					// {
+					// displayCards();
+					// }
+					// }
+					// } else
 					if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
 							&& eventY >= bottomY - faceDownCard.getHeight()
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Swiped!!!");
 						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
-							if (game.playCard(botID))
-							{
+							if (game.playCard(botID)) {
 								displayCards();
 							}
 						}
@@ -227,35 +221,34 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 							&& eventY >= middleY - faceDownCard.getHeight()
 							&& eventY < (middleY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Swiped!!!");
-						
-							//******************************
-							//need way for computer to slap
-							//******************************
-							game.slapStack(botID); 
-							displayCards();
-						
+
+						// ******************************
+						// need way for computer to slap
+						// ******************************
+						game.slapStack(botID);
+						displayCards();
+
 					}
-					
+
 				}
 				// Touch was tap and release
 				else if (action == MotionEvent.ACTION_UP) {
-//					if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
-//							&& eventY < (topY + faceDownCard.getHeight())) {
-//						Log.i(TAG, "Touched!!!");
-//						if (!game.player2.getHand().isEmpty()) {
-//							if (game.playCard(topID))
-//							{
-//								displayCards();	
-//							}
-//						}
-//					} else 
-						if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
+					// if (eventX >= topX && eventX < (topX + faceDownCard.getWidth()) && eventY >= topY
+					// && eventY < (topY + faceDownCard.getHeight())) {
+					// Log.i(TAG, "Touched!!!");
+					// if (!game.player2.getHand().isEmpty()) {
+					// if (game.playCard(topID))
+					// {
+					// displayCards();
+					// }
+					// }
+					// } else
+					if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
 							&& eventY >= bottomY - faceDownCard.getHeight()
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Touched!!!");
 						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
-							if (game.playCard(botID))
-							{
+							if (game.playCard(botID)) {
 								displayCards();
 							}
 						}
@@ -263,12 +256,12 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 							&& eventY >= middleY - faceDownCard.getHeight()
 							&& eventY < (middleY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Touched!!!");
-						
-							game.slapStack(botID);
-							displayCards();
-						
+
+						game.slapStack(botID);
+						displayCards();
+
 					}
-					
+
 				}
 				return true;
 			}
