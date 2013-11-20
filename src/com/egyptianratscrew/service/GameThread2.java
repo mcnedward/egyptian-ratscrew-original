@@ -141,15 +141,15 @@ public class GameThread2 extends Thread {
 	 */
 	public void dealCards() {
 		game.dealCards();
-		int x = 0;
-		for (Card card : cardDeck) {
-			if ((x & 1) == 0) {
-				player1.add(card);
-			} else {
-				player2.add(card);
-			}
-			x++;
-		}
+		// int x = 0;
+		// for (Card card : cardDeck) {
+		// if ((x & 1) == 0) {
+		// player1.add(card);
+		// } else {
+		// player2.add(card);
+		// }
+		// x++;
+		// }
 	}
 
 	/**
@@ -169,19 +169,19 @@ public class GameThread2 extends Thread {
 
 		// Synchronize the lock here so the card deck arrays will be locked while constantly being drawn by the run loop
 		synchronized (lock) {
-			for (Card card : player1) {
+			for (Card card : p1.getHand()) {
 				canvas.drawBitmap(card.getCardBitmap(), topX, topY, null);
 				topX += 5;
 				topY += 0.5;
 			}
 			// Display the cards in player 2's hand
-			for (Card card : player2) {
+			for (Card card : p2.getHand()) {
 				canvas.drawBitmap(card.getCardBitmap(), bottomX, bottomY - faceDownCard.getHeight(), null);
 				bottomX -= 5;
 				bottomY -= 0.5;
 			}
 			// Display the cards in the middle of the table
-			if (middleDeck != null) {
+			if (theStack != null) {
 				Iterator<Card> middleDeckIterator = middleDeck.iterator();
 				// Display the first card centered
 				if (middleDeckIterator.hasNext()) {
