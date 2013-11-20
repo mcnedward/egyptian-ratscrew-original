@@ -21,6 +21,7 @@ import android.view.View.OnTouchListener;
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
+import com.egyptianratscrew.dto.IPlayer;
 
 /**
  * 
@@ -38,6 +39,12 @@ public class GameThread2 extends Thread {
 	private Canvas canvas;						// Canvas for the UI the thread is running
 	volatile Thread thread;
 	private boolean run = false;				// Boolean for determining if the thread is running
+
+	/** Game Variables **/
+	private Game game;
+	private IPlayer p1;
+	private IPlayer p2;
+	private List<Card> theStack;
 
 	private CardDeck cd;						// CardDeck object
 	private List<Card> cardDeck;				// List of cards for the card deck for each new game
@@ -63,12 +70,19 @@ public class GameThread2 extends Thread {
 	 * @param gameSurface
 	 *            - The game surface that the UI of the thread is using
 	 */
-	public GameThread2(Context context, GameSurface gameSurface) {
+	public GameThread2(Context context, GameSurface gameSurface, Game game) {
 		// Set the context, GameSurface, and SurfaceHolder
 		this.context = context;
 		this.gameSurface = gameSurface;
 		this.surfaceHolder = gameSurface.getHolder();
+		this.game = game;
+
 		canvas = new Canvas();
+
+		// Initialize all variables taken from Game class
+		p1 = game.player1;
+		p2 = game.player2;
+		theStack = game.theStack;
 
 		// Initialize a new card deck
 		cd = new CardDeck(context);
@@ -126,6 +140,7 @@ public class GameThread2 extends Thread {
 	 * Deal cards to the top and bottom players
 	 */
 	public void dealCards() {
+		game.dealCards();
 		int x = 0;
 		for (Card card : cardDeck) {
 			if ((x & 1) == 0) {

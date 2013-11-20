@@ -26,7 +26,7 @@ public class GameSurface extends SurfaceView implements SurfaceHolder.Callback {
 
 		getHolder().addCallback(this);
 		setFocusable(true);
-		gameThread2 = new GameThread2(context, this);
+		gameThread2 = new GameThread2(context, this, game);
 	}
 
 	@Override
