@@ -21,7 +21,7 @@ public class GameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_layout);
 		
-		
+		//game = new Game(true, this.getIntent().getIntExtra(Difficulty,3), new String[] {this.getIntent().getStringExtra(Player1Name),this);
 		game = new Game(true, 3, new String[] {"Player1"}, this);
 		
 		//setting the relativelayout of table
