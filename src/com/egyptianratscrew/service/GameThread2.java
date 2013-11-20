@@ -1,6 +1,5 @@
 package com.egyptianratscrew.service;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -20,7 +19,6 @@ import android.view.View.OnTouchListener;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dto.Card;
-import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.IPlayer;
 
 /**
@@ -46,11 +44,6 @@ public class GameThread2 extends Thread {
 	private IPlayer p2;
 	private List<Card> theStack;
 
-	private CardDeck cd;						// CardDeck object
-	private List<Card> cardDeck;				// List of cards for the card deck for each new game
-	private List<Card> player1;					// List of cards for player 1
-	private List<Card> player2;					// List of cards for player 2
-	private List<Card> middleDeck;				// List of cards for the middle of the game table
 	private Bitmap faceDownCard;				// Bitmap image of the face down card
 
 	private Object lock = new Object();			// Create a lock that will be used for synchronization of displaying cards
@@ -84,21 +77,8 @@ public class GameThread2 extends Thread {
 		p2 = game.player2;
 		theStack = game.theStack;
 
-		// Initialize a new card deck
-		cd = new CardDeck(context);
-		cardDeck = cd.cardDeck;
-		shuffleCards(cardDeck);
-		// Initialize the player cards and the middle card deck
-		player1 = new ArrayList<Card>();
-		player2 = new ArrayList<Card>();
-		middleDeck = new ArrayList<Card>();
-
 		int cardId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
 		faceDownCard = BitmapFactory.decodeResource(context.getResources(), cardId);
-	}
-
-	public void setCardDeck(List<Card> cardDeck) {
-		this.cardDeck = cardDeck;
 	}
 
 	/**
@@ -141,15 +121,6 @@ public class GameThread2 extends Thread {
 	 */
 	public void dealCards() {
 		game.dealCards();
-		// int x = 0;
-		// for (Card card : cardDeck) {
-		// if ((x & 1) == 0) {
-		// player1.add(card);
-		// } else {
-		// player2.add(card);
-		// }
-		// x++;
-		// }
 	}
 
 	/**
@@ -181,8 +152,8 @@ public class GameThread2 extends Thread {
 				bottomY -= 0.5;
 			}
 			// Display the cards in the middle of the table
-			if (theStack != null) {
-				Iterator<Card> middleDeckIterator = middleDeck.iterator();
+			if (game.theStack != null) {
+				Iterator<Card> middleDeckIterator = theStack.iterator();
 				// Display the first card centered
 				if (middleDeckIterator.hasNext()) {
 					canvas.drawBitmap(middleDeckIterator.next().getCardBitmap(), middleX, middleY, null);
@@ -264,11 +235,11 @@ public class GameThread2 extends Thread {
 						synchronized (lock) {
 							try {
 								lock.wait();
-								if (!player1.isEmpty()) {
-									Card card = player1.get(player1.size() - 1);
+								if (!p1.getHand().isEmpty()) {
+									Card card = p1.getHand().get(p1.getHand().size() - 1);
 									Log.i(TAG, "Player 1 played a card!!!");
-									player1.remove(card);
-									middleDeck.add(card);
+									p1.getHand().remove(card);
+									game.theStack.add(card);
 								}
 								lock.notify();
 							} catch (InterruptedException e) {
@@ -283,10 +254,10 @@ public class GameThread2 extends Thread {
 						synchronized (lock) {
 							try {
 								lock.wait();
-								if (!player2.isEmpty()) {
-									Card card = player2.get(player2.size() - 1);
-									player2.remove(card);
-									middleDeck.add(card);
+								if (!p2.getHand().isEmpty()) {
+									Card card = p2.getHand().get(p2.getHand().size() - 1);
+									p2.getHand().remove(card);
+									game.theStack.add(card);
 								}
 								lock.notify();
 							} catch (InterruptedException e) {
