@@ -1,5 +1,6 @@
 package com.egyptianratscrew.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Timer;
@@ -62,6 +63,7 @@ public class Game {
 		player1.setTillFace(0);
 		player2.setTillFace(0);
 		
+		theStack = new ArrayList<Card>();
 		
 		//create deck
 		
