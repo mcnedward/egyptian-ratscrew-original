@@ -15,41 +15,17 @@
         android:text="@string/app_name"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <Button
-        android:id="@+id/btnRules"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
-        android:onClick="viewRules"
-        android:text="@string/rules" />
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="150dp"
+        android:layout_height="0dip"
+        android:layout_weight="1"
+        android:contentDescription="@string/imgScreen"
+        android:maxHeight="@dimen/activity_vertical_margin"
+        android:maxWidth="@dimen/activity_horizontal_margin"
+        android:scaleType="fitCenter"
+        android:src="@drawable/screenimage" />
 
-    <Button
-        android:id="@+id/btnComputer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
-        android:onClick="startNewGame"
-        android:text="@string/computer" />
-
-    <Button
-        android:id="@+id/btnHuman"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/human" />
-    
-    <Button
-        android:id="@+id/btnStatistics"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="viewStatistics"
-        android:paddingBottom="10dip"
-        android:paddingTop="10dip"
-        android:text="@string/statistics" />
-    
     <Button
         android:id="@+id/btnUserRegister"
         android:layout_width="match_parent"
@@ -65,10 +41,9 @@
         android:text="@string/facebook" />
 
     <Button
-        android:id="@+id/btnDevelopment"
+        android:id="@+id/btnExisting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="viewDevelopers"
-        android:text="@string/btnDevelopment" />
+        android:text="@string/btnExisting" />
 
 </LinearLayout>
