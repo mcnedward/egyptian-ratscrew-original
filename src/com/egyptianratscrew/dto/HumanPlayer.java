@@ -2,6 +2,8 @@ package com.egyptianratscrew.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class HumanPlayer implements IPlayer {
 	private String playerName;
@@ -9,11 +11,15 @@ public class HumanPlayer implements IPlayer {
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
-	
+
+	private Map<Integer, Card> playerHand;
+
 	public HumanPlayer(String name, int id) {
 		playerName = name;
 		playerID = id;
 		hand = new ArrayList<Card>();
+
+		playerHand = new ConcurrentHashMap<Integer, Card>();
 	}
 
 	@Override
@@ -25,8 +31,8 @@ public class HumanPlayer implements IPlayer {
 	@Override
 	public Card playCard() {
 		// TODO Auto-generated method stub
-		Card retCard = hand.get(0);
-		hand.remove(0);
+		Card retCard = hand.get(hand.size() - 1);
+		hand.remove(hand.size() - 1);
 		return retCard;
 	}
 
@@ -35,8 +41,7 @@ public class HumanPlayer implements IPlayer {
 		// TODO Auto-generated method stub
 		if (getTillFace() > 0) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -82,14 +87,13 @@ public class HumanPlayer implements IPlayer {
 		// TODO Auto-generated method stub
 		if (hand.size() == 52) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
-	
+
 	@Override
-	public List<Card> getHand(){
+	public List<Card> getHand() {
 		return hand;
 	}
 }
