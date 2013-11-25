@@ -149,5 +149,16 @@ public class RatscrewDatabase {
 			return false;
 		}
 	}
+	
+	private boolean userExists(String userFirstName) {
+		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
+		if (c.getCount() > 0) {
+			c.close();
+			return true;
+		} else {
+			c.close();
+			return false;
+		}
+	}
 
 }

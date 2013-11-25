@@ -41,10 +41,7 @@
         </activity>
 
         <!-- End Activities -->
-        <activity
-            android:name="com.egyptianratscrew.CardBackSelectActivity"
-            android:label="@string/title_activity_card_back_select" >
-        </activity>
+        <activity android:name=".ui.CardBackSelectActivity"></activity>
     </application>
 
 </manifest>

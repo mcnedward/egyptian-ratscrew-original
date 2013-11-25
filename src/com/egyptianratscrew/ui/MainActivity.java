@@ -23,6 +23,7 @@ import com.egyptianratscrew.R;
 
 public class MainActivity extends Activity {
 
+	private static final int FB_REQUEST = 1;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -58,7 +59,7 @@ public class MainActivity extends Activity {
 	//starting activity of fbLogin
 	public void fbLogin(View view) {
 		Intent fblogin = new Intent(this, fbLoginActivity.class);
-		startActivity(fblogin);
+		startActivityForResult(fblogin,FB_REQUEST);
 	}
 
 	//starting activity of viewDevelopers
@@ -70,6 +71,18 @@ public class MainActivity extends Activity {
 	public void startNewUser(View view) {
 		Intent user = new Intent(this, RegisterActivity.class);
 		startActivity(user);
+	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		  super.onActivityResult(requestCode, resultCode, data);
+		  
+		  if(resultCode == RESULT_OK) {
+				// RESULT_OK means that everything processed successfully.
+				
+				if (requestCode == FB_REQUEST) {
+					
+				}
+		  }
 	}
 	
 }
