@@ -102,7 +102,7 @@ public class fbLoginActivity extends Activity implements LoginListener {
 
 	  try{
 	   user = graphApi.getMyAccountInfo();
-	   Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
+	   //Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
 	   //update your status if logged in
 	   //graphApi.setStatus("Hello, world!");
 	  } catch(EasyFacebookError e){
