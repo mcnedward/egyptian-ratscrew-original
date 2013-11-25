@@ -80,5 +80,6 @@ public class PlayGameActivity extends Activity {
 				cardBack = (Bitmap) data.getParcelableExtra("IMAGE");
 			}
 		}
+	}
 
 }
