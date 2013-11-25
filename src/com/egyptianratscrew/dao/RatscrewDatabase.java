@@ -136,10 +136,44 @@ public class RatscrewDatabase {
 			}
 		}
 	}
+	
+	public User selectUserByName(String userFirstName) {
+		User user = null;
+		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
+		try {
+			while (c.moveToNext()) {
+				int userId = c.getInt(c.getColumnIndexOrThrow(USER_ID));
+				String userName = c.getString(c.getColumnIndexOrThrow(USERNAME));
+				String password = c.getString(c.getColumnIndexOrThrow(PASSWORD));
+				String email = c.getString(c.getColumnIndexOrThrow(EMAIL));
+				String firstName = c.getString(c.getColumnIndexOrThrow(FIRST_NAME));
+				String lastName = c.getString(c.getColumnIndexOrThrow(LAST_NAME));
+				int numberOfWins = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_WINS));
+				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
+				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
+				int highestLosingStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_LOSING_STREAK));
+				int numberOfTies = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_TIES));
+				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
+				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
+
+				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
+						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
+			}
+			if (user == null) {
+				Log.i(TAG, "No user exists");
+				return null;
+			} else
+				return user;
+		} finally {
+			if (c != null && !c.isClosed()) {
+				c.close();
+			}
+		}
+	}
 
 	/********** OBJECT EXISTS QUERIES **********/
 
-	private boolean userExists(int userId) {
+	public boolean userExists(int userId) {
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE userId = ?", new String[] { String.valueOf(userId) });
 		if (c.getCount() > 0) {
 			c.close();
@@ -150,7 +184,7 @@ public class RatscrewDatabase {
 		}
 	}
 	
-	private boolean userExists(String userFirstName) {
+	public boolean userExists(String userFirstName) {
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
 		if (c.getCount() > 0) {
 			c.close();
