@@ -223,6 +223,7 @@ public final class R {
         public static final int yellow=0x7f040010;
     }
     public static final class dimen {
+        public static final int CardBackPreviewPadding=0x7f050004;
         /**  Default screen margins, per the Android Design guidelines. 
 
          Customize dimensions originally defined in res/values/dimens.xml (such as
@@ -309,7 +310,7 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f09000a;
         public static final int Table=0x7f09000b;
-        public static final int action_settings=0x7f090028;
+        public static final int action_settings=0x7f09002c;
         public static final int blank=0x7f09000c;
         public static final int btnExisting=0x7f090005;
         public static final int btnFBLogin=0x7f090004;
@@ -317,7 +318,10 @@ public final class R {
         public static final int btnReset=0x7f090018;
         public static final int btnSubmit=0x7f090017;
         public static final int btnUserRegister=0x7f090003;
-        public static final int imageView1=0x7f090001;
+        public static final int button1=0x7f090029;
+        public static final int button2=0x7f09002a;
+        public static final int button3=0x7f09002b;
+        public static final int imgThumbnail=0x7f090001;
         public static final int lblConfirmPassword=0x7f090007;
         public static final int lblEmailAddress=0x7f090015;
         public static final int lblFirstName=0x7f09000d;
@@ -326,6 +330,7 @@ public final class R {
         public static final int lblPassword=0x7f090008;
         public static final int lblRegistration=0x7f090006;
         public static final int lblUserName=0x7f090011;
+        public static final int textView1=0x7f090028;
         public static final int txtAppName=0x7f090000;
         public static final int txtConfirmPassword=0x7f090014;
         public static final int txtDisplayEmail=0x7f09001c;
@@ -357,9 +362,11 @@ public final class R {
         public static final int register=0x7f030004;
         public static final int rules=0x7f030005;
         public static final int statistics=0x7f030006;
+        public static final int take_picture=0x7f030007;
     }
     public static final class menu {
-        public static final int main=0x7f080000;
+        public static final int card_back_select=0x7f080000;
+        public static final int main=0x7f080001;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -411,6 +418,7 @@ public final class R {
         public static final int rules=0x7f060006;
         public static final int rulesDescription=0x7f060003;
         public static final int statistics=0x7f060007;
+        public static final int title_activity_card_back_select=0x7f060037;
         public static final int totalGames=0x7f06000e;
         public static final int txtBlank=0x7f060030;
         public static final int txtCopyright=0x7f060029;
