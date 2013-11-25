@@ -53,6 +53,13 @@ public class RegisterActivity extends Activity{
 			user.setPassword(txtPassword.getText().toString());
 			user.setEmail(txtEmailAddress.getText().toString());
 			user.setUserId(rdb.getNewUserID());
+			user.setNumberOfLosses(0);
+			user.setNumberOfTies(0);
+			user.setNumberOfWins(0);
+			user.setTotalGames(0);
+			user.setHighestLosingStreak(0);
+			user.setHighestWinningStreak(0);
+			user.setHighScore(0);
 			
 			Intent resultIntent = new Intent();
 			resultIntent.putExtra("NewUser", user);
