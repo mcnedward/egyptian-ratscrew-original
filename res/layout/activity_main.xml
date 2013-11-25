@@ -27,13 +27,6 @@
         android:src="@drawable/screenimage" />
 
     <Button
-        android:id="@+id/btnNewGame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="startNewGame"
-        android:text="@string/computer" />
-
-    <Button
         android:id="@+id/btnUserRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

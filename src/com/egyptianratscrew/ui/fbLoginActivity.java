@@ -2,9 +2,9 @@ package com.egyptianratscrew.ui;
 
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.easy.facebook.android.apicall.GraphApi;
 import com.easy.facebook.android.error.EasyFacebookError;
@@ -105,11 +105,22 @@ public class fbLoginActivity extends Activity implements LoginListener {
 	   //Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
 	   //update your status if logged in
 	   //graphApi.setStatus("Hello, world!");
+	   fbLoginManager.displayToast("Hey, " + user.getFirst_name() + "! Login success!");
+	   
+	   Intent resultIntent = new Intent();
+	   resultIntent.putExtra("USER_NAME", user.getFirst_name());
+	   setResult(Activity.RESULT_OK,resultIntent);
+	   finish();
+	   
 	  } catch(EasyFacebookError e){
 	   Log.d("TAG: ", e.toString());
 	  }
+	  catch(NullPointerException e) {
+		  Log.d("TAG: ", e.toString());
+	  }
 
-	  fbLoginManager.displayToast("Hey, " + user.getFirst_name() + "! Login success!");
+	  
+	  
 	 }
 
 	 public void logoutSuccess() {
