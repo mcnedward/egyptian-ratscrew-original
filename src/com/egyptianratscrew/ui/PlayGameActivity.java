@@ -35,6 +35,8 @@ public class PlayGameActivity extends Activity {
 	//starting activity of game
 	public void PlayNewGame(View view) {
 		Intent game = new Intent(this, GameActivity.class);
+		game.putExtra("Difficulty", difficulty);
+		game.putExtra("CardBack", cardBack);
 		startActivity(game);
 	}
 	
