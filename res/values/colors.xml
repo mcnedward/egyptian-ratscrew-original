@@ -2,7 +2,7 @@
 <!--
 Version: 2
 Organized by: Willie Tsang
-https://github.com/wtsang02/colors/blob/master/color.xml
+https://github.com/wtsang02/colors/blob/master/color.xml
 -->
 <resources>
 
@@ -197,5 +197,7 @@ https://github.com/wtsang02/colors/blob/master/color.xml
 
     <color name="YellowGreen">#9ACD32</color>
     <!-- z -->
+
+    <color name="black_overlay">#66000000</color>
 
 </resources>
