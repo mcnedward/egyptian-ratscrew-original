@@ -9,6 +9,14 @@ package com.egyptianratscrew;
 
 public final class R {
     public static final class attr {
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int buttonBarButtonStyle=0x7f010001;
+        /** <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+         */
+        public static final int buttonBarStyle=0x7f010000;
     }
     public static final class color {
         public static final int AliceBlue=0x7f04003b;
@@ -177,6 +185,9 @@ public final class R {
         public static final int android_green=0x7f040000;
         public static final int aqua=0x7f040042;
         public static final int black=0x7f04000c;
+        /**  z 
+         */
+        public static final int black_overlay=0x7f040098;
         public static final int blue=0x7f04000f;
         /**  e 
  f 
@@ -306,77 +317,81 @@ public final class R {
         public static final int screenimage=0x7f020042;
         public static final int sj=0x7f020043;
         public static final int sk=0x7f020044;
-        public static final int sq=0x7f020045;
+        public static final int splashscreen=0x7f020045;
+        public static final int sq=0x7f020046;
     }
     public static final class id {
-        public static final int LinearLayout1=0x7f090014;
-        public static final int Table=0x7f090015;
-        public static final int action_settings=0x7f090037;
-        public static final int blank=0x7f090016;
+        public static final int LinearLayout1=0x7f090016;
+        public static final int Table=0x7f090017;
+        public static final int action_settings=0x7f090039;
+        public static final int blank=0x7f090018;
         public static final int btnCardBack=0x7f09000c;
         public static final int btnComputer=0x7f09000a;
-        public static final int btnDefault=0x7f090033;
+        public static final int btnDefault=0x7f090035;
         public static final int btnDevelopers=0x7f09000f;
         public static final int btnDifficulty=0x7f09000b;
         public static final int btnExisting=0x7f090009;
-        public static final int btnExistingPicture=0x7f090035;
+        public static final int btnExistingPicture=0x7f090037;
         public static final int btnFBLogin=0x7f090008;
         public static final int btnLogin=0x7f090004;
-        public static final int btnReset=0x7f090022;
+        public static final int btnReset=0x7f090024;
         public static final int btnRules=0x7f09000e;
-        public static final int btnSave=0x7f090036;
+        public static final int btnSave=0x7f090038;
         public static final int btnStatistics=0x7f09000d;
-        public static final int btnSubmit=0x7f090021;
-        public static final int btnTakePicture=0x7f090034;
+        public static final int btnSubmit=0x7f090023;
+        public static final int btnTakePicture=0x7f090036;
         public static final int btnUserRegister=0x7f090007;
         public static final int edtPassword=0x7f090003;
         public static final int edtUserName=0x7f090001;
+        public static final int fullscreen_content=0x7f090010;
+        public static final int fullscreen_content_controls=0x7f090011;
         public static final int imgThumbnail=0x7f090006;
-        public static final int lblConfirmPassword=0x7f090011;
-        public static final int lblEmailAddress=0x7f09001f;
-        public static final int lblFirstName=0x7f090017;
-        public static final int lblLastName=0x7f090019;
-        public static final int lblName=0x7f090013;
-        public static final int lblPassword=0x7f090012;
-        public static final int lblRegistration=0x7f090010;
-        public static final int lblSelectPicture=0x7f090032;
-        public static final int lblUserName=0x7f09001b;
+        public static final int lblConfirmPassword=0x7f090013;
+        public static final int lblEmailAddress=0x7f090021;
+        public static final int lblFirstName=0x7f090019;
+        public static final int lblLastName=0x7f09001b;
+        public static final int lblName=0x7f090015;
+        public static final int lblPassword=0x7f090014;
+        public static final int lblRegistration=0x7f090012;
+        public static final int lblSelectPicture=0x7f090034;
+        public static final int lblUserName=0x7f09001d;
         public static final int textView1=0x7f090000;
         public static final int textView2=0x7f090002;
         public static final int txtAppName=0x7f090005;
-        public static final int txtConfirmPassword=0x7f09001e;
-        public static final int txtDisplayEmail=0x7f090026;
-        public static final int txtDisplayHighScore=0x7f090031;
-        public static final int txtDisplayName=0x7f090027;
-        public static final int txtDisplayNumberOfLosses=0x7f09002e;
-        public static final int txtDisplayNumberOfTies=0x7f09002f;
-        public static final int txtDisplayNumberOfWins=0x7f09002d;
-        public static final int txtDisplayTotalGames=0x7f090030;
-        public static final int txtDisplayUserName=0x7f090025;
-        public static final int txtEmailAddress=0x7f090020;
-        public static final int txtFirst=0x7f090018;
-        public static final int txtLast=0x7f09001a;
-        public static final int txtPassword=0x7f09001d;
-        public static final int txtRules=0x7f090023;
-        public static final int txtRulesDescription=0x7f090024;
-        public static final int txtStatHighScore=0x7f09002c;
-        public static final int txtStatLoss=0x7f090029;
-        public static final int txtStatTies=0x7f09002a;
-        public static final int txtStatTotal=0x7f09002b;
-        public static final int txtStatWin=0x7f090028;
-        public static final int txtUserName=0x7f09001c;
+        public static final int txtConfirmPassword=0x7f090020;
+        public static final int txtDisplayEmail=0x7f090028;
+        public static final int txtDisplayHighScore=0x7f090033;
+        public static final int txtDisplayName=0x7f090029;
+        public static final int txtDisplayNumberOfLosses=0x7f090030;
+        public static final int txtDisplayNumberOfTies=0x7f090031;
+        public static final int txtDisplayNumberOfWins=0x7f09002f;
+        public static final int txtDisplayTotalGames=0x7f090032;
+        public static final int txtDisplayUserName=0x7f090027;
+        public static final int txtEmailAddress=0x7f090022;
+        public static final int txtFirst=0x7f09001a;
+        public static final int txtLast=0x7f09001c;
+        public static final int txtPassword=0x7f09001f;
+        public static final int txtRules=0x7f090025;
+        public static final int txtRulesDescription=0x7f090026;
+        public static final int txtStatHighScore=0x7f09002e;
+        public static final int txtStatLoss=0x7f09002b;
+        public static final int txtStatTies=0x7f09002c;
+        public static final int txtStatTotal=0x7f09002d;
+        public static final int txtStatWin=0x7f09002a;
+        public static final int txtUserName=0x7f09001e;
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
         public static final int activity_main=0x7f030001;
         public static final int activity_play_game=0x7f030002;
-        public static final int developers=0x7f030003;
-        public static final int fblogin=0x7f030004;
-        public static final int game_layout=0x7f030005;
-        public static final int register=0x7f030006;
-        public static final int rules=0x7f030007;
-        public static final int statistics=0x7f030008;
-        public static final int take_picture=0x7f030009;
+        public static final int activity_splash=0x7f030003;
+        public static final int developers=0x7f030004;
+        public static final int fblogin=0x7f030005;
+        public static final int game_layout=0x7f030006;
+        public static final int register=0x7f030007;
+        public static final int rules=0x7f030008;
+        public static final int statistics=0x7f030009;
+        public static final int take_picture=0x7f03000a;
     }
     public static final class menu {
         public static final int card_back_select=0x7f080000;
@@ -397,6 +412,8 @@ public final class R {
         public static final int computer=0x7f060004;
         public static final int developing=0x7f06002b;
         public static final int development=0x7f060028;
+        public static final int dummy_button=0x7f06003b;
+        public static final int dummy_content=0x7f06003c;
         public static final int facebook=0x7f060034;
         public static final int hello_world=0x7f060002;
         public static final int highScore=0x7f06000f;
@@ -437,6 +454,7 @@ public final class R {
         public static final int title_activity_card_back_select=0x7f060037;
         public static final int title_activity_login=0x7f060039;
         public static final int title_activity_play_game=0x7f060038;
+        public static final int title_activity_splash=0x7f06003a;
         public static final int totalGames=0x7f06000e;
         public static final int txtBlank=0x7f060030;
         public static final int txtCopyright=0x7f060029;
@@ -452,15 +470,18 @@ public final class R {
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+
     
 
             Theme customizations available in newer API levels can go in
             res/values-vXX/styles.xml, while customizations related to
             backward-compatibility can go here.
+
         
 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
+
     
  API 11 theme customizations can go here. 
 
@@ -475,5 +496,51 @@ public final class R {
  All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070001;
+        public static final int ButtonBar=0x7f070003;
+        public static final int ButtonBarButton=0x7f070004;
+        public static final int FullscreenActionBarStyle=0x7f070005;
+        public static final int FullscreenTheme=0x7f070002;
     }
+    public static final class styleable {
+        /** 
+         Declare custom theme attributes that allow changing which styles are
+         used for button bars depending on the API level.
+         ?android:attr/buttonBarStyle is new as of API 11 so this is
+         necessary to support previous API levels.
+    
+           <p>Includes the following attributes:</p>
+           <table>
+           <colgroup align="left" />
+           <colgroup align="left" />
+           <tr><th>Attribute</th><th>Description</th></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarButtonStyle com.egyptianratscrew:buttonBarButtonStyle}</code></td><td></td></tr>
+           <tr><td><code>{@link #ButtonBarContainerTheme_buttonBarStyle com.egyptianratscrew:buttonBarStyle}</code></td><td></td></tr>
+           </table>
+           @see #ButtonBarContainerTheme_buttonBarButtonStyle
+           @see #ButtonBarContainerTheme_buttonBarStyle
+         */
+        public static final int[] ButtonBarContainerTheme = {
+            0x7f010000, 0x7f010001
+        };
+        /**
+          <p>This symbol is the offset where the {@link com.egyptianratscrew.R.attr#buttonBarButtonStyle}
+          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.egyptianratscrew:buttonBarButtonStyle
+        */
+        public static final int ButtonBarContainerTheme_buttonBarButtonStyle = 1;
+        /**
+          <p>This symbol is the offset where the {@link com.egyptianratscrew.R.attr#buttonBarStyle}
+          attribute's value can be found in the {@link #ButtonBarContainerTheme} array.
+
+
+          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
+or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
+          @attr name com.egyptianratscrew:buttonBarStyle
+        */
+        public static final int ButtonBarContainerTheme_buttonBarStyle = 0;
+    };
 }

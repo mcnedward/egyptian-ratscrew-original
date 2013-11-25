@@ -73,5 +73,8 @@
     <string name="title_activity_card_back_select">CardBackSelectActivity</string>
     <string name="title_activity_play_game">PlayGameActivity</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 
 </resources>
