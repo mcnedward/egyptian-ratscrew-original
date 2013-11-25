@@ -25,6 +25,8 @@ import com.egyptianratscrew.dao.User;
 
 public class MainActivity extends Activity {
 
+	private static final int NEW_USER_REQUEST = 2;
+
 	private static final int FB_REQUEST = 1;
 	
 	private RatscrewDatabase rdb;
@@ -46,10 +48,6 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	
-
-	
-
 	//starting activity of stats
 	public void viewStatistics(View view) {
 		Intent stats = new Intent(this, ViewStatistics.class);
@@ -66,7 +64,7 @@ public class MainActivity extends Activity {
 	//starting activity of user
 	public void startNewUser(View view) {
 		Intent user = new Intent(this, RegisterActivity.class);
-		startActivity(user);
+		startActivityForResult(user,NEW_USER_REQUEST);
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -99,7 +97,13 @@ public class MainActivity extends Activity {
 						user.setUserName(firstName + user.getUserId());
 						
 						loggedInUser = user;
+						rdb.insertUser(user);
 					}
+				}
+				else if (requestCode == NEW_USER_REQUEST){
+					User user = (User) data.getSerializableExtra("NewUser");
+					loggedInUser = user;
+					rdb.insertUser(user);
 				}
 		  }
 	}
