@@ -63,7 +63,7 @@ public class GameThread2 extends Thread {
 	 * @param gameSurface
 	 *            - The game surface that the UI of the thread is using
 	 */
-	public GameThread2(Context context, GameSurface gameSurface, Game game) {
+	public GameThread2(Context context, GameSurface gameSurface, Game game, Bitmap fdc) {
 		// Set the context, GameSurface, and SurfaceHolder
 		this.context = context;
 		this.gameSurface = gameSurface;
@@ -77,8 +77,13 @@ public class GameThread2 extends Thread {
 		p2 = game.player2;
 		theStack = game.theStack;
 
-		int cardId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
-		faceDownCard = BitmapFactory.decodeResource(context.getResources(), cardId);
+		if (fdc != null){
+			faceDownCard = fdc;
+		}
+		else {
+			int cardId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
+			faceDownCard = BitmapFactory.decodeResource(context.getResources(), cardId);
+		}
 	}
 
 	/**
