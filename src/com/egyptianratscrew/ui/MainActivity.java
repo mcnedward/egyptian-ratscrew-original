@@ -25,6 +25,8 @@ import com.egyptianratscrew.dao.User;
 
 public class MainActivity extends Activity {
 
+	private static final int LOGIN_REQUEST = 3;
+
 	private static final int NEW_USER_REQUEST = 2;
 
 	private static final int FB_REQUEST = 1;
@@ -56,7 +58,7 @@ public class MainActivity extends Activity {
 
 	public void LoginWithCredentials(View v){
 		Intent loginIntent = new Intent(this,LoginActivity.class);
-		
+		startActivityForResult(loginIntent,LOGIN_REQUEST);
 	}
 	
 	//starting activity of user
@@ -104,6 +106,11 @@ public class MainActivity extends Activity {
 					User user = (User) data.getSerializableExtra("NewUser");
 					loggedInUser = user;
 					rdb.insertUser(user);
+					LoginSuccess();
+				}
+				else if (requestCode == LOGIN_REQUEST){
+					User user = (User) data.getSerializableExtra("ExistingUser");
+					loggedInUser = user;
 					LoginSuccess();
 				}
 		  }
