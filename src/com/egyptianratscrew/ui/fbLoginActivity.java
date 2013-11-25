@@ -2,9 +2,13 @@ package com.egyptianratscrew.ui;
 
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.easy.facebook.android.apicall.GraphApi;
 import com.easy.facebook.android.error.EasyFacebookError;
@@ -18,13 +22,22 @@ public class fbLoginActivity extends Activity implements LoginListener {
 
 	 private FBLoginManager fbLoginManager;
 
-	 public final String EGYPTIANRATSCREWAPP_ID = "585680418165248";
+	 public final String EGYPTIANRATSCREWAPP_ID = "451442211642705";
 
 	 @Override
 	 public void onCreate(Bundle savedInstanceState) {
 	  super.onCreate(savedInstanceState);
 	  //setContentView(R.layout.fbLogin);
-	  connectToFacebook();
+	  if (isConnectedToInternet(this))
+	  {
+		  connectToFacebook();
+	  }
+	  else
+	  {
+		  Toast.makeText(this, "Not connected to the Internet.", Toast.LENGTH_LONG).show();
+		  setResult(Activity.RESULT_CANCELED,null);
+		   finish();
+	  }
 	 }
 
 	 public void connectToFacebook(){
@@ -117,6 +130,8 @@ public class fbLoginActivity extends Activity implements LoginListener {
 	  }
 	  catch(NullPointerException e) {
 		  Log.d("TAG: ", e.toString());
+		  setResult(Activity.RESULT_CANCELED,null);
+		   finish();
 	  }
 
 	  
@@ -129,5 +144,19 @@ public class fbLoginActivity extends Activity implements LoginListener {
 
 	 public void loginFail() {
 	  fbLoginManager.displayToast("Login Epic Failed!");
+	  setResult(Activity.RESULT_CANCELED,null);
+	   finish();
 	 }
+	 
+	 private boolean isConnectedToInternet(Context context){
+		 ConnectivityManager cm =
+			        (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+			 
+			NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+			boolean isConnected = activeNetwork != null &&
+			                      activeNetwork.isConnectedOrConnecting();
+			return isConnected;
+
+	 }
+		
 	}

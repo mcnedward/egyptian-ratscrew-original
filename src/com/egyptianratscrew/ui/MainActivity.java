@@ -46,17 +46,9 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	//starting activity of viewRules
-	public void viewRules(View view) {
-		Intent viewRules = new Intent(this, ViewRules.class);
-		startActivity(viewRules);
-	}
+	
 
-	//starting activity of game
-	public void startNewGame(View view) {
-		Intent game = new Intent(this, GameActivity.class);
-		startActivity(game);
-	}
+	
 
 	//starting activity of stats
 	public void viewStatistics(View view) {
@@ -70,11 +62,7 @@ public class MainActivity extends Activity {
 		startActivityForResult(fblogin,FB_REQUEST);
 	}
 
-	//starting activity of viewDevelopers
-	public void viewDevelopers(View view){
-		Intent developers = new Intent (this, ViewDevelopers.class);
-		startActivity(developers);
-	}
+	
 	//starting activity of user
 	public void startNewUser(View view) {
 		Intent user = new Intent(this, RegisterActivity.class);
@@ -108,6 +96,9 @@ public class MainActivity extends Activity {
 						user.setPassword("");
 						user.setTotalGames(0);
 						user.setUserId(rdb.getNewUserID());
+						user.setUserName(firstName + user.getUserId());
+						
+						loggedInUser = user;
 					}
 				}
 		  }
