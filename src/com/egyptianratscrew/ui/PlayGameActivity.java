@@ -72,6 +72,12 @@ public class PlayGameActivity extends Activity {
 		startActivityForResult(cardBack,CARD_BACK_REQUEST);
 	}
 	
+	//starting activity of stats
+	public void ViewStatistics(View view) {
+		Intent stats = new Intent(this, ViewStatistics.class);
+		startActivity(stats);
+	}
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK) {
 			// RESULT_OK means that everything processed successfully.
