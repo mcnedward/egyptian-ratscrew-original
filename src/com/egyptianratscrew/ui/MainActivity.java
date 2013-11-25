@@ -54,6 +54,10 @@ public class MainActivity extends Activity {
 		startActivityForResult(fblogin,FB_REQUEST);
 	}
 
+	public void LoginWithCredentials(View v){
+		Intent loginIntent = new Intent(this,LoginActivity.class);
+		
+	}
 	
 	//starting activity of user
 	public void startNewUser(View view) {
@@ -69,9 +73,10 @@ public class MainActivity extends Activity {
 				
 				if (requestCode == FB_REQUEST) {
 					String firstName = data.getStringExtra("USER_NAME");
-					if (rdb.userExists(firstName))
+					if (rdb.userExists(firstName, RatscrewDatabase.FIRST_NAME_FIELD))
 					{
 						loggedInUser = rdb.selectUserByName(firstName);
+						LoginSuccess();
 					}
 					else
 					{
@@ -92,14 +97,22 @@ public class MainActivity extends Activity {
 						
 						loggedInUser = user;
 						rdb.insertUser(user);
+						LoginSuccess();
 					}
 				}
 				else if (requestCode == NEW_USER_REQUEST){
 					User user = (User) data.getSerializableExtra("NewUser");
 					loggedInUser = user;
 					rdb.insertUser(user);
+					LoginSuccess();
 				}
 		  }
+	}
+	
+	private void LoginSuccess(){
+		Intent loginIntent = new Intent(this,PlayGameActivity.class);
+		loginIntent.putExtra("User", loggedInUser);
+		startActivity(loginIntent);
 	}
 	
 }

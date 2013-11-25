@@ -6,5 +6,6 @@
     <dimen name="developer">40dp</dimen>
     <dimen name="names">30dp</dimen>
     <dimen name="CardBackPreviewPadding">100dp</dimen>
+    <dimen name="dp22">22dp</dimen>
 
 </resources>

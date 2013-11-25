@@ -72,5 +72,6 @@
     <string name="imgScreen"></string>
     <string name="title_activity_card_back_select">CardBackSelectActivity</string>
     <string name="title_activity_play_game">PlayGameActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>

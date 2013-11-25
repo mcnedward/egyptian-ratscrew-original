@@ -11,6 +11,10 @@ import android.util.Log;
 
 
 public class RatscrewDatabase {
+	public static final int USER_NAME_FIELD = 2;
+
+	public static final int FIRST_NAME_FIELD = 1;
+
 	private static String TAG = "MusicDatabase";
 
 	private DatabaseAdapter dba;
@@ -173,11 +177,45 @@ public class RatscrewDatabase {
 			}
 		}
 	}
+	
+	public User selectUserByUserName(String aUserName) {
+		User user = null;
+		Cursor c = db.rawQuery("SELECT * FROM user WHERE USER_NAME = ?", new String[] { aUserName });
+		try {
+			while (c.moveToNext()) {
+				int userId = c.getInt(c.getColumnIndexOrThrow(USER_ID));
+				String userName = c.getString(c.getColumnIndexOrThrow(USERNAME));
+				String password = c.getString(c.getColumnIndexOrThrow(PASSWORD));
+				String email = c.getString(c.getColumnIndexOrThrow(EMAIL));
+				String firstName = c.getString(c.getColumnIndexOrThrow(FIRST_NAME));
+				String lastName = c.getString(c.getColumnIndexOrThrow(LAST_NAME));
+				int numberOfWins = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_WINS));
+				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
+				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
+				int highestLosingStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_LOSING_STREAK));
+				int numberOfTies = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_TIES));
+				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
+				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
+
+				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
+						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
+			}
+			if (user == null) {
+				Log.i(TAG, "No user exists");
+				return null;
+			} else
+				return user;
+		} finally {
+			if (c != null && !c.isClosed()) {
+				c.close();
+			}
+		}
+	}
 
 	/********** OBJECT EXISTS QUERIES **********/
 
 	public boolean userExists(int userId) {
-		Cursor c = db.rawQuery("SELECT * FROM user WHERE userId = ?", new String[] { String.valueOf(userId) });
+		Cursor c = db.rawQuery("SELECT * FROM user WHERE USER_ID = ?", new String[] { String.valueOf(userId) });
 		if (c.getCount() > 0) {
 			c.close();
 			return true;
@@ -187,8 +225,19 @@ public class RatscrewDatabase {
 		}
 	}
 	
-	public boolean userExists(String userFirstName) {
-		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
+	public boolean userExists(String userName, int field) {
+		Cursor c = null;
+		if (field == FIRST_NAME_FIELD){
+			c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userName });
+		}
+		else if (field == USER_NAME_FIELD){
+			c = db.rawQuery("SELECT * FROM user WHERE USER_NAME = ?", new String[] { userName });
+		}
+		else {
+			Log.d("TAG: ", "Field Invalid.");
+			return false;
+		}
+		
 		if (c.getCount() > 0) {
 			c.close();
 			return true;

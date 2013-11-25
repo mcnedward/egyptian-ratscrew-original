@@ -9,7 +9,7 @@
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -47,6 +47,10 @@
         <activity
             android:name="com.egyptianratscrew.ui.PlayGameActivity"
             android:label="@string/title_activity_play_game" >
+        </activity>
+        <activity
+            android:name="com.egyptianratscrew.ui.LoginActivity"
+            android:label="@string/title_activity_login" >
         </activity>
     </application>
 
