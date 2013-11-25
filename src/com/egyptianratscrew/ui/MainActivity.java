@@ -7,6 +7,8 @@ import android.view.Menu;
 import android.view.View;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.RatscrewDatabase;
+import com.egyptianratscrew.dao.User;
 
 /**
  * This page is the Main Menu for the Egyptian Ratscrew game
@@ -24,10 +26,16 @@ import com.egyptianratscrew.R;
 public class MainActivity extends Activity {
 
 	private static final int FB_REQUEST = 1;
+	
+	private RatscrewDatabase rdb;
+	private User loggedInUser;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		rdb = new RatscrewDatabase(this);
+		loggedInUser = null;
 	}
 
 
@@ -80,7 +88,11 @@ public class MainActivity extends Activity {
 				// RESULT_OK means that everything processed successfully.
 				
 				if (requestCode == FB_REQUEST) {
-					
+					String firstName = data.getStringExtra("USER_NAME");
+					if (rdb.userExists(firstName))
+					{
+						loggedInUser = rdb.selectUserByName(firstName);
+					}
 				}
 		  }
 	}
