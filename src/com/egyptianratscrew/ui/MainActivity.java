@@ -48,12 +48,6 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	//starting activity of stats
-	public void viewStatistics(View view) {
-		Intent stats = new Intent(this, ViewStatistics.class);
-		startActivity(stats);
-	}
-
 	//starting activity of fbLogin
 	public void fbLogin(View view) {
 		Intent fblogin = new Intent(this, fbLoginActivity.class);

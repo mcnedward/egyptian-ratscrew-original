@@ -41,12 +41,23 @@
         android:text="Select Card Back" />
 
     <Button
-        android:id="@+id/btnRules"
+        android:id="@+id/btnStatistics"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/btnCardBack"
         android:layout_alignRight="@+id/btnCardBack"
         android:layout_centerVertical="true"
+        android:onClick="ViewStatistics"
+        android:text="View Statistics" />
+
+    <Button
+        android:id="@+id/btnRules"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnDevelopers"
+        android:layout_alignRight="@+id/btnStatistics"
+        android:layout_below="@+id/btnStatistics"
+        android:layout_marginTop="19dp"
         android:onClick="ViewRules"
         android:text="View Rules" />
 
@@ -54,10 +65,10 @@
         android:id="@+id/btnDevelopers"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/btnRules"
-        android:layout_alignRight="@+id/btnRules"
+        android:layout_alignLeft="@+id/btnStatistics"
+        android:layout_alignRight="@+id/btnStatistics"
         android:layout_below="@+id/btnRules"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="14dp"
         android:onClick="ViewDevelopers"
         android:text="View Developers" />
 
