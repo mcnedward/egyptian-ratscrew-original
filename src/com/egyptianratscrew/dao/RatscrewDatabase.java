@@ -1,5 +1,8 @@
 package com.egyptianratscrew.dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils.InsertHelper;
@@ -193,6 +196,37 @@ public class RatscrewDatabase {
 			c.close();
 			return false;
 		}
+	}
+	
+	public int getNewUserID()
+	{
+		int retInt = 1;
+		Cursor c = db.rawQuery("SELECT * FROM user", null);
+		try {
+			List<Integer> userIDs = new ArrayList<Integer>();
+			
+			while (c.moveToNext()) {
+				userIDs.add(c.getInt(c.getColumnIndexOrThrow(USER_ID)));
+			}
+			
+			while (true)
+			{
+				if (userIDs.contains(retInt))
+				{
+					retInt++;
+				}
+				else
+				{
+					break;
+				}
+			}
+		}
+		catch (Exception e)
+		{
+			Log.d("TAG: ", e.toString());
+		}
+		
+		return retInt;
 	}
 
 }

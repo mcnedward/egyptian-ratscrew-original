@@ -93,6 +93,22 @@ public class MainActivity extends Activity {
 					{
 						loggedInUser = rdb.selectUserByName(firstName);
 					}
+					else
+					{
+						User user = new User();
+						user.setFirstName(firstName);
+						user.setEmail(null);
+						user.setHighestLosingStreak(0);
+						user.setHighestWinningStreak(0);
+						user.setHighScore(0);
+						user.setLastName("");
+						user.setNumberOfLosses(0);
+						user.setNumberOfTies(0);
+						user.setNumberOfWins(0);
+						user.setPassword("");
+						user.setTotalGames(0);
+						user.setUserId(rdb.getNewUserID());
+					}
 				}
 		  }
 	}
