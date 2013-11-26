@@ -18,8 +18,6 @@ public class HumanPlayer implements IPlayer {
 		playerName = name;
 		playerID = id;
 		hand = new ArrayList<Card>();
-
-		playerHand = new ConcurrentHashMap<Integer, Card>();
 	}
 
 	@Override

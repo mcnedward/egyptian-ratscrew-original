@@ -304,21 +304,22 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int ic_launcher=0x7f020035;
         public static final int jokerblue=0x7f020036;
         public static final int jokerred=0x7f020037;
-        public static final int s10=0x7f020038;
-        public static final int s2=0x7f020039;
-        public static final int s3=0x7f02003a;
-        public static final int s4=0x7f02003b;
-        public static final int s5=0x7f02003c;
-        public static final int s6=0x7f02003d;
-        public static final int s7=0x7f02003e;
-        public static final int s8=0x7f02003f;
-        public static final int s9=0x7f020040;
-        public static final int sa=0x7f020041;
-        public static final int screenimage=0x7f020042;
-        public static final int sj=0x7f020043;
-        public static final int sk=0x7f020044;
-        public static final int splashscreen=0x7f020045;
-        public static final int sq=0x7f020046;
+        public static final int playing_cards_animation=0x7f020038;
+        public static final int s10=0x7f020039;
+        public static final int s2=0x7f02003a;
+        public static final int s3=0x7f02003b;
+        public static final int s4=0x7f02003c;
+        public static final int s5=0x7f02003d;
+        public static final int s6=0x7f02003e;
+        public static final int s7=0x7f02003f;
+        public static final int s8=0x7f020040;
+        public static final int s9=0x7f020041;
+        public static final int sa=0x7f020042;
+        public static final int screenimage=0x7f020043;
+        public static final int sj=0x7f020044;
+        public static final int sk=0x7f020045;
+        public static final int splashscreen=0x7f020046;
+        public static final int sq=0x7f020047;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f090017;
@@ -386,19 +387,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int activity_main=0x7f030001;
         public static final int activity_play_game=0x7f030002;
         public static final int activity_splash=0x7f030003;
-        public static final int developers=0x7f030004;
-        public static final int fblogin=0x7f030005;
-        public static final int game_layout=0x7f030006;
-        public static final int register=0x7f030007;
-        public static final int rules=0x7f030008;
-        public static final int statistics=0x7f030009;
-        public static final int take_picture=0x7f03000a;
+        public static final int activity_winner=0x7f030004;
+        public static final int developers=0x7f030005;
+        public static final int fblogin=0x7f030006;
+        public static final int game_layout=0x7f030007;
+        public static final int register=0x7f030008;
+        public static final int rules=0x7f030009;
+        public static final int statistics=0x7f03000a;
+        public static final int take_picture=0x7f03000b;
     }
     public static final class menu {
         public static final int card_back_select=0x7f080000;
         public static final int login=0x7f080001;
         public static final int main=0x7f080002;
         public static final int play_game=0x7f080003;
+        public static final int winner=0x7f080004;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
@@ -456,6 +459,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int title_activity_login=0x7f060039;
         public static final int title_activity_play_game=0x7f060038;
         public static final int title_activity_splash=0x7f06003a;
+        public static final int title_activity_winner=0x7f06003d;
         public static final int totalGames=0x7f06000e;
         public static final int txtBlank=0x7f060030;
         public static final int txtCopyright=0x7f060029;

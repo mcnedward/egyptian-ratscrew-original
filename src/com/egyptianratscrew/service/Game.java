@@ -166,6 +166,9 @@ public class Game {
 			}
 		}
 		
+		
+		
+		
 		// if the stack is slappable, start timer to slap stack
         if (slappable()) {
                 Timer compSlapTimer = new Timer();
@@ -254,10 +257,7 @@ public class Game {
 		IPlayer p = getPlayerFromID(playerID);
 		IPlayer p2 = new HumanPlayer("empty", -1);
 		theStack.add(p.playCard());
-		// int x = middleStack.size();
-		int y = p.getHand().size();
-		// middleStack.put(x, p.playCard(y));
-
+	
 		// need to update graphics here
 
 		// if player needs to play a face and didnt
