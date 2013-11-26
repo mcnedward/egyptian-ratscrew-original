@@ -1,0 +1,32 @@
+* Deal cards to the top and bottom players
+	 */
+	public void dealCards() {
+		int surfaceWidth = gameSurface.getWidth();	// The width of the game surface (card table)
+		int bitX = 10;	// The x-coordinate for the top set of cards
+		int bitY = 10;	// The y-coordinate for the top set of cards
+		int bitY2 = gameSurface.getBottom() - 20;	// The y-coordinate for the bottom set of cards
+
+		// Lock the canvas for drawing on
+		canvas = surfaceHolder.lockCanvas();		// The canvas for the game surface
+		initializeTable();	// Reset the game surface every time
+		int x = 1;
+
+		for (Card card : cardDeck) {
+			Bitmap cardBitmap = card.getCardBitmap();
+			// Draw the top card
+			canvas.drawBitmap(card.getCardBitmap(), bitX, bitY, null);
+			// Draw the bottom card
+			canvas.drawBitmap(cardBitmap, bitX, bitY2 - cardBitmap.getHeight(), null);
+
+			bitX += 30;	// Increase the x-coordinate for the cards
+			// Check if the card is going past the edge of the game surface; Reset the coordinates if the cards if true
+			if ((card.getCardBitmap().getWidth() + bitX) >= surfaceWidth) {
+				bitX = 10;
+				bitY += 40;
+				bitY2 += gameSurface.getBottom();
+			}
+			x++;
+		}
+		// Unlock and post the canvas
+		surfaceHolder.unlockCanvasAndPost(canvas);
+	}
