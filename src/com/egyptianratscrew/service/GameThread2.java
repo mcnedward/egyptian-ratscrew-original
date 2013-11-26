@@ -72,10 +72,6 @@ public class GameThread2 extends Thread {
 
 		canvas = new Canvas();
 
-		// Initialize all variables taken from Game class
-		p1 = game.player1;
-		p2 = game.player2;
-		theStack = game.theStack;
 
 		if (fdc != null){
 			faceDownCard = fdc;
