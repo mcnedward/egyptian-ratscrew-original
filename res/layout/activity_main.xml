@@ -27,6 +27,13 @@
         android:src="@drawable/screenimage" />
 
     <Button
+        android:id="@+id/btnTestGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="StartGame"
+        android:text="Test Game" />
+
+    <Button
         android:id="@+id/btnUserRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

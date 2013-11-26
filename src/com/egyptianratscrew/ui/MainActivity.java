@@ -122,4 +122,9 @@ public class MainActivity extends Activity {
 		startActivity(loginIntent);
 	}
 	
+	public void StartGame(View v)
+	{
+		Intent gameIntent = new Intent(this, GameActivity.class);
+		startActivity(gameIntent);
+	}
 }
