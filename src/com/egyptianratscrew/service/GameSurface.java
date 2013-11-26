@@ -47,7 +47,7 @@ public class GameSurface extends SurfaceView implements Runnable {
 	public void drawGame(Canvas canvas) {
 		canvas.drawColor(context.getResources().getColor(R.color.green));	// Set the background color of the canvas
 		game.setCardLocations(this);				// Set the coordinates of each card in the deck
-		game.playCard2();							// Check if any cards need to be played by either player
+		game.displayCards();							// Check if any cards need to be played by either player
 		for (Card card : game.player1.getHand()) {	// Draw every card in player 1's hand
 			card.onDraw(canvas);
 		}
