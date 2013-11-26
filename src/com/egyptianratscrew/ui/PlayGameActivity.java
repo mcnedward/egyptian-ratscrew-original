@@ -10,12 +10,14 @@ import android.view.Menu;
 import android.view.View;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.User;
 
 public class PlayGameActivity extends Activity {
 	
 	private static final int CARD_BACK_REQUEST = 1;
 	private int difficulty;
 	private Bitmap cardBack;
+	private User user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class PlayGameActivity extends Activity {
 		setContentView(R.layout.activity_play_game);
 		difficulty = 3;
 		cardBack = null;
+		user = (User) getIntent().getExtras().getSerializable("User");
 	}
 
 	@Override
@@ -37,6 +40,7 @@ public class PlayGameActivity extends Activity {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
 		game.putExtra("CardBack", cardBack);
+		game.putExtra("Names", new String[] { user.getUserName() });
 		startActivity(game);
 	}
 	
