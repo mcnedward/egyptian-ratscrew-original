@@ -165,6 +165,12 @@ public class Game {
 				theStack.add(card);
 			}
 		}
+		
+		// if the stack is slappable, start timer to slap stack
+        if (slappable()) {
+                Timer compSlapTimer = new Timer();
+                compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
+        }
 
 		/**
 		 * Check if if if the computer's turn. If it is, start a new task that will play a card for the computer after
