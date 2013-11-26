@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
