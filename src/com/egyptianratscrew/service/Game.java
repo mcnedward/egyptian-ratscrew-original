@@ -8,9 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v4.view.MotionEventCompat;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -140,13 +138,16 @@ public class Game {
 			c.setX((surfaceView.getWidth() - c.getWidth()) / 2);
 			c.setY((surfaceView.getHeight() - c.getHeight()) / 2);
 			degree += 20;
+			if (slappable()) {
+				setCardListener(c.getX(), c.getY(), c, surfaceView);
+			}
 		}
 	}
 
 	/**
 	 * Used to play a card from either the player's or the computer's hand.
 	 */
-	public void playCard2() {
+	public void displayCards() {
 		/**
 		 * Check the player's hands for any cards that are hidden, which should be only the top cards if they were
 		 * played. If there are any hidden cards, remove them from the iterator and add that card to the middle stack.
@@ -156,6 +157,7 @@ public class Game {
 			if (card.isHidden()) {
 				iterator.remove();
 				theStack.add(card);
+				playCard(player1);
 			}
 		}
 		for (Iterator<Card> iterator2 = player2.getHand().iterator(); iterator2.hasNext();) {
@@ -163,49 +165,47 @@ public class Game {
 			if (card.isHidden()) {
 				iterator2.remove();
 				theStack.add(card);
+				playCard(player2);
 			}
 		}
-		
-		
-		
-		
-		// if the stack is slappable, start timer to slap stack
-        if (slappable()) {
-                Timer compSlapTimer = new Timer();
-                compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
-        }
 
-		/**
-		 * Check if if if the computer's turn. If it is, start a new task that will play a card for the computer after
-		 * the set delay.
-		 */
-		if (player2.myTurn()) {
-			try {
-				Timer timer = new Timer();
-				timer.schedule(new TimerTask() {
-					@Override
-					public void run() {
-						/**
-						 * Check again if it is the computer's turn still, because the game is constantly being run and
-						 * drawn in the GameSurface class. If this check is not here, the timer task will continue
-						 * removing cards until the run method in GameSurface reaches this point again.
-						 */
-						if (player2.myTurn()) {
-							/**
-							 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
-							 * set the computer's turn off
-							 */
-							player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
-							player1.setMyTurn(true);
-							player2.setMyTurn(false);
-						}
-					}
-
-				}, DELAY_INTERVAL);	// TODO This delay interval will be determined by the difficulty later
-			} catch (Exception e) {
-				Log.i(TAG, e.getMessage(), e);
-			}
-		}
+		// // if the stack is slappable, start timer to slap stack
+		// if (slappable()) {
+		// Timer compSlapTimer = new Timer();
+		// compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
+		// }
+		//
+		// /**
+		// * Check if if if the computer's turn. If it is, start a new task that will play a card for the computer after
+		// * the set delay.
+		// */
+		// if (player2.myTurn()) {
+		// try {
+		// Timer timer = new Timer();
+		// timer.schedule(new TimerTask() {
+		// @Override
+		// public void run() {
+		// /**
+		// * Check again if it is the computer's turn still, because the game is constantly being run and
+		// * drawn in the GameSurface class. If this check is not here, the timer task will continue
+		// * removing cards until the run method in GameSurface reaches this point again.
+		// */
+		// if (player2.myTurn()) {
+		// /**
+		// * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
+		// * set the computer's turn off
+		// */
+		// player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
+		// player1.setMyTurn(true);
+		// player2.setMyTurn(false);
+		// }
+		// }
+		//
+		// }, DELAY_INTERVAL); // TODO This delay interval will be determined by the difficulty later
+		// } catch (Exception e) {
+		// Log.i(TAG, e.getMessage(), e);
+		// }
+		// }
 	}
 
 	/**
@@ -234,6 +234,13 @@ public class Game {
 				if (action == MotionEvent.ACTION_UP) {
 					if (eventX >= x && eventX < (x + card.getWidth()) && eventY >= y - card.getHeight()
 							&& eventY < (y - card.getHeight() + card.getHeight())) {
+						if (slappable()) {
+							for (Card card : theStack) {
+								player2.getHand().add(card);
+							}
+							theStack = new ArrayList<Card>();
+						}
+
 						if (player1.myTurn()) {
 							card.setHiddden(true);
 							player1.setMyTurn(false);
@@ -253,28 +260,27 @@ public class Game {
 	 * @param playerID
 	 * @return
 	 */
-	public boolean playCard(int playerID) {
-		IPlayer p = getPlayerFromID(playerID);
+	public boolean playCard(IPlayer p) {
 		IPlayer p2 = new HumanPlayer("empty", -1);
-		theStack.add(p.playCard());
-	
+		Card middleTopCard = theStack.get(theStack.size() - 1);
+
 		// need to update graphics here
 
 		// if player needs to play a face and didnt
 		// decrement turns left to play face
-		if (p.needsToPlayFace() && !isFace(theStack.get(theStack.size() - 1))) {
+		if (p.needsToPlayFace() && !isFace(middleTopCard)) {
 			// if (p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
 			p.setTillFace(p.getTillFace() - 1);
 		}
 		// if player needs to play a face and did
 		// switch players turn
 		// set other player to need a face
-		else if (p.needsToPlayFace() && isFace(theStack.get(theStack.size() - 1))) {
+		else if (p.needsToPlayFace() && isFace(middleTopCard)) {
 			// else if (p.needsToPlayFace() && isFace(middleStack.get(middleStack.size() - 1))) {
 			p.setMyTurn(false);
 			p2 = getOtherPlayer(p);
 			p2.setMyTurn(true);
-			p2.setTillFace(theStack.get(theStack.size() - 1).tillFaceValue);
+			p2.setTillFace(middleTopCard.tillFaceValue);
 			// p2.setTillFace(middleStack.get(middleStack.size() - 1).tillFaceValue);
 		}
 		// if player does not need to play a face and does
@@ -285,12 +291,12 @@ public class Game {
 			p.setMyTurn(false);
 			p2 = getOtherPlayer(p);
 			p2.setMyTurn(true);
-			p2.setTillFace(theStack.get(theStack.size() - 1).tillFaceValue);
+			p2.setTillFace(middleTopCard.tillFaceValue);
 			// p2.setTillFace(middleStack.get(middleStack.size() - 1).tillFaceValue);
 		}
 		// if player does not need to play a face and doesnt
 		// switch players turn
-		else if (!p.needsToPlayFace() && theStack.size() > 0 && !isFace(theStack.get(theStack.size() - 1))) {
+		else if (!p.needsToPlayFace() && theStack.size() > 0 && !isFace(middleTopCard)) {
 			// else if (!p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
 			p.setMyTurn(false);
 			p2 = getOtherPlayer(p);
@@ -298,7 +304,8 @@ public class Game {
 
 		}
 
-		savePlayers(p, p2);
+		if (p2.getID() != -1)
+			savePlayers(p, p2);
 
 		// if the stack is slappable, start timer to slap stack
 		if (slappable()) {
@@ -309,7 +316,7 @@ public class Game {
 		// if it is the computers turn (player 2) start timer to play card
 		if (player2.myTurn()) {
 			Timer compTurnTimer = new Timer();
-			compTurnTimer.schedule(new CompTurnTask(), TIME_BETWEEN_TURNS);
+			compTurnTimer.schedule(new CompTurnTask(), DELAY_INTERVAL);	// TODO TIME_BETWEEN_TURNS???
 		}
 
 		return true;
@@ -386,9 +393,11 @@ public class Game {
 
 		if (slappable()) {
 			for (Card c : theStack) {
-				p.addCard(c);
+				c.setHiddden(false);
+				c.rotateCard(0);
+				p.getHand().add(0, c);
 			}
-			theStack.removeAll(theStack);
+			theStack = new ArrayList<Card>();
 
 			// need to update graphics here
 
@@ -408,19 +417,22 @@ public class Game {
 
 		boolean retBool = false;
 
+		if (theStack.size() - 1) {
+			Card topCard = theStack.get(theStack.size() - 1);
+			Card secondCard = theStack.get(theStack.size() - 2);
+			Card thirdCard = theStack.get(theStack.size() - 3);
+		}
+
 		// if top two cards are the same type
-		if (theStack.size() > 1
-				&& theStack.get(theStack.size() - 1).cardType.equals(theStack.get(theStack.size() - 2).cardType)) {
+		if (theStack.size() > 1 && topCard.cardType.equals(secondCard.cardType)) {
 			retBool = true;
 		}
 		// if first and third card are the same (sandwich)
-		else if (theStack.size() > 2
-				&& theStack.get(theStack.size() - 1).cardType.equals(theStack.get(theStack.size() - 3).cardType)) {
+		else if (theStack.size() > 2 && topCard.cardType.equals(thirdCard.cardType)) {
 			retBool = true;
 		}
 		// if top two cards add up to ten
-		else if (theStack.size() > 1
-				&& theStack.get(theStack.size() - 1).cardValue + theStack.get(theStack.size() - 2).cardValue == 10) {
+		else if (theStack.size() > 1 && topCard.cardValue + secondCard.cardValue == 10) {
 			retBool = true;
 		} else {
 
@@ -469,8 +481,20 @@ public class Game {
 
 		@Override
 		public void run() {
-			player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
-			player2.setMyTurn(false);
+			/**
+			 * Check again if it is the computer's turn still, because the game is constantly being run and
+			 * drawn in the GameSurface class. If this check is not here, the timer task will continue
+			 * removing cards until the run method in GameSurface reaches this point again.
+			 */
+			if (player2.myTurn()) {
+				/**
+				 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
+				 * set the computer's turn off
+				 */
+				player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
+				player1.setMyTurn(true);
+				player2.setMyTurn(false);
+			}
 		}
 	}
 
