@@ -4,17 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.egyptianratscrew.dao.User;
+
 public class HumanPlayer implements IPlayer {
 	private String playerName;
 	private List<Card> hand;
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
+	private User user;
 
 	private Map<Integer, Card> playerHand;
 
-	public HumanPlayer(String name, int id) {
-		playerName = name;
+	public HumanPlayer(User u, int id) {
+		user = u;
+		playerName = user.getUserName();
 		playerID = id;
 		hand = new ArrayList<Card>();
 	}

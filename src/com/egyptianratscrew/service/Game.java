@@ -15,6 +15,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.ComputerPlayer;
@@ -52,16 +53,16 @@ public class Game {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, int difficulty, String[] names, Context con) {
+	public Game(boolean onePlayerGame, int difficulty, User[] users, Context con) {
 		context = con;
 		// set player variables
-		if (names.length > 0)
-			player1 = new HumanPlayer(names[0], 0);
+		if (users.length > 0)
+			player1 = new HumanPlayer(users[0], 0);
 
-		if (!onePlayerGame && names.length > 1) {
-			player2 = new HumanPlayer(names[1], 1);
+		if (!onePlayerGame && users.length > 1) {
+			player2 = new HumanPlayer(users[1], 1);
 		} else {
-			player2 = new ComputerPlayer(COMPUTER_PLAYER_NAME, 1);
+			player2 = new ComputerPlayer(CreateComputer(),1);
 		}
 
 		compSlapDelay = difficulty * DELAY_INTERVAL;
@@ -220,7 +221,7 @@ public class Game {
 	 * @return
 	 */
 	public boolean playCard(IPlayer p) {
-		IPlayer p2 = new HumanPlayer("empty", -1);
+		IPlayer p2 = new HumanPlayer(null, -1);
 		Card middleTopCard = theStack.get(theStack.size() - 1);
 
 		// need to update graphics here
@@ -415,6 +416,13 @@ public class Game {
 			cardDeck.set(nextRandom, cardDeck.get(arrayLength));
 			cardDeck.set(arrayLength, card);
 		}
+	}
+	
+	private User CreateComputer(){
+		User u = new User();
+		u.setUserId(0);
+		u.setUserName(COMPUTER_PLAYER_NAME);
+		return u;
 	}
 
 	class CompSlapTask extends TimerTask {
