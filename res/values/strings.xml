@@ -94,5 +94,6 @@
     <string name="btnDevelopers">View Developers</string>
     <string name="btnLogin">Login</string>
     <string name="btnClear">Reset</string>
+    <string name="lblCredentials">Login with Credentials</string>
 
 </resources>

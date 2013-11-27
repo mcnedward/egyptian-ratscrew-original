@@ -8,17 +8,6 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".LoginActivity" >
 
-    <TextView
-        android:id="@+id/lblUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="18dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/lblUser"
-        android:textSize="@dimen/dp22" />
-
     <EditText
         android:id="@+id/edtUserName"
         android:layout_width="wrap_content"
@@ -70,5 +59,27 @@
         android:layout_marginTop="31dp"
         android:onClick="ClearClicked"
         android:text="@string/btnClear" />
+
+    <TextView
+        android:id="@+id/lblUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="34dp"
+        android:layout_marginTop="54dp"
+        android:text="@string/lblUser"
+        android:textSize="@dimen/dp22" />
+
+    <TextView
+        android:id="@+id/txtCredentials"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/edtPassword"
+        android:text="@string/lblCredentials"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/DarkBlue"
+        android:textSize="@dimen/dp22" />
 
 </RelativeLayout>
