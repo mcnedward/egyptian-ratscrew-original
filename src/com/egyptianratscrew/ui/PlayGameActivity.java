@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.User;
+import com.egyptianratscrew.dao.UserArrayWrapper;
 
 public class PlayGameActivity extends Activity {
 	
@@ -40,7 +41,7 @@ public class PlayGameActivity extends Activity {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
 		game.putExtra("CardBack", cardBack);
-		game.putExtra("Users", new User[] { user });
+		game.putExtra("Users", new UserArrayWrapper(new User[] { user }));
 		startActivity(game);
 	}
 	

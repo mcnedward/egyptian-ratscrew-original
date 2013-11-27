@@ -15,6 +15,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
@@ -28,7 +29,7 @@ import com.egyptianratscrew.dto.IPlayer;
  * @author AJ
  * 
  */
-public class Game {
+public class Game{
 	private static final String TAG = "Game";
 
 	private static final String COMPUTER_PLAYER_NAME = "Android";
@@ -37,6 +38,7 @@ public class Game {
 	public IPlayer player1;
 	public IPlayer player2;
 	public List<Card> theStack;
+	private List<IGameFinishedListener> listeners;
 
 	// public Map<Integer, Card> middleStack;
 
@@ -55,6 +57,9 @@ public class Game {
 	 */
 	public Game(boolean onePlayerGame, int difficulty, User[] users, Context con) {
 		context = con;
+		
+		listeners = new ArrayList<IGameFinishedListener>();
+		
 		// set player variables
 		if (users.length > 0)
 			player1 = new HumanPlayer(users[0], 0);
@@ -278,7 +283,7 @@ public class Game {
 			Timer compTurnTimer = new Timer();
 			compTurnTimer.schedule(new CompTurnTask(), DELAY_INTERVAL);	// TODO TIME_BETWEEN_TURNS???
 		}
-
+		DeclareWinner(player1);
 		return true;
 	}
 
@@ -359,15 +364,16 @@ public class Game {
 				c.setHiddden(false);
 				cardsToAdd.add(c);
 			}
+			
 			theStack = new ArrayList<Card>();
 			p.getHand().addAll(0, cardsToAdd);
 
 			// need to update graphics here
 
 			// savePlayers(p, getOtherPlayer(p));
-			// if (p.hasAllCards()) {
-			// DeclareWinner(p);
-			// }
+			 if (p.hasAllCards()) {
+			 DeclareWinner(p);
+			 }
 		}
 	}
 
@@ -405,7 +411,21 @@ public class Game {
 	 */
 	private void DeclareWinner(IPlayer p) {
 		// do stuff with winner
+		GameFinished(this);
 	}
+	protected void GameFinished(Game game) {
+		Object lock = new Object();
+		for (IGameFinishedListener listener : listeners) {
+            synchronized(lock) {
+                listener.onGameFinished(game);
+            }
+        }
+    }
+	
+	public void registerGameFinishedListener(IGameFinishedListener listener) {
+        listeners.add(listener);
+    }
+	
 
 	public void shuffleCards(List<Card> cardDeck) {
 		int arrayLength = cardDeck.size();
@@ -461,5 +481,7 @@ public class Game {
 			}
 		}
 	}
+
+	
 
 }
