@@ -54,7 +54,8 @@
     <string name="lblEmailAddress">Email Address :</string>
     <string name="txtDevelopers"><b>Developers</b></string>
     <string name="development"></string>
-    <string name="txtCopyright">Copyright 2013</string>
+    <string name="txtCopyright">Mobile Device Programming \n\
+        Copyright 2013</string>
     <string name="names">AJ Gold \n\
         Julie Frazee \n\
         Edward McNealy</string>
