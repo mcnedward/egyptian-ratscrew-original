@@ -334,7 +334,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnExisting=0x7f09000a;
         public static final int btnExistingPicture=0x7f090038;
         public static final int btnFBLogin=0x7f090009;
-        public static final int btnLogin=0x7f090004;
+        public static final int btnLogin=0x7f090001;
         public static final int btnReset=0x7f090025;
         public static final int btnRules=0x7f09000f;
         public static final int btnSave=0x7f090039;
@@ -343,8 +343,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnTakePicture=0x7f090037;
         public static final int btnTestGame=0x7f090007;
         public static final int btnUserRegister=0x7f090008;
-        public static final int edtPassword=0x7f090003;
-        public static final int edtUserName=0x7f090001;
+        public static final int edtPassword=0x7f090002;
+        public static final int edtUserName=0x7f090003;
         public static final int fullscreen_content=0x7f090011;
         public static final int fullscreen_content_controls=0x7f090012;
         public static final int imgRat=0x7f090006;
@@ -354,12 +354,12 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lblFirstName=0x7f09001a;
         public static final int lblLastName=0x7f09001c;
         public static final int lblName=0x7f090016;
+        public static final int lblPass=0x7f090004;
         public static final int lblPassword=0x7f090015;
         public static final int lblRegistration=0x7f090013;
         public static final int lblSelectPicture=0x7f090035;
+        public static final int lblUser=0x7f090000;
         public static final int lblUserName=0x7f09001e;
-        public static final int textView1=0x7f090000;
-        public static final int textView2=0x7f090002;
         public static final int txtAppName=0x7f090005;
         public static final int txtConfirmPassword=0x7f090021;
         public static final int txtDisplayEmail=0x7f090029;
@@ -407,11 +407,25 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class string {
         public static final int action_settings=0x7f060001;
         public static final int app_name=0x7f060000;
+        public static final int btnBack=0x7f060048;
+        public static final int btnClear=0x7f06004e;
+        public static final int btnComputer=0x7f060046;
+        public static final int btnDefault=0x7f060040;
+        public static final int btnDevelopers=0x7f06004c;
         public static final int btnDevelopment=0x7f06000a;
+        public static final int btnDifficulty=0x7f060047;
         public static final int btnExisting=0x7f060035;
+        public static final int btnLogin=0x7f06004d;
         public static final int btnReset=0x7f06002f;
+        public static final int btnRules=0x7f06004b;
+        public static final int btnSavePicture=0x7f060043;
+        public static final int btnSelection=0x7f060044;
+        public static final int btnStats=0x7f060049;
+        public static final int btnStatss=0x7f06004a;
         public static final int btnSubmit=0x7f060008;
+        public static final int btnTakeaNewPicture=0x7f060041;
         public static final int btnTestGame=0x7f06003f;
+        public static final int btnUseExistingPicture=0x7f060042;
         public static final int btnUser=0x7f060009;
         /**  Strings for Buttons 
          */
@@ -424,6 +438,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello_world=0x7f060002;
         public static final int highScore=0x7f06000f;
         public static final int human=0x7f060005;
+        public static final int imgPicture=0x7f060045;
         public static final int imgRat=0x7f06003e;
         public static final int imgScreen=0x7f060036;
         public static final int lblConfirm=0x7f06002c;

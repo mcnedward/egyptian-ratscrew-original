@@ -16,7 +16,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:onClick="PlayNewGame"
-        android:text="Play Against the Computer" />
+        android:text="@string/btnComputer" />
 
     <Button
         android:id="@+id/btnDifficulty"
@@ -27,7 +27,7 @@
         android:layout_below="@+id/btnComputer"
         android:layout_marginTop="14dp"
         android:onClick="SelectDifficulty"
-        android:text="Select Difficulty" />
+        android:text="@string/btnDifficulty" />
 
     <Button
         android:id="@+id/btnCardBack"
@@ -38,7 +38,7 @@
         android:layout_below="@+id/btnDifficulty"
         android:layout_marginTop="17dp"
         android:onClick="SelectCardBack"
-        android:text="Select Card Back" />
+        android:text="@string/btnBack" />
 
     <Button
         android:id="@+id/btnStatistics"
@@ -48,7 +48,7 @@
         android:layout_alignRight="@+id/btnCardBack"
         android:layout_centerVertical="true"
         android:onClick="ViewStatistics"
-        android:text="View Statistics" />
+        android:text="@string/btnStatss" />
 
     <Button
         android:id="@+id/btnRules"
@@ -59,7 +59,7 @@
         android:layout_below="@+id/btnStatistics"
         android:layout_marginTop="19dp"
         android:onClick="ViewRules"
-        android:text="View Rules" />
+        android:text="@string/btnRules" />
 
     <Button
         android:id="@+id/btnDevelopers"
@@ -70,6 +70,6 @@
         android:layout_below="@+id/btnRules"
         android:layout_marginTop="14dp"
         android:onClick="ViewDevelopers"
-        android:text="View Developers" />
+        android:text="@string/btnDevelopers" />
 
 </RelativeLayout>

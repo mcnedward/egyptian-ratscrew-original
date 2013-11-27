@@ -79,5 +79,20 @@
     <string name="title_activity_winner">WinnerActivity</string>
     <string name="imgRat"></string>
     <string name="btnTestGame">Test Game</string>
+    <string name="btnDefault">Default</string>
+    <string name="btnTakeaNewPicture">Take a New Picture</string>
+    <string name="btnUseExistingPicture">Use an Existing Picture</string>
+    <string name="btnSavePicture">Save Picture</string>
+    <string name="btnSelection">Select a picture to use as your card back:</string>
+    <string name="imgPicture"></string>
+    <string name="btnComputer">Play Against the Computer</string>
+    <string name="btnDifficulty">Difficulty</string>
+    <string name="btnBack">Select Card Back</string>
+    <string name="btnStats">Statistics</string>
+    <string name="btnStatss">View Statistics</string>
+    <string name="btnRules">View Rules</string>
+    <string name="btnDevelopers">View Developers</string>
+    <string name="btnLogin">Login</string>
+    <string name="btnClear">Reset</string>
 
 </resources>
