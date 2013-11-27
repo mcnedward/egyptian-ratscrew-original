@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 
@@ -32,7 +33,7 @@ public class MainActivity extends Activity {
 	private static final int FB_REQUEST = 1;
 	
 	private RatscrewDatabase rdb;
-	private User loggedInUser;
+	private IUser loggedInUser;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,18 +83,9 @@ public class MainActivity extends Activity {
 					}
 					else
 					{
-						User user = new User();
+						IUser user = new User();
 						user.setFirstName(firstName);
-						user.setEmail(null);
-						user.setHighestLosingStreak(0);
-						user.setHighestWinningStreak(0);
-						user.setHighScore(0);
 						user.setLastName("");
-						user.setNumberOfLosses(0);
-						user.setNumberOfTies(0);
-						user.setNumberOfWins(0);
-						user.setPassword("");
-						user.setTotalGames(0);
 						user.setUserId(rdb.getNewUserID());
 						user.setUserName(firstName + user.getUserId());
 						
@@ -103,13 +95,13 @@ public class MainActivity extends Activity {
 					}
 				}
 				else if (requestCode == NEW_USER_REQUEST){
-					User user = (User) data.getSerializableExtra("NewUser");
+					IUser user = (IUser) data.getSerializableExtra("NewUser");
 					loggedInUser = user;
 					rdb.insertUser(user);
 					LoginSuccess();
 				}
 				else if (requestCode == LOGIN_REQUEST){
-					User user = (User) data.getSerializableExtra("ExistingUser");
+					IUser user = (IUser) data.getSerializableExtra("ExistingUser");
 					loggedInUser = user;
 					LoginSuccess();
 				}

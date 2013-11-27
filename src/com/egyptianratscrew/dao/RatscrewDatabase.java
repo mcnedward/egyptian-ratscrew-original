@@ -44,7 +44,7 @@ public class RatscrewDatabase {
 	/********** INSERT QUERIES **********/
 
 	@SuppressWarnings("deprecation")
-	public void insertUser(User user) {
+	public void insertUser(IUser user) {
 		if (userExists(user.getUserId())) {
 			return;
 		} else {
@@ -144,8 +144,8 @@ public class RatscrewDatabase {
 		}
 	}
 	
-	public User selectUserByName(String userFirstName) {
-		User user = null;
+	public IUser selectUserByName(String userFirstName) {
+		IUser user = null;
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
 		try {
 			while (c.moveToNext()) {
@@ -178,8 +178,8 @@ public class RatscrewDatabase {
 		}
 	}
 	
-	public User selectUserByUserName(String aUserName) {
-		User user = null;
+	public IUser selectUserByUserName(String aUserName) {
+		IUser user = null;
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE USER_NAME = ?", new String[] { aUserName });
 		try {
 			while (c.moveToNext()) {
