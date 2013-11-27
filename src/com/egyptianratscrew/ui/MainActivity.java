@@ -10,6 +10,8 @@ import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
+import com.egyptianratscrew.dao.UserArrayWrapper;
+import com.egyptianratscrew.dao.UserStub;
 
 /**
  * This page is the Main Menu for the Egyptian Ratscrew game
@@ -117,6 +119,8 @@ public class MainActivity extends Activity {
 	public void StartGame(View v)
 	{
 		Intent gameIntent = new Intent(this, GameActivity.class);
+		UserArrayWrapper wrapper = new UserArrayWrapper(new IUser[] {new UserStub()});
+		gameIntent.putExtra("Users", wrapper);
 		startActivity(gameIntent);
 	}
 }

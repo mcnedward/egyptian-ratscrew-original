@@ -284,6 +284,8 @@ public class Game{
 			Timer compTurnTimer = new Timer();
 			compTurnTimer.schedule(new CompTurnTask(), DELAY_INTERVAL);	// TODO TIME_BETWEEN_TURNS???
 		}
+		
+		//For testing game over scenarios
 		DeclareWinner(player1);
 		return true;
 	}
@@ -439,12 +441,14 @@ public class Game{
 		}
 	}
 	
-	private User CreateComputer(){
-		User u = new User();
+	
+	private IUser CreateComputer(){
+		IUser u = new User();
 		u.setUserId(0);
 		u.setUserName(COMPUTER_PLAYER_NAME);
 		return u;
 	}
+	
 
 	class CompSlapTask extends TimerTask {
 
