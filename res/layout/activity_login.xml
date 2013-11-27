@@ -19,17 +19,6 @@
         android:text="@string/lblUser"
         android:textSize="@dimen/dp22" />
 
-    <Button
-        android:id="@+id/btnLogin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/edtPassword"
-        android:layout_below="@+id/edtPassword"
-        android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/lblUser"
-        android:onClick="LoginClicked"
-        android:text="@string/btnLogin" />
-
     <EditText
         android:id="@+id/edtUserName"
         android:layout_width="wrap_content"
@@ -61,5 +50,25 @@
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtPassword"
+        android:layout_below="@+id/edtPassword"
+        android:layout_marginTop="31dp"
+        android:onClick="LoginClicked"
+        android:text="@string/btnLogin" />
+
+    <Button
+        android:id="@+id/btnClear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/btnLogin"
+        android:layout_alignRight="@+id/edtPassword"
+        android:layout_marginTop="31dp"
+        android:onClick="ClearClicked"
+        android:text="@string/btnClear" />
 
 </RelativeLayout>

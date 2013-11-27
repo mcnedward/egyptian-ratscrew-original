@@ -51,5 +51,10 @@ public class LoginActivity extends Activity {
 			Toast.makeText(this, "Invalid Username.", Toast.LENGTH_LONG);
 		}
 	}
+	
+	public void ClearClicked(View v){
+		edtUserName.setText("");
+		edtPassword.setText("");
+	}
 
 }
