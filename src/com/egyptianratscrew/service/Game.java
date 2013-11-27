@@ -1,14 +1,15 @@
 package com.egyptianratscrew.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
 import android.support.v4.view.MotionEventCompat;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.view.View;
@@ -117,30 +118,18 @@ public class Game {
 		float bottomY = surfaceView.getBottom() - 20;
 		int degree = 0;
 
-		for (Card c : player2.getHand()) {
-			c.setX(topX);
-			c.setY(topY);
-			topX += 14;
-			topY += 0.5;
+		player1.setCardCoor((bottomX - player1.getTopCard().getWidth()), (bottomY - player1.getTopCard().getHeight()));
+		if (player1.myTurn()) {
+			setCardListener(player1.getTopCard(), surfaceView);
 		}
-		for (Card c : player1.getHand()) {
-			c.setX(bottomX - c.getWidth());
-			c.setY(bottomY - c.getHeight());
-			if (player1.myTurn()) {
-				setCardListener((bottomX - c.getWidth()), bottomY, c, surfaceView);
-			}
-			bottomX -= 14;
-			bottomY -= 0.5;
-		}
+		player2.setCardCoor(topX, topY);
 		for (Card c : theStack) {
 			c.rotateCard(degree);
 			c.setRotate(false);
 			c.setX((surfaceView.getWidth() - c.getWidth()) / 2);
 			c.setY((surfaceView.getHeight() - c.getHeight()) / 2);
 			degree += 20;
-			if (slappable()) {
-				setCardListener(c.getX(), c.getY(), c, surfaceView);
-			}
+			setCardListener(c, surfaceView);
 		}
 	}
 
@@ -152,60 +141,16 @@ public class Game {
 		 * Check the player's hands for any cards that are hidden, which should be only the top cards if they were
 		 * played. If there are any hidden cards, remove them from the iterator and add that card to the middle stack.
 		 */
-		for (Iterator<Card> iterator = player1.getHand().iterator(); iterator.hasNext();) {
-			Card card = iterator.next();
-			if (card.isHidden()) {
-				iterator.remove();
-				theStack.add(card);
-				playCard(player1);
-			}
+		if (player1.getTopCard().isHidden()) {
+			theStack.add(player1.getTopCard());
+			player1.getHand().remove(player1.getTopCard());
+			playCard(player1);
 		}
-		for (Iterator<Card> iterator2 = player2.getHand().iterator(); iterator2.hasNext();) {
-			Card card = iterator2.next();
-			if (card.isHidden()) {
-				iterator2.remove();
-				theStack.add(card);
-				playCard(player2);
-			}
+		if (player2.getTopCard().isHidden()) {
+			theStack.add(player2.getTopCard());
+			player2.getHand().remove(player2.getTopCard());
+			playCard(player2);
 		}
-
-		// // if the stack is slappable, start timer to slap stack
-		// if (slappable()) {
-		// Timer compSlapTimer = new Timer();
-		// compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
-		// }
-		//
-		// /**
-		// * Check if if if the computer's turn. If it is, start a new task that will play a card for the computer after
-		// * the set delay.
-		// */
-		// if (player2.myTurn()) {
-		// try {
-		// Timer timer = new Timer();
-		// timer.schedule(new TimerTask() {
-		// @Override
-		// public void run() {
-		// /**
-		// * Check again if it is the computer's turn still, because the game is constantly being run and
-		// * drawn in the GameSurface class. If this check is not here, the timer task will continue
-		// * removing cards until the run method in GameSurface reaches this point again.
-		// */
-		// if (player2.myTurn()) {
-		// /**
-		// * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
-		// * set the computer's turn off
-		// */
-		// player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
-		// player1.setMyTurn(true);
-		// player2.setMyTurn(false);
-		// }
-		// }
-		//
-		// }, DELAY_INTERVAL); // TODO This delay interval will be determined by the difficulty later
-		// } catch (Exception e) {
-		// Log.i(TAG, e.getMessage(), e);
-		// }
-		// }
 	}
 
 	/**
@@ -222,7 +167,12 @@ public class Game {
 	 * @param surfaceView
 	 *            The surface view that this touch needs to be registered on.
 	 */
-	public void setCardListener(final float x, final float y, final Card card, SurfaceView surfaceView) {
+	public void setCardListener(final Card card, SurfaceView surfaceView) {
+		final float playerCardX = (surfaceView.getWidth() - 10) - card.getWidth();
+		final float playerCardY = surfaceView.getBottom() - 20;
+		final float middleCardX = (surfaceView.getWidth() - card.getWidth()) / 2;
+		final float middleCardY = (surfaceView.getHeight() - card.getHeight()) / 2;
+
 		// Set the touch listener for the game surface
 		surfaceView.setOnTouchListener(new OnTouchListener() {
 			@Override
@@ -232,19 +182,28 @@ public class Game {
 				int eventY = (int) event.getY();	// Get the y-coordinates for the action
 
 				if (action == MotionEvent.ACTION_UP) {
-					if (eventX >= x && eventX < (x + card.getWidth()) && eventY >= y - card.getHeight()
-							&& eventY < (y - card.getHeight() + card.getHeight())) {
-						if (slappable()) {
-							for (Card card : theStack) {
-								player2.getHand().add(card);
-							}
-							theStack = new ArrayList<Card>();
-						}
-
+					if (eventX >= playerCardX && eventX < (playerCardX + card.getWidth())
+							&& eventY >= playerCardY - card.getHeight()
+							&& eventY < (playerCardY - card.getHeight() + card.getHeight())) {
 						if (player1.myTurn()) {
-							card.setHiddden(true);
+							player1.getTopCard().setHiddden(true);
 							player1.setMyTurn(false);
 							player2.setMyTurn(true);
+						}
+					}
+					if (eventX >= middleCardX && eventX < (middleCardX + card.getWidth()) && eventY >= middleCardY
+							&& eventY < (middleCardY + card.getHeight())) {
+						if (slappable()) {
+							Log.i(TAG, "Adding cards to player 1");
+							List<Card> cardsToAdd = new ArrayList<Card>();
+							for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
+								Card c = iterator.next();
+								c.resetCardBitmap();
+								c.setHiddden(false);
+								cardsToAdd.add(c);
+							}
+							theStack = new ArrayList<Card>();
+							player1.getHand().addAll(0, cardsToAdd);
 						}
 					}
 				}
@@ -392,19 +351,22 @@ public class Game {
 		IPlayer p = getPlayerFromID(playerID);
 
 		if (slappable()) {
-			for (Card c : theStack) {
+			List<Card> cardsToAdd = new ArrayList<Card>();
+			for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
+				Card c = iterator.next();
+				c.resetCardBitmap();
 				c.setHiddden(false);
-				c.rotateCard(0);
-				p.getHand().add(0, c);
+				cardsToAdd.add(c);
 			}
 			theStack = new ArrayList<Card>();
+			p.getHand().addAll(0, cardsToAdd);
 
 			// need to update graphics here
 
-			savePlayers(p, getOtherPlayer(p));
-			if (p.hasAllCards()) {
-				DeclareWinner(p);
-			}
+			// savePlayers(p, getOtherPlayer(p));
+			// if (p.hasAllCards()) {
+			// DeclareWinner(p);
+			// }
 		}
 	}
 
@@ -414,28 +376,22 @@ public class Game {
 	 * @return
 	 */
 	public boolean slappable() {
-
 		boolean retBool = false;
 
-		if (theStack.size() - 1) {
+		if (theStack.size() > 1) {
 			Card topCard = theStack.get(theStack.size() - 1);
 			Card secondCard = theStack.get(theStack.size() - 2);
+			if (topCard.cardType.equals(secondCard.cardType)) {
+				retBool = true;
+			} else if (topCard.cardValue + secondCard.cardValue == 10) {
+				retBool = true;
+			}
+		} else if (theStack.size() > 2) {
+			Card topCard = theStack.get(theStack.size() - 1);
 			Card thirdCard = theStack.get(theStack.size() - 3);
-		}
-
-		// if top two cards are the same type
-		if (theStack.size() > 1 && topCard.cardType.equals(secondCard.cardType)) {
-			retBool = true;
-		}
-		// if first and third card are the same (sandwich)
-		else if (theStack.size() > 2 && topCard.cardType.equals(thirdCard.cardType)) {
-			retBool = true;
-		}
-		// if top two cards add up to ten
-		else if (theStack.size() > 1 && topCard.cardValue + secondCard.cardValue == 10) {
-			retBool = true;
-		} else {
-
+			if (topCard.cardType.equals(thirdCard.cardType)) {
+				retBool = true;
+			}
 		}
 
 		return retBool;
