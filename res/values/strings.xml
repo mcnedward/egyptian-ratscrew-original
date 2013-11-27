@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Egyptian Ratscrew</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="rulesDescription">        The idea of this project is to design an Egyptian Ratscrew Game on a mobile device. We will be show the true aspect of the game on a mobile device. The object of the game is to get all the 52 cards of the deck. First, the deck is dealt to all the players with each players getting about the same number of cards. The cards are placed face down and the players are not allowed to look at their cards. The first players placed their top card face up in the center of the table. Each player does so until a face card (Jack, Queen, King, and Ace) is played. If a face card is played the next player has to play a face card in a certain number of chances. If no face card is played then the player that played the face card wins the pile. This continues until one player has all the cards. Slapping the pile is a key aspect of the game. The first person to slap the pile wins the game.  If a player has run out of cards they may still slap the pile. Slapping occurs when the following conditions have been met:
+        -Doubles in a row
+        -Sandwiched Doubles 
+        -Two Cards add up to ten
+        -Four cards are played in order
+        -When a King and Queen are played in sequence
+        If a slap was wrong then the player must add two cards to the bottom of the pile.</string>
+
+    <!-- Strings for Buttons -->
+
+    <string name="computer">Computer</string>
+    <string name="human">Human</string>
+    <string name="rules">Rules</string>
+    <string name="statistics">Statistics</string>
+    <string name="btnSubmit">Submit</string>
+    <string name="btnUser">New User</string>
+    <string name="btnDevelopment">Developers</string>
+
+    <!-- Strings for Statistics Layout -->
+
+    <string name="numberOfWins">Number of Wins:</string>
+    <string name="numberOfLosses">Number of Losses:</string>
+    <string name="numberOfTies">Number of Ties:</string>
+    <string name="totalGames">Total Games:</string>
+    <string name="highScore">High Score:</string>
+    <string name="lblUserID">User ID</string>
+    <string name="lblFirstName">First Name</string>
+    <string name="lblLastName">Last Name</string>
+    <string name="lblUserName">User Name</string>
+    <string name="lblEmail">Email</string>
+    <string name="lblPassword">Password</string>
+    <string name="txtUserId"></string>
+    <string name="txtFirstName"></string>
+    <string name="txtLastName"></string>
+    <string name="txtUserName"></string>
+    <string name="txtEmail"></string>
+    <string name="txtPassword"></string>
+    <string name="lblFirstNames">First Name</string>
+    <string name="lblLastNames">Last Name:</string>
+    <string name="lblFirstNames2">First Name:</string>
+    <string name="lblUserNames">User Name:</string>
+    <string name="lblUserNames2">User Name:</string>
+    <string name="lblPasswords">Password:</string>
+    <string name="lblEmails">Email:</string>
+    <string name="lblRegistration">Registration</string>
+    <string name="lblUser">User Name :</string>
+    <string name="lblPass">"Password : "</string>
+    <string name="lblEmailAddress">Email Address :</string>
+    <string name="txtDevelopers"><b>Developers</b></string>
+    <string name="development"></string>
+    <string name="txtCopyright">Copyright 2013</string>
+    <string name="names">AJ Gold \n\
+        Julie Frazee \n\
+        Edward McNealy</string>
+    <string name="developing"></string>
+    <string name="lblConfirm">Confirm Password:</string>
+    <string name="lblConfirmation">Confirm Password:</string>
+    <string name="lblName">Name :</string>
+    <string name="btnReset">Reset</string>
+    <string name="txtBlank"></string>
+    <string name="registration"></string>
+    <string name="register"></string>
+    <string name="registering">New User Registration</string>
+    <string name="facebook">Login with Facebook</string>
+    <string name="btnExisting">Login with Credentials</string>
+    <string name="imgScreen"></string>
+    <string name="title_activity_card_back_select">CardBackSelectActivity</string>
+    <string name="title_activity_play_game">PlayGameActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_winner">WinnerActivity</string>
+    <string name="imgRat"></string>
+    <string name="btnTestGame">Test Game</string>
+
+</resources>
