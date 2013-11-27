@@ -8,7 +8,7 @@
         android:id="@+id/lblSelectPicture"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select a picture to use as your card back:"
+        android:text="@string/btnSelection"
         android:textSize="@dimen/names" />
 
     <Button
@@ -16,33 +16,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="DefaultClicked"
-        android:text="Default" />
+        android:text="@string/btnDefault" />
 
     <Button
         android:id="@+id/btnTakePicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="TakeNewPicture"
-        android:text="Take New Picture" />
+        android:text="@string/btnTakeaNewPicture" />
 
     <Button
         android:id="@+id/btnExistingPicture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="OpenExistingImage"
-        android:text="Use Existing Picture" />
+        android:text="@string/btnUseExistingPicture" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="SavePicture"
-        android:text="Save Picture" />
+        android:text="@string/btnSavePicture" />
 
     <ImageView
         android:id="@+id/imgThumbnail"
         android:layout_width="207dp"
         android:layout_height="225dp"
+        android:contentDescription="@string/imgPicture"
         android:paddingLeft="@dimen/CardBackPreviewPadding"
         android:src="@drawable/b2fv" />
 

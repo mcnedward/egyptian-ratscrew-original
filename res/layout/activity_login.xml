@@ -9,46 +9,15 @@
     tools:context=".LoginActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/lblUser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="18dp"
         android:layout_marginTop="16dp"
-        android:text="User Name:"
+        android:text="@string/lblUser"
         android:textSize="@dimen/dp22" />
-
-    <EditText
-        android:id="@+id/edtUserName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
-        android:layout_marginTop="21dp"
-        android:ems="10" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edtUserName"
-        android:layout_below="@+id/edtUserName"
-        android:layout_marginTop="52dp"
-        android:text="Password:"
-        android:textSize="@dimen/dp22" />
-
-    <EditText
-        android:id="@+id/edtPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -57,8 +26,40 @@
         android:layout_alignRight="@+id/edtPassword"
         android:layout_below="@+id/edtPassword"
         android:layout_marginTop="30dp"
-        android:layout_toRightOf="@+id/textView1"
+        android:layout_toRightOf="@+id/lblUser"
         android:onClick="LoginClicked"
-        android:text="Login" />
+        android:text="@string/btnLogin" />
+
+    <EditText
+        android:id="@+id/edtUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblUser"
+        android:layout_below="@+id/lblUser"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <TextView
+        android:id="@+id/lblPass"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/edtUserName"
+        android:layout_below="@+id/edtUserName"
+        android:layout_marginTop="20dp"
+        android:text="@string/lblPass"
+        android:textSize="@dimen/dp22" />
+
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/lblPass"
+        android:layout_below="@+id/lblPass"
+        android:layout_marginTop="15dp"
+        android:ems="10"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
 
 </RelativeLayout>
