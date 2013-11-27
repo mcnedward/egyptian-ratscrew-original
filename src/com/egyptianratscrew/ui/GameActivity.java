@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.RelativeLayout;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.UserArrayWrapper;
 import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.GameSurface;
 
@@ -24,7 +25,8 @@ public class GameActivity extends Activity {
 //				(String[])this.getIntent().getCharSequenceArrayExtra("Names"),
 //				this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
-		game = new Game(true, 3, new String[] { "Player1" }, this);
+		UserArrayWrapper wrapper = (UserArrayWrapper) this.getIntent().getSerializableExtra("Users");
+		game = new Game(true, 3, wrapper.getUsers() , this);
 
 		// setting the relative layout of table
 		table = (RelativeLayout) findViewById(R.id.Table);
