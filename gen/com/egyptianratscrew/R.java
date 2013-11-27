@@ -324,7 +324,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int LinearLayout1=0x7f090017;
         public static final int Table=0x7f090018;
-        public static final int action_settings=0x7f09003a;
+        public static final int action_settings=0x7f09003b;
         public static final int blank=0x7f090019;
         public static final int btnCardBack=0x7f09000d;
         public static final int btnComputer=0x7f09000b;
@@ -347,7 +347,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int edtUserName=0x7f090001;
         public static final int fullscreen_content=0x7f090011;
         public static final int fullscreen_content_controls=0x7f090012;
-        public static final int imgThumbnail=0x7f090006;
+        public static final int imgRat=0x7f090006;
+        public static final int imgThumbnail=0x7f09003a;
         public static final int lblConfirmPassword=0x7f090014;
         public static final int lblEmailAddress=0x7f090022;
         public static final int lblFirstName=0x7f09001a;
@@ -410,6 +411,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnExisting=0x7f060035;
         public static final int btnReset=0x7f06002f;
         public static final int btnSubmit=0x7f060008;
+        public static final int btnTestGame=0x7f06003f;
         public static final int btnUser=0x7f060009;
         /**  Strings for Buttons 
          */
@@ -422,6 +424,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int hello_world=0x7f060002;
         public static final int highScore=0x7f06000f;
         public static final int human=0x7f060005;
+        public static final int imgRat=0x7f06003e;
         public static final int imgScreen=0x7f060036;
         public static final int lblConfirm=0x7f06002c;
         public static final int lblConfirmation=0x7f06002d;
