@@ -1,6 +1,8 @@
 package com.egyptianratscrew.dao;
 
-public interface IUser {
+import java.io.Serializable;
+
+public interface IUser extends Serializable{
 	public int getUserId();
 
 	public void setUserId(int userId);

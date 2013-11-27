@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 
 import com.egyptianratscrew.dao.IGameFinishedListener;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
@@ -55,7 +56,7 @@ public class Game{
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, int difficulty, User[] users, Context con) {
+	public Game(boolean onePlayerGame, int difficulty, IUser[] users, Context con) {
 		context = con;
 		
 		listeners = new ArrayList<IGameFinishedListener>();
