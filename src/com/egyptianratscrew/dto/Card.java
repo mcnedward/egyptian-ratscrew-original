@@ -44,8 +44,9 @@ public class Card {
 	/**
 	 * Empty constructor for a card.
 	 */
-	public Card() {
-
+	public Card(Context context) {
+		resourceId = context.getResources().getIdentifier("jokerred", "drawable", context.getPackageName());
+		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
 	}
 
 	/**
@@ -263,6 +264,16 @@ public class Card {
 	}
 
 	/**
+	 * This is used to reset the card bitmap to the default position
+	 */
+	public void resetCardBitmap() {
+		resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
+		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
+		height = bitmap.getHeight();
+		width = bitmap.getWidth();
+	}
+
+	/**
 	 * Used to determine whether the card should be rotated or not.
 	 * 
 	 * @return Boolean - rotate card if true, ignore rotation if false.
@@ -311,7 +322,7 @@ public class Card {
 	 *            The degree amount to rotate the card.
 	 */
 	public void rotateCard(float degree) {
-		if (rotate) {	// If the card is set to be rotated, rotate it!!!
+		if (rotate) { // If the card is set to be rotated, rotate it!!!
 			float scaleWidth = ((float) 100) / bitmap.getWidth();
 			float scaleHeight = ((float) 150) / bitmap.getHeight();
 			Matrix matrix = new Matrix();

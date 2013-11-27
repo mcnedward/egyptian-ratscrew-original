@@ -225,7 +225,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 						// ******************************
 						// need way for computer to slap
 						// ******************************
-						game.slapStack(botID);
+						// game.slapStack(botID);
 						displayCards();
 
 					}
@@ -257,7 +257,7 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 							&& eventY < (middleY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Touched!!!");
 
-						game.slapStack(botID);
+						// game.slapStack(botID);
 						displayCards();
 
 					}

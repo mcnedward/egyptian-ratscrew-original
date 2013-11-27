@@ -2,6 +2,9 @@ package com.egyptianratscrew.service;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -45,17 +48,29 @@ public class GameSurface extends SurfaceView implements Runnable {
 	 *            The canvas that the cards will be drawn on.
 	 */
 	public void drawGame(Canvas canvas) {
+		Card card = new Card(context);
+		Paint paint = new Paint();
+		paint.setStyle(Style.FILL);
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(30);
+
 		canvas.drawColor(context.getResources().getColor(R.color.green));	// Set the background color of the canvas
 		game.setCardLocations(this);				// Set the coordinates of each card in the deck
-		game.displayCards();							// Check if any cards need to be played by either player
-		for (Card card : game.player1.getHand()) {	// Draw every card in player 1's hand
-			card.onDraw(canvas);
-		}
-		for (Card card : game.player2.getHand()) {	// Draw every card in player 2's hand
-			card.onDraw(canvas);
-		}
-		for (Card card : game.theStack) {			// Draw every card in the middle stack
-			card.onDraw(canvas);
+		game.displayCards();						// Check if any cards need to be played by either player
+
+		game.player1.getTopCard().onDraw(canvas);
+		canvas.drawText("Card Count: " + game.player1.getHand().size(), game.player1.getTopCard().getX() - 200,
+				game.player1.getTopCard().getY() + game.player1.getTopCard().getHeight() - 10, paint);
+		game.player2.getTopCard().onDraw(canvas);
+		canvas.drawText("Card Count: " + game.player2.getHand().size(), game.player2.getTopCard().getWidth() + 10,
+				game.player2.getTopCard().getHeight(), paint);
+		if (game.player1.myTurn())
+			canvas.drawText("Player 1's turn!!!", 10, (this.getHeight() / 2) + card.getHeight() + 200, paint);
+		if (game.player2.myTurn())
+			canvas.drawText("Player 2's turn!!!", 10, (this.getHeight() / 2) - card.getHeight() - 200, paint);
+
+		for (Card c : game.theStack) {			// Draw every card in the middle stack
+			c.onDraw(canvas);
 		}
 	}
 
