@@ -3,7 +3,6 @@ package com.egyptianratscrew.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class HumanPlayer implements IPlayer {
 	private String playerName;
@@ -83,7 +82,7 @@ public class HumanPlayer implements IPlayer {
 	@Override
 	public boolean hasAllCards() {
 		// TODO Auto-generated method stub
-		if (hand.size() == 52) {
+		if (hand.size() == 51) {
 			return true;
 		} else {
 			return false;
@@ -93,5 +92,17 @@ public class HumanPlayer implements IPlayer {
 	@Override
 	public List<Card> getHand() {
 		return hand;
+	}
+
+	@Override
+	public Card getTopCard() {
+		return hand.get(hand.size() - 1);
+	}
+
+	@Override
+	public void setCardCoor(float x, float y) {
+		Card card = getTopCard();
+		card.setX(x);
+		card.setY(y);
 	}
 }
