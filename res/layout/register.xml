@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblFirstName"
         android:inputType="textPersonName" >
 
         <requestFocus />
@@ -50,6 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblLastName"
         android:inputType="textPersonName" />
 
     <TextView
@@ -64,6 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblUserName"
         android:inputType="textPersonName" />
 
     <TextView
@@ -78,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblPassword"
         android:inputType="textPassword" />
 
     <TextView
@@ -92,6 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblPassword"
         android:inputType="textPassword" />
 
     <TextView
@@ -106,6 +111,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="@string/lblEmail"
         android:inputType="textEmailAddress" />
 
     <LinearLayout

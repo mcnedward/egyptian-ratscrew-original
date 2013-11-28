@@ -59,7 +59,7 @@
 
             <TextView
                 android:id="@+id/txtStatLoss"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/cell_shape"
                 android:padding="5dp"
@@ -83,7 +83,7 @@
                 android:padding="5dp"
                 android:text="@string/totalGames"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-            
+
             <TextView
                 android:id="@+id/txtStatHighScore"
                 android:layout_width="match_parent"
@@ -92,6 +92,25 @@
                 android:padding="5dp"
                 android:text="@string/highScore"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/txtStatHighestWinningStreak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="@dimen/padding"
+                android:text="@string/txtHighestWinStreak"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/txtStatHighestLosingStreak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="@dimen/padding"
+                android:text="@string/txtHighestLosingStreak"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -138,7 +157,7 @@
                 android:padding="5dp"
                 android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
-            
+
             <TextView
                 android:id="@+id/txtDisplayHighScore"
                 android:layout_width="fill_parent"
@@ -148,7 +167,27 @@
                 android:padding="5dp"
                 android:text="@string/txtBlank"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/txtDisplayHighestWinningStreak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="@dimen/padding"
+                android:text="@string/txtBlank"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <TextView
+                android:id="@+id/txtDisplayHighestLosingStreak"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cell_shape"
+                android:padding="@dimen/padding"
+                android:text="@string/txtBlank"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
         </LinearLayout>
+
     </LinearLayout>
 
 </LinearLayout>
