@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.util.SystemUiHider;
@@ -55,7 +56,9 @@ public class SplashActivity extends Activity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_splash);
-
+		
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);    // Removes title bar
+		
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 
