@@ -54,7 +54,8 @@
     <string name="lblEmailAddress">Email Address :</string>
     <string name="txtDevelopers"><b>Developers</b></string>
     <string name="development"></string>
-    <string name="txtCopyright">Copyright 2013</string>
+    <string name="txtCopyright">Mobile Device Programming \n\
+        Copyright 2013</string>
     <string name="names">AJ Gold \n\
         Julie Frazee \n\
         Edward McNealy</string>
@@ -95,5 +96,8 @@
     <string name="btnLogin">Login</string>
     <string name="btnClear">Reset</string>
     <string name="lblCredentials">Login with Credentials</string>
+    <string name="lblPercent">Percentage of Wins</string>
+    <string name="txtHighestWinStreak">Winning Streak:</string>
+    <string name="txtHighestLosingStreak">Losing Streak:</string>
 
 </resources>

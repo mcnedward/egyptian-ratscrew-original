@@ -1,6 +1,7 @@
 package com.egyptianratscrew.ui;
 
 
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -40,6 +41,8 @@ public class ViewStatistics extends Activity {
 		user.setNumberOfTies(1);
 		user.setTotalGames(13);
 		user.setHighScore(50);
+		user.setHighestWinningStreak(5);
+		user.setHighestLosingStreak(2);
 
 		//calling the method displayUserData with the user information
 		displayUserData(user);
@@ -70,6 +73,8 @@ public class ViewStatistics extends Activity {
 		TextView txtDisplayNumberOfTies = (TextView) findViewById(R.id.txtDisplayNumberOfTies);
 		TextView txtDisplayTotalGames = (TextView) findViewById(R.id.txtDisplayTotalGames);
 		TextView txtDisplayHighScore = (TextView) findViewById(R.id.txtDisplayHighScore);
+		TextView txtDisplayHighestWinningStreak = (TextView) findViewById(R.id.txtDisplayHighestWinningStreak);
+		TextView txtDisplayHighestLosingStreak = (TextView) findViewById(R.id.txtDisplayHighestLosingStreak);
 
 		//setting the text for username, email, and firstname and lastname through get methods
 		txtDisplayUserName.setText(user.getUserName());
@@ -82,6 +87,8 @@ public class ViewStatistics extends Activity {
 		txtDisplayNumberOfTies.setText(String.valueOf(user.getNumberOfTies()));
 		txtDisplayTotalGames.setText(String.valueOf(user.getTotalGames()));
 		txtDisplayHighScore.setText(String.valueOf(user.getHighScore()));
+		txtDisplayHighestWinningStreak.setText(String.valueOf(user.getHighestWinningStreak()));
+		txtDisplayHighestLosingStreak.setText(String.valueOf(user.getHighestLosingStreak()));
 	}
 
 }
