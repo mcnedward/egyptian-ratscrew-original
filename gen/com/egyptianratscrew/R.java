@@ -246,6 +246,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int developer=0x7f050002;
         public static final int dp22=0x7f050005;
         public static final int names=0x7f050003;
+        public static final int padding=0x7f050006;
     }
     public static final class drawable {
         public static final int b1fh=0x7f020000;
@@ -324,24 +325,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
     public static final class id {
         public static final int LinearLayout1=0x7f090019;
         public static final int Table=0x7f09001a;
-        public static final int action_settings=0x7f09003d;
+        public static final int action_settings=0x7f090041;
         public static final int blank=0x7f09001b;
         public static final int btnCardBack=0x7f09000f;
         public static final int btnClear=0x7f090005;
         public static final int btnComputer=0x7f09000d;
-        public static final int btnDefault=0x7f090038;
+        public static final int btnDefault=0x7f09003c;
         public static final int btnDevelopers=0x7f090012;
         public static final int btnDifficulty=0x7f09000e;
         public static final int btnExisting=0x7f09000c;
-        public static final int btnExistingPicture=0x7f09003a;
+        public static final int btnExistingPicture=0x7f09003e;
         public static final int btnFBLogin=0x7f09000b;
         public static final int btnLogin=0x7f090004;
         public static final int btnReset=0x7f090027;
         public static final int btnRules=0x7f090011;
-        public static final int btnSave=0x7f09003b;
+        public static final int btnSave=0x7f09003f;
         public static final int btnStatistics=0x7f090010;
         public static final int btnSubmit=0x7f090026;
-        public static final int btnTakePicture=0x7f090039;
+        public static final int btnTakePicture=0x7f09003d;
         public static final int btnTestGame=0x7f090009;
         public static final int btnUserRegister=0x7f09000a;
         public static final int edtPassword=0x7f090003;
@@ -349,7 +350,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int fullscreen_content=0x7f090013;
         public static final int fullscreen_content_controls=0x7f090014;
         public static final int imgRat=0x7f090008;
-        public static final int imgThumbnail=0x7f09003c;
+        public static final int imgThumbnail=0x7f090040;
         public static final int lblConfirmPassword=0x7f090016;
         public static final int lblEmailAddress=0x7f090024;
         public static final int lblFirstName=0x7f09001c;
@@ -358,19 +359,21 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lblPass=0x7f090002;
         public static final int lblPassword=0x7f090017;
         public static final int lblRegistration=0x7f090015;
-        public static final int lblSelectPicture=0x7f090037;
+        public static final int lblSelectPicture=0x7f09003b;
         public static final int lblUser=0x7f090001;
         public static final int lblUserName=0x7f090020;
         public static final int txtAppName=0x7f090007;
         public static final int txtConfirmPassword=0x7f090023;
         public static final int txtCredentials=0x7f090006;
         public static final int txtDisplayEmail=0x7f09002b;
-        public static final int txtDisplayHighScore=0x7f090036;
+        public static final int txtDisplayHighScore=0x7f090038;
+        public static final int txtDisplayHighestLosingStreak=0x7f09003a;
+        public static final int txtDisplayHighestWinningStreak=0x7f090039;
         public static final int txtDisplayName=0x7f09002c;
-        public static final int txtDisplayNumberOfLosses=0x7f090033;
-        public static final int txtDisplayNumberOfTies=0x7f090034;
-        public static final int txtDisplayNumberOfWins=0x7f090032;
-        public static final int txtDisplayTotalGames=0x7f090035;
+        public static final int txtDisplayNumberOfLosses=0x7f090035;
+        public static final int txtDisplayNumberOfTies=0x7f090036;
+        public static final int txtDisplayNumberOfWins=0x7f090034;
+        public static final int txtDisplayTotalGames=0x7f090037;
         public static final int txtDisplayUserName=0x7f09002a;
         public static final int txtEmailAddress=0x7f090025;
         public static final int txtFirst=0x7f09001d;
@@ -379,6 +382,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int txtRules=0x7f090028;
         public static final int txtRulesDescription=0x7f090029;
         public static final int txtStatHighScore=0x7f090031;
+        public static final int txtStatHighestLosingStreak=0x7f090033;
+        public static final int txtStatHighestWinningStreak=0x7f090032;
         public static final int txtStatLoss=0x7f09002e;
         public static final int txtStatTies=0x7f09002f;
         public static final int txtStatTotal=0x7f090030;
@@ -458,6 +463,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int lblPass=0x7f060025;
         public static final int lblPassword=0x7f060015;
         public static final int lblPasswords=0x7f060021;
+        public static final int lblPercent=0x7f060050;
         public static final int lblRegistration=0x7f060023;
         public static final int lblUser=0x7f060024;
         public static final int lblUserID=0x7f060010;
@@ -487,6 +493,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int txtDevelopers=0x7f060027;
         public static final int txtEmail=0x7f06001a;
         public static final int txtFirstName=0x7f060017;
+        public static final int txtHighestLosingStreak=0x7f060052;
+        public static final int txtHighestWinStreak=0x7f060051;
         public static final int txtLastName=0x7f060018;
         public static final int txtPassword=0x7f06001b;
         public static final int txtUserId=0x7f060016;
