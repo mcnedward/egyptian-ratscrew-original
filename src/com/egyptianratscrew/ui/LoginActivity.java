@@ -9,8 +9,13 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
+import com.egyptianratscrew.dao.UserArrayWrapper;
+import com.egyptianratscrew.dao.UserStub;
+
+
 
 public class LoginActivity extends Activity {
 
@@ -41,15 +46,18 @@ public class LoginActivity extends Activity {
 				Intent resultIntent = new Intent();
 				resultIntent.putExtra("ExistingUser", user);
 				setResult(Activity.RESULT_OK,resultIntent);
-				finish();
+			    finish();
+				
 			}
-			else{
-				Toast.makeText(this, "Invalid Password.", Toast.LENGTH_LONG);
+		
+			else {
+				Toast.makeText(this, "Invalid Password. Please try again.", Toast.LENGTH_LONG).show();
 			}
 		}
 		else {
-			Toast.makeText(this, "Invalid Username.", Toast.LENGTH_LONG);
+			Toast.makeText(this, "Invalid Username. Please try again.", Toast.LENGTH_LONG).show();
 		}
+		
 	}
 	
 	public void ClearClicked(View v){
