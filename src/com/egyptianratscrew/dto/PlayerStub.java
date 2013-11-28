@@ -2,26 +2,25 @@ package com.egyptianratscrew.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.UserStub;
 
-public class HumanPlayer implements IPlayer {
+public class PlayerStub implements IPlayer {
 	private String playerName;
 	private List<Card> hand;
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
 	private IUser user;
-
-
-	public HumanPlayer(IUser u, int id) {
-		user = u;
+	
+	public PlayerStub(int id) {
+		user = new UserStub();
 		playerName = user.getUserName();
 		playerID = id;
 		hand = new ArrayList<Card>();
 	}
-
+	
 	@Override
 	public void addCard(Card c) {
 		// TODO Auto-generated method stub
