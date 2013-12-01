@@ -237,6 +237,15 @@ public class Game{
 		if (p.needsToPlayFace() && !isFace(middleTopCard)) {
 			// if (p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
 			p.setTillFace(p.getTillFace() - 1);
+			if (p.getTillFace() == 0){
+				//change turns
+				p.setMyTurn(false);
+				p2 = getOtherPlayer(p);
+				p2.setMyTurn(true);
+				//add cards to other players hand
+				addCardsToHand(p2);
+				checkWinner(p2);
+			}
 		}
 		// if player needs to play a face and did
 		// switch players turn
@@ -272,6 +281,8 @@ public class Game{
 
 		if (p2.getID() != -1)
 			savePlayers(p, p2);
+		else
+			savePlayers(p);
 
 		// if the stack is slappable, start timer to slap stack
 		if (slappable()) {
@@ -302,6 +313,14 @@ public class Game{
 			player2 = p2;
 		} else {
 			player1 = p2;
+			player2 = p;
+		}
+	}
+	
+	private void savePlayers(IPlayer p){
+		if (p.getID() == player1.getID()) {
+			player1 = p;
+		} else {
 			player2 = p;
 		}
 	}
@@ -360,24 +379,34 @@ public class Game{
 		IPlayer p = getPlayerFromID(playerID);
 
 		if (slappable()) {
-			List<Card> cardsToAdd = new ArrayList<Card>();
-			for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
-				Card c = iterator.next();
-				c.resetCardBitmap();
-				c.setHiddden(false);
-				cardsToAdd.add(c);
-			}
+			addCardsToHand(p);
+
+			savePlayers(p, getOtherPlayer(p));
 			
-			theStack = new ArrayList<Card>();
-			p.getHand().addAll(0, cardsToAdd);
-
-			// need to update graphics here
-
-			// savePlayers(p, getOtherPlayer(p));
-			 if (p.hasAllCards()) {
-			 DeclareWinner(p);
-			 }
+			 checkWinner(p);
 		}
+	}
+
+	private void checkWinner(IPlayer p) {
+		if (p.hasAllCards()) {
+			DeclareWinner(p);
+		 }
+	}
+
+	private void addCardsToHand(IPlayer p) {
+		List<Card> cardsToAdd = new ArrayList<Card>();
+		for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
+			Card c = iterator.next();
+			c.resetCardBitmap();
+			c.setHiddden(false);
+			cardsToAdd.add(c);
+		}
+		
+		theStack = new ArrayList<Card>();
+		p.getHand().addAll(0, cardsToAdd);
+		
+		//save players
+		
 	}
 
 	/**
