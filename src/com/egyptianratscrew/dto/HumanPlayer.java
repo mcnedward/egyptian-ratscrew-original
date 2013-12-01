@@ -108,4 +108,9 @@ public class HumanPlayer implements IPlayer {
 		card.setX(x);
 		card.setY(y);
 	}
+	
+	@Override
+	public IUser getUser(){
+		return this.user;
+	}
 }

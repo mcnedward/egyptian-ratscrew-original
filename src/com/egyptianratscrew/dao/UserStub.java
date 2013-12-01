@@ -14,6 +14,8 @@ public class UserStub implements IUser{
 	private int numberOfLosses;
 	private int highestWinningStreak;
 	private int highestLosingStreak;
+	private int currentWinningStreak;
+	private int currentLosingStreak;
 	private int numberOfTies;
 	private int totalGames;
 	private int highScore;
@@ -33,6 +35,8 @@ public class UserStub implements IUser{
 		this.setNumberOfWins(0);
 		this.setHighestLosingStreak(0);
 		this.setHighestWinningStreak(0);
+		this.setCurrentLosingStreak(0);
+		this.setCurrentWinningStreak(0);
 		this.setHighScore(0);
 		this.setTotalGames(0);
 	}
@@ -191,5 +195,29 @@ public class UserStub implements IUser{
 	public void setHighScore(int highScore) {
 		// TODO Auto-generated method stub
 		this.highScore = highScore;
+	}
+	
+	@Override
+	public int getCurrentWinningStreak() {
+		// TODO Auto-generated method stub
+		return this.currentWinningStreak;
+	}
+
+	@Override
+	public void setCurrentWinningStreak(int currentWinningStreak) {
+		// TODO Auto-generated method stub
+		this.currentWinningStreak = currentWinningStreak;
+	}
+
+	@Override
+	public int getCurrentLosingStreak() {
+		// TODO Auto-generated method stub
+		return this.currentLosingStreak;
+	}
+
+	@Override
+	public void setCurrentLosingStreak(int currentLosingStreak) {
+		// TODO Auto-generated method stub
+		this.currentLosingStreak = currentLosingStreak;
 	}
 }

@@ -2,6 +2,8 @@ package com.egyptianratscrew.dto;
 
 import java.util.List;
 
+import com.egyptianratscrew.dao.IUser;
+
 public interface IPlayer {
 	public String getName();
 
@@ -33,4 +35,6 @@ public interface IPlayer {
 	public Card getTopCard();
 
 	public void setCardCoor(float x, float y);
+	
+	public IUser getUser();
 }

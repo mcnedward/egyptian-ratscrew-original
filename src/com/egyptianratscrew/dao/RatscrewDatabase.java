@@ -32,6 +32,8 @@ public class RatscrewDatabase {
 	private static String NUMBER_OF_LOSSES = "number_of_losses";
 	private static String HIGHEST_WINNING_STREAK = "highest_winning_streak";
 	private static String HIGHEST_LOSING_STREAK = "highest_losing_streak";
+	private static String CURRENT_WINNING_STREAK = "current_winning_streak";
+	private static String CURRENT_LOSING_STREAK = "current_losing_streak";
 	private static String NUMBER_OF_TIES = "number_of_ties";
 	private static String TOTAL_GAMES = "total_games";
 	private static String HIGH_SCORE = "high_score";
@@ -61,6 +63,8 @@ public class RatscrewDatabase {
 			final int numberOfLosses = user.getNumberOfLosses();
 			final int highestWinningStreak = user.getHighestWinningStreak();
 			final int highestLosingStreak = user.getHighestLosingStreak();
+			final int currentWinningStreak = user.getCurrentWinningStreak();
+			final int currentLosingStreak = user.getCurrentLosingStreak();
 			final int numberOfTies = user.getNumberOfTies();
 			final int totalGames = user.getTotalGames();
 			final int highScore = user.getHighScore();
@@ -75,6 +79,8 @@ public class RatscrewDatabase {
 			final int numberOfLossesColumn = ih.getColumnIndex(NUMBER_OF_LOSSES);
 			final int highestWinningStreakColumn = ih.getColumnIndex(HIGHEST_WINNING_STREAK);
 			final int highestLosingStreakColumn = ih.getColumnIndex(HIGHEST_LOSING_STREAK);
+			final int currentWinningStreakColumn = ih.getColumnIndex(CURRENT_WINNING_STREAK);
+			final int currentLosingStreakColumn = ih.getColumnIndex(CURRENT_LOSING_STREAK);
 			final int numberOfTiesColumn = ih.getColumnIndex(NUMBER_OF_TIES);
 			final int totalGamesColumn = ih.getColumnIndex(TOTAL_GAMES);
 			final int highScoreColumn = ih.getColumnIndex(HIGH_SCORE);
@@ -96,6 +102,8 @@ public class RatscrewDatabase {
 				ih.bind(numberOfLossesColumn, numberOfLosses);
 				ih.bind(highestWinningStreakColumn, highestWinningStreak);
 				ih.bind(highestLosingStreakColumn, highestLosingStreak);
+				ih.bind(currentWinningStreakColumn, currentWinningStreak);
+				ih.bind(currentLosingStreakColumn, currentLosingStreak);
 				ih.bind(numberOfTiesColumn, numberOfTies);
 				ih.bind(totalGamesColumn, totalGames);
 				ih.bind(highScoreColumn, highScore);
@@ -125,12 +133,14 @@ public class RatscrewDatabase {
 				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
 				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
 				int highestLosingStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_LOSING_STREAK));
+				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
+				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int numberOfTies = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_TIES));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
 				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
 
 				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, numberOfTies, totalGames, highScore);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
@@ -159,12 +169,14 @@ public class RatscrewDatabase {
 				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
 				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
 				int highestLosingStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_LOSING_STREAK));
+				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
+				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int numberOfTies = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_TIES));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
 				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
 
 				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, numberOfTies, totalGames, highScore);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
@@ -193,12 +205,14 @@ public class RatscrewDatabase {
 				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
 				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
 				int highestLosingStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_LOSING_STREAK));
+				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
+				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int numberOfTies = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_TIES));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
 				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
 
 				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, numberOfTies, totalGames, highScore);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
