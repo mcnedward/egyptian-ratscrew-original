@@ -9,6 +9,10 @@ public class UserArrayWrapper implements Serializable{
 		users = both;
 	}
 	
+	/***
+	 * Return user array
+	 * @return
+	 */
 	public IUser[] getUsers(){
 		return users;
 	}
