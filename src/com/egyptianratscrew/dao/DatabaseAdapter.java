@@ -18,23 +18,23 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 	/** Database Name **/
 	private static String DB_NAME = "ratscrew.db";
 	/** Database Version **/
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 
 	/** User Table **/
 	private static String DATABASE_TABLE_USER = "user";
 	private static String USER_ID = "_id";
-	private static String USERNAME = "userName";
-	private static String PASSWORD = "password";
-	private static String EMAIL = "email";
-	private static String FIRST_NAME = "first_name";
-	private static String LAST_NAME = "last_name";
-	private static String NUMBER_OF_WINS = "number_of_wins";
-	private static String NUMBER_OF_LOSSES = "number_of_losses";
-	private static String HIGHEST_WINNING_STREAK = "highest_winning_streak";
-	private static String HIGHEST_LOSING_STREAK = "highest_losing_streak";
-	private static String NUMBER_OF_TIES = "number_of_ties";
-	private static String TOTAL_GAMES = "total_games";
-	private static String HIGH_SCORE = "high_score";
+	private static String FIRST_NAME = "FirstName";
+	private static String LAST_NAME = "LastName";
+	private static String USERNAME = "UserName";
+	private static String EMAIL = "Email";
+	private static String PASSWORD = "Password";
+	private static String NUMBER_OF_WINS = "NumberOfWins";
+	private static String NUMBER_OF_LOSSES = "NumberOfLosses";
+	private static String HIGHEST_WINNING_STREAK = "HighestWinningStreak";
+	private static String HIGHEST_LOSING_STREAK = "HighestLosingStreak";
+	private static String NUMBER_OF_TIES = "NumberOfTies";
+	private static String TOTAL_GAMES = "TotalGames";
+	private static String HIGH_SCORE = "HighScore";
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
