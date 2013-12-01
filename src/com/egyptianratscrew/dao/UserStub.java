@@ -1,8 +1,9 @@
 package com.egyptianratscrew.dao;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
-public class UserStub implements IUser{
+public class UserStub implements IUser {
 
 	private int userId;
 	private String userName;
@@ -17,13 +18,16 @@ public class UserStub implements IUser{
 	private int numberOfTies;
 	private int totalGames;
 	private int highScore;
-	
-	
-	public UserStub(){
-		Date d = new Date();
-		int id = Integer.parseInt(String.format("%d%d%d%d%d%d", d.getMonth(), d.getDay(), d.getYear(),d.getHours(),d.getMinutes(),d.getSeconds()));
+
+	public UserStub() {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.DATE, -1);
+		SimpleDateFormat dateFormat = new SimpleDateFormat("MMddyyhhmmss");
+		int date = cal.getTime().getDate();
+
+		int id = date;
 		this.setUserId(id);
-		this.setUserName("UserStub_"+ Integer.toString(id));
+		this.setUserName("UserStub_" + Integer.toString(id));
 		this.setFirstName("User");
 		this.setLastName("Stub");
 		this.setPassword("");
@@ -58,7 +62,7 @@ public class UserStub implements IUser{
 	@Override
 	public void setUserName(String userName) {
 		// TODO Auto-generated method stub
-		this.userName = userName; 
+		this.userName = userName;
 	}
 
 	@Override
