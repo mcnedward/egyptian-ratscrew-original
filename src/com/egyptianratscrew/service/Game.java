@@ -458,9 +458,9 @@ public class Game{
 		GameFinished(this);
 	}
 	protected void GameFinished(Game game) {
-		Object lock = new Object();
+		//Object lock = new Object();
 		for (IGameFinishedListener listener : listeners) {
-            synchronized(lock) {
+            synchronized(this) {
                 listener.onGameFinished(game);
             }
         }
