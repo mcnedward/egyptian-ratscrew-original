@@ -226,9 +226,18 @@ public class RatscrewDatabase {
 		}
 	}
 
+	/********** UPDATE QUERIES **********/
+	public boolean updateUser(IUser user){
+		db.delete("user", "_id = " + user.getUserId(), null);
+		insertUser(user);
+		
+		return true;
+	}
+	
+	
 	/********** OBJECT EXISTS QUERIES **********/
 
-	public boolean userExists(int userId) {
+ 	public boolean userExists(int userId) {
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE USER_ID = ?", new String[] { String.valueOf(userId) });
 		if (c.getCount() > 0) {
 			c.close();
