@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IGameFinishedListener;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.UserArrayWrapper;
 import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.GameSurface;
@@ -53,10 +54,35 @@ public class GameActivity extends Activity implements IGameFinishedListener{
 //	    });
 		Toast t = Toast.makeText(this, "yay", Toast.LENGTH_LONG);
 		t.show();
+		
+		
+	}
+	
+	private void updateSatistics(Game game){
+		IUser winner = null;
+		IUser loser = null;
+		
+		if (game.player1.hasAllCards()){
+			winner = game.player1.getUser();
+			loser = game.player2.getUser();
+		}
+		else if (game.player2.hasAllCards()){
+			winner = game.player2.getUser();
+			loser = game.player1.getUser();
+		}
+		else {
+			Toast t = Toast.makeText(this, "Error, Game Not Finished.",Toast.LENGTH_LONG);
+			//handle error
+		}
+		
+		winner.setNumberOfWins(winner.getNumberOfWins() + 1);
+		
+		
+		
 	}
 
 	@Override
-	protected void onPause() {
+	protected void onPause() { 
 		super.onPause();
 		tableCardSurface.pause();
 	}

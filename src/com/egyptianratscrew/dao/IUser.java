@@ -54,5 +54,13 @@ public interface IUser extends Serializable{
 	public int getHighScore();
 
 	public void setHighScore(int highScore);
+	
+	public int getCurrentWinningStreak();
+	
+	public void setCurrentWinningStreak(int currentWinningStreak);
+	
+	public int getCurrentLosingStreak();
+	
+	public void setCurrentLosingStreak(int currentLosingStreak);
 
 }

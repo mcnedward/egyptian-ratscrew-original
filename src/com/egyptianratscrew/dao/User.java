@@ -14,12 +14,15 @@ public class User implements Serializable, IUser  {
 	private int numberOfLosses;
 	private int highestWinningStreak;
 	private int highestLosingStreak;
+	private int currentWinningStreak;
+	private int currentLosingStreak;
 	private int numberOfTies;
 	private int totalGames;
 	private int highScore;
 
 	public User(int userId, String userName, String password, String email, String firstName, String lastName,
-			int numberOfWins, int numberOfLosses, int highestWinningStreak, int highestLosingStreak, int numberOfTies,
+			int numberOfWins, int numberOfLosses, int highestWinningStreak, int highestLosingStreak,
+			int currentWinningStreak, int currentLosingStreak, int numberOfTies,
 			int totalGames, int highScore) {
 
 		super();
@@ -33,6 +36,8 @@ public class User implements Serializable, IUser  {
 		this.numberOfLosses = numberOfLosses;
 		this.highestWinningStreak = highestWinningStreak;
 		this.highestLosingStreak = highestLosingStreak;
+		this.currentWinningStreak = currentWinningStreak;
+		this.currentLosingStreak = currentLosingStreak;
 		this.numberOfTies = numberOfTies;
 		this.totalGames = totalGames;
 		this.highScore = highScore;
@@ -144,6 +149,31 @@ public class User implements Serializable, IUser  {
 
 	public void setHighScore(int highScore) {
 		this.highScore = highScore;
+	}
+
+	
+	@Override
+	public int getCurrentWinningStreak() {
+		// TODO Auto-generated method stub
+		return this.currentWinningStreak;
+	}
+
+	@Override
+	public void setCurrentWinningStreak(int currentWinningStreak) {
+		// TODO Auto-generated method stub
+		this.currentWinningStreak = currentWinningStreak;
+	}
+
+	@Override
+	public int getCurrentLosingStreak() {
+		// TODO Auto-generated method stub
+		return this.currentLosingStreak;
+	}
+
+	@Override
+	public void setCurrentLosingStreak(int currentLosingStreak) {
+		// TODO Auto-generated method stub
+		this.currentLosingStreak = currentLosingStreak;
 	}
 
 }
