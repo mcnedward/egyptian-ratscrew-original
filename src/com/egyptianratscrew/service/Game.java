@@ -316,7 +316,10 @@ public class Game{
 			player2 = p;
 		}
 	}
-	
+	/***
+	 * saves temp player to the local variable 
+	 * @param p
+	 */
 	private void savePlayers(IPlayer p){
 		if (p.getID() == player1.getID()) {
 			player1 = p;
@@ -387,12 +390,20 @@ public class Game{
 		}
 	}
 
+	/***
+	 * Checks to see if the passed in player has all 52 cards and calls declare winner
+	 * @param p
+	 */
 	private void checkWinner(IPlayer p) {
 		if (p.hasAllCards()) {
 			DeclareWinner(p);
 		 }
 	}
 
+	/***
+	 * Adds the stack to the passed in players hand
+	 * @param p
+	 */
 	private void addCardsToHand(IPlayer p) {
 		List<Card> cardsToAdd = new ArrayList<Card>();
 		for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
@@ -406,6 +417,7 @@ public class Game{
 		p.getHand().addAll(0, cardsToAdd);
 		
 		//save players
+		savePlayers(p);
 		
 	}
 
