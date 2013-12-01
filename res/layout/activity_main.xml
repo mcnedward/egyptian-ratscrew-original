@@ -17,19 +17,14 @@
         android:textColor="@color/red"
         android:textSize="@dimen/names" />
 
-    <FrameLayout
+    <ImageView
+        android:id="@+id/imgAlbumArtNowPlaying"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.94" >
-
-        <ImageView
-            android:id="@+id/imgRat"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/imgRat"
-            android:src="@drawable/screenimage" />
-
-    </FrameLayout>
+        android:layout_height="200dp"
+        android:contentDescription="@string/imgRat"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/screenimage" />
 
     <Button
         android:id="@+id/btnTestGame"
@@ -60,5 +55,30 @@
         android:layout_height="wrap_content"
         android:onClick="LoginWithCredentials"
         android:text="@string/btnExisting" />
+
+    <Button
+        android:id="@+id/btnStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="viewStatistics"
+        android:text="@string/statistics"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Logout"
+        android:text="@string/btnLogout"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

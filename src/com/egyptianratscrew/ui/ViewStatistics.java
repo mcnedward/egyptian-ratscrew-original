@@ -1,14 +1,12 @@
 package com.egyptianratscrew.ui;
 
-
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.widget.TextView;
 
 import com.egyptianratscrew.R;
-import com.egyptianratscrew.dao.User;
+import com.egyptianratscrew.dao.IUser;
 
 /**
  * Activity for viewing the statistics for the currently logged in user
@@ -20,31 +18,16 @@ import com.egyptianratscrew.dao.User;
  */
 
 public class ViewStatistics extends Activity {
+	private final static String TAG = "ViewStatistics";
+
+	private IUser user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistics);
 
-		// A user should be passed to this activity when it is inflated in MainActivity
-		// That way we don't have to create one here
-		User user = new User();
-		//setting the username, email, firstName, and LastName
-		user.setUserName("whatsmyusername");
-		user.setEmail("edmcn123@gmail.com");
-		user.setFirstName("Edward");
-		user.setLastName("McNealy");
-
-		//setting the number of wins, losses, ties, games played, and high score
-		user.setNumberOfWins(10);
-		user.setNumberOfLosses(2);
-		user.setNumberOfTies(1);
-		user.setTotalGames(13);
-		user.setHighScore(50);
-		user.setHighestWinningStreak(5);
-		user.setHighestLosingStreak(2);
-
-		//calling the method displayUserData with the user information
+		user = MainActivity.user;
 		displayUserData(user);
 	}
 
@@ -61,9 +44,9 @@ public class ViewStatistics extends Activity {
 	 * @param user
 	 *            - The user who's data you want to view
 	 */
-	public void displayUserData(User user) {
-		
-		//setting up the text views
+	public void displayUserData(IUser user) {
+
+		// setting up the text views
 		TextView txtDisplayUserName = (TextView) findViewById(R.id.txtDisplayUserName);
 		TextView txtDisplayEmail = (TextView) findViewById(R.id.txtDisplayEmail);
 		TextView txtDisplayName = (TextView) findViewById(R.id.txtDisplayName);
@@ -76,12 +59,12 @@ public class ViewStatistics extends Activity {
 		TextView txtDisplayHighestWinningStreak = (TextView) findViewById(R.id.txtDisplayHighestWinningStreak);
 		TextView txtDisplayHighestLosingStreak = (TextView) findViewById(R.id.txtDisplayHighestLosingStreak);
 
-		//setting the text for username, email, and firstname and lastname through get methods
+		// setting the text for user name, email, and first name and last name through get methods
 		txtDisplayUserName.setText(user.getUserName());
 		txtDisplayEmail.setText(user.getEmail());
 		txtDisplayName.setText(user.getFirstName() + " " + user.getLastName());
 
-		//setting the text for wins, losses, tiesm and games, and high score through get methods
+		// setting the text for wins, losses, ties, and games, and high score through get methods
 		txtDisplayNumberOfWins.setText(String.valueOf(user.getNumberOfWins()));
 		txtDisplayNumberOfLosses.setText(String.valueOf(user.getNumberOfLosses()));
 		txtDisplayNumberOfTies.setText(String.valueOf(user.getNumberOfTies()));

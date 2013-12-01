@@ -157,7 +157,7 @@ public class RatscrewDatabase {
 	 *            The user id of the user you want to return from the database.
 	 * @return The user from the database.
 	 */
-	public IUser selectUserById(int userId) {
+	public IUser getUserById(int userId) {
 		User user = null;
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE userId = ?", new String[] { String.valueOf(userId) });
 		try {
@@ -190,7 +190,7 @@ public class RatscrewDatabase {
 		}
 	}
 
-	public IUser selectUserByName(String userFirstName) {
+	public IUser getUserByName(String userFirstName) {
 		IUser user = null;
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
 		try {
@@ -224,17 +224,25 @@ public class RatscrewDatabase {
 		}
 	}
 
-	public IUser selectUserByUserName(String aUserName) {
+	/**
+	 * This is used to select a certain user from the database based on a user name.
+	 * 
+	 * @param userName
+	 *            The user name of the user you want to get from the database.
+	 * @return The user from the database whose user name matches the user name parameter you entered.
+	 */
+	public IUser getUserByUserName(String userName) {
 		IUser user = null;
-		Cursor c = db.rawQuery("SELECT * FROM user WHERE USER_NAME = ?", new String[] { aUserName });
+		open();
+		Cursor c = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_USER + " WHERE " + USERNAME + " = ?",
+				new String[] { userName });
 		try {
 			while (c.moveToNext()) {
 				int userId = c.getInt(c.getColumnIndexOrThrow(USER_ID));
-				String userName = c.getString(c.getColumnIndexOrThrow(USERNAME));
-				String password = c.getString(c.getColumnIndexOrThrow(PASSWORD));
-				String email = c.getString(c.getColumnIndexOrThrow(EMAIL));
 				String firstName = c.getString(c.getColumnIndexOrThrow(FIRST_NAME));
 				String lastName = c.getString(c.getColumnIndexOrThrow(LAST_NAME));
+				String email = c.getString(c.getColumnIndexOrThrow(EMAIL));
+				String password = c.getString(c.getColumnIndexOrThrow(PASSWORD));
 				int numberOfWins = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_WINS));
 				int numberOfLosses = c.getInt(c.getColumnIndexOrThrow(NUMBER_OF_LOSSES));
 				int highestWinningStreak = c.getInt(c.getColumnIndexOrThrow(HIGHEST_WINNING_STREAK));
@@ -243,7 +251,7 @@ public class RatscrewDatabase {
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
 				int highScore = c.getInt(c.getColumnIndexOrThrow(HIGH_SCORE));
 
-				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
+				user = new User(userId, firstName, lastName, userName, email, password, numberOfWins, numberOfLosses,
 						highestWinningStreak, highestLosingStreak, numberOfTies, totalGames, highScore);
 			}
 			if (user == null) {
@@ -251,11 +259,15 @@ public class RatscrewDatabase {
 				return null;
 			} else
 				return user;
+		} catch (Exception e) {
+			Log.i(TAG, e.getMessage(), e);
 		} finally {
 			if (c != null && !c.isClosed()) {
 				c.close();
+				close();
 			}
 		}
+		return user;
 	}
 
 	/********** OBJECT EXISTS QUERIES **********/
