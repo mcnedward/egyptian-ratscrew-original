@@ -95,6 +95,7 @@
     <string name="btnDevelopers">View Developers</string>
     <string name="btnLogin">Login</string>
     <string name="btnClear">Reset</string>
+    <string name="btnLogout">Logout</string>
     <string name="lblCredentials">Login with Credentials</string>
     <string name="lblPercent">Percentage of Wins</string>
     <string name="txtHighestWinStreak">Winning Streak:</string>
