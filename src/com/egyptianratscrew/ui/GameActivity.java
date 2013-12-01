@@ -55,9 +55,8 @@ public class GameActivity extends Activity implements IGameFinishedListener{
 //	    });
 		Toast t = Toast.makeText(this, "yay", Toast.LENGTH_LONG);
 		t.show();
-		return;
 		
-		//updateSatistics(game);
+		updateSatistics(game);
 		
 		
 		
