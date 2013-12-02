@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 
@@ -111,7 +112,7 @@ public class RegisterActivity extends Activity {
 			Toast toast = Toast.makeText(this, "Your passwords do not match...", Toast.LENGTH_SHORT);
 			toast.show();
 		} else {
-			User user = new User(firstName, lastName, userName, email, password);
+			IUser user = new User(firstName, lastName, userName, email, password);
 			try {
 				db.insertUser(user);
 			} catch (Exception e) {

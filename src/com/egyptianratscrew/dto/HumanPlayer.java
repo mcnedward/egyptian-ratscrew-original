@@ -2,11 +2,15 @@ package com.egyptianratscrew.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import android.util.Log;
 
 import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.User;
 
 public class HumanPlayer implements IPlayer {
+	private static final String TAG = "HumanPlayer";
+
 	private String playerName;
 	private List<Card> hand;
 	private boolean turn;
@@ -14,24 +18,25 @@ public class HumanPlayer implements IPlayer {
 	private int playerID;
 	private IUser user;
 
-	private Map<Integer, Card> playerHand;
-
-	public HumanPlayer(IUser u, int id) {
-		user = u;
-		playerName = user.getUserName();
-		playerID = id;
+	public HumanPlayer(IUser user) {
+		if (user != null) {
+			this.user = user;
+		} else {
+			this.user = new User("Egyptian", "Ratscrew", "Android", null, null);
+			this.user.setUserId(0);
+		}
+		playerName = this.user.getUserName();
+		playerID = this.user.getUserId();
 		hand = new ArrayList<Card>();
 	}
 
 	@Override
 	public void addCard(Card c) {
-		// TODO Auto-generated method stub
 		hand.add(c);
 	}
 
 	@Override
 	public Card playCard() {
-		// TODO Auto-generated method stub
 		Card retCard = hand.get(hand.size() - 1);
 		hand.remove(hand.size() - 1);
 		return retCard;
@@ -39,8 +44,7 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public boolean needsToPlayFace() {
-		// TODO Auto-generated method stub
-		if (getTillFace() > 0) {
+		if (tillFace > 0) {
 			return true;
 		} else {
 			return false;
@@ -49,25 +53,21 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public int getTillFace() {
-		// TODO Auto-generated method stub
 		return tillFace;
 	}
 
 	@Override
-	public void setTillFace(int i) {
-		// TODO Auto-generated method stub
-		tillFace = i;
+	public void setTillFace(int tillFace) {
+		this.tillFace = tillFace;
 	}
 
 	@Override
 	public boolean myTurn() {
-		// TODO Auto-generated method stub
 		return turn;
 	}
 
 	@Override
 	public void setMyTurn(boolean b) {
-		// TODO Auto-generated method stub
 		turn = b;
 	}
 
@@ -100,7 +100,12 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public Card getTopCard() {
-		return hand.get(hand.size() - 1);
+		try {
+			return hand.get(hand.size() - 1);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			Log.i(TAG, e.getMessage(), e);
+		}
+		return null;
 	}
 
 	@Override
