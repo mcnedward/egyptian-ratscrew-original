@@ -16,9 +16,8 @@ public class UserStub implements IUser{
 	private int highestLosingStreak;
 	private int currentWinningStreak;
 	private int currentLosingStreak;
-	private int numberOfTies;
 	private int totalGames;
-	private int highScore;
+	
 	
 	
 	public UserStub(){
