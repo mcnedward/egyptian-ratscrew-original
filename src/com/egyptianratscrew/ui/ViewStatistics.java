@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.widget.TextView;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 
 /**
@@ -28,19 +29,7 @@ public class ViewStatistics extends Activity {
 
 		// A user should be passed to this activity when it is inflated in MainActivity
 		// That way we don't have to create one here
-		User user = new User();
-		//setting the username, email, firstName, and LastName
-		user.setUserName("whatsmyusername");
-		user.setEmail("edmcn123@gmail.com");
-		user.setFirstName("Edward");
-		user.setLastName("McNealy");
-
-		//setting the number of wins, losses, ties, games played, and high score
-		user.setNumberOfWins(10);
-		user.setNumberOfLosses(2);
-		user.setTotalGames(13);
-		user.setHighestWinningStreak(5);
-		user.setHighestLosingStreak(2);
+		IUser user = (IUser) this.getIntent().getSerializableExtra("User");
 
 		//calling the method displayUserData with the user information
 		displayUserData(user);
@@ -59,7 +48,7 @@ public class ViewStatistics extends Activity {
 	 * @param user
 	 *            - The user who's data you want to view
 	 */
-	public void displayUserData(User user) {
+	public void displayUserData(IUser user) {
 		
 		//setting up the text views
 		TextView txtDisplayUserName = (TextView) findViewById(R.id.txtDisplayUserName);
@@ -68,9 +57,7 @@ public class ViewStatistics extends Activity {
 
 		TextView txtDisplayNumberOfWins = (TextView) findViewById(R.id.txtDisplayNumberOfWins);
 		TextView txtDisplayNumberOfLosses = (TextView) findViewById(R.id.txtDisplayNumberOfLosses);
-		TextView txtDisplayNumberOfTies = (TextView) findViewById(R.id.txtDisplayNumberOfTies);
 		TextView txtDisplayTotalGames = (TextView) findViewById(R.id.txtDisplayTotalGames);
-		TextView txtDisplayHighScore = (TextView) findViewById(R.id.txtDisplayHighScore);
 		TextView txtDisplayHighestWinningStreak = (TextView) findViewById(R.id.txtDisplayHighestWinningStreak);
 		TextView txtDisplayHighestLosingStreak = (TextView) findViewById(R.id.txtDisplayHighestLosingStreak);
 
