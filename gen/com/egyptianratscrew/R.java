@@ -337,11 +337,11 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnExistingPicture=0x7f090041;
         public static final int btnFBLogin=0x7f09000b;
         public static final int btnLogin=0x7f090004;
-        public static final int btnLogout=0x7f09000d;
+        public static final int btnLogout=0x7f09000e;
         public static final int btnReset=0x7f09002a;
         public static final int btnRules=0x7f090013;
         public static final int btnSave=0x7f090042;
-        public static final int btnStatistics=0x7f09000e;
+        public static final int btnStatistics=0x7f09000d;
         public static final int btnSubmit=0x7f090029;
         public static final int btnTakePicture=0x7f090040;
         public static final int btnTestGame=0x7f090009;

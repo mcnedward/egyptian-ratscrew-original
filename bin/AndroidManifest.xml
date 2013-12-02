@@ -22,13 +22,11 @@
         <activity
             android:name="com.egyptianratscrew.ui.MainActivity"
             android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-            <!-- <intent-filter> -->
-            <!-- <action android:name="android.intent.action.MAIN" /> -->
-
-
-            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
-            <!-- </intent-filter> -->
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewRules" >
         </activity>
@@ -38,8 +36,7 @@
         </activity>
         <activity android:name="com.egyptianratscrew.ui.fbLoginActivity" >
         </activity>
-        <activity
-            android:name="com.egyptianratscrew.ui.RegisterActivity" >
+        <activity android:name="com.egyptianratscrew.ui.RegisterActivity" >
         </activity>
         <activity android:name="com.egyptianratscrew.ui.ViewDevelopers" >
         </activity>
@@ -55,18 +52,20 @@
             android:name="com.egyptianratscrew.ui.LoginActivity"
             android:label="@string/title_activity_login" >
         </activity>
-        <activity
-            android:name="com.egyptianratscrew.ui.SplashActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
-            android:label="@string/title_activity_splash"
-            android:theme="@style/FullscreenTheme" >
-            <intent-filter>
- -->
-                <action android:name="android.intent.action.MAIN" />
+        <!-- <activity -->
+        <!-- android:name="com.egyptianratscrew.ui.SplashActivity" -->
+        <!-- android:configChanges="orientation|keyboardHidden|screenSize" -->
+        <!-- android:label="@string/title_activity_splash" -->
+        <!-- android:theme="@style/FullscreenTheme" > -->
+        <!-- <intent-filter> -->
+        <!--  -->
+ -->
+        <!-- <action android:name="android.intent.action.MAIN" /> -->
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+
+        <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+        <!-- </intent-filter> -->
+        <!-- </activity> -->
         <activity
             android:name="com.egyptianratscrew.ui.WinnerActivity"
             android:label="@string/title_activity_winner" >
