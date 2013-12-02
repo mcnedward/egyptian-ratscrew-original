@@ -55,28 +55,38 @@ public class GameSurface extends SurfaceView implements Runnable {
 		paint.setTextSize(30);
 
 		canvas.drawColor(context.getResources().getColor(R.color.green));	// Set the background color of the canvas
-		game.setCardLocations(this);				// Set the coordinates of each card in the deck
-		game.displayCards();						// Check if any cards need to be played by either player
+		game.setCardLocations(this);	// Set the coordinates of each card in the deck
+		game.displayCards();			// Check if any cards need to be played by either player
 
-		game.player1.getTopCard().onDraw(canvas);
-		canvas.drawText("Card Count: " + game.player1.getHand().size(), game.player1.getTopCard().getX() - 200,
-				game.player1.getTopCard().getY() + game.player1.getTopCard().getHeight() - 10, paint);
-		game.player2.getTopCard().onDraw(canvas);
-		canvas.drawText("Card Count: " + game.player2.getHand().size(), game.player2.getTopCard().getWidth() + 10,
-				game.player2.getTopCard().getHeight(), paint);
+		if (game.player1.getTopCard() != null) {
+			game.player1.getTopCard().onDraw(canvas);
+			canvas.drawText("Card Count: " + game.player1.getHand().size(), game.player1.getTopCard().getX() - 200,
+					game.player1.getTopCard().getY() + game.player1.getTopCard().getHeight() - 10, paint);
+		}
+		if (game.player2.getTopCard() != null) {
+			game.player2.getTopCard().onDraw(canvas);
+			canvas.drawText("Card Count: " + game.player2.getHand().size(), game.player2.getTopCard().getWidth() + 10,
+					game.player2.getTopCard().getHeight(), paint);
+		}
+
 		if (game.player1.myTurn())
-			canvas.drawText("Player 1's turn!!!", 10, (this.getHeight() / 2) + card.getHeight() + 200, paint);
+			canvas.drawText("Player 1's turn!!!", 10, (this.getHeight() / 2) + card.getHeight(), paint);
 		if (game.player2.myTurn())
-			canvas.drawText("Player 2's turn!!!", 10, (this.getHeight() / 2) - card.getHeight() - 200, paint);
+			canvas.drawText("Player 2's turn!!!", 10, (this.getHeight() / 2) - card.getHeight(), paint);
+		if (game.slappable())
+			canvas.drawText("SLAP!!!", 10, this.getHeight() / 2, paint);
+		if (game.numberOfChances > 0)
+			canvas.drawText("Chances to play card: " + game.numberOfChances, 10,
+					(this.getHeight() / 2) + card.getHeight() + 50, paint);
 
-		for (Card c : game.theStack) {			// Draw every card in the middle stack
+		for (int i = 0; i < game.theStack.size(); i++) {			// Draw every card in the middle stack
+			Card c = game.theStack.get(i);
 			c.onDraw(canvas);
 		}
 	}
 
 	@Override
 	public void run() {
-		game.dealCards();	// Deal the cards. This is only called once
 		while (GAME_RUNNING) {
 			if (!holder.getSurface().isValid()) {
 				continue;

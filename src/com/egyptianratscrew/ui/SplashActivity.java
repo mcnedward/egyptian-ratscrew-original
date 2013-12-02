@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.util.SystemUiHider;
@@ -22,10 +21,9 @@ import com.egyptianratscrew.util.SystemUiHider;
 public class SplashActivity extends Activity {
 	private static String TAG = SplashActivity.class.getName();
 	private static long SLEEP_TIME = 5;
-	
+
 	/**
-	 * Whether or not the system UI should be auto-hidden after
-	 * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
+	 * Whether or not the system UI should be auto-hidden after {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
 	 */
 	private static final boolean AUTO_HIDE = true;
 
@@ -54,11 +52,10 @@ public class SplashActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		// this.requestWindowFeature(Window.FEATURE_NO_TITLE); // Removes title bar
 
 		setContentView(R.layout.activity_splash);
-		
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);    // Removes title bar
-		
+
 		final View controlsView = findViewById(R.id.fullscreen_content_controls);
 		final View contentView = findViewById(R.id.fullscreen_content);
 
@@ -66,45 +63,39 @@ public class SplashActivity extends Activity {
 		// this activity.
 		mSystemUiHider = SystemUiHider.getInstance(this, contentView, HIDER_FLAGS);
 		mSystemUiHider.setup();
-		mSystemUiHider
-				.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
-					// Cached values.
-					int mControlsHeight;
-					int mShortAnimTime;
+		mSystemUiHider.setOnVisibilityChangeListener(new SystemUiHider.OnVisibilityChangeListener() {
+			// Cached values.
+			int mControlsHeight;
+			int mShortAnimTime;
 
-					@Override
-					@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-					public void onVisibilityChange(boolean visible) {
-						if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-							// If the ViewPropertyAnimator API is available
-							// (Honeycomb MR2 and later), use it to animate the
-							// in-layout UI controls at the bottom of the
-							// screen.
-							if (mControlsHeight == 0) {
-								mControlsHeight = controlsView.getHeight();
-							}
-							if (mShortAnimTime == 0) {
-								mShortAnimTime = getResources().getInteger(
-										android.R.integer.config_shortAnimTime);
-							}
-							controlsView
-									.animate()
-									.translationY(visible ? 0 : mControlsHeight)
-									.setDuration(mShortAnimTime);
-						} else {
-							// If the ViewPropertyAnimator APIs aren't
-							// available, simply show or hide the in-layout UI
-							// controls.
-							controlsView.setVisibility(visible ? View.VISIBLE
-									: View.GONE);
-						}
-
-						if (visible && AUTO_HIDE) {
-							// Schedule a hide().
-							delayedHide(AUTO_HIDE_DELAY_MILLIS);
-						}
+			@Override
+			@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+			public void onVisibilityChange(boolean visible) {
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+					// If the ViewPropertyAnimator API is available
+					// (Honeycomb MR2 and later), use it to animate the
+					// in-layout UI controls at the bottom of the
+					// screen.
+					if (mControlsHeight == 0) {
+						mControlsHeight = controlsView.getHeight();
 					}
-				});
+					if (mShortAnimTime == 0) {
+						mShortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+					}
+					controlsView.animate().translationY(visible ? 0 : mControlsHeight).setDuration(mShortAnimTime);
+				} else {
+					// If the ViewPropertyAnimator APIs aren't
+					// available, simply show or hide the in-layout UI
+					// controls.
+					controlsView.setVisibility(visible ? View.VISIBLE : View.GONE);
+				}
+
+				if (visible && AUTO_HIDE) {
+					// Schedule a hide().
+					delayedHide(AUTO_HIDE_DELAY_MILLIS);
+				}
+			}
+		});
 
 		// Set up the user interaction to manually show or hide the system UI.
 		contentView.setOnClickListener(new View.OnClickListener() {
@@ -119,28 +110,28 @@ public class SplashActivity extends Activity {
 		});
 
 		IntentLauncher launcher = new IntentLauncher();
-		  launcher.start();
-		}
+		launcher.start();
+	}
 
-		 private class IntentLauncher extends Thread {
-		  @Override
-		  /**
-		   * Sleep for some time and than start new activity.
-		   */
-		  public void run() {
-		     try {
-		        // Sleeping
-		        Thread.sleep(SLEEP_TIME*1000);
-		     } catch (Exception e) {
-		        Log.e(TAG, e.getMessage());
-		     }
+	private class IntentLauncher extends Thread {
+		@Override
+		/**
+		 * Sleep for some time and than start new activity.
+		 */
+		public void run() {
+			try {
+				// Sleeping
+				Thread.sleep(SLEEP_TIME * 1000);
+			} catch (Exception e) {
+				Log.e(TAG, e.getMessage());
+			}
 
-		     // Start main activity
-		     Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-		     SplashActivity.this.startActivity(intent);
-		     SplashActivity.this.finish();
-		  }
+			// Start main activity
+			Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+			SplashActivity.this.startActivity(intent);
+			SplashActivity.this.finish();
 		}
+	}
 
 	@Override
 	protected void onPostCreate(Bundle savedInstanceState) {
@@ -151,8 +142,6 @@ public class SplashActivity extends Activity {
 		// are available.
 		delayedHide(100);
 	}
-
-	
 
 	Handler mHideHandler = new Handler();
 	Runnable mHideRunnable = new Runnable() {

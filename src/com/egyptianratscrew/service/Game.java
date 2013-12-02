@@ -20,9 +20,9 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
-import com.egyptianratscrew.dto.ComputerPlayer;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
+import com.egyptianratscrew.ui.MainActivity;
 
 /**
  * Game Class
@@ -30,24 +30,25 @@ import com.egyptianratscrew.dto.IPlayer;
  * @author AJ
  * 
  */
-public class Game{
+public class Game {
 	private static final String TAG = "Game";
 
 	private static final String COMPUTER_PLAYER_NAME = "Android";
 	private static final int DELAY_INTERVAL = 1000;
 	private static final long TIME_BETWEEN_TURNS = 1500;
+	private long compSlapDelay;
+
 	public IPlayer player1;
 	public IPlayer player2;
 	public List<Card> theStack;
 	private List<IGameFinishedListener> listeners;
 
-	// public Map<Integer, Card> middleStack;
-
 	private CardDeck cd;
 	private List<Card> cardDeck;
 	private Context context;
 
-	private long compSlapDelay;
+	private Card blankCard;
+	public int numberOfChances = 0;
 
 	/**
 	 * Game Constructor, creates a new instance of the game class
@@ -56,20 +57,14 @@ public class Game{
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, int difficulty, IUser[] users, Context con) {
+	public Game(boolean onePlayerGame, int difficulty, Context con) {
 		context = con;
-		
-		listeners = new ArrayList<IGameFinishedListener>();
-		
-		// set player variables
-		if (users.length > 0)
-			player1 = new HumanPlayer(users[0], 0);
+		blankCard = new Card(context);
 
-		if (!onePlayerGame && users.length > 1) {
-			player2 = new HumanPlayer(users[1], 1);
-		} else {
-			player2 = new ComputerPlayer(CreateComputer(),1);
-		}
+		listeners = new ArrayList<IGameFinishedListener>();
+
+		player1 = new HumanPlayer(MainActivity.user);
+		player2 = new HumanPlayer(null);
 
 		compSlapDelay = difficulty * DELAY_INTERVAL;
 
@@ -83,11 +78,10 @@ public class Game{
 		// middleStack = new ConcurrentHashMap<Integer, Card>();
 
 		// create deck
-
 		cd = new CardDeck(context);
 		cardDeck = cd.cardDeck;
 		// shuffleCards(cardDeck);
-		// dealCards();
+		dealCards();
 
 		// update graphics
 
@@ -98,7 +92,6 @@ public class Game{
 	 */
 	public void dealCards() {
 		int i = 0;
-		int x = 0;
 		for (Card c : cardDeck)// for (int i = 0; i > cardDeck.size(); i++)
 		{
 			if ((i % 2) == 0) {
@@ -125,12 +118,13 @@ public class Game{
 		float bottomY = surfaceView.getBottom() - 20;
 		int degree = 0;
 
-		player1.setCardCoor((bottomX - player1.getTopCard().getWidth()), (bottomY - player1.getTopCard().getHeight()));
+		player1.setCardCoor((bottomX - blankCard.getWidth()), (bottomY - blankCard.getHeight()));
 		if (player1.myTurn()) {
 			setCardListener(player1.getTopCard(), surfaceView);
 		}
 		player2.setCardCoor(topX, topY);
-		for (Card c : theStack) {
+		for (int i = 0; i < theStack.size(); i++) {
+			Card c = theStack.get(i);
 			c.rotateCard(degree);
 			c.setRotate(false);
 			c.setX((surfaceView.getWidth() - c.getWidth()) / 2);
@@ -193,30 +187,129 @@ public class Game{
 							&& eventY >= playerCardY - card.getHeight()
 							&& eventY < (playerCardY - card.getHeight() + card.getHeight())) {
 						if (player1.myTurn()) {
-							player1.getTopCard().setHiddden(true);
-							player1.setMyTurn(false);
-							player2.setMyTurn(true);
+							throwCard(player1);
+							if (numberOfChances == 0) {
+								player1.setMyTurn(false);
+								player2.setMyTurn(true);
+
+								// Start a new timer for the computer's turn
+								// TODO TIME_BETWEEN_TURNS???
+								Timer player2TurnTask = new Timer();
+								player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+							}
 						}
 					}
 					if (eventX >= middleCardX && eventX < (middleCardX + card.getWidth()) && eventY >= middleCardY
 							&& eventY < (middleCardY + card.getHeight())) {
 						if (slappable()) {
 							Log.i(TAG, "Adding cards to player 1");
-							List<Card> cardsToAdd = new ArrayList<Card>();
-							for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
-								Card c = iterator.next();
-								c.resetCardBitmap();
-								c.setHiddden(false);
-								cardsToAdd.add(c);
-							}
-							theStack = new ArrayList<Card>();
-							player1.getHand().addAll(0, cardsToAdd);
+							slapStack(player1);
 						}
 					}
 				}
 				return true;
 			}
 		});
+	}
+
+	/**
+	 * This method is used to throw a card into the middle deck. The timer for the computer player to slap the middle
+	 * deck is also set here.
+	 * 
+	 * @param player
+	 *            The player who is throwing cards into the middle deck.
+	 */
+	public void throwCard(IPlayer player) {
+		Card cardToThrow = player.getTopCard();	// Get the top card from the player's hand
+
+		// Check if the player has played a letter card. If they have, add their card to the top pile and throw another
+		// card. Then decrement the counter for their number of chances to get a letter card until they play one.
+		if (numberOfChances > 0) {
+			theStack.add(cardToThrow);
+			player.getHand().remove(cardToThrow);
+			numberOfChances--;
+			// If they run out of chances to play a letter card, give all the cards in the middle stack to the other
+			// player.
+			if (numberOfChances == 0) {
+				slapStack(getOtherPlayer(player));
+			}
+		} else {
+			theStack.add(cardToThrow);
+			player.getHand().remove(cardToThrow);
+			numberOfChances = cardToThrow.tillFaceValue;
+		}
+
+		// Check if the middle deck is slappable after every throw
+		if (slappable()) {
+			// Start a new timer for the computer's turn
+			// TODO TIME_BETWEEN_TURNS???
+			Timer player2SlapTask = new Timer();
+			player2SlapTask.schedule(new Player2SlapTask(), DELAY_INTERVAL);
+		}
+	}
+
+	/**
+	 * This method will slap the middle stack and add all of the cards there to the player who slapped it.
+	 * 
+	 * @param player
+	 *            The player who slapped the middle deck.
+	 */
+	public void slapStack(IPlayer player) {
+		List<Card> cardsToAdd = new ArrayList<Card>();
+		for (int i = 0; i < theStack.size(); i++) {
+			Card c = theStack.get(i);
+			c.resetCardBitmap();
+			c.setHiddden(false);
+			cardsToAdd.add(c);
+		}
+		theStack = new ArrayList<Card>();
+		player.getHand().addAll(0, cardsToAdd);
+		// Reset the number of chances to play a letter card if a player has those chances
+		if (numberOfChances > 0)
+			numberOfChances = 0;
+	}
+
+	class Player2TurnTask extends TimerTask {
+
+		public Player2TurnTask() {
+
+		}
+
+		@Override
+		public void run() {
+			/**
+			 * Check again if it is the computer's turn still, because the game is constantly being run and
+			 * drawn in the GameSurface class. If this check is not here, the timer task will continue
+			 * removing cards until the run method in GameSurface reaches this point again.
+			 */
+			if (player2.myTurn()) {
+				/**
+				 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
+				 * set the computer's turn off
+				 */
+				throwCard(player2);
+				if (numberOfChances == 0) {
+					player2.setMyTurn(false);
+					player1.setMyTurn(true);
+				} else {
+					Timer player2TurnTask = new Timer();
+					player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+				}
+			}
+		}
+	}
+
+	class Player2SlapTask extends TimerTask {
+
+		public Player2SlapTask() {
+
+		}
+
+		@Override
+		public void run() {
+			Log.i(TAG, "Adding cards to player 2");
+			slapStack(player2);
+		}
 	}
 
 	/**
@@ -227,7 +320,7 @@ public class Game{
 	 * @return
 	 */
 	public boolean playCard(IPlayer p) {
-		IPlayer p2 = new HumanPlayer(null, -1);
+		IPlayer p2 = new HumanPlayer(null);
 		Card middleTopCard = theStack.get(theStack.size() - 1);
 
 		// need to update graphics here
@@ -237,15 +330,6 @@ public class Game{
 		if (p.needsToPlayFace() && !isFace(middleTopCard)) {
 			// if (p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
 			p.setTillFace(p.getTillFace() - 1);
-			if (p.getTillFace() == 0){
-				//change turns
-				p.setMyTurn(false);
-				p2 = getOtherPlayer(p);
-				p2.setMyTurn(true);
-				//add cards to other players hand
-				addCardsToHand(p2);
-				checkWinner(p2);
-			}
 		}
 		// if player needs to play a face and did
 		// switch players turn
@@ -281,8 +365,6 @@ public class Game{
 
 		if (p2.getID() != -1)
 			savePlayers(p, p2);
-		else
-			savePlayers(p);
 
 		// if the stack is slappable, start timer to slap stack
 		if (slappable()) {
@@ -295,9 +377,9 @@ public class Game{
 			Timer compTurnTimer = new Timer();
 			compTurnTimer.schedule(new CompTurnTask(), DELAY_INTERVAL);	// TODO TIME_BETWEEN_TURNS???
 		}
-		
-		//For testing game over scenarios
-		DeclareWinner(player1);
+
+		// For testing game over scenarios
+		// DeclareWinner(player1);
 		return true;
 	}
 
@@ -313,17 +395,6 @@ public class Game{
 			player2 = p2;
 		} else {
 			player1 = p2;
-			player2 = p;
-		}
-	}
-	/***
-	 * saves temp player to the local variable 
-	 * @param p
-	 */
-	private void savePlayers(IPlayer p){
-		if (p.getID() == player1.getID()) {
-			player1 = p;
-		} else {
 			player2 = p;
 		}
 	}
@@ -345,11 +416,11 @@ public class Game{
 	/**
 	 * returns the opposite player
 	 * 
-	 * @param p
+	 * @param player
 	 * @return
 	 */
-	private IPlayer getOtherPlayer(IPlayer p) {
-		if (p.getName().equals(player1.getName())) {
+	private IPlayer getOtherPlayer(IPlayer player) {
+		if (player.getName().equals(player1.getName())) {
 			return player2;
 		} else {
 			return player1;
@@ -382,14 +453,26 @@ public class Game{
 		IPlayer p = getPlayerFromID(playerID);
 
 		if (slappable()) {
-			addCardsToHand(p);
+			List<Card> cardsToAdd = new ArrayList<Card>();
+			for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
+				Card c = iterator.next();
+				c.resetCardBitmap();
+				c.setHiddden(false);
+				cardsToAdd.add(c);
+			}
 
-			savePlayers(p, getOtherPlayer(p));
-			
-			 checkWinner(p);
+			theStack = new ArrayList<Card>();
+			p.getHand().addAll(0, cardsToAdd);
+
+			// need to update graphics here
+
+			// savePlayers(p, getOtherPlayer(p));
+			if (p.hasAllCards()) {
+				DeclareWinner(p);
+			}
 		}
 	}
-
+	
 	/***
 	 * Checks to see if the passed in player has all 52 cards and calls declare winner
 	 * @param p
@@ -398,27 +481,6 @@ public class Game{
 		if (p.hasAllCards()) {
 			DeclareWinner(p);
 		 }
-	}
-
-	/***
-	 * Adds the stack to the passed in players hand
-	 * @param p
-	 */
-	private void addCardsToHand(IPlayer p) {
-		List<Card> cardsToAdd = new ArrayList<Card>();
-		for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
-			Card c = iterator.next();
-			c.resetCardBitmap();
-			c.setHiddden(false);
-			cardsToAdd.add(c);
-		}
-		
-		theStack = new ArrayList<Card>();
-		p.getHand().addAll(0, cardsToAdd);
-		
-		//save players
-		savePlayers(p);
-		
 	}
 
 	/**
@@ -437,7 +499,8 @@ public class Game{
 			} else if (topCard.cardValue + secondCard.cardValue == 10) {
 				retBool = true;
 			}
-		} else if (theStack.size() > 2) {
+		}
+		if (theStack.size() > 2) {
 			Card topCard = theStack.get(theStack.size() - 1);
 			Card thirdCard = theStack.get(theStack.size() - 3);
 			if (topCard.cardType.equals(thirdCard.cardType)) {
@@ -457,6 +520,7 @@ public class Game{
 		// do stuff with winner
 		GameFinished(this);
 	}
+
 	protected void GameFinished(Game game) {
 		//Object lock = new Object();
 		for (IGameFinishedListener listener : listeners) {
@@ -469,7 +533,6 @@ public class Game{
 	public void registerGameFinishedListener(IGameFinishedListener listener) {
         listeners.add(listener);
     }
-	
 
 	public void shuffleCards(List<Card> cardDeck) {
 		int arrayLength = cardDeck.size();
@@ -481,15 +544,13 @@ public class Game{
 			cardDeck.set(arrayLength, card);
 		}
 	}
-	
-	
-	private IUser CreateComputer(){
+
+	private IUser CreateComputer() {
 		IUser u = new User();
 		u.setUserId(0);
 		u.setUserName(COMPUTER_PLAYER_NAME);
 		return u;
 	}
-	
 
 	class CompSlapTask extends TimerTask {
 
@@ -527,7 +588,5 @@ public class Game{
 			}
 		}
 	}
-
-	
 
 }
