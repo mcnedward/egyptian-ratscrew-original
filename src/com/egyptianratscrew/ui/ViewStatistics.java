@@ -66,7 +66,7 @@ public class ViewStatistics extends Activity {
 		txtDisplayEmail.setText(user.getEmail());
 		txtDisplayName.setText(user.getFirstName() + " " + user.getLastName());
 
-		//setting the text for wins, losses, tiesm and games, and high score through get methods
+		//setting the text for wins, losses, total games, highest streaks
 		txtDisplayNumberOfWins.setText(String.valueOf(user.getNumberOfWins()));
 		txtDisplayNumberOfLosses.setText(String.valueOf(user.getNumberOfLosses()));
 		txtDisplayTotalGames.setText(String.valueOf(user.getTotalGames()));

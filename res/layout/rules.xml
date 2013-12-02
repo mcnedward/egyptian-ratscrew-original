@@ -3,23 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
-    
+
     <TextView
         android:id="@+id/txtRules"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingBottom="30dip"
-        android:paddingTop="30dip"
+        android:paddingBottom="@dimen/dp22"
+        android:paddingTop="@dimen/border"
         android:text="@string/rules"
         android:textAppearance="?android:attr/textAppearanceLarge" />
-    
+
     <TextView
         android:id="@+id/txtRulesDescription"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:text="@string/rulesDescription"/>
+        android:layout_height="0dip"
+        android:layout_weight="1.08"
+        android:text="@string/rulesDescription" />
 
 </LinearLayout>
