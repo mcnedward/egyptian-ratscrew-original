@@ -53,9 +53,7 @@ public class ViewStatistics extends Activity {
 
 		TextView txtDisplayNumberOfWins = (TextView) findViewById(R.id.txtDisplayNumberOfWins);
 		TextView txtDisplayNumberOfLosses = (TextView) findViewById(R.id.txtDisplayNumberOfLosses);
-		TextView txtDisplayNumberOfTies = (TextView) findViewById(R.id.txtDisplayNumberOfTies);
 		TextView txtDisplayTotalGames = (TextView) findViewById(R.id.txtDisplayTotalGames);
-		TextView txtDisplayHighScore = (TextView) findViewById(R.id.txtDisplayHighScore);
 		TextView txtDisplayHighestWinningStreak = (TextView) findViewById(R.id.txtDisplayHighestWinningStreak);
 		TextView txtDisplayHighestLosingStreak = (TextView) findViewById(R.id.txtDisplayHighestLosingStreak);
 
