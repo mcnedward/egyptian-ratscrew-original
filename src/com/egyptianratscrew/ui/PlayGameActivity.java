@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.View;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dao.UserArrayWrapper;
 
@@ -18,7 +19,7 @@ public class PlayGameActivity extends Activity {
 	private static final int CARD_BACK_REQUEST = 1;
 	private int difficulty;
 	private Bitmap cardBack;
-	private User user;
+	private IUser user;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class PlayGameActivity extends Activity {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
 		game.putExtra("CardBack", cardBack);
-		game.putExtra("Users", new UserArrayWrapper(new User[] { user }));
+		game.putExtra("Users", new UserArrayWrapper(new IUser[] { user }));
 		startActivity(game);
 	}
 	
@@ -82,6 +83,7 @@ public class PlayGameActivity extends Activity {
 	//starting activity of stats
 	public void ViewStatistics(View view) {
 		Intent stats = new Intent(this, ViewStatistics.class);
+		stats.putExtra("User", user);
 		startActivity(stats);
 	}
 	
