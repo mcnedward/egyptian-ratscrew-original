@@ -15,8 +15,7 @@
         android:layout_alignLeft="@+id/lblUser"
         android:layout_below="@+id/lblUser"
         android:ems="10"
-        android:hint="@string/lblUserName"
-        android:inputType="textPersonName" />
+        android:hint="@string/lblUserName" />
 
     <TextView
         android:id="@+id/lblPass"
