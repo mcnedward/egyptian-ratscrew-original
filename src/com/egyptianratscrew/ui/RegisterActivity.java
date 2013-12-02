@@ -68,7 +68,7 @@ public class RegisterActivity extends Activity{
 			finish();
 		}
 		else{
-			Toast.makeText(this, "Invalid Password.", Toast.LENGTH_LONG);
+			Toast.makeText(this, "Invalid Password.", Toast.LENGTH_LONG).show();
 		}
 	}
 	
