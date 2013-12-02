@@ -16,14 +16,11 @@ public class User implements Serializable, IUser  {
 	private int highestLosingStreak;
 	private int currentWinningStreak;
 	private int currentLosingStreak;
-	private int numberOfTies;
 	private int totalGames;
-	private int highScore;
 
 	public User(int userId, String userName, String password, String email, String firstName, String lastName,
 			int numberOfWins, int numberOfLosses, int highestWinningStreak, int highestLosingStreak,
-			int currentWinningStreak, int currentLosingStreak, int numberOfTies,
-			int totalGames, int highScore) {
+			int currentWinningStreak, int currentLosingStreak,int totalGames) {
 
 		super();
 		this.userId = userId;
@@ -38,9 +35,7 @@ public class User implements Serializable, IUser  {
 		this.highestLosingStreak = highestLosingStreak;
 		this.currentWinningStreak = currentWinningStreak;
 		this.currentLosingStreak = currentLosingStreak;
-		this.numberOfTies = numberOfTies;
 		this.totalGames = totalGames;
-		this.highScore = highScore;
 	}
 
 	public User() {
@@ -127,28 +122,12 @@ public class User implements Serializable, IUser  {
 		this.highestLosingStreak = highestLosingStreak;
 	}
 
-	public int getNumberOfTies() {
-		return numberOfTies;
-	}
-
-	public void setNumberOfTies(int numberOfTies) {
-		this.numberOfTies = numberOfTies;
-	}
-
 	public int getTotalGames() {
 		return totalGames;
 	}
 
 	public void setTotalGames(int totalGames) {
 		this.totalGames = totalGames;
-	}
-
-	public int getHighScore() {
-		return highScore;
-	}
-
-	public void setHighScore(int highScore) {
-		this.highScore = highScore;
 	}
 
 	

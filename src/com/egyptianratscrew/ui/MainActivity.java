@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
 					}
 					else
 					{
-						IUser user = new User();
+						IUser user = new UserStub();
 						user.setFirstName(firstName);
 						user.setLastName("");
 						user.setUserId(rdb.getNewUserID());

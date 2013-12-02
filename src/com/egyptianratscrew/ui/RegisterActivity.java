@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 
@@ -46,7 +47,7 @@ public class RegisterActivity extends Activity{
 		if (txtPassword.getText() == txtConfirmPassword.getText()){
 			RatscrewDatabase rdb = new RatscrewDatabase(this);
 			
-			User user = new User();
+			IUser user = new User();
 			user.setFirstName(txtFirst.getText().toString());
 			user.setLastName(txtLast.getText().toString());
 			user.setUserName(txtUserName.getText().toString());
@@ -54,12 +55,12 @@ public class RegisterActivity extends Activity{
 			user.setEmail(txtEmailAddress.getText().toString());
 			user.setUserId(rdb.getNewUserID());
 			user.setNumberOfLosses(0);
-			user.setNumberOfTies(0);
 			user.setNumberOfWins(0);
 			user.setTotalGames(0);
 			user.setHighestLosingStreak(0);
 			user.setHighestWinningStreak(0);
-			user.setHighScore(0);
+			user.setCurrentLosingStreak(0);
+			user.setCurrentWinningStreak(0);
 			
 			Intent resultIntent = new Intent();
 			resultIntent.putExtra("NewUser", user);

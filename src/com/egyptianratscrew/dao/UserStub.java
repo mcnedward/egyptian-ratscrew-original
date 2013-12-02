@@ -31,13 +31,11 @@ public class UserStub implements IUser{
 		this.setPassword("");
 		this.setEmail("");
 		this.setNumberOfLosses(0);
-		this.setNumberOfTies(0);
 		this.setNumberOfWins(0);
 		this.setHighestLosingStreak(0);
 		this.setHighestWinningStreak(0);
 		this.setCurrentLosingStreak(0);
 		this.setCurrentWinningStreak(0);
-		this.setHighScore(0);
 		this.setTotalGames(0);
 	}
 
@@ -162,18 +160,6 @@ public class UserStub implements IUser{
 	}
 
 	@Override
-	public int getNumberOfTies() {
-		// TODO Auto-generated method stub
-		return this.numberOfTies;
-	}
-
-	@Override
-	public void setNumberOfTies(int numberOfTies) {
-		// TODO Auto-generated method stub
-		this.numberOfTies = numberOfTies;
-	}
-
-	@Override
 	public int getTotalGames() {
 		// TODO Auto-generated method stub
 		return this.totalGames;
@@ -183,18 +169,6 @@ public class UserStub implements IUser{
 	public void setTotalGames(int totalGames) {
 		// TODO Auto-generated method stub
 		this.totalGames = totalGames;
-	}
-
-	@Override
-	public int getHighScore() {
-		// TODO Auto-generated method stub
-		return this.highScore;
-	}
-
-	@Override
-	public void setHighScore(int highScore) {
-		// TODO Auto-generated method stub
-		this.highScore = highScore;
 	}
 	
 	@Override

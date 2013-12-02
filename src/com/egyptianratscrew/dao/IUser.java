@@ -43,17 +43,9 @@ public interface IUser extends Serializable{
 
 	public void setHighestLosingStreak(int highestLosingStreak);
 
-	public int getNumberOfTies();
-
-	public void setNumberOfTies(int numberOfTies);
-
 	public int getTotalGames();
 
 	public void setTotalGames(int totalGames);
-
-	public int getHighScore();
-
-	public void setHighScore(int highScore);
 	
 	public int getCurrentWinningStreak();
 	
