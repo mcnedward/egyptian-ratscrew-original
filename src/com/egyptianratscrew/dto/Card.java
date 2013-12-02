@@ -47,6 +47,8 @@ public class Card {
 	public Card(Context context) {
 		resourceId = context.getResources().getIdentifier("jokerred", "drawable", context.getPackageName());
 		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
+		this.height = bitmap.getHeight();
+		this.width = bitmap.getWidth();
 	}
 
 	/**

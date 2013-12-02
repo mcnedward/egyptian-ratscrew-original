@@ -18,23 +18,23 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 	/** Database Name **/
 	private static String DB_NAME = "ratscrew.db";
 	/** Database Version **/
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 
 	/** User Table **/
 	private static String DATABASE_TABLE_USER = "user";
 	private static String USER_ID = "_id";
-	private static String USERNAME = "userName";
-	private static String PASSWORD = "password";
-	private static String EMAIL = "email";
-	private static String FIRST_NAME = "first_name";
-	private static String LAST_NAME = "last_name";
-	private static String NUMBER_OF_WINS = "number_of_wins";
-	private static String NUMBER_OF_LOSSES = "number_of_losses";
-	private static String HIGHEST_WINNING_STREAK = "highest_winning_streak";
-	private static String HIGHEST_LOSING_STREAK = "highest_losing_streak";
-	private static String CURRENT_WINNING_STREAK = "current_winning_streak";
-	private static String CURRENT_LOSING_STREAK = "current_losing_streak";
-	private static String TOTAL_GAMES = "total_games";
+	private static String FIRST_NAME = "FirstName";
+	private static String LAST_NAME = "LastName";
+	private static String USERNAME = "UserName";
+	private static String EMAIL = "Email";
+	private static String PASSWORD = "Password";
+	private static String NUMBER_OF_WINS = "NumberOfWins";
+	private static String NUMBER_OF_LOSSES = "NumberOfLosses";
+	private static String HIGHEST_WINNING_STREAK = "HighestWinningStreak";
+	private static String HIGHEST_LOSING_STREAK = "HighestLosingStreak";
+	private static String CURRENT_WINNING_STREAK = "CurrentWinningStreak";
+	private static String CURRENT_LOSING_STREAK = "CurrentLosingStreak";
+	private static String TOTAL_GAMES = "TotalGames";
 
 	/**
 	 * Constructor Takes and keeps a reference of the passed context in order to
@@ -52,7 +52,8 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 		String createUserTable = String
 				.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER)",
 						DATABASE_TABLE_USER, USER_ID, USERNAME, PASSWORD, EMAIL, FIRST_NAME, LAST_NAME, NUMBER_OF_WINS,
-						NUMBER_OF_LOSSES, HIGHEST_WINNING_STREAK, HIGHEST_LOSING_STREAK, CURRENT_WINNING_STREAK, CURRENT_LOSING_STREAK, TOTAL_GAMES);
+						NUMBER_OF_LOSSES, HIGHEST_WINNING_STREAK, HIGHEST_LOSING_STREAK, CURRENT_WINNING_STREAK, CURRENT_LOSING_STREAK,
+						TOTAL_GAMES);
 		Log.i(TAG, String.format("%s", createUserTable));
 		db.execSQL(createUserTable);
 	}
