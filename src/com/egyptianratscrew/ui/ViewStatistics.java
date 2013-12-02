@@ -38,9 +38,7 @@ public class ViewStatistics extends Activity {
 		//setting the number of wins, losses, ties, games played, and high score
 		user.setNumberOfWins(10);
 		user.setNumberOfLosses(2);
-		user.setNumberOfTies(1);
 		user.setTotalGames(13);
-		user.setHighScore(50);
 		user.setHighestWinningStreak(5);
 		user.setHighestLosingStreak(2);
 
@@ -84,9 +82,7 @@ public class ViewStatistics extends Activity {
 		//setting the text for wins, losses, tiesm and games, and high score through get methods
 		txtDisplayNumberOfWins.setText(String.valueOf(user.getNumberOfWins()));
 		txtDisplayNumberOfLosses.setText(String.valueOf(user.getNumberOfLosses()));
-		txtDisplayNumberOfTies.setText(String.valueOf(user.getNumberOfTies()));
 		txtDisplayTotalGames.setText(String.valueOf(user.getTotalGames()));
-		txtDisplayHighScore.setText(String.valueOf(user.getHighScore()));
 		txtDisplayHighestWinningStreak.setText(String.valueOf(user.getHighestWinningStreak()));
 		txtDisplayHighestLosingStreak.setText(String.valueOf(user.getHighestLosingStreak()));
 	}

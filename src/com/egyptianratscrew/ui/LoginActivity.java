@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
 	
 	public void LoginClicked(View v){
 		if (rdb.userExists(edtUserName.getText().toString(), RatscrewDatabase.USER_NAME_FIELD)){
-			User user = (User)rdb.selectUserByUserName(edtUserName.getText().toString());
+			IUser user = (User)rdb.selectUserByUserName(edtUserName.getText().toString());
 			if (user.getPassword() == edtPassword.getText().toString()){
 				Intent resultIntent = new Intent();
 				resultIntent.putExtra("ExistingUser", user);
