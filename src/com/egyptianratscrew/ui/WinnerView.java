@@ -13,10 +13,12 @@ import android.view.View;
 
 public class WinnerView extends View {
 
+	//setting the variables
 	private Movie mMovie;
     private long mMovieStart;
     
     private static byte[] streamToBytes(InputStream is) {
+    	//setting the byte and buffers
         ByteArrayOutputStream os = new ByteArrayOutputStream(1024);
         byte[] buffer = new byte[1024];
         int len;
@@ -30,6 +32,7 @@ public class WinnerView extends View {
     }
     
     public WinnerView(Context context) {
+    	//if winnerview is called then play the animated cards
         super(context);
         setFocusable(true);
         

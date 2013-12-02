@@ -23,6 +23,7 @@ public class SystemUiHiderBase extends SystemUiHider {
 		super(activity, anchorView, flags);
 	}
 
+	//setup method setting the flags layouts
 	@Override
 	public void setup() {
 		if ((mFlags & FLAG_LAYOUT_IN_SCREEN_OLDER_DEVICES) == 0) {

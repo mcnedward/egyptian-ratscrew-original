@@ -13,10 +13,12 @@ import com.egyptianratscrew.dao.RatscrewDatabase;
 
 public class LoginActivity extends Activity {
 
+	//setting variables
 	private EditText edtUserName;
 	private EditText edtPassword;
 	private RatscrewDatabase rdb;
 
+	//creating the screen of activity_login
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -34,26 +36,33 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
+	//the login button is click
 	public void LoginClicked(View v) {
+		//declaring the username and password
 		String userName = edtUserName.getText().toString().trim();
 		String password = edtPassword.getText().toString().trim();
 
 		IUser user = rdb.getUserByUserName(userName);
 
+		//if the username is blank to display a message
 		if (userName.equals("")) {
 			Toast toast = Toast.makeText(this, "You need to enter a user name...", Toast.LENGTH_SHORT);
 			toast.show();
+			//if the password is blank to display a message
 		} else if (password.equals("")) {
 			Toast toast = Toast.makeText(this, "You need to enter a password...", Toast.LENGTH_SHORT);
 			toast.show();
+			//if the username is incorrect to display a message
 		} else if (user == null) {
 			Toast toast = Toast.makeText(this, "That user does not exist or the passwords do not match...",
 					Toast.LENGTH_SHORT);
 			toast.show();
+			//if the password is incorrect to display a message
 		} else if (!user.getPassword().equals(password)) {
 			Toast toast = Toast.makeText(this, "That user does not exist or the passwords do not match...",
 					Toast.LENGTH_SHORT);
 			toast.show();
+			//the username and password exist
 		} else {
 			Toast toast = Toast.makeText(this, "Success!!!", Toast.LENGTH_SHORT);
 			toast.show();
@@ -79,6 +88,7 @@ public class LoginActivity extends Activity {
 
 	}
 
+	//if reset clicked then clear everything to start over
 	public void ClearClicked(View v) {
 		edtUserName.setText("");
 		edtPassword.setText("");

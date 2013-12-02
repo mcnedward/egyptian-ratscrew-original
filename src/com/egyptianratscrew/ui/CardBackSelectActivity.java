@@ -17,6 +17,7 @@ import com.egyptianratscrew.R;
 
 public class CardBackSelectActivity extends Activity {
 
+	//setting the variables
 	private static final int CAMERA_REQUEST = 2;
 
 	private static final int IMAGE_GALLERY_REQUEST = 1;
@@ -25,11 +26,12 @@ public class CardBackSelectActivity extends Activity {
 	
 	private ImageView thumbnail;
 
+	//creating the content view of take_picture.xml
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.take_picture);
-		
+		//setting the thumbnail to be able to find
 		thumbnail = (ImageView) findViewById(R.id.imgThumbnail);
 	}
 	
@@ -54,12 +56,16 @@ public class CardBackSelectActivity extends Activity {
 		
 	}
 	
+	//the takenewpicture method and start the activity of the camera_request
 	public void TakeNewPicture(View v)
 	{
+		
 		Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+		//start the activity
 		startActivityForResult(cameraIntent, CAMERA_REQUEST);
 	}
 	
+	//save a picture
 	public void SavePicture(View v)
 	{
 		Intent intentMessage=new Intent();
