@@ -94,6 +94,7 @@ public class MainActivity extends Activity {
 						loggedInUser = user;
 						rdb.insertUser(user);
 						LoginSuccess();
+						
 					}
 				}
 				else if (requestCode == NEW_USER_REQUEST){
