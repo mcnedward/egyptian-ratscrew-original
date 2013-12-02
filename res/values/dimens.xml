@@ -8,5 +8,6 @@
     <dimen name="CardBackPreviewPadding">100dp</dimen>
     <dimen name="dp22">22dp</dimen>
     <dimen name="padding">5dp</dimen>
+    <dimen name="border">10dp</dimen>
 
 </resources>

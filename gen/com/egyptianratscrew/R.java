@@ -243,6 +243,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
          */
         public static final int activity_horizontal_margin=0x7f050000;
         public static final int activity_vertical_margin=0x7f050001;
+        public static final int border=0x7f050007;
         public static final int developer=0x7f050002;
         public static final int dp22=0x7f050005;
         public static final int names=0x7f050003;
