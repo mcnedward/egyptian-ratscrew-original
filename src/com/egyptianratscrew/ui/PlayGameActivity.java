@@ -16,12 +16,14 @@ import com.egyptianratscrew.dao.UserArrayWrapper;
 
 public class PlayGameActivity extends Activity {
 	
+	//declaring the variables
 	private static final int CARD_BACK_REQUEST = 1;
 	private int difficulty;
 	private Bitmap cardBack;
 	private IUser user;
 
 	@Override
+	//creating the screens and content views
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play_game);
@@ -57,7 +59,7 @@ public class PlayGameActivity extends Activity {
 		Intent developers = new Intent (this, ViewDevelopers.class);
 		startActivity(developers);
 	}
-	
+	//setting difficulty level
 	public void SelectDifficulty(View v){
 		final CharSequence[] items = {
                 "Hard", "Medium", "Easy"
@@ -75,6 +77,7 @@ public class PlayGameActivity extends Activity {
         diffSelect.show();
 	}
 	
+	//setting the back of the card
 	public void SelectCardBack(View v){
 		Intent cardBack = new Intent(this,CardBackSelectActivity.class);
 		startActivityForResult(cardBack,CARD_BACK_REQUEST);

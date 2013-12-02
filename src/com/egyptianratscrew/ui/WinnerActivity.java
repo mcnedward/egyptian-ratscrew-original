@@ -18,6 +18,7 @@ import com.egyptianratscrew.R;
 
 public class WinnerActivity extends Activity  {
 
+	//creating the winner screen
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

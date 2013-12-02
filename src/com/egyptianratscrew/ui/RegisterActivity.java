@@ -79,6 +79,7 @@ public class RegisterActivity extends Activity {
 		String password = txtPassword.getText().toString().trim();
 		String confirmPassword = txtConfirmPassword.getText().toString().trim();
 
+		//display information if missing information
 		if (firstName.equals("")) {
 			txtFirstName.requestFocus();
 			Toast toast = Toast.makeText(this, "You need to enter a first name...", Toast.LENGTH_SHORT);
@@ -91,6 +92,7 @@ public class RegisterActivity extends Activity {
 			txtUserName.requestFocus();
 			Toast toast = Toast.makeText(this, "You need to enter a user name...", Toast.LENGTH_SHORT);
 			toast.show();
+			//display if already one
 		} else if (db.userNameExists(userName)) {
 			txtUserName.requestFocus();
 			Toast toast = Toast.makeText(this, "That user name is already in use...", Toast.LENGTH_SHORT);
@@ -107,10 +109,12 @@ public class RegisterActivity extends Activity {
 			txtConfirmPassword.requestFocus();
 			Toast toast = Toast.makeText(this, "You need to enter a confirmation password...", Toast.LENGTH_SHORT);
 			toast.show();
+			//password do not match
 		} else if (!password.equals(confirmPassword)) {
 			txtPassword.requestFocus();
 			Toast toast = Toast.makeText(this, "Your passwords do not match...", Toast.LENGTH_SHORT);
 			toast.show();
+			//insert the information
 		} else {
 			IUser user = new User(firstName, lastName, userName, email, password);
 			try {
@@ -118,6 +122,7 @@ public class RegisterActivity extends Activity {
 			} catch (Exception e) {
 				Log.i(TAG, e.getMessage(), e);
 			}
+			//display information that was added
 			Toast toast = Toast.makeText(this, "The user " + user + " has been added!", Toast.LENGTH_SHORT);
 			toast.show();
 			resetFields();
@@ -137,6 +142,7 @@ public class RegisterActivity extends Activity {
 		txtConfirmPassword.setText("");
 	}
 
+	//reset field if not needed
 	public void ResetFields(View v) {
 		txtFirstName.setText("");
 		txtLastName.setText("");
