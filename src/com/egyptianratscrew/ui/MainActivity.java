@@ -169,6 +169,8 @@ public class MainActivity extends Activity {
 		Intent gameIntent = new Intent(this, ViewStatistics.class);
 		startActivity(gameIntent);
 	}
+	
+	
 
 	public void hideButtons(boolean hide) {
 		Button btnUserRegister = (Button) findViewById(R.id.btnUserRegister);
@@ -176,6 +178,9 @@ public class MainActivity extends Activity {
 		Button btnExisting = (Button) findViewById(R.id.btnExisting);
 		Button btnLogout = (Button) findViewById(R.id.btnLogout);
 		Button btnStatistics = (Button) findViewById(R.id.btnStatistics);
+		
+		
+		
 
 		TextView txtUserInfo = (TextView) findViewById(R.id.txtUserInfo);
 
@@ -186,6 +191,8 @@ public class MainActivity extends Activity {
 			btnLogout.setVisibility(View.VISIBLE);
 			btnStatistics.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
+			
+			
 			txtUserInfo.setText("Logged in as " + user);
 		} else {
 			btnUserRegister.setVisibility(View.VISIBLE);
@@ -194,6 +201,8 @@ public class MainActivity extends Activity {
 			btnLogout.setVisibility(View.GONE);
 			btnStatistics.setVisibility(View.GONE);
 			txtUserInfo.setVisibility(View.GONE);
+			
+			
 		}
 	}
 }
