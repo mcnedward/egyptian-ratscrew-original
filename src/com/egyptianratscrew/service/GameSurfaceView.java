@@ -43,6 +43,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
 	private float topY;
 	private float bottomX;
 	private float bottomY;
+	
 
 	public GameSurfaceView(Context context) {
 		super(context);
@@ -236,6 +237,7 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
 							middleDeck.add(card);
 							displayCards();
 						}
+						//get the width and height of the cards in the event
 					} else if (eventX >= bottomX && eventX < (bottomX + faceDownCard.getWidth())
 							&& eventY >= bottomY - faceDownCard.getHeight()
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
