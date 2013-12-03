@@ -31,6 +31,7 @@ import com.egyptianratscrew.ui.MainActivity;
  * 
  */
 public class Game {
+	//declaring variables and constants
 	private static final String TAG = "Game";
 
 	private static final String COMPUTER_PLAYER_NAME = "Android";
@@ -118,6 +119,7 @@ public class Game {
 		float bottomY = surfaceView.getBottom() - 20;
 		int degree = 0;
 
+		//setting the location of the cards and the listener when its player turn
 		player1.setCardCoor((bottomX - blankCard.getWidth()), (bottomY - blankCard.getHeight()));
 		if (player1.myTurn()) {
 			setCardListener(player1.getTopCard(), surfaceView);
@@ -193,7 +195,7 @@ public class Game {
 								player2.setMyTurn(true);
 
 								// Start a new timer for the computer's turn
-								// TODO TIME_BETWEEN_TURNS???
+								//  TIME_BETWEEN_TURNS???
 								Timer player2TurnTask = new Timer();
 								player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
 							}
@@ -305,6 +307,7 @@ public class Game {
 
 		}
 
+		//slap deck add the card to the correct player
 		@Override
 		public void run() {
 			Log.i(TAG, "Adding cards to player 2");
@@ -521,6 +524,7 @@ public class Game {
 		GameFinished(this);
 	}
 
+	//
 	protected void GameFinished(Game game) {
 		//Object lock = new Object();
 		for (IGameFinishedListener listener : listeners) {
@@ -534,9 +538,11 @@ public class Game {
         listeners.add(listener);
     }
 
+	//shuffle the cards and getting the cards to the players
 	public void shuffleCards(List<Card> cardDeck) {
 		int arrayLength = cardDeck.size();
 		Random random = new Random();
+		
 		while (arrayLength > 1) {
 			int nextRandom = random.nextInt(arrayLength--);
 			Card card = cardDeck.get(nextRandom);
@@ -544,6 +550,7 @@ public class Game {
 			cardDeck.set(arrayLength, card);
 		}
 	}
+	//create the computer with an id and name
 
 	private IUser CreateComputer() {
 		IUser u = new User();
