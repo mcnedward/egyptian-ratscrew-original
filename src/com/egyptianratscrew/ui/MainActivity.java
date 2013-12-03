@@ -56,7 +56,7 @@ public class MainActivity extends Activity {
 		rdb = new RatscrewDatabase(this);
 		loggedInUser = null;
 
-		user = rdb.getUserByUserName("edwardmcn");	// TODO Remove this when app is finished!!! Used for testing
+		user = rdb.getUserByUserName("edwardmcn");	
 	}
 
 	@Override
@@ -170,6 +170,17 @@ public class MainActivity extends Activity {
 		startActivity(gameIntent);
 	}
 	
+	public void viewRules(View v){
+		Intent ruleIntent = new Intent(this, ViewRules.class);
+		startActivity(ruleIntent);
+	}
+	
+	public void viewDevelopers(View v){
+		Intent developerIntent = new Intent(this, ViewDevelopers.class);
+		startActivity(developerIntent);
+	}
+	
+
 	
 
 	public void hideButtons(boolean hide) {
@@ -178,6 +189,10 @@ public class MainActivity extends Activity {
 		Button btnExisting = (Button) findViewById(R.id.btnExisting);
 		Button btnLogout = (Button) findViewById(R.id.btnLogout);
 		Button btnStatistics = (Button) findViewById(R.id.btnStatistics);
+		Button btnRule = (Button) findViewById(R.id.btnRule);
+		Button btnDeveloper = (Button) findViewById(R.id.btnDeveloper);
+	
+		
 		
 		
 		
@@ -190,6 +205,8 @@ public class MainActivity extends Activity {
 			btnExisting.setVisibility(View.GONE);
 			btnLogout.setVisibility(View.VISIBLE);
 			btnStatistics.setVisibility(View.VISIBLE);
+			btnRule.setVisibility(View.VISIBLE);
+			btnDeveloper.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
 			
 			
@@ -200,6 +217,8 @@ public class MainActivity extends Activity {
 			btnExisting.setVisibility(View.VISIBLE);
 			btnLogout.setVisibility(View.GONE);
 			btnStatistics.setVisibility(View.GONE);
+			btnRule.setVisibility(View.GONE);
+			btnDeveloper.setVisibility(View.GONE);
 			txtUserInfo.setVisibility(View.GONE);
 			
 			
