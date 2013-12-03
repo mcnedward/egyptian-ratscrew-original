@@ -126,6 +126,9 @@ public class RegisterActivity extends Activity {
 			Toast toast = Toast.makeText(this, "The user " + user + " has been added!", Toast.LENGTH_SHORT);
 			toast.show();
 			resetFields();
+			MainActivity.user = user;
+			finish();
+	
 		}
 		// Intent resultIntent = new Intent();
 		// resultIntent.putExtra("NewUser", user);
