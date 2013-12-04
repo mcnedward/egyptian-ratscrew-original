@@ -60,19 +60,24 @@ public class CardDeck {
 			} else
 				value = Integer.parseInt(type);
 
+			
 			Card card = new Card(type, value, suit, imageName, context);
+			//adding a card to the deck
 			cardDeck.add(card);
 		}
 	}
 
+	//return the position of the card
 	public Card getCardAt(int position) {
 		return cardDeck.get(position);
 	}
 
+	//return the card position and type
 	public String getCardType(int position) {
 		return cardDeck.get(position).cardType;
 	}
 
+	//return the card position and value
 	public int getCardValue(int position) {
 		return cardDeck.get(position).cardValue;
 	}
