@@ -128,7 +128,7 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public IUser getUser() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 }

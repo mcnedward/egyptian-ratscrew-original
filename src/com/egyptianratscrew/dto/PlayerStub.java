@@ -7,6 +7,7 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.UserStub;
 
 public class PlayerStub implements IPlayer {
+	//declaring variables
 	private String playerName;
 	private List<Card> hand;
 	private boolean turn;
@@ -15,21 +16,25 @@ public class PlayerStub implements IPlayer {
 	private IUser user;
 	
 	public PlayerStub(int id) {
+		//setting the user to the UserStub information
 		user = new UserStub();
+		//getting the username of the player
 		playerName = user.getUserName();
+		//the id setting to the playerID
 		playerID = id;
+		//hand is a new ArrayList
 		hand = new ArrayList<Card>();
 	}
 	
 	@Override
 	public void addCard(Card c) {
-		// TODO Auto-generated method stub
+		//add the card to the hand
 		hand.add(c);
 	}
 
 	@Override
 	public Card playCard() {
-		// TODO Auto-generated method stub
+		//playing a card and taking the the stack to one less card
 		Card retCard = hand.get(hand.size() - 1);
 		hand.remove(hand.size() - 1);
 		return retCard;
@@ -37,7 +42,7 @@ public class PlayerStub implements IPlayer {
 
 	@Override
 	public boolean needsToPlayFace() {
-		// TODO Auto-generated method stub
+		//must play a face card
 		if (getTillFace() > 0) {
 			return true;
 		} else {
@@ -47,45 +52,46 @@ public class PlayerStub implements IPlayer {
 
 	@Override
 	public int getTillFace() {
-		// TODO Auto-generated method stub
+		//getting the tillFace value
 		return tillFace;
 	}
 
 	@Override
 	public void setTillFace(int i) {
-		// TODO Auto-generated method stub
+		//setting the TillFace
 		tillFace = i;
 	}
 
 	@Override
 	public boolean myTurn() {
-		// TODO Auto-generated method stub
+		//return turn if it is players turn
 		return turn;
 	}
 
 	@Override
 	public void setMyTurn(boolean b) {
-		// TODO Auto-generated method stub
+		//return turn to set to myturn
 		turn = b;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		// returning the name of the player
 		return playerName;
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
+		//returning the playerID 
 		return playerID;
 	}
 
 	@Override
 	public boolean hasAllCards() {
-		// TODO Auto-generated method stub
+		//once the player has 52 cards in their hand they gain all cards
 		if (hand.size() == 51) {
 			return true;
+			//if not then the game continues
 		} else {
 			return false;
 		}
