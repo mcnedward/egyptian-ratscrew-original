@@ -9,6 +9,7 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 
 public class HumanPlayer implements IPlayer {
+	//declare variable and values
 	private static final String TAG = "HumanPlayer";
 
 	private String playerName;
@@ -19,22 +20,28 @@ public class HumanPlayer implements IPlayer {
 	private IUser user;
 
 	public HumanPlayer(IUser user) {
+		//if the user exists set to the user of the game
 		if (user != null) {
 			this.user = user;
+			//if the user not there then set to 0 for the ID
 		} else {
 			this.user = new User("Egyptian", "Ratscrew", "Android", null, null);
 			this.user.setUserId(0);
 		}
+		
+		//getting the username and the userid with the hand
 		playerName = this.user.getUserName();
 		playerID = this.user.getUserId();
 		hand = new ArrayList<Card>();
 	}
 
+	//add the card to the hand
 	@Override
 	public void addCard(Card c) {
 		hand.add(c);
 	}
 
+	//remove the card from the hand and return the hand size less than one
 	@Override
 	public Card playCard() {
 		Card retCard = hand.get(hand.size() - 1);
@@ -42,6 +49,7 @@ public class HumanPlayer implements IPlayer {
 		return retCard;
 	}
 
+	//must play a face return true if jack, queen, king, and ace
 	@Override
 	public boolean needsToPlayFace() {
 		if (tillFace > 0) {
@@ -56,16 +64,19 @@ public class HumanPlayer implements IPlayer {
 		return tillFace;
 	}
 
+	//setting the tillFace
 	@Override
 	public void setTillFace(int tillFace) {
 		this.tillFace = tillFace;
 	}
 
+	//return true if myturn
 	@Override
 	public boolean myTurn() {
 		return turn;
 	}
 
+	//setting the setMyTurn
 	@Override
 	public void setMyTurn(boolean b) {
 		turn = b;
@@ -73,19 +84,19 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
+		
 		return playerName;
 	}
 
 	@Override
 	public int getID() {
-		// TODO Auto-generated method stub
+		
 		return playerID;
 	}
 
 	@Override
 	public boolean hasAllCards() {
-		// TODO Auto-generated method stub
+		
 		if (hand.size() == 51) {
 			return true;
 		} else {
