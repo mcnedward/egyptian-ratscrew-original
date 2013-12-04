@@ -5,6 +5,7 @@ import java.util.List;
 import com.egyptianratscrew.dao.IUser;
 
 public interface IPlayer {
+	//declaring variables 
 	public String getName();
 
 	public void addCard(Card c);
