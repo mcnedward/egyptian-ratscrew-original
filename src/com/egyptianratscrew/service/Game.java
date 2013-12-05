@@ -85,6 +85,15 @@ public class Game {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
 		}
 		player2 = new HumanPlayer(null);
+
+		// Create the deck of cards
+		cd = new CardDeck(context);
+		cardDeck = cd.cardDeck;
+		if (!onePlayerGame) {
+			for (int i = 0; i < 26; i++) {
+				cardDeck.remove(i);
+			}
+		}
 	}
 
 	/**
@@ -99,9 +108,6 @@ public class Game {
 		player2.setTillFace(0);
 
 		theStack = new ArrayList<Card>();
-		// Create the deck of cards
-		cd = new CardDeck(context);
-		cardDeck = cd.cardDeck;
 		shuffleCards(cardDeck);
 
 		int i = 0;
