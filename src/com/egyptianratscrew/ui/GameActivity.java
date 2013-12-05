@@ -2,8 +2,8 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -13,7 +13,7 @@ import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
-import com.egyptianratscrew.service.Game;
+import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.service.Game2;
 import com.egyptianratscrew.service.GameSurface;
 
@@ -92,20 +92,24 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		IUser winner = null;
 		IUser loser = null;
 		// player 1 wins the game and set the winner to the winner and loser to player 2
-		if (game.player1.hasAllCards()) {
+		if (game.player1.hasAllCards() || 
+				(game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			winner = game.player1.getUser();
 			loser = game.player2.getUser();
 		}
 		// player 2 winner and player 1 loser
-		else if (game.player2.hasAllCards()) {
+		else if (game.player2.hasAllCards()|| 
+				(game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			winner = game.player2.getUser();
 			loser = game.player1.getUser();
 		}
 		// game tied or not finished
 		else {
 			Toast t = Toast.makeText(this, "Error, Game Not Finished.", Toast.LENGTH_LONG);
+			t.show();
 			// handle error
 			StartGame();
+			return;
 		}
 		// setting information about the winner
 		winner.setTotalGames(winner.getTotalGames() + 1);
