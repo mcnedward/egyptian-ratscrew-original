@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/txtAppName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/red"
+        android:textSize="@dimen/names" />
+
+    <ImageView
+        android:id="@+id/imgAlbumArtNowPlaying"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:contentDescription="@string/imgRat"
+        android:paddingBottom="20dp"
+        android:paddingTop="20dp"
+        android:src="@drawable/screenimage" />
+
+    <Button
+        android:id="@+id/btnTestGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:enabled="true"
+        android:maxHeight="@dimen/Button"
+        android:onClick="StartGame"
+        android:text="@string/btnTestGame"
+        android:visibility="visible" />
+
+    <Button
+        android:id="@+id/btnUserRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="startNewUser"
+        android:text="@string/registering" />
+
+    <Button
+        android:id="@+id/btnFBLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="fbLogin"
+        android:text="@string/facebook" />
+
+    <Button
+        android:id="@+id/btnExisting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="LoginWithCredentials"
+        android:text="@string/btnExisting" />
+
+    <Button
+        android:id="@+id/btnRule"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="viewRules"
+        android:text="@string/btnRules"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnDeveloper"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="viewDevelopers"
+        android:text="@string/btnDevelopers"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnStatistics"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="viewStatistics"
+        android:text="@string/btnStatss"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Logout"
+        android:text="@string/btnLogout"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/txtUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="30dip"
+        android:paddingTop="30dip"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>
