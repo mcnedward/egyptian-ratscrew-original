@@ -9,17 +9,16 @@ public class CardDeck {
 
 	public List<Card> cardDeck;
 	protected Context context;
-	
-	public static int DeckSize()
-	{
+
+	public static int DeckSize() {
 		return deck.length;
 	}
 
 	// TODO This is the real deck that should be used in the final app
-	private static String[] realdeck = new String[] { "sa", "s2", "s3", "s4", "s7", "s6", "s7", "s8", "s9", "s10", "sj", "sq",
-			"sk", "ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck", "da", "d2", "d3",
-			"d4", "d5", "d6", "d7", "d8", "d9", "d10", "dj", "dq", "dk", "ha", "h2", "h3", "h4", "h5", "h6", "h7",
-			"h8", "h9", "h10", "hj", "hq", "hk" };
+	private static String[] realdeck = new String[] { "sa", "s2", "s3", "s4", "s7", "s6", "s7", "s8", "s9", "s10",
+			"sj", "sq", "sk", "ca", "c2", "c3", "c4", "c5", "c6", "c7", "c8", "c9", "c10", "cj", "cq", "ck", "da",
+			"d2", "d3", "d4", "d5", "d6", "d7", "d8", "d9", "d10", "dj", "dq", "dk", "ha", "h2", "h3", "h4", "h5",
+			"h6", "h7", "h8", "h9", "h10", "hj", "hq", "hk" };
 
 	private static String[] deck = new String[] { "c4", "c4", "c4", "c4", "ca", "c4" };
 
@@ -70,7 +69,8 @@ public class CardDeck {
 
 	/**
 	 * 
-	 * @param position of the card
+	 * @param position
+	 *            of the card
 	 * @return
 	 */
 	public Card getCardAt(int position) {
@@ -79,7 +79,8 @@ public class CardDeck {
 
 	/**
 	 * 
-	 * @param position of the card type
+	 * @param position
+	 *            of the card type
 	 * @return
 	 */
 	public String getCardType(int position) {
@@ -88,7 +89,8 @@ public class CardDeck {
 
 	/**
 	 * 
-	 * @param position of the card value
+	 * @param position
+	 *            of the card value
 	 * @return
 	 */
 	public int getCardValue(int position) {

@@ -14,7 +14,7 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.CardDeck;
-import com.egyptianratscrew.service.Game2;
+import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.GameSurface;
 
 public class GameActivity extends Activity implements IGameFinishedListener {
@@ -22,7 +22,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	// declaring variables
 	private RelativeLayout table;
 	private GameSurface tableCardSurface;
-	private Game2 game;
+	RatscrewDatabase db;
+	private Game game;
 	private Context context;
 	private Bitmap cardBack;
 	private IUser user;
@@ -39,6 +40,9 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// wrapper.getUsers(),
 		// this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
+
+		// using the database
+		db = new RatscrewDatabase(this);
 
 		cardBack = (Bitmap) this.getIntent().getParcelableExtra("CardBack");
 		// Check if there was a user intent passed to this activity
@@ -58,9 +62,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 	private void StartGame() {
 		context = this;
-		game = new Game2(true, user, 3, cardBack, this);
+		game = new Game(true, user, 3, cardBack, this);
 		game.registerGameFinishedListener(this);
-
 
 		// setting the relative layout of table
 		table = (RelativeLayout) findViewById(R.id.Table);
@@ -70,16 +73,14 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	}
 
 	@Override
-	public void onGameFinished(Game2 game) {
-//		runOnUiThread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				
-//			}
-//		});
+	public void onGameFinished(final Game game) {
+		// runOnUiThread(new Runnable() {
+		// @Override
+		// public void run() {
+		//
+		// }
+		// });
 		updateStatistics(game);
-		Intent winnerIntent = new Intent(this, WinnerActivity.class);
 		startActivity(new Intent(context, WinnerActivity.class));
 	}
 
@@ -88,20 +89,21 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	 * @param game
 	 *            to update the Statistic of the game
 	 */
-	private void updateStatistics(Game2 game) {
+	private void updateStatistics(Game game) {
 		IUser winner = null;
 		IUser loser = null;
 		// player 1 wins the game and set the winner to the winner and loser to player 2
-		if (game.player1.hasAllCards() || 
-				(game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
-			winner = game.player1.getUser();
-			loser = game.player2.getUser();
+		if (game.player1.hasAllCards() || (game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
+			// winner = game.player1.getUser();
+			// loser = game.player2.getUser();
+			db.userWins(game.player1.getUser());
 		}
 		// player 2 winner and player 1 loser
-		else if (game.player2.hasAllCards()|| 
-				(game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
-			winner = game.player2.getUser();
-			loser = game.player1.getUser();
+		else if (game.player2.hasAllCards()
+				|| (game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
+			// winner = game.player2.getUser();
+			// loser = game.player1.getUser();
+			db.userLoses(game.player2.getUser());
 		}
 		// game tied or not finished
 		else {
@@ -127,15 +129,13 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		if (loser.getHighestLosingStreak() < loser.getCurrentLosingStreak()) {
 			loser.setHighestLosingStreak(loser.getCurrentLosingStreak());
 		}
-		// using the database
-		RatscrewDatabase rdb = new RatscrewDatabase(this);
 
 		// updating information given the game results
 		if (winner.getUserId() != 0) {
-			rdb.updateUser(winner);
+			db.updateUser(winner);
 		}
 		if (loser.getUserId() != 0) {
-			rdb.updateUser(loser);
+			db.updateUser(loser);
 		}
 
 	}

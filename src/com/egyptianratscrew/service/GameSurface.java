@@ -21,9 +21,9 @@ public class GameSurface extends SurfaceView implements Runnable {
 	private boolean GAME_RUNNING = false;
 	private Canvas canvas = null;
 
-	private Game2 game;
+	private Game game;
 
-	public GameSurface(Context context, Game2 game) {
+	public GameSurface(Context context, Game game) {
 		super(context);
 		this.context = context;
 		this.game = game;
