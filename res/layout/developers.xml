@@ -30,6 +30,13 @@
         android:text="@string/names"
         android:textSize="@dimen/names" />
 
+    <Button
+        android:id="@+id/btnTestGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="testGame"
+        android:text="Test Game" />
+
     <TextView
         android:id="@+id/lblName"
         android:layout_width="match_parent"
