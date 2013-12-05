@@ -2,15 +2,18 @@ package com.egyptianratscrew.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.app.Activity;
+import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Align;
+import android.graphics.Paint.Style;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -18,8 +21,10 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 
+import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
@@ -27,32 +32,34 @@ import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
 
 /**
+ * <p>
  * Game Class
+ * <p>
+ * This class creates an instance of the Egyptian Ratscrew game. All game logic is handled here, and the drawGame method
+ * is created here. By calling drawGame and passing it a canvas, the card game will be started and run.
  * 
- * @author AJ
+ * @author AJ, Edward
  * 
  */
 public class Game {
-	// declaring variables and constants
-	private static final String TAG = "Game";
+	private static final String TAG = "Game2";	// Tag for logging errors
 
-	private static final String COMPUTER_PLAYER_NAME = "Android";
-	private static final int DELAY_INTERVAL = 1000;
+	private static final int DELAY_INTERVAL = 1000;	// Delay for computer to play a card or slap
 	private static final long TIME_BETWEEN_TURNS = 1500;
-	private long compSlapDelay;
+	private static boolean GAME_STARTED = false;	// Tells the Surface View thread that the game should be ran
+	private static boolean SLAPPED = false;			// Allows the middle deck to be slapped
 
-	public IPlayer player1;
-	public IPlayer player2;
-	public List<Card> theStack;
+	private Context context;		// Context of the activity to run the game on
+	private RatscrewDatabase db;	// Database for updating a winner
 	private List<IGameFinishedListener> listeners;
+	private IUser user;				// The user for player 1
 
-	private CardDeck cd;
-	private List<Card> cardDeck;
-	private Context context;
-	private IUser user;
-
-	private Card blankCard;
-	public int numberOfChances = 0;
+	public IPlayer player1;			// Interface for player 1
+	public IPlayer player2;			// Interface for player 2
+	public List<Card> theStack;		// The middle stack of cards that have been played
+	private CardDeck cd;			// Card deck object for creating the list of cards
+	private List<Card> cardDeck;	// List of cards for the card deck
+	private Bitmap cardBack;		// The card back that will be used if the user took a picture
 
 	/**
 	 * Game Constructor, creates a new instance of the game class
@@ -61,50 +68,42 @@ public class Game {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, int difficulty, Context con) {
-		context = con;
-		blankCard = new Card(context);
+	public Game(boolean onePlayerGame, IUser u, int difficulty, Bitmap cardBack, Context con) {
+		this.context = con;
+		this.user = u;
+		db = new RatscrewDatabase(context);
 
 		listeners = new ArrayList<IGameFinishedListener>();
 
-		Intent intent = ((Activity) context).getIntent();
-		Bundle extras = intent.getExtras();
+		this.cardBack = cardBack;
 
 		// Check if a user is logged in and make player 1 that user if true
 		// Create a new blank user if there is no user logged in
-		if (extras != null) {
-			if (extras.containsKey("User")) {
-				user = (User) ((Activity) context).getIntent().getExtras().getSerializable("User");
-				player1 = new HumanPlayer(user);
-			}
+		if (user != null) {
+			player1 = new HumanPlayer(user);
 		} else {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
-			player2 = new HumanPlayer(null);
 		}
-
-		compSlapDelay = difficulty * DELAY_INTERVAL;
-
-		player1.setMyTurn(true);
-		player2.setMyTurn(false);
-		player1.setTillFace(0);
-		player2.setTillFace(0);
-
-		theStack = new ArrayList<Card>();
-
-		// Create the deck of cards
-		cd = new CardDeck(context);
-		cardDeck = cd.cardDeck;
-		// shuffleCards(cardDeck);
-		dealCards();
-
-		// update graphics
-
+		player2 = new HumanPlayer(null);
 	}
 
 	/**
 	 * Used to deal cards from the deck to each player.
 	 */
 	public void dealCards() {
+		player1.setHand(new ArrayList<Card>());
+		player2.setHand(new ArrayList<Card>());
+		player1.setMyTurn(true);
+		player2.setMyTurn(false);
+		player1.setTillFace(0);
+		player2.setTillFace(0);
+
+		theStack = new ArrayList<Card>();
+		// Create the deck of cards
+		cd = new CardDeck(context);
+		cardDeck = cd.cardDeck;
+		shuffleCards(cardDeck);
+
 		int i = 0;
 		for (Card c : cardDeck)// for (int i = 0; i > cardDeck.size(); i++)
 		{
@@ -115,6 +114,7 @@ public class Game {
 			}
 			i++;
 		}
+		GAME_STARTED = true;
 	}
 
 	/**
@@ -131,7 +131,7 @@ public class Game {
 	 * @param surfaceView
 	 *            The surface view that this touch needs to be registered on.
 	 */
-	public void setCardListeners(final SurfaceView surfaceView, final Card player1Card) {
+	public void setCardListeners(final SurfaceView surfaceView) {
 		// Set the touch listener for the game surface
 		surfaceView.setOnTouchListener(new OnTouchListener() {
 			@Override
@@ -141,32 +141,43 @@ public class Game {
 				int eventY = (int) event.getY();	// Get the y-coordinates for the action
 
 				if (action == MotionEvent.ACTION_UP) {
-					if (!player1.getHand().isEmpty()) {
+
+					if (GAME_STARTED) {
+						float bottomX = surfaceView.getWidth() - 10;
+						float bottomY = surfaceView.getBottom() - 20;
+						Card player1Card = new Card(context);
+						player1Card.setX(bottomX - player1Card.getWidth());
+						player1Card.setY(bottomY - player1Card.getHeight());
 						if (eventX >= player1Card.getX() && eventX < (player1Card.getX() + player1Card.getWidth())
 								&& eventY >= player1Card.getY()
 								&& eventY < (player1Card.getY() + player1Card.getHeight())) {
 							if (player1.myTurn()) {
-								throwCard(player1);
-								if (numberOfChances == 0) {
-									player1.setMyTurn(false);
-									player2.setMyTurn(true);
-
-									// Start a new timer for the computer's turn
-									// TIME_BETWEEN_TURNS???
-									Timer player2TurnTask = new Timer();
-									player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+								if (!player1.getHand().isEmpty()) {
+									throwCard(player1);
+									return false;
 								}
 							}
 						}
-					}
-					if (!theStack.isEmpty()) {
-						Card middleCard = theStack.get(theStack.size() - 1);
-						if (eventX >= middleCard.getX() && eventX < (middleCard.getX() + middleCard.getWidth())
-								&& eventY >= middleCard.getY() && eventY < (middleCard.getY() + middleCard.getHeight())) {
-							if (slappable()) {
-								Log.i(TAG, "Adding cards to player 1");
-								slapStack(player1);
+						if (!theStack.isEmpty()) {
+							Card middleCard = theStack.get(theStack.size() - 1);
+							if (eventX >= middleCard.getX() && eventX < (middleCard.getX() + middleCard.getWidth())
+									&& eventY >= middleCard.getY()
+									&& eventY < (middleCard.getY() + middleCard.getHeight())) {
+								if (slappable()) {
+									Log.i(TAG, "Adding cards to player 1");
+									slapStack(player1);
+									return false;
+								}
 							}
+						}
+					} else {
+						Card cardDeck = new Card(context);
+						cardDeck.setX((surfaceView.getWidth() - cardDeck.getWidth()) / 2);
+						cardDeck.setY((surfaceView.getHeight() - cardDeck.getHeight()) / 2);
+						if (eventX >= cardDeck.getX() && eventX < (cardDeck.getX() + cardDeck.getWidth())
+								&& eventY >= cardDeck.getY() && eventY < (cardDeck.getY() + cardDeck.getHeight())) {
+							dealCards();
+							return false;
 						}
 					}
 				}
@@ -183,42 +194,52 @@ public class Game {
 	 *            The player who is throwing cards into the middle deck.
 	 */
 	public void throwCard(IPlayer player) {
-		if (player.getHand().isEmpty()) {
-			DeclareWinner(getOtherPlayer(player));
-		} else {
-			Card cardToThrow = player.getTopCard();	// Get the top card from the player's hand
+		Card cardToThrow = player.getTopCard();	// Get the top card from the player's hand
 
-			// Check if the player has played a letter card. If they have, add their card to the top pile and throw
-			// another
-			// card. Then decrement the counter for their number of chances to get a letter card until they play one.
-			if (numberOfChances > 0) {
-				theStack.add(cardToThrow);
-				player.getHand().remove(cardToThrow);
-				if (cardToThrow.tillFaceValue > 0) {
-					numberOfChances = 0;
-					return;
-				} else {
-					numberOfChances--;
-					// If they run out of chances to play a letter card, give all the cards in the middle stack to the
-					// other
-					// player.
-					if (numberOfChances == 0) {
-						slapStack(getOtherPlayer(player));
-					}
-				}
+		// First check if the player has already played a face card by getting their till face value. If it is greater
+		// than 0, then they have played a face card. So add the card to throw to the middle stack and remove it from
+		// the player's hand.
+		if (player.getTillFace() > 0) {
+			theStack.add(cardToThrow);
+			player.getHand().remove(cardToThrow);
+			// Then check if the card that was thrown is a face card. If it is, then that player's turn is over. If it
+			// is not a face card, then reduce the player's till face value by one.
+			if (cardToThrow.tillFaceValue > 0) {
+				player.setTillFace(0);
+				player.setMyTurn(false);
+				getOtherPlayer(player).setMyTurn(true);
 			} else {
-				theStack.add(cardToThrow);
-				player.getHand().remove(cardToThrow);
-				numberOfChances = cardToThrow.tillFaceValue;
+				player.setTillFace(player.getTillFace() - 1);
+				// If they run out of chances to play a face card, then the middle deck goes to the other player.
+				if (player.getTillFace() == 0) {
+					if (!SLAPPED)
+						slapStack(getOtherPlayer(player));
+				}
 			}
-
-			// Check if the middle deck is slappable after every throw
-			if (slappable()) {
-				// Start a new timer for the computer's turn
-				// TODO TIME_BETWEEN_TURNS???
-				Timer player2SlapTask = new Timer();
-				player2SlapTask.schedule(new Player2SlapTask(), DELAY_INTERVAL);
-			}
+		}
+		// If the player has not already played a face card, then check if the card thrown is a face card. If it is, add
+		// it to the middle deck and set the player's till face value. Then return (void) so that either a touch can be
+		// handled for player 1, or a new turn task can be scheduled for player 2.
+		else if (cardToThrow.tillFaceValue > 0) {
+			theStack.add(cardToThrow);
+			player.getHand().remove(cardToThrow);
+			player.setMyTurn(false);
+			IPlayer playerB = getOtherPlayer(player);
+			playerB.setMyTurn(true);
+			playerB.setTillFace(cardToThrow.tillFaceValue);
+		}
+		// If the card thrown is not a face card, then simply add it to the middle deck and switch player turns.
+		else {
+			theStack.add(cardToThrow);
+			player.getHand().remove(cardToThrow);
+			player.setMyTurn(false);
+			getOtherPlayer(player).setMyTurn(true);
+		}
+		if (player2.myTurn()) {
+			// Start a new timer for the computer's turn
+			// TIME_BETWEEN_TURNS???
+			Timer player2TurnTask = new Timer();
+			player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
 		}
 	}
 
@@ -229,19 +250,28 @@ public class Game {
 	 *            The player who slapped the middle deck.
 	 */
 	public void slapStack(IPlayer player) {
-		List<Card> cardsToAdd = new ArrayList<Card>();
+		SLAPPED = true;
 		for (int i = 0; i < theStack.size(); i++) {
 			Card c = theStack.get(i);
-			// TODO Remove this (next line only) in final version when cards in player hands are displayed as facedown
 			c.resetCardBitmap();
-			c.setHiddden(false);
-			cardsToAdd.add(c);
+			player.addCard(c);
 		}
 		theStack = new ArrayList<Card>();
-		player.getHand().addAll(0, cardsToAdd);
 		// Reset the number of chances to play a letter card if a player has those chances
-		if (numberOfChances > 0)
-			numberOfChances = 0;
+		player.setTillFace(0);
+		player.setMyTurn(true);
+		IPlayer playerB = getOtherPlayer(player);
+		playerB.setTillFace(0);
+		playerB.setMyTurn(false);
+
+		SLAPPED = false;
+
+		if (player2.myTurn()) {
+			// Start a new timer for the computer's turn
+			// TIME_BETWEEN_TURNS???
+			Timer player2TurnTask = new Timer();
+			player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+		}
 	}
 
 	class Player2TurnTask extends TimerTask {
@@ -258,17 +288,12 @@ public class Game {
 			 * removing cards until the run method in GameSurface reaches this point again.
 			 */
 			if (player2.myTurn()) {
-				/**
-				 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
-				 * set the computer's turn off
-				 */
-				throwCard(player2);
-				if (numberOfChances == 0) {
-					player2.setMyTurn(false);
-					player1.setMyTurn(true);
-				} else {
-					Timer player2TurnTask = new Timer();
-					player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+				if (!player2.getHand().isEmpty()) {
+					/**
+					 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
+					 * set the computer's turn off
+					 */
+					throwCard(player2);
 				}
 			}
 		}
@@ -283,109 +308,12 @@ public class Game {
 		// slap deck add the card to the correct player
 		@Override
 		public void run() {
-			Log.i(TAG, "Adding cards to player 2");
-			slapStack(player2);
-		}
-	}
-
-	/**
-	 * Play Card Method
-	 * will get called each time either player plays a card, only needs a player ID
-	 * 
-	 * @param playerID
-	 * @return
-	 */
-	public boolean playCard(IPlayer p) {
-		IPlayer p2 = new HumanPlayer(null);
-		Card middleTopCard = theStack.get(theStack.size() - 1);
-
-		// need to update graphics here
-
-		// if player needs to play a face and didnt
-		// decrement turns left to play face
-		if (p.needsToPlayFace() && !isFace(middleTopCard)) {
-			// if (p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
-			p.setTillFace(p.getTillFace() - 1);
-		}
-		// if player needs to play a face and did
-		// switch players turn
-		// set other player to need a face
-		else if (p.needsToPlayFace() && isFace(middleTopCard)) {
-			// else if (p.needsToPlayFace() && isFace(middleStack.get(middleStack.size() - 1))) {
-			p.setMyTurn(false);
-			p2 = getOtherPlayer(p);
-			p2.setMyTurn(true);
-			p2.setTillFace(middleTopCard.tillFaceValue);
-			// p2.setTillFace(middleStack.get(middleStack.size() - 1).tillFaceValue);
-		}
-		// if player does not need to play a face and does
-		// switch players turn
-		// set other player to need a face
-		else if (!p.needsToPlayFace() && theStack.size() > 0 && isFace(theStack.get(theStack.size() - 1))) {
-			// else if (!p.needsToPlayFace() && isFace(middleStack.get(middleStack.size() - 1))) {
-			p.setMyTurn(false);
-			p2 = getOtherPlayer(p);
-			p2.setMyTurn(true);
-			p2.setTillFace(middleTopCard.tillFaceValue);
-			// p2.setTillFace(middleStack.get(middleStack.size() - 1).tillFaceValue);
-		}
-		// if player does not need to play a face and doesnt
-		// switch players turn
-		else if (!p.needsToPlayFace() && theStack.size() > 0 && !isFace(middleTopCard)) {
-			// else if (!p.needsToPlayFace() && !isFace(middleStack.get(middleStack.size() - 1))) {
-			p.setMyTurn(false);
-			p2 = getOtherPlayer(p);
-			p2.setMyTurn(true);
-
-		}
-
-		if (p2.getID() != -1)
-			savePlayers(p, p2);
-
-		// if the stack is slappable, start timer to slap stack
-		if (slappable()) {
-			Timer compSlapTimer = new Timer();
-			compSlapTimer.schedule(new CompSlapTask(), compSlapDelay);
-		}
-
-		// if it is the computers turn (player 2) start timer to play card
-		if (player2.myTurn()) {
-			Timer compTurnTimer = new Timer();
-			compTurnTimer.schedule(new CompTurnTask(), DELAY_INTERVAL);	// TODO TIME_BETWEEN_TURNS???
-		}
-
-		// For testing game over scenarios
-		// DeclareWinner(player1);
-		return true;
-	}
-
-	/**
-	 * Saves temp players to the local variables player1 and player2
-	 * 
-	 * @param p
-	 * @param p2
-	 */
-	private void savePlayers(IPlayer p, IPlayer p2) {
-		if (p.getID() == player1.getID()) {
-			player1 = p;
-			player2 = p2;
-		} else {
-			player1 = p2;
-			player2 = p;
-		}
-	}
-
-	/**
-	 * returns IPlayer the corresponds with playerID
-	 * 
-	 * @param playerID
-	 * @return
-	 */
-	private IPlayer getPlayerFromID(int playerID) {
-		if (player1.getID() == playerID) {
-			return player1;
-		} else {
-			return player2;
+			if (slappable()) {
+				if (!SLAPPED) {
+					Log.i(TAG, "Adding cards to player 2");
+					slapStack(player2);
+				}
+			}
 		}
 	}
 
@@ -403,61 +331,52 @@ public class Game {
 		}
 	}
 
-	/**
-	 * returns true if the passed in card is a face or ace
-	 * 
-	 * @param c
-	 * @return
-	 */
-	private boolean isFace(Card c) {
-		if (c.cardType.equalsIgnoreCase("jack") || c.cardType.equalsIgnoreCase("queen")
-				|| c.cardType.equalsIgnoreCase("king") || c.cardType.equalsIgnoreCase("ace")) {
-			return true;
-		} else {
-			return false;
-		}
-
-	}
-
-	/**
-	 * gets called with each attempt to slap the stack
-	 * also declares winner happens here
-	 * 
-	 * @param playerID
-	 */
-	public void slapStack(int playerID) {
-		IPlayer p = getPlayerFromID(playerID);
-
-		if (slappable()) {
-			List<Card> cardsToAdd = new ArrayList<Card>();
-			for (ListIterator<Card> iterator = theStack.listIterator(); iterator.hasNext();) {
-				Card c = iterator.next();
-				c.resetCardBitmap();
-				c.setHiddden(false);
-				cardsToAdd.add(c);
-			}
-
-			theStack = new ArrayList<Card>();
-			p.getHand().addAll(0, cardsToAdd);
-
-			// need to update graphics here
-
-			// savePlayers(p, getOtherPlayer(p));
-			if (p.hasAllCards()) {
-				DeclareWinner(p);
-			}
-		}
-	}
-
 	/***
 	 * Checks to see if the passed in player has all 52 cards and calls declare winner
 	 * 
-	 * @param p
+	 * @param player
 	 */
-	private void checkWinner(IPlayer p) {
-		if (p.hasAllCards()) {
-			DeclareWinner(p);
+	public void checkWinner() {
+		if (player1.getHand().isEmpty() && player1.myTurn()) {
+			if (!slappable()) {
+				declareWinner(player2);
+				return;
+			}
 		}
+		if (player2.getHand().isEmpty() && player2.myTurn()) {
+			if (!slappable()) {
+				declareWinner(getOtherPlayer(player1));
+				return;
+			}
+		}
+		if (player1.getHand().size() == cardDeck.size()) {
+			declareWinner(player1);
+			return;
+		}
+		if (player2.getHand().size() == cardDeck.size()) {
+			declareWinner(player2);
+			return;
+		}
+	}
+
+	public void declareWinner(final IPlayer player) {
+
+		GAME_STARTED = false;
+		GameFinished(this);
+
+	}
+
+	protected void GameFinished(Game game) {
+		// Object lock = new Object();
+		for (IGameFinishedListener listener : listeners) {
+			synchronized (this) {
+				listener.onGameFinished(game);
+			}
+		}
+	}
+
+	public void registerGameFinishedListener(IGameFinishedListener listener) {
+		listeners.add(listener);
 	}
 
 	/**
@@ -488,28 +407,12 @@ public class Game {
 		return retBool;
 	}
 
-	/**
-	 * do stuff with the winning player
-	 * 
-	 * @param p
-	 */
-	private void DeclareWinner(IPlayer p) {
-		// do stuff with winner
-		//GameFinished(this);
+	public boolean isStarted() {
+		return GAME_STARTED;
 	}
 
-	//
-	protected void GameFinished(Game2 game) {
-		// Object lock = new Object();
-		for (IGameFinishedListener listener : listeners) {
-			synchronized (this) {
-				listener.onGameFinished(game);
-			}
-		}
-	}
-
-	public void registerGameFinishedListener(IGameFinishedListener listener) {
-		listeners.add(listener);
+	public void setStarted(boolean start) {
+		GAME_STARTED = start;
 	}
 
 	// shuffle the cards and getting the cards to the players
@@ -525,50 +428,101 @@ public class Game {
 		}
 	}
 
-	// create the computer with an id and name
+	/**
+	 * This method is used to draw all the components of the game. The card locations will first be set, then the
+	 * playCard method will be called to check if there are any cards that need to be removed. After all of those
+	 * methods have ran, the onDraw method for each card in both player's hands and the middle stack will be called so
+	 * that the cards can be drawn on the canvas.
+	 * 
+	 * @param canvas
+	 *            The canvas that the cards will be drawn on.
+	 */
+	@SuppressLint("WrongCall")
+	public void drawGame(Canvas canvas) {
+		float topX = 10;
+		float topY = 10;
+		float bottomX = canvas.getWidth() - 10;
+		float bottomY = canvas.getHeight() - 20;
 
-	private IUser CreateComputer() {
-		IUser u = new User();
-		u.setUserId(0);
-		u.setUserName(COMPUTER_PLAYER_NAME);
-		return u;
-	}
-
-	class CompSlapTask extends TimerTask {
-
-		public CompSlapTask() {
-
+		Card player1Card = new Card(context);
+		player1Card.setX(bottomX - player1Card.getWidth());
+		player1Card.setY(bottomY - player1Card.getHeight());
+		Card player2Card = new Card(context);
+		player2Card.setX(topX);
+		player2Card.setY(topY);
+		if (cardBack != null) {
+			player1Card.setCardBitmap(cardBack);
+			player2Card.setCardBitmap(cardBack);
 		}
 
-		@Override
-		public void run() {
-			slapStack(player2.getID());
-		}
-	}
+		Paint paint = new Paint();
+		paint.setStyle(Style.FILL);
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(30);
+		paint.setTextAlign(Align.CENTER);
 
-	class CompTurnTask extends TimerTask {
+		canvas.drawColor(context.getResources().getColor(R.color.green));	// Set the background color of the canvas
 
-		public CompTurnTask() {
-
-		}
-
-		@Override
-		public void run() {
-			/**
-			 * Check again if it is the computer's turn still, because the game is constantly being run and
-			 * drawn in the GameSurface class. If this check is not here, the timer task will continue
-			 * removing cards until the run method in GameSurface reaches this point again.
-			 */
-			if (player2.myTurn()) {
-				/**
-				 * Get the last card in the computer's hand and hide it, then set the turn to player 1 and
-				 * set the computer's turn off
-				 */
-				player2.getHand().get(player2.getHand().size() - 1).setHiddden(true);
-				player1.setMyTurn(true);
-				player2.setMyTurn(false);
+		if (isStarted()) {
+			checkWinner();
+			if (!player1.getHand().isEmpty()) {
+				// game.player1.getTopCard().onDraw(canvas);
+				player1Card.onDraw(canvas);
+				canvas.drawText("Card Count: " + player1.getHand().size(),
+						(canvas.getWidth() - player1Card.getWidth()) / 2, player1Card.getY() + player1Card.getHeight()
+								- 10, paint);
 			}
+			if (!player2.getHand().isEmpty()) {
+				// game.player2.getTopCard().onDraw(canvas);
+				player2Card.onDraw(canvas);
+				canvas.drawText("Card Count: " + player2.getHand().size(),
+						(canvas.getWidth() + player2Card.getWidth()) / 2, topY - paint.ascent(), paint);
+			}
+			if (!theStack.isEmpty()) {
+				int degree = 0;
+				for (int i = 0; i < theStack.size(); i++) {
+					Card c = theStack.get(i);
+					c.rotateCard(degree);
+					c.setRotate(false);
+					c.setX((canvas.getWidth() - c.getWidth()) / 2);
+					c.setY((canvas.getHeight() - c.getHeight()) / 2);
+					degree += 45;
+					c.onDraw(canvas);
+				}
+			}
+			if (player1.myTurn()) {
+				canvas.drawText(player1.getName() + "'s turn!!!", (canvas.getWidth() / 2), (canvas.getHeight() / 2)
+						+ player1Card.getHeight(), paint);
+				if (player1.getTillFace() > 0)
+					canvas.drawText("Chances to play card: " + player1.getTillFace(), (canvas.getWidth() / 2),
+							(canvas.getHeight() / 2) + player1Card.getHeight() + 50, paint);
+			}
+			if (player2.myTurn()) {
+				canvas.drawText(player2.getName() + "'s turn!!!", (canvas.getWidth() / 2), (canvas.getHeight() / 2)
+						- player2Card.getHeight(), paint);
+				if (player2.getTillFace() > 0)
+					canvas.drawText("Chances to play card: " + player2.getTillFace(), (canvas.getWidth() / 2),
+							(canvas.getHeight() / 2) - player2Card.getHeight() - 50, paint);
+			}
+			if (slappable()) {
+				paint.setTextAlign(Align.LEFT);
+				canvas.drawText("SLAP!!!", 10, canvas.getHeight() / 2, paint);
+				paint.setTextAlign(Align.CENTER);
+
+				// Start a new timer for the computer's turn
+				// TODO TIME_BETWEEN_TURNS???
+				Timer player2SlapTask = new Timer();
+				player2SlapTask.schedule(new Player2SlapTask(), DELAY_INTERVAL);
+			}
+		} else {
+			Card cardDeck = new Card(context);
+			float x = (canvas.getWidth() - cardDeck.getWidth()) / 2;
+			float y = (canvas.getHeight() - cardDeck.getHeight()) / 2;
+			cardDeck.setX(x);
+			cardDeck.setY(y);
+			cardDeck.onDraw(canvas);
+			canvas.drawText("TAP THE DECK TO START!!!", (canvas.getWidth() / 2),
+					(canvas.getHeight() / 2) + cardDeck.getHeight(), paint);
 		}
 	}
-
 }

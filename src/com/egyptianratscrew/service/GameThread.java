@@ -213,9 +213,9 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Swiped!!!");
 						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
-							if (game.playCard(game.player1)) {
-								displayCards();
-							}
+							// if (game.playCard(game.player1)) {
+							// displayCards();
+							// }
 						}
 					} else if (eventX >= middleX && eventX < (middleX + faceDownCard.getWidth())
 							&& eventY >= middleY - faceDownCard.getHeight()
@@ -248,9 +248,9 @@ public class GameThread extends AsyncTask<Void, Integer, Void> {
 							&& eventY < (bottomY - faceDownCard.getHeight() + faceDownCard.getHeight())) {
 						Log.i(TAG, "Touched!!!");
 						if (!game.player1.getHand().isEmpty() && game.player1.myTurn()) {
-							if (game.playCard(game.player1)) {
-								displayCards();
-							}
+							// if (game.playCard(game.player1)) {
+							// displayCards();
+							// }
 						}
 					} else if (eventX >= middleX && eventX < (middleX + faceDownCard.getWidth())
 							&& eventY >= middleY - faceDownCard.getHeight()
