@@ -19,12 +19,22 @@
 
     <ImageView
         android:id="@+id/imgAlbumArtNowPlaying"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:contentDescription="@string/imgRat"
         android:paddingBottom="10dp"
         android:paddingTop="10dp"
         android:src="@drawable/screenimage" />
+
+    <TextView
+        android:id="@+id/txtUserInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
         android:id="@+id/btnTestGame"
@@ -87,8 +97,8 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/btnPicture"
         android:onClick="CardBackSelectActivity"
+        android:text="@string/btnPicture"
         android:visibility="gone" />
 
     <Button
@@ -98,14 +108,5 @@
         android:onClick="Logout"
         android:text="@string/btnLogout"
         android:visibility="gone" />
-
-    <TextView
-        android:id="@+id/txtUserInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingBottom="30dip"
-        android:paddingTop="30dip"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </LinearLayout>

@@ -333,24 +333,24 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int btnClear=0x7f090005;
         public static final int btnComputer=0x7f090013;
         public static final int btnDefault=0x7f090049;
-        public static final int btnDeveloper=0x7f09000e;
+        public static final int btnDeveloper=0x7f09000f;
         public static final int btnDevelopers=0x7f090017;
         public static final int btnDifficulty=0x7f090014;
-        public static final int btnExisting=0x7f09000c;
+        public static final int btnExisting=0x7f09000d;
         public static final int btnExistingPicture=0x7f09004b;
-        public static final int btnFBLogin=0x7f09000b;
+        public static final int btnFBLogin=0x7f09000c;
         public static final int btnLogin=0x7f090004;
-        public static final int btnLogout=0x7f090011;
-        public static final int btnPicture=0x7f090010;
+        public static final int btnLogout=0x7f090012;
+        public static final int btnPicture=0x7f090011;
         public static final int btnReset=0x7f09002d;
-        public static final int btnRule=0x7f09000d;
+        public static final int btnRule=0x7f09000e;
         public static final int btnRules=0x7f090016;
         public static final int btnSave=0x7f09004c;
-        public static final int btnStatistics=0x7f09000f;
+        public static final int btnStatistics=0x7f090010;
         public static final int btnSubmit=0x7f09002c;
         public static final int btnTakePicture=0x7f09004a;
-        public static final int btnTestGame=0x7f090009;
-        public static final int btnUserRegister=0x7f09000a;
+        public static final int btnTestGame=0x7f09000a;
+        public static final int btnUserRegister=0x7f09000b;
         public static final int edtPassword=0x7f090003;
         public static final int edtUserName=0x7f090000;
         public static final int fullscreen_content=0x7f090018;
@@ -402,7 +402,7 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int txtStatLoss=0x7f090037;
         public static final int txtStatTotal=0x7f09003a;
         public static final int txtStatWin=0x7f090034;
-        public static final int txtUserInfo=0x7f090012;
+        public static final int txtUserInfo=0x7f090009;
         public static final int txtUserName=0x7f090027;
     }
     public static final class layout {
