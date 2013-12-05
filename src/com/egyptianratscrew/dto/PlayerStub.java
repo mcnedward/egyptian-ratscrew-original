@@ -7,34 +7,34 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.UserStub;
 
 public class PlayerStub implements IPlayer {
-	//declaring variables
+	// declaring variables
 	private String playerName;
 	private List<Card> hand;
 	private boolean turn;
 	private int tillFace;
 	private int playerID;
 	private IUser user;
-	
+
 	public PlayerStub(int id) {
-		//setting the user to the UserStub information
+		// setting the user to the UserStub information
 		user = new UserStub();
-		//getting the username of the player
+		// getting the username of the player
 		playerName = user.getUserName();
-		//the id setting to the playerID
+		// the id setting to the playerID
 		playerID = id;
-		//hand is a new ArrayList
+		// hand is a new ArrayList
 		hand = new ArrayList<Card>();
 	}
-	
+
 	@Override
 	public void addCard(Card c) {
-		//add the card to the hand
+		// add the card to the hand
 		hand.add(c);
 	}
 
 	@Override
 	public Card playCard() {
-		//playing a card and taking the the stack to one less card
+		// playing a card and taking the the stack to one less card
 		Card retCard = hand.get(hand.size() - 1);
 		hand.remove(hand.size() - 1);
 		return retCard;
@@ -42,7 +42,7 @@ public class PlayerStub implements IPlayer {
 
 	@Override
 	public boolean needsToPlayFace() {
-		//must play a face card
+		// must play a face card
 		if (getTillFace() > 0) {
 			return true;
 		} else {
@@ -52,25 +52,25 @@ public class PlayerStub implements IPlayer {
 
 	@Override
 	public int getTillFace() {
-		//getting the tillFace value
+		// getting the tillFace value
 		return tillFace;
 	}
 
 	@Override
 	public void setTillFace(int i) {
-		//setting the TillFace
+		// setting the TillFace
 		tillFace = i;
 	}
 
 	@Override
 	public boolean myTurn() {
-		//return turn if it is players turn
+		// return turn if it is players turn
 		return turn;
 	}
 
 	@Override
 	public void setMyTurn(boolean b) {
-		//return turn to set to myturn
+		// return turn to set to myturn
 		turn = b;
 	}
 
@@ -82,16 +82,16 @@ public class PlayerStub implements IPlayer {
 
 	@Override
 	public int getID() {
-		//returning the playerID 
+		// returning the playerID
 		return playerID;
 	}
 
 	@Override
 	public boolean hasAllCards() {
-		//once the player has 52 cards in their hand they gain all cards
+		// once the player has 52 cards in their hand they gain all cards
 		if (hand.size() == 51) {
 			return true;
-			//if not then the game continues
+			// if not then the game continues
 		} else {
 			return false;
 		}
@@ -113,9 +113,15 @@ public class PlayerStub implements IPlayer {
 		card.setX(x);
 		card.setY(y);
 	}
-	
+
 	@Override
-	public IUser getUser(){
+	public IUser getUser() {
 		return this.user;
+	}
+
+	@Override
+	public void setHand(ArrayList<Card> list) {
+		// TODO Auto-generated method stub
+
 	}
 }

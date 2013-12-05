@@ -101,6 +101,8 @@
     <string name="lblCredentials">Login with Credentials</string>
     <string name="lblPercent">Percentage of Wins</string>
     <string name="txtHighestWinStreak">Winning Streak:</string>
+    <string name="txtCurrentWinStreak">Current Win Streak:</string>
     <string name="txtHighestLosingStreak">Losing Streak:</string>
+    <string name="txtCurrentLosingStreak">Current Loss Streak:</string>
 
 </resources>

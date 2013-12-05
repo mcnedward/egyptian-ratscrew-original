@@ -114,7 +114,7 @@ public class RatscrewDatabase {
 			final int currentWinningStreakColumn = ih.getColumnIndex(CURRENT_WINNING_STREAK);
 			final int currentLosingStreakColumn = ih.getColumnIndex(CURRENT_LOSING_STREAK);
 			final int totalGamesColumn = ih.getColumnIndex(TOTAL_GAMES);
-			
+
 			@SuppressWarnings("unused")
 			int x = 0;
 
@@ -159,7 +159,9 @@ public class RatscrewDatabase {
 	 */
 	public IUser getUserById(int userId) {
 		User user = null;
-		Cursor c = db.rawQuery("SELECT * FROM user WHERE userId = ?", new String[] { String.valueOf(userId) });
+		open();
+		Cursor c = db.rawQuery("SELECT * FROM " + DATABASE_TABLE_USER + " WHERE " + USER_ID + " = ?",
+				new String[] { String.valueOf(userId) });
 		try {
 			while (c.moveToNext()) {
 				String userName = c.getString(c.getColumnIndexOrThrow(USERNAME));
@@ -174,9 +176,10 @@ public class RatscrewDatabase {
 				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
 				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
-				
-				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, totalGames);
+
+				user = new User(userId, firstName, lastName, userName, email, password, numberOfWins, numberOfLosses,
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak,
+						totalGames);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
@@ -186,12 +189,14 @@ public class RatscrewDatabase {
 		} finally {
 			if (c != null && !c.isClosed()) {
 				c.close();
+				close();
 			}
 		}
 	}
 
 	public IUser getUserByName(String userFirstName) {
 		IUser user = null;
+		open();
 		Cursor c = db.rawQuery("SELECT * FROM user WHERE FIRST_NAME = ?", new String[] { userFirstName });
 		try {
 			while (c.moveToNext()) {
@@ -208,9 +213,10 @@ public class RatscrewDatabase {
 				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
 				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
-				
-				user = new User(userId, userName, password, email, firstName, lastName, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, totalGames);
+
+				user = new User(userId, firstName, lastName, userName, email, password, numberOfWins, numberOfLosses,
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak,
+						totalGames);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
@@ -220,6 +226,7 @@ public class RatscrewDatabase {
 		} finally {
 			if (c != null && !c.isClosed()) {
 				c.close();
+				close();
 			}
 		}
 	}
@@ -250,9 +257,10 @@ public class RatscrewDatabase {
 				int currentWinningStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_WINNING_STREAK));
 				int currentLosingStreak = c.getInt(c.getColumnIndexOrThrow(CURRENT_LOSING_STREAK));
 				int totalGames = c.getInt(c.getColumnIndexOrThrow(TOTAL_GAMES));
-				
+
 				user = new User(userId, firstName, lastName, userName, email, password, numberOfWins, numberOfLosses,
-						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak, totalGames);
+						highestWinningStreak, highestLosingStreak, currentWinningStreak, currentLosingStreak,
+						totalGames);
 			}
 			if (user == null) {
 				Log.i(TAG, "No user exists");
@@ -269,12 +277,67 @@ public class RatscrewDatabase {
 		}
 		return user;
 	}
-	
+
 	/********** UPDATE QUERIES **********/
-	public boolean updateUser(IUser user){
+
+	public void userWins(IUser user) {
+		IUser u = getUserById(user.getUserId());
+		if (u != null) {
+			open();
+			try {
+				// Update the win stats
+				db.execSQL("UPDATE " + DATABASE_TABLE_USER + " SET " + NUMBER_OF_WINS + " = " + NUMBER_OF_WINS
+						+ " + 1, " + CURRENT_WINNING_STREAK + " = " + CURRENT_WINNING_STREAK + " + 1, " + TOTAL_GAMES
+						+ " = " + TOTAL_GAMES + " + 1 WHERE " + USER_ID + " = ?",
+						new String[] { String.valueOf(user.getUserId()) });
+				// Reset the current losing streak
+				db.execSQL("UPDATE " + DATABASE_TABLE_USER + " SET " + CURRENT_LOSING_STREAK + " = 0 WHERE " + USER_ID
+						+ " = ?", new String[] { String.valueOf(user.getUserId()) });
+				// Update the highest winning streak if it is less than or equal to the current winning streak
+				if (user.getCurrentWinningStreak() >= user.getHighestWinningStreak()) {
+					db.execSQL("UPDATE " + DATABASE_TABLE_USER + " SET " + HIGHEST_WINNING_STREAK + " = "
+							+ CURRENT_WINNING_STREAK + " WHERE " + USER_ID + " = ?",
+							new String[] { String.valueOf(user.getUserId()) });
+				}
+			} catch (Exception e) {
+				Log.i(TAG, e.getMessage(), e);
+			} finally {
+				close();
+			}
+		}
+	}
+
+	public void userLoses(IUser user) {
+		IUser u = getUserById(user.getUserId());
+		if (u != null) {
+			open();
+			try {
+				db.execSQL("UPDATE " + DATABASE_TABLE_USER + " SET " + NUMBER_OF_LOSSES + " = " + NUMBER_OF_LOSSES
+						+ " + 1, " + CURRENT_LOSING_STREAK + " = " + CURRENT_LOSING_STREAK + " + 1, " + TOTAL_GAMES
+						+ " = " + TOTAL_GAMES + " + 1 WHERE " + USER_ID + " = ?",
+						new String[] { String.valueOf(user.getUserId()) });
+				// Reset the current winning streak
+				db.execSQL("UPDATE " + DATABASE_TABLE_USER + " SET " + CURRENT_WINNING_STREAK + " = 0 WHERE " + USER_ID
+						+ " = ?", new String[] { String.valueOf(user.getUserId()) });
+				// Update highest losing streak if it is less than or equal to the current losing streak
+				if (user.getCurrentLosingStreak() >= user.getHighestLosingStreak()) {
+					db.execSQL(
+							"UPDATE " + DATABASE_TABLE_USER + " SET " + HIGHEST_LOSING_STREAK + " = "
+									+ user.getCurrentLosingStreak() + " WHERE " + USER_ID + " = ?",
+							new String[] { String.valueOf(user.getUserId()) });
+				}
+			} catch (Exception e) {
+				Log.i(TAG, e.getMessage(), e);
+			} finally {
+				close();
+			}
+		}
+	}
+
+	public boolean updateUser(IUser user) {
 		db.delete("user", "_id = " + user.getUserId(), null);
 		insertUser(user);
-		
+
 		return true;
 	}
 
