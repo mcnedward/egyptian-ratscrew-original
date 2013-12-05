@@ -31,7 +31,7 @@ import com.egyptianratscrew.dao.DefaultPicture;
 
 public class Card {
 
-	//declaring variables
+	// declaring variables
 	public String cardType;
 	public int cardValue;
 	private String cardSuit;
@@ -270,7 +270,7 @@ public class Card {
 	 *            The bitmap used to display the card image.
 	 */
 	public void setCardBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+		this.bitmap = Bitmap.createScaledBitmap(bitmap, (int) width, (int) height, false);
 	}
 
 	/**
