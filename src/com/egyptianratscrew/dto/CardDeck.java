@@ -63,17 +63,29 @@ public class CardDeck {
 		}
 	}
 
-	// return the position of the card
+	/**
+	 * 
+	 * @param position of the card
+	 * @return
+	 */
 	public Card getCardAt(int position) {
 		return cardDeck.get(position);
 	}
 
-	// return the card position and type
+	/**
+	 * 
+	 * @param position of the card type
+	 * @return
+	 */
 	public String getCardType(int position) {
 		return cardDeck.get(position).cardType;
 	}
 
-	// return the card position and value
+	/**
+	 * 
+	 * @param position of the card value
+	 * @return
+	 */
 	public int getCardValue(int position) {
 		return cardDeck.get(position).cardValue;
 	}

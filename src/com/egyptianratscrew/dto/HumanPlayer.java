@@ -17,6 +17,10 @@ public class HumanPlayer implements IPlayer {
 	private int playerID;
 	private IUser user;
 
+	/**
+	 * 
+	 * @param user getting the user information
+	 */
 	public HumanPlayer(IUser user) {
 		// if the user exists set to the user of the game
 		if (user != null) {
@@ -33,13 +37,17 @@ public class HumanPlayer implements IPlayer {
 		hand = new ArrayList<Card>();
 	}
 
-	// add the card to the hand
+	/**
+	 * add the card to the hand
+	 */
 	@Override
 	public void addCard(Card c) {
 		hand.add(c);
 	}
 
-	// remove the card from the hand and return the hand size less than one
+	/**
+	 * remove the card from the hand and return the hand size less than one
+	 */
 	@Override
 	public Card playCard() {
 		Card retCard = hand.get(hand.size() - 1);
@@ -118,8 +126,10 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public void setCardCoor(float x, float y) {
+		
 		Card card = getTopCard();
 		if (card != null) {
+			//set the coordinates of the cards
 			card.setX(x);
 			card.setY(y);
 		}

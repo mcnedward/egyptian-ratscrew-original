@@ -29,6 +29,7 @@ import android.graphics.Matrix;
 
 public class Card {
 
+	//declaring variables
 	public String cardType;
 	public int cardValue;
 	private String cardSuit;
