@@ -2,6 +2,7 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -35,8 +36,10 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
 
+		IUser user = (IUser)this.getIntent().getSerializableExtra("User");
+		Bitmap cardBack = (Bitmap)this.getIntent().getParcelableExtra("CardBack");
 		context = this;
-		game = new Game2(true, 3, this);
+		game = new Game2(true,user, 3, cardBack,this);
 
 		// game.registerGameFinishedListener(this);
 

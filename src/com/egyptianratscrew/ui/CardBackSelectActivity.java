@@ -50,13 +50,17 @@ public class CardBackSelectActivity extends Activity {
 		
 		// start this activity.
 		startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST);
-		
-		
 	}
 	
 	public void DefaultClicked(View v)
 	{
-		
+		image = GetDefaultPicture();
+	}
+	
+	private Bitmap GetDefaultPicture() {
+		int resourceId = this.getResources().getIdentifier("b2fv", "drawable", this.getPackageName());
+		Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), resourceId);
+		return bitmap;
 	}
 	
 	/**

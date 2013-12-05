@@ -8,6 +8,7 @@ import java.util.TimerTask;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -64,7 +65,7 @@ public class Game2 {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game2(boolean onePlayerGame, int difficulty, Context con) {
+	public Game2(boolean onePlayerGame, IUser aUser, int difficulty, Bitmap cardBack, Context con) {
 		this.context = con;
 		db = new RatscrewDatabase(context);
 
@@ -73,7 +74,7 @@ public class Game2 {
 		// Check if a user is logged in and make player 1 that user if true
 		// Create a new blank user if there is no user logged in
 		if (MainActivity.user != null)
-			player1 = new HumanPlayer(MainActivity.user);
+			player1 = new HumanPlayer(aUser);
 		else
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
 		player2 = new HumanPlayer(null);
