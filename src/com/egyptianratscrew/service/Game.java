@@ -87,13 +87,12 @@ public class Game {
 		player2 = new HumanPlayer(null);
 
 		// Create the deck of cards
-		cd = new CardDeck(context);
-		cardDeck = cd.cardDeck;
-		if (!onePlayerGame) {
-			for (int i = 0; i < 26; i++) {
-				cardDeck.remove(i);
-			}
+		if (onePlayerGame) {
+			cd = new CardDeck(context);
+		} else {
+			cd = new CardDeck(context, false);
 		}
+		cardDeck = cd.cardDeck;
 	}
 
 	/**
