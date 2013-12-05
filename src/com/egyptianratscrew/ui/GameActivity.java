@@ -80,8 +80,10 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		//
 		// }
 		// });
-		updateStatistics(game);
-		startActivity(new Intent(context, WinnerActivity.class));
+		IUser winner = updateStatistics(game);
+		Intent winnerIntent = new Intent(this,WinnerActivity.class);
+		winnerIntent.putExtra("User", winner);
+		startActivity(winnerIntent);
 	}
 
 	/**
@@ -89,20 +91,21 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	 * @param game
 	 *            to update the Statistic of the game
 	 */
-	private void updateStatistics(Game game) {
+	private IUser updateStatistics(Game game) {
 		IUser winner = null;
 		IUser loser = null;
 		// player 1 wins the game and set the winner to the winner and loser to player 2
-		if (game.player1.hasAllCards() || (game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
-			// winner = game.player1.getUser();
-			// loser = game.player2.getUser();
+		if (game.player1.hasAllCards() || 
+				(game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
+			 winner = game.player1.getUser();
+			 loser = game.player2.getUser();
 			db.userWins(game.player1.getUser());
 		}
 		// player 2 winner and player 1 loser
 		else if (game.player2.hasAllCards()
 				|| (game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
-			// winner = game.player2.getUser();
-			// loser = game.player1.getUser();
+			 winner = game.player2.getUser();
+			 loser = game.player1.getUser();
 			db.userLoses(game.player2.getUser());
 		}
 		// game tied or not finished
@@ -111,32 +114,34 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 			t.show();
 			// handle error
 			StartGame();
-			return;
+			return null;
 		}
 		// setting information about the winner
-		winner.setTotalGames(winner.getTotalGames() + 1);
-		winner.setNumberOfWins(winner.getNumberOfWins() + 1);
-		winner.setCurrentWinningStreak(winner.getCurrentWinningStreak() + 1);
-		winner.setCurrentLosingStreak(0);
-		if (winner.getHighestWinningStreak() < winner.getCurrentWinningStreak()) {
-			winner.setHighestWinningStreak(winner.getCurrentWinningStreak());
-		}
-		// setting information about the loser
-		loser.setTotalGames(loser.getTotalGames() + 1);
-		loser.setNumberOfLosses(loser.getNumberOfLosses() + 1);
-		loser.setCurrentLosingStreak(loser.getCurrentLosingStreak() + 1);
-		loser.setCurrentWinningStreak(0);
-		if (loser.getHighestLosingStreak() < loser.getCurrentLosingStreak()) {
-			loser.setHighestLosingStreak(loser.getCurrentLosingStreak());
-		}
-
-		// updating information given the game results
-		if (winner.getUserId() != 0) {
-			db.updateUser(winner);
-		}
-		if (loser.getUserId() != 0) {
-			db.updateUser(loser);
-		}
+//		winner.setTotalGames(winner.getTotalGames() + 1);
+//		winner.setNumberOfWins(winner.getNumberOfWins() + 1);
+//		winner.setCurrentWinningStreak(winner.getCurrentWinningStreak() + 1);
+//		winner.setCurrentLosingStreak(0);
+//		if (winner.getHighestWinningStreak() < winner.getCurrentWinningStreak()) {
+//			winner.setHighestWinningStreak(winner.getCurrentWinningStreak());
+//		}
+//		// setting information about the loser
+//		loser.setTotalGames(loser.getTotalGames() + 1);
+//		loser.setNumberOfLosses(loser.getNumberOfLosses() + 1);
+//		loser.setCurrentLosingStreak(loser.getCurrentLosingStreak() + 1);
+//		loser.setCurrentWinningStreak(0);
+//		if (loser.getHighestLosingStreak() < loser.getCurrentLosingStreak()) {
+//			loser.setHighestLosingStreak(loser.getCurrentLosingStreak());
+//		}
+//
+//		// updating information given the game results
+//		if (winner.getUserId() != 0) {
+//			db.updateUser(winner);
+//		}
+//		if (loser.getUserId() != 0) {
+//			db.updateUser(loser);
+//		}
+		
+		return winner;
 
 	}
 
