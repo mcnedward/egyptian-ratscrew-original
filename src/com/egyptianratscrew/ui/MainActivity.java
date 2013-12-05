@@ -33,7 +33,7 @@ import com.egyptianratscrew.dao.User;
 
 public class MainActivity extends Activity {
 
-	//setting the request and variables
+	// setting the request and variables
 	private static final int LOGIN_REQUEST = 3;
 
 	private static final int NEW_USER_REQUEST = 2;
@@ -45,8 +45,7 @@ public class MainActivity extends Activity {
 	private IUser loggedInUser;
 	public static IUser user = null;
 
-	
-	//creating the screens
+	// creating the screens
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -56,7 +55,7 @@ public class MainActivity extends Activity {
 		rdb = new RatscrewDatabase(this);
 		loggedInUser = null;
 
-		user = rdb.getUserByUserName("edwardmcn");	
+		user = rdb.getUserByUserName("edwardmcn");
 	}
 
 	@Override
@@ -80,7 +79,7 @@ public class MainActivity extends Activity {
 		startActivityForResult(fblogin, FB_REQUEST);
 	}
 
-	//starting activity with credentials
+	// starting activity with credentials
 	public void LoginWithCredentials(View v) {
 		Intent loginIntent = new Intent(this, LoginActivity.class);
 		startActivityForResult(loginIntent, LOGIN_REQUEST);
@@ -98,7 +97,6 @@ public class MainActivity extends Activity {
 		if (resultCode == RESULT_OK) {
 			// RESULT_OK means that everything processed successfully.
 
-			
 			if (requestCode == FB_REQUEST) {
 				String firstName = data.getStringExtra("USER_NAME");
 				if (rdb.userExists(firstName, RatscrewDatabase.FIRST_NAME_FIELD)) {
@@ -169,19 +167,16 @@ public class MainActivity extends Activity {
 		Intent gameIntent = new Intent(this, ViewStatistics.class);
 		startActivity(gameIntent);
 	}
-	
-	public void viewRules(View v){
+
+	public void viewRules(View v) {
 		Intent ruleIntent = new Intent(this, ViewRules.class);
 		startActivity(ruleIntent);
 	}
-	
-	public void viewDevelopers(View v){
+
+	public void viewDevelopers(View v) {
 		Intent developerIntent = new Intent(this, ViewDevelopers.class);
 		startActivity(developerIntent);
 	}
-	
-
-	
 
 	public void hideButtons(boolean hide) {
 		Button btnUserRegister = (Button) findViewById(R.id.btnUserRegister);
@@ -191,11 +186,6 @@ public class MainActivity extends Activity {
 		Button btnStatistics = (Button) findViewById(R.id.btnStatistics);
 		Button btnRule = (Button) findViewById(R.id.btnRule);
 		Button btnDeveloper = (Button) findViewById(R.id.btnDeveloper);
-	
-		
-		
-		
-		
 
 		TextView txtUserInfo = (TextView) findViewById(R.id.txtUserInfo);
 
@@ -208,8 +198,7 @@ public class MainActivity extends Activity {
 			btnRule.setVisibility(View.VISIBLE);
 			btnDeveloper.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
-			
-			
+
 			txtUserInfo.setText("Logged in as " + user);
 		} else {
 			btnUserRegister.setVisibility(View.VISIBLE);
@@ -220,8 +209,7 @@ public class MainActivity extends Activity {
 			btnRule.setVisibility(View.GONE);
 			btnDeveloper.setVisibility(View.GONE);
 			txtUserInfo.setVisibility(View.GONE);
-			
-			
+
 		}
 	}
 }

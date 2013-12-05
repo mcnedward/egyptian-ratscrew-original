@@ -18,7 +18,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 	/** Database Name **/
 	private static String DB_NAME = "ratscrew.db";
 	/** Database Version **/
-	private static final int DB_VERSION = 2;
+	private static final int DB_VERSION = 3;
 
 	/** User Table **/
 	private static String DATABASE_TABLE_USER = "user";
@@ -52,8 +52,8 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 		String createUserTable = String
 				.format("CREATE TABLE IF NOT EXISTS %s (%s INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT NOT NULL, %s TEXT, %s TEXT, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER, %s INTEGER)",
 						DATABASE_TABLE_USER, USER_ID, USERNAME, PASSWORD, EMAIL, FIRST_NAME, LAST_NAME, NUMBER_OF_WINS,
-						NUMBER_OF_LOSSES, HIGHEST_WINNING_STREAK, HIGHEST_LOSING_STREAK, CURRENT_WINNING_STREAK, CURRENT_LOSING_STREAK,
-						TOTAL_GAMES);
+						NUMBER_OF_LOSSES, HIGHEST_WINNING_STREAK, HIGHEST_LOSING_STREAK, CURRENT_WINNING_STREAK,
+						CURRENT_LOSING_STREAK, TOTAL_GAMES);
 		Log.i(TAG, String.format("%s", createUserTable));
 		db.execSQL(createUserTable);
 	}

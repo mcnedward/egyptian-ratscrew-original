@@ -1,11 +1,12 @@
 package com.egyptianratscrew.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.egyptianratscrew.dao.IUser;
 
 public interface IPlayer {
-	//declaring variables 
+	// declaring variables
 	public String getName();
 
 	public void addCard(Card c);
@@ -36,6 +37,8 @@ public interface IPlayer {
 	public Card getTopCard();
 
 	public void setCardCoor(float x, float y);
-	
+
 	public IUser getUser();
+
+	void setHand(ArrayList<Card> list);
 }

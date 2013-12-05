@@ -42,10 +42,10 @@ public class Card {
 	private Context context;
 
 	/**
-	 * Empty constructor for a card.
+	 * This creates a blank, face down card.
 	 */
 	public Card(Context context) {
-		resourceId = context.getResources().getIdentifier("jokerred", "drawable", context.getPackageName());
+		resourceId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
 		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
 		this.height = bitmap.getHeight();
 		this.width = bitmap.getWidth();
@@ -73,24 +73,24 @@ public class Card {
 		this.imageName = image;
 		this.context = context;
 
-		//if a jack is played then only one chance to play another face card
+		// if a jack is played then only one chance to play another face card
 		if (cardType.equalsIgnoreCase("jack")) {
 			tillFaceValue = 1;
-			//if a queen is played then only two chances to play another face card
+			// if a queen is played then only two chances to play another face card
 		} else if (cardType.equalsIgnoreCase("queen")) {
 			tillFaceValue = 2;
-			//if a king is played then only three chances to play another face card
+			// if a king is played then only three chances to play another face card
 		} else if (cardType.equalsIgnoreCase("king")) {
 			tillFaceValue = 3;
-			//if a ace is played then only four chances to play another face card
+			// if a ace is played then only four chances to play another face card
 		} else if (cardType.equalsIgnoreCase("ace")) {
 			tillFaceValue = 4;
-			//if a face card is not played then set equal to 0
+			// if a face card is not played then set equal to 0
 		} else {
 			tillFaceValue = 0;
 		}
 
-		//setting the resourceID and the bitmap (width and height)
+		// setting the resourceID and the bitmap (width and height)
 		resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
 		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
 		this.height = bitmap.getHeight();
@@ -275,10 +275,12 @@ public class Card {
 	 * This is used to reset the card bitmap to the default position
 	 */
 	public void resetCardBitmap() {
+		// Setting the resourceID and the bitmap (width and height)
 		resourceId = context.getResources().getIdentifier(imageName, "drawable", context.getPackageName());
-		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
-		height = bitmap.getHeight();
-		width = bitmap.getWidth();
+		Bitmap b = BitmapFactory.decodeResource(context.getResources(), resourceId);
+		this.bitmap = b;
+		this.height = b.getHeight();
+		this.width = b.getWidth();
 	}
 
 	/**
