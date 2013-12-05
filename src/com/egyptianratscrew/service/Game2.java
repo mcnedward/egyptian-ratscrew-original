@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
@@ -21,6 +22,7 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Toast;
+
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
@@ -332,13 +334,13 @@ public class Game2 {
 			declareWinner(player2);
 			return;
 		}
-		if (player1.getHand().isEmpty()) {
+		if (player1.getHand().isEmpty() && player1.myTurn()) {
 			if (!slappable()) {
 				declareWinner(player2);
 				return;
 			}
 		}
-		if (player2.getHand().isEmpty()) {
+		if (player2.getHand().isEmpty() && player2.myTurn()) {
 			if (!slappable()) {
 				declareWinner(getOtherPlayer(player1));
 				return;
@@ -347,21 +349,23 @@ public class Game2 {
 	}
 
 	public void declareWinner(final IPlayer player) {
-		IUser user = player.getUser();
-		if (user == this.user) {
-			db.userWins(user);
-		} else {
-			db.userLoses(user);
-		}
+		
 		GAME_STARTED = false;
-
-		((Activity) context).runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				Toast t = Toast.makeText(context, player.getName() + " wins!!!!", Toast.LENGTH_SHORT);
-				t.show();
+		GameFinished(this);
+		
+	}
+	
+	protected void GameFinished(Game2 game) {
+		// Object lock = new Object();
+		for (IGameFinishedListener listener : listeners) {
+			synchronized (this) {
+				listener.onGameFinished(game);
 			}
-		});
+		}
+	}
+	
+	public void registerGameFinishedListener(IGameFinishedListener listener) {
+		listeners.add(listener);
 	}
 
 	/**

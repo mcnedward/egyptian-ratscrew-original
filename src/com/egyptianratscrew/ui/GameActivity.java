@@ -24,6 +24,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	private GameSurface tableCardSurface;
 	private Game2 game;
 	private Context context;
+	private Bitmap cardBack;
+	private IUser user;
 
 	// creating the content view of game_layout
 	@Override
@@ -38,9 +40,9 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
 
-		Bitmap cardBack = (Bitmap) this.getIntent().getParcelableExtra("CardBack");
+		cardBack = (Bitmap) this.getIntent().getParcelableExtra("CardBack");
 		// Check if there was a user intent passed to this activity
-		IUser user = null;
+		user = null;
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
 		if (extras != null) {
@@ -50,30 +52,35 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 				// TODO: Do something with the value of isNew.
 			}
 		}
+		StartGame();
+
+	}
+
+	private void StartGame() {
 		context = this;
 		game = new Game2(true, user, 3, cardBack, this);
+		game.registerGameFinishedListener(this);
 
-		// game.registerGameFinishedListener(this);
 
 		// setting the relative layout of table
 		table = (RelativeLayout) findViewById(R.id.Table);
 		tableCardSurface = new GameSurface(this, game);
 		// adding the tableCardSurface
 		table.addView(tableCardSurface);
-
 	}
 
 	@Override
-	public void onGameFinished(Game game) {
-		runOnUiThread(new Runnable() {
-
-			@Override
-			public void run() {
-				Toast t = Toast.makeText(context, "yay", Toast.LENGTH_LONG);
-				t.show();
-				// startActivity(new Intent(context, WinnerActivity.class));
-			}
-		});
+	public void onGameFinished(Game2 game) {
+//		runOnUiThread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				
+//			}
+//		});
+		updateStatistics(game);
+		Intent winnerIntent = new Intent(this, WinnerActivity.class);
+		startActivity(new Intent(context, WinnerActivity.class));
 	}
 
 	/**
@@ -81,7 +88,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	 * @param game
 	 *            to update the Statistic of the game
 	 */
-	private void updateSatistics(Game game) {
+	private void updateStatistics(Game2 game) {
 		IUser winner = null;
 		IUser loser = null;
 		// player 1 wins the game and set the winner to the winner and loser to player 2
@@ -98,6 +105,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		else {
 			Toast t = Toast.makeText(this, "Error, Game Not Finished.", Toast.LENGTH_LONG);
 			// handle error
+			StartGame();
 		}
 		// setting information about the winner
 		winner.setTotalGames(winner.getTotalGames() + 1);

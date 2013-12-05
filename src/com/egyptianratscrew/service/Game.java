@@ -495,11 +495,11 @@ public class Game {
 	 */
 	private void DeclareWinner(IPlayer p) {
 		// do stuff with winner
-		GameFinished(this);
+		//GameFinished(this);
 	}
 
 	//
-	protected void GameFinished(Game game) {
+	protected void GameFinished(Game2 game) {
 		// Object lock = new Object();
 		for (IGameFinishedListener listener : listeners) {
 			synchronized (this) {
