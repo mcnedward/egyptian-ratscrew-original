@@ -1,17 +1,13 @@
 package com.egyptianratscrew.ui;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IUser;
@@ -43,7 +39,6 @@ public class MainActivity extends Activity {
 	private Context context;
 	private RatscrewDatabase rdb;
 	private IUser loggedInUser;
-	public static IUser user = null;
 
 	/**
 	 * creating the screens
@@ -56,8 +51,6 @@ public class MainActivity extends Activity {
 		context = this;
 		rdb = new RatscrewDatabase(this);
 		loggedInUser = null;
-
-		user = rdb.getUserByUserName("edwardmcn");
 	}
 
 	@Override
@@ -70,7 +63,7 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (user != null) {
+		if (loggedInUser != null) {
 			hideButtons(true);
 		}
 	}
@@ -159,35 +152,6 @@ public class MainActivity extends Activity {
 		startActivity(gameIntent);
 	}
 
-	/**
-	 * Logout of the game
-	 * 
-	 * @param v
-	 */
-	public void Logout(View v) {
-		AlertDialog.Builder confirm = new AlertDialog.Builder(this);
-		AlertDialog confirmDialog;
-		confirm.setTitle("Are you sure you want to logout?");
-		confirm.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) { // Delete the artist if user confirms
-				user = null;
-				hideButtons(false);
-				Toast toast = Toast.makeText(context, "You have logged out.", Toast.LENGTH_SHORT);
-				toast.show();
-				return;
-			}
-		});
-		confirm.setNegativeButton("No", new OnClickListener() { // Do nothing if user cancels
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						return;
-					}
-				});
-		confirmDialog = confirm.create(); // Show the confirm dialog
-		confirmDialog.show();
-	}
-
 	public void viewStatistics(View v) {
 		Intent gameIntent = new Intent(this, ViewStatistics.class);
 		startActivity(gameIntent);
@@ -237,7 +201,7 @@ public class MainActivity extends Activity {
 			btnDeveloper.setVisibility(View.VISIBLE);
 			btnPicture.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
-			txtUserInfo.setText("Logged in as " + user);
+			txtUserInfo.setText("Logged in as " + loggedInUser);
 
 			/**
 			 * Hide certain buttons that are not being used

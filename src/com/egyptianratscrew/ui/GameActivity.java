@@ -2,6 +2,7 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
+import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.Game2;
 import com.egyptianratscrew.service.GameSurface;
@@ -35,8 +37,20 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
 
+		// Check if there was a user intent passed to this activity
+		IUser user = null;
+		Intent intent = getIntent();
+		Bundle extras = intent.getExtras();
+		if (extras != null) {
+			if (extras.containsKey("User")) {
+				user = (User) extras.getSerializable("User");
+
+				// TODO: Do something with the value of isNew.
+			}
+		}
 		context = this;
-		game = new Game2(true, 3, this);
+		// Start a new Game with either a null user, or the logged in user
+		game = new Game2(true, 3, this, user);
 
 		// game.registerGameFinishedListener(this);
 
@@ -63,7 +77,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 	/**
 	 * 
-	 * @param game to update the Statistic of the game
+	 * @param game
+	 *            to update the Statistic of the game
 	 */
 	private void updateSatistics(Game game) {
 		IUser winner = null;

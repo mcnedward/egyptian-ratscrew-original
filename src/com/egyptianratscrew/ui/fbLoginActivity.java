@@ -112,7 +112,6 @@ public class fbLoginActivity extends Activity implements LoginListener {
 			String userName = user.getName();
 			String email = user.getEmail();
 			IUser u = new User(firstName, lastName, userName, email, null);
-			MainActivity.user = u;
 			db.insertUser(u);
 			// Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
 			// update your status if logged in

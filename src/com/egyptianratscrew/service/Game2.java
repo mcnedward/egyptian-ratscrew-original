@@ -30,7 +30,6 @@ import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
-import com.egyptianratscrew.ui.MainActivity;
 
 /**
  * Game Class
@@ -50,6 +49,7 @@ public class Game2 {
 	private Context context;
 	private RatscrewDatabase db;
 	private List<IGameFinishedListener> listeners;
+	private IUser user;
 
 	public IPlayer player1;
 	public IPlayer player2;
@@ -64,18 +64,20 @@ public class Game2 {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game2(boolean onePlayerGame, int difficulty, Context con) {
+	public Game2(boolean onePlayerGame, int difficulty, Context con, IUser u) {
 		this.context = con;
+		this.user = u;
 		db = new RatscrewDatabase(context);
 
 		listeners = new ArrayList<IGameFinishedListener>();
 
 		// Check if a user is logged in and make player 1 that user if true
 		// Create a new blank user if there is no user logged in
-		if (MainActivity.user != null)
-			player1 = new HumanPlayer(MainActivity.user);
-		else
+		if (user != null) {
+			player1 = new HumanPlayer(user);
+		} else {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
+		}
 		player2 = new HumanPlayer(null);
 	}
 
@@ -339,7 +341,7 @@ public class Game2 {
 
 	public void declareWinner(final IPlayer player) {
 		IUser user = player.getUser();
-		if (user == MainActivity.user) {
+		if (user == this.user) {
 			db.userWins(user);
 		} else {
 			db.userLoses(user);

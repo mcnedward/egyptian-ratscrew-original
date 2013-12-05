@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IUser;
-import com.egyptianratscrew.dao.RatscrewDatabase;
+import com.egyptianratscrew.dao.User;
 
 /**
  * Activity for viewing the statistics for the currently logged in user
@@ -22,15 +22,13 @@ public class ViewStatistics extends Activity {
 	private final static String TAG = "ViewStatistics";
 
 	private IUser user;
-	private RatscrewDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistics);
 
-		db = new RatscrewDatabase(this);
-		user = db.getUserById(MainActivity.user.getUserId());
+		user = (User) getIntent().getExtras().getSerializable("User");
 		displayUserData(user);
 	}
 

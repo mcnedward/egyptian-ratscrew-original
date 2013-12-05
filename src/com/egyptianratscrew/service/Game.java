@@ -7,7 +7,10 @@ import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.view.MotionEventCompat;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -22,7 +25,6 @@ import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
-import com.egyptianratscrew.ui.MainActivity;
 
 /**
  * Game Class
@@ -47,6 +49,7 @@ public class Game {
 	private CardDeck cd;
 	private List<Card> cardDeck;
 	private Context context;
+	private IUser user;
 
 	private Card blankCard;
 	public int numberOfChances = 0;
@@ -64,13 +67,20 @@ public class Game {
 
 		listeners = new ArrayList<IGameFinishedListener>();
 
+		Intent intent = ((Activity) context).getIntent();
+		Bundle extras = intent.getExtras();
+
 		// Check if a user is logged in and make player 1 that user if true
 		// Create a new blank user if there is no user logged in
-		if (MainActivity.user != null)
-			player1 = new HumanPlayer(MainActivity.user);
-		else
+		if (extras != null) {
+			if (extras.containsKey("User")) {
+				user = (User) ((Activity) context).getIntent().getExtras().getSerializable("User");
+				player1 = new HumanPlayer(user);
+			}
+		} else {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
-		player2 = new HumanPlayer(null);
+			player2 = new HumanPlayer(null);
+		}
 
 		compSlapDelay = difficulty * DELAY_INTERVAL;
 
