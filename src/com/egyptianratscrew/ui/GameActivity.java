@@ -2,6 +2,7 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
@@ -37,6 +38,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// this);
 		// {this.getIntent().getStringExtra(Player1Name),this);
 
+		Bitmap cardBack = (Bitmap) this.getIntent().getParcelableExtra("CardBack");
 		// Check if there was a user intent passed to this activity
 		IUser user = null;
 		Intent intent = getIntent();
@@ -49,8 +51,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 			}
 		}
 		context = this;
-		// Start a new Game with either a null user, or the logged in user
-		game = new Game2(true, 3, this, user);
+		game = new Game2(true, user, 3, cardBack, this);
 
 		// game.registerGameFinishedListener(this);
 

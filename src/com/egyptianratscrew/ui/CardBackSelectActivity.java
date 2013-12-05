@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.DefaultPicture;
 
 public class CardBackSelectActivity extends Activity {
 
@@ -50,14 +51,14 @@ public class CardBackSelectActivity extends Activity {
 		
 		// start this activity.
 		startActivityForResult(photoPickerIntent, IMAGE_GALLERY_REQUEST);
-		
-		
 	}
 	
 	public void DefaultClicked(View v)
 	{
-		
+		image = DefaultPicture.getImage(this);
 	}
+	
+	
 	
 	/**
 	 * the takenewpicture method and start the activity of the camera_request
