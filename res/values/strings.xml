@@ -102,5 +102,6 @@
     <string name="lblPercent">Percentage of Wins</string>
     <string name="txtHighestWinStreak">Winning Streak:</string>
     <string name="txtHighestLosingStreak">Losing Streak:</string>
+    <string name="btnPicture">Take a Picture</string>
 
 </resources>
