@@ -15,7 +15,13 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 
+/**
+ * This allows the user to register for the game
+ * @author Julie
+ *
+ */
 public class RegisterActivity extends Activity {
+	//declaring the variables
 	private final static String TAG = "RegisterActivity";
 
 	private EditText txtFirstName;
@@ -29,7 +35,9 @@ public class RegisterActivity extends Activity {
 
 	private List<User> userList;
 
-	// creating the register content view
+	/**
+	 * creating the register content view
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -135,6 +143,9 @@ public class RegisterActivity extends Activity {
 		// setResult(Activity.RESULT_OK, resultIntent);
 		// finish();
 	}
+	/**
+	 * reset the fields to be cleared
+	 */
 
 	public void resetFields() {
 		txtFirstName.setText("");

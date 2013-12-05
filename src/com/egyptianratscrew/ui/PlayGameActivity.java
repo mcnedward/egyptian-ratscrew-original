@@ -14,6 +14,11 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dao.UserArrayWrapper;
 
+/**
+ * This will play the game activiity
+ * @author Julie
+ *
+ */
 public class PlayGameActivity extends Activity {
 	
 	//declaring the variables
@@ -24,6 +29,9 @@ public class PlayGameActivity extends Activity {
 
 	@Override
 	//creating the screens and content views
+	/**
+	 * create the screen and contents
+	 */
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play_game);
@@ -39,7 +47,10 @@ public class PlayGameActivity extends Activity {
 		return true;
 	}
 	
-	//starting activity of game
+	/**
+	 * starting activity of game
+	 * @param view the view of the screen
+	 */
 	public void PlayNewGame(View view) {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
@@ -48,18 +59,27 @@ public class PlayGameActivity extends Activity {
 		startActivity(game);
 	}
 	
-	//starting activity of viewRules
+	/**
+	 * starting activity of viewRules
+	 * @param view the rules
+	 */
 	public void ViewRules(View view) {
 		Intent viewRules = new Intent(this, ViewRules.class);
 		startActivity(viewRules);
 	}
 	
-	//starting activity of viewDevelopers
+	/**
+	 * starting activity of viewDevelopers
+	 * @param view developers
+	 */
 	public void ViewDevelopers(View view){
 		Intent developers = new Intent (this, ViewDevelopers.class);
 		startActivity(developers);
 	}
-	//setting difficulty level
+	/**
+	 * setting difficulty level
+	 * @param v difficulty level
+	 */
 	public void SelectDifficulty(View v){
 		final CharSequence[] items = {
                 "Hard", "Medium", "Easy"
@@ -77,19 +97,28 @@ public class PlayGameActivity extends Activity {
         diffSelect.show();
 	}
 	
-	//setting the back of the card
+	/**
+	 * setting the back of the card
+	 * @param v the card
+	 */
 	public void SelectCardBack(View v){
 		Intent cardBack = new Intent(this,CardBackSelectActivity.class);
 		startActivityForResult(cardBack,CARD_BACK_REQUEST);
 	}
 	
-	//starting activity of stats
+	/**
+	 * starting activity of stats
+	 * @param view
+	 */
 	public void ViewStatistics(View view) {
 		Intent stats = new Intent(this, ViewStatistics.class);
 		stats.putExtra("User", user);
 		startActivity(stats);
 	}
 	
+	/**
+	 * result of the card
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if(resultCode == RESULT_OK) {
 			// RESULT_OK means that everything processed successfully.
