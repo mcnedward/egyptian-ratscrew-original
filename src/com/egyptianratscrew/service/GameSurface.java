@@ -19,7 +19,6 @@ public class GameSurface extends SurfaceView implements Runnable {
 	private SurfaceHolder holder;
 	private Thread thread;
 	private boolean GAME_RUNNING = false;
-	private boolean GAME_STARTED = false;
 	private Canvas canvas = null;
 
 	private Game2 game;
@@ -58,17 +57,15 @@ public class GameSurface extends SurfaceView implements Runnable {
 		while (true) {
 			try {
 				thread.join();
+				break;
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			break;
 		}
-		thread = null;
 	}
 
 	public void resume() {
 		GAME_RUNNING = true;
-		// game.setStarted(true);
 		thread = new Thread(this);
 		thread.start();
 	}

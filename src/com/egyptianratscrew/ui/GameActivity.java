@@ -2,8 +2,8 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
@@ -13,7 +13,6 @@ import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
-import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.Game2;
 import com.egyptianratscrew.service.GameSurface;
 
@@ -61,7 +60,6 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		game = new Game2(true, user, 3, cardBack, this);
 		game.registerGameFinishedListener(this);
 
-
 		// setting the relative layout of table
 		table = (RelativeLayout) findViewById(R.id.Table);
 		tableCardSurface = new GameSurface(this, game);
@@ -70,16 +68,14 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	}
 
 	@Override
-	public void onGameFinished(Game2 game) {
-//		runOnUiThread(new Runnable() {
-//
-//			@Override
-//			public void run() {
-//				
-//			}
-//		});
-		updateStatistics(game);
-		Intent winnerIntent = new Intent(this, WinnerActivity.class);
+	public void onGameFinished(final Game2 game) {
+		runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				updateStatistics(game);
+			}
+		});
+
 		startActivity(new Intent(context, WinnerActivity.class));
 	}
 
@@ -104,6 +100,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// game tied or not finished
 		else {
 			Toast t = Toast.makeText(this, "Error, Game Not Finished.", Toast.LENGTH_LONG);
+			t.show();
 			// handle error
 			StartGame();
 		}

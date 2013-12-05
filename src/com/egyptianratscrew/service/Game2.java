@@ -32,7 +32,6 @@ import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.dto.HumanPlayer;
 import com.egyptianratscrew.dto.IPlayer;
-import com.egyptianratscrew.ui.MainActivity;
 
 /**
  * Game Class
@@ -434,13 +433,15 @@ public class Game2 {
 		float bottomY = canvas.getHeight() - 20;
 
 		Card player1Card = new Card(context);
-		player1Card.setCardBitmap(cardBack);
 		player1Card.setX(bottomX - player1Card.getWidth());
 		player1Card.setY(bottomY - player1Card.getHeight());
 		Card player2Card = new Card(context);
-		player2Card.setCardBitmap(cardBack);
 		player2Card.setX(topX);
 		player2Card.setY(topY);
+		if (cardBack != null) {
+			player1Card.setCardBitmap(cardBack);
+			player2Card.setCardBitmap(cardBack);
+		}
 
 		Paint paint = new Paint();
 		paint.setStyle(Style.FILL);
