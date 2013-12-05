@@ -3,7 +3,7 @@ package com.egyptianratscrew.dao;
 import java.io.Serializable;
 
 public class User implements Serializable, IUser {
-
+//declaring variables
 	private int userId;
 	private String firstName;
 	private String lastName;
@@ -194,25 +194,21 @@ public class User implements Serializable, IUser {
 
 	@Override
 	public int getCurrentWinningStreak() {
-		// TODO Auto-generated method stub
 		return this.currentWinningStreak;
 	}
 
 	@Override
 	public void setCurrentWinningStreak(int currentWinningStreak) {
-		// TODO Auto-generated method stub
 		this.currentWinningStreak = currentWinningStreak;
 	}
 
 	@Override
 	public int getCurrentLosingStreak() {
-		// TODO Auto-generated method stub
 		return this.currentLosingStreak;
 	}
 
 	@Override
 	public void setCurrentLosingStreak(int currentLosingStreak) {
-		// TODO Auto-generated method stub
 		this.currentLosingStreak = currentLosingStreak;
 	}
 

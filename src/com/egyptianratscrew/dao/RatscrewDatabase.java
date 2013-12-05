@@ -42,7 +42,7 @@ public class RatscrewDatabase {
 	}
 
 	/**
-	 * Open the database for the Music Library for reading only.
+	 * Open the database for the Ratscrew Database for reading only.
 	 * 
 	 * @return A read-only database.
 	 * @throws android.database.SQLException
@@ -53,7 +53,7 @@ public class RatscrewDatabase {
 	}
 
 	/**
-	 * Opens the database for the Music Library for writing.
+	 * Opens the database for the Ratscrew Database for writing.
 	 * 
 	 * @return A writable database.
 	 * @throws android.database.SQLException
@@ -87,7 +87,7 @@ public class RatscrewDatabase {
 			// Create a single InsertHelper to handle this set of insertions.
 			InsertHelper ih = new InsertHelper(db, DATABASE_TABLE_USER);
 
-			// Get the Artist information
+			// Get the User information
 			final String firstName = user.getFirstName();
 			final String lastName = user.getLastName();
 			final String userName = user.getUserName();
