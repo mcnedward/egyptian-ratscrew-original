@@ -11,6 +11,8 @@ import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.view.View;
 
+import com.egyptianratscrew.dao.IUser;
+
 /**
  * Setting the screen when the game is won
  * @author Julie
@@ -21,15 +23,20 @@ public class WinnerView extends View {
 	// setting the variables
 	private Movie mMovie;
 	private long mMovieStart;
+	private String username;
 
 
-	public WinnerView(Context context, InputStream is) {
+	public WinnerView(Context context, InputStream is, IUser winner) {
 		// if winnerview is called then play the animated cards
 		super(context);
 		setFocusable(true);
-
+		if (winner == null)
+			username = "Player";
+		else
+			username = winner.getUserName();
+		
 		//is = context.getResources().openRawResource(R.drawable.playing_cards_animation);
-		mMovie = Movie.decodeStream(is);
+		//mMovie = Movie.decodeStream(is);
 	}
 
 	@Override
@@ -62,10 +69,14 @@ public class WinnerView extends View {
 		canvas.drawColor(Color.GREEN);
 		Paint paint = new Paint();
 		paint.setStyle(Style.FILL);
-		paint.setColor(Color.RED);
-		paint.setTextSize(50);
+		paint.setColor(Color.BLACK);
+		paint.setTextSize(30);
 		paint.setTextAlign(Align.CENTER);
-		canvas.drawText("Winner!", 10,10, paint);
+		canvas.drawText("Game Over", canvas.getWidth()/2,10 -paint.ascent(), paint);
+		paint.setTextSize(50);
+		paint.setColor(Color.RED);
+		canvas.drawText("Congratulations, " + username, canvas.getWidth()/2,canvas.getHeight()/2, paint);
+		canvas.drawText("Winner!", canvas.getWidth()/2 ,(canvas.getHeight()/2)+ paint.ascent(), paint);
 	}
 
 }

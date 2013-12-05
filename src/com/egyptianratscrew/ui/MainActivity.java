@@ -39,7 +39,7 @@ public class MainActivity extends Activity {
 
 	private Context context;
 	private RatscrewDatabase rdb;
-	private IUser loggedInUser;
+	public static IUser loggedInUser;
 
 	/**
 	 * creating the screens
