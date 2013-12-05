@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 			} else if (requestCode == NEW_USER_REQUEST) {
 				IUser user = (IUser) data.getSerializableExtra("NewUser");
 				loggedInUser = user;
-				rdb.insertUser(user);
+				// rdb.insertUser(user);
 				LoginSuccess();
 			} else if (requestCode == LOGIN_REQUEST) {
 				IUser user = (IUser) data.getSerializableExtra("ExistingUser");
