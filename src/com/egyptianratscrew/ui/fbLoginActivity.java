@@ -2,7 +2,6 @@ package com.egyptianratscrew.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,11 +14,15 @@ import com.easy.facebook.android.facebook.FBLoginManager;
 import com.easy.facebook.android.facebook.Facebook;
 import com.easy.facebook.android.facebook.LoginListener;
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.RatscrewDatabase;
+import com.egyptianratscrew.dao.User;
 
 public class fbLoginActivity extends Activity implements LoginListener {
 	/** Called when the activity is first created. */
 
 	private FBLoginManager fbLoginManager;
+	private RatscrewDatabase db;
 
 	public final String EGYPTIANRATSCREWAPP_ID = "451442211642705";
 
@@ -27,6 +30,7 @@ public class fbLoginActivity extends Activity implements LoginListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// setContentView(R.layout.fbLogin);
+		db = new RatscrewDatabase(this);
 		if (isConnectedToInternet(this)) {
 			connectToFacebook();
 		} else {
@@ -103,14 +107,21 @@ public class fbLoginActivity extends Activity implements LoginListener {
 
 		try {
 			user = graphApi.getMyAccountInfo();
+			String firstName = user.getFirst_name();
+			String lastName = user.getLast_name();
+			String userName = user.getName();
+			String email = user.getEmail();
+			IUser u = new User(firstName, lastName, userName, email, null);
+			MainActivity.user = u;
+			db.insertUser(u);
 			// Toast.makeText(this, user.getFirst_name(), Toast.LENGTH_LONG).show();
 			// update your status if logged in
 			// graphApi.setStatus("Hello, world!");
 			fbLoginManager.displayToast("Hey, " + user.getFirst_name() + "! Login success!");
 
-			Intent resultIntent = new Intent();
-			resultIntent.putExtra("USER_NAME", user.getFirst_name());
-			setResult(Activity.RESULT_OK, resultIntent);
+			// Intent resultIntent = new Intent();
+			// resultIntent.putExtra("USER_NAME", user.getFirst_name());
+			// setResult(Activity.RESULT_OK, resultIntent);
 			finish();
 
 		} catch (EasyFacebookError e) {
