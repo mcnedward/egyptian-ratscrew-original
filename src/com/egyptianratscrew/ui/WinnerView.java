@@ -1,6 +1,8 @@
 package com.egyptianratscrew.ui;
 
 import java.io.InputStream;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -20,20 +22,26 @@ import com.egyptianratscrew.dao.IUser;
  */
 public class WinnerView extends View {
 
+	private static final int DELAY_INTERVAL = 2000;
 	// setting the variables
 	private Movie mMovie;
 	private long mMovieStart;
 	private String username;
+	private boolean Blink;
 
 
 	public WinnerView(Context context, InputStream is, IUser winner) {
 		// if winnerview is called then play the animated cards
 		super(context);
 		setFocusable(true);
+		Blink = true;
 		if (winner == null)
 			username = "Player";
 		else
 			username = winner.getUserName();
+		
+		Timer BlinkTimer = new Timer();
+		BlinkTimer.schedule(new BlinkTask(), DELAY_INTERVAL,DELAY_INTERVAL);
 		
 		//is = context.getResources().openRawResource(R.drawable.playing_cards_animation);
 		//mMovie = Movie.decodeStream(is);
@@ -74,9 +82,27 @@ public class WinnerView extends View {
 		paint.setTextAlign(Align.CENTER);
 		canvas.drawText("Game Over", canvas.getWidth()/2,10 -paint.ascent(), paint);
 		paint.setTextSize(50);
-		paint.setColor(Color.RED);
+		if (Blink)
+			paint.setColor(Color.RED);
+		else
+			paint.setColor(Color.MAGENTA);
+		
+		
 		canvas.drawText("Congratulations, " + username, canvas.getWidth()/2,canvas.getHeight()/2, paint);
 		canvas.drawText("Winner!", canvas.getWidth()/2 ,(canvas.getHeight()/2)+ paint.ascent(), paint);
 	}
 
+	class BlinkTask extends TimerTask {
+
+		public BlinkTask() {
+		}
+
+		@Override
+		public void run() {
+			if (Blink)
+				Blink = false;
+			else
+				Blink = true;
+		}
+	}
 }
