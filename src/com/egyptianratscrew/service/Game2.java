@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -21,7 +21,6 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.Toast;
-
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
@@ -57,6 +56,7 @@ public class Game2 {
 	public List<Card> theStack;
 	private CardDeck cd;
 	private List<Card> cardDeck;
+	private Bitmap cardBack;
 
 	/**
 	 * Game Constructor, creates a new instance of the game class
@@ -71,6 +71,8 @@ public class Game2 {
 
 		listeners = new ArrayList<IGameFinishedListener>();
 
+		this.cardBack = cardBack;
+		
 		// Check if a user is logged in and make player 1 that user if true
 		// Create a new blank user if there is no user logged in
 		if (MainActivity.user != null)
@@ -414,6 +416,7 @@ public class Game2 {
 	 * @param canvas
 	 *            The canvas that the cards will be drawn on.
 	 */
+	@SuppressLint("WrongCall")
 	public void drawGame(Canvas canvas) {
 		float topX = 10;
 		float topY = 10;
@@ -421,9 +424,11 @@ public class Game2 {
 		float bottomY = canvas.getHeight() - 20;
 
 		Card player1Card = new Card(context);
+		player1Card.setCardBitmap(cardBack);
 		player1Card.setX(bottomX - player1Card.getWidth());
 		player1Card.setY(bottomY - player1Card.getHeight());
 		Card player2Card = new Card(context);
+		player2Card.setCardBitmap(cardBack);
 		player2Card.setX(topX);
 		player2Card.setY(topY);
 
