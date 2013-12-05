@@ -1,5 +1,8 @@
 package com.egyptianratscrew.ui;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import android.app.Activity;
 import android.os.Bundle;
 
@@ -11,7 +14,10 @@ public class WinnerActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(new WinnerView(this));
+		InputStream is = null;
+		try {is = getAssets().open("playing_cards_animation.gif");}
+		catch (IOException ex) {ex.printStackTrace();}
+		setContentView(new WinnerView(this,is));
 	}
 
 }
