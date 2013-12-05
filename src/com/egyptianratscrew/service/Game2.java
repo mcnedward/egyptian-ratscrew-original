@@ -218,7 +218,10 @@ public class Game2 {
 		else if (cardToThrow.tillFaceValue > 0) {
 			theStack.add(cardToThrow);
 			player.getHand().remove(cardToThrow);
-			player.setTillFace(cardToThrow.tillFaceValue);
+			player.setMyTurn(false);
+			IPlayer playerB = getOtherPlayer(player);
+			playerB.setMyTurn(true);
+			playerB.setTillFace(cardToThrow.tillFaceValue);
 		}
 		// If the card thrown is not a face card, then simply add it to the middle deck and switch player turns.
 		else {
