@@ -3,13 +3,11 @@ package com.egyptianratscrew.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.util.Log;
-
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 
 public class HumanPlayer implements IPlayer {
-	//declare variable and values
+	// declare variable and values
 	private static final String TAG = "HumanPlayer";
 
 	private String playerName;
@@ -20,28 +18,28 @@ public class HumanPlayer implements IPlayer {
 	private IUser user;
 
 	public HumanPlayer(IUser user) {
-		//if the user exists set to the user of the game
+		// if the user exists set to the user of the game
 		if (user != null) {
 			this.user = user;
-			//if the user not there then set to 0 for the ID
+			// if the user not there then set to 0 for the ID
 		} else {
 			this.user = new User("Egyptian", "Ratscrew", "Android", null, null);
 			this.user.setUserId(0);
 		}
-		
-		//getting the username and the userid with the hand
+
+		// getting the username and the userid with the hand
 		playerName = this.user.getUserName();
 		playerID = this.user.getUserId();
 		hand = new ArrayList<Card>();
 	}
 
-	//add the card to the hand
+	// add the card to the hand
 	@Override
 	public void addCard(Card c) {
 		hand.add(c);
 	}
 
-	//remove the card from the hand and return the hand size less than one
+	// remove the card from the hand and return the hand size less than one
 	@Override
 	public Card playCard() {
 		Card retCard = hand.get(hand.size() - 1);
@@ -49,7 +47,7 @@ public class HumanPlayer implements IPlayer {
 		return retCard;
 	}
 
-	//must play a face return true if jack, queen, king, and ace
+	// must play a face return true if jack, queen, king, and ace
 	@Override
 	public boolean needsToPlayFace() {
 		if (tillFace > 0) {
@@ -64,19 +62,19 @@ public class HumanPlayer implements IPlayer {
 		return tillFace;
 	}
 
-	//setting the tillFace
+	// setting the tillFace
 	@Override
 	public void setTillFace(int tillFace) {
 		this.tillFace = tillFace;
 	}
 
-	//return true if myturn
+	// return true if myturn
 	@Override
 	public boolean myTurn() {
 		return turn;
 	}
 
-	//setting the setMyTurn
+	// setting the setMyTurn
 	@Override
 	public void setMyTurn(boolean b) {
 		turn = b;
@@ -84,20 +82,19 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public String getName() {
-		
+
 		return playerName;
 	}
 
 	@Override
 	public int getID() {
-		
+
 		return playerID;
 	}
 
 	@Override
 	public boolean hasAllCards() {
-		
-		if (hand.size() == 51) {
+		if (hand.size() == 11) {
 			return true;
 		} else {
 			return false;
@@ -110,25 +107,26 @@ public class HumanPlayer implements IPlayer {
 	}
 
 	@Override
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = hand;
+	}
+
+	@Override
 	public Card getTopCard() {
-		try {
-			return hand.get(hand.size() - 1);
-		} catch (ArrayIndexOutOfBoundsException e) {
-			Log.i(TAG, e.getMessage(), e);
-		}
-		return null;
+		return hand.get(hand.size() - 1);
 	}
 
 	@Override
 	public void setCardCoor(float x, float y) {
 		Card card = getTopCard();
-		card.setX(x);
-		card.setY(y);
+		if (card != null) {
+			card.setX(x);
+			card.setY(y);
+		}
 	}
 
 	@Override
 	public IUser getUser() {
-		
-		return null;
+		return user;
 	}
 }

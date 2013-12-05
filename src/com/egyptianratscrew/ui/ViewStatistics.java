@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.RatscrewDatabase;
 
 /**
  * Activity for viewing the statistics for the currently logged in user
@@ -21,13 +22,15 @@ public class ViewStatistics extends Activity {
 	private final static String TAG = "ViewStatistics";
 
 	private IUser user;
+	private RatscrewDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistics);
 
-		user = MainActivity.user;
+		db = new RatscrewDatabase(this);
+		user = db.getUserById(MainActivity.user.getUserId());
 		displayUserData(user);
 	}
 
@@ -55,7 +58,9 @@ public class ViewStatistics extends Activity {
 		TextView txtDisplayNumberOfLosses = (TextView) findViewById(R.id.txtDisplayNumberOfLosses);
 		TextView txtDisplayTotalGames = (TextView) findViewById(R.id.txtDisplayTotalGames);
 		TextView txtDisplayHighestWinningStreak = (TextView) findViewById(R.id.txtDisplayHighestWinningStreak);
+		TextView txtDisplayCurrentWinningStreak = (TextView) findViewById(R.id.txtDisplayCurrentWinningStreak);
 		TextView txtDisplayHighestLosingStreak = (TextView) findViewById(R.id.txtDisplayHighestLosingStreak);
+		TextView txtDisplayCurrentLosingStreak = (TextView) findViewById(R.id.txtDisplayCurrentLosingStreak);
 
 		// setting the text for user name, email, and first name and last name through get methods
 		txtDisplayUserName.setText(user.getUserName());
@@ -66,7 +71,9 @@ public class ViewStatistics extends Activity {
 		txtDisplayNumberOfWins.setText(String.valueOf(user.getNumberOfWins()));
 		txtDisplayNumberOfLosses.setText(String.valueOf(user.getNumberOfLosses()));
 		txtDisplayHighestWinningStreak.setText(String.valueOf(user.getHighestWinningStreak()));
+		txtDisplayCurrentWinningStreak.setText(String.valueOf(user.getCurrentWinningStreak()));
 		txtDisplayHighestLosingStreak.setText(String.valueOf(user.getHighestLosingStreak()));
+		txtDisplayCurrentLosingStreak.setText(String.valueOf(user.getCurrentLosingStreak()));
 		txtDisplayTotalGames.setText(String.valueOf(user.getTotalGames()));
 	}
 

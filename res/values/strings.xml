@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="rulesDescription"> The idea of this project is to design an Egyptian Ratscrew Game on a mobile device. We will be show the true aspect of the game on a mobile device. The object of the game is to get all the 52 cards of the deck. \n\
-        First, the deck is dealt to all the players with each players getting about the same number of cards. The cards are placed face down and the players are not allowed to look at their cards. The first players placed their top card face up in the center of the table. Each player does so until a face card (Jack, Queen, King, and Ace) is played. If a face card is played the that player has to play a face card in a certain number of chances. If no face card is played then the player that played the face card wins the pile. This continues until one player has all the cards. Slapping the pile is a key aspect of the game. The first person to slap the pile wins the game.  If a player has run out of cards they may still slap the pile. Slapping occurs when the following conditions have been met:\n\
+        First, the deck is dealt to all the players with each players getting about the same number of cards. The cards are placed face down and the players are not allowed to look at their cards. The first players placed their top card face up in the center of the table. Each player does so until a face card (Jack, Queen, King, and Ace) is played. If a face card is played the next player has to play a face card in a certain number of chances. If no face card is played then the player that played the face card wins the pile. This continues until one player has all the cards. Slapping the pile is a key aspect of the game. The first person to slap the pile wins the game.  If a player has run out of cards they may still slap the pile. Slapping occurs when the following conditions have been met:\n\
         -Doubles in a row \n\
         -Sandwiched Doubles \n\
         -Two Cards add up to ten \n\
@@ -101,7 +101,9 @@
     <string name="lblCredentials">Login with Credentials</string>
     <string name="lblPercent">Percentage of Wins</string>
     <string name="txtHighestWinStreak">Winning Streak:</string>
+    <string name="txtCurrentWinStreak">Current Win Streak:</string>
     <string name="txtHighestLosingStreak">Losing Streak:</string>
     <string name="btnPicture">Take a Picture</string>
+    <string name="txtCurrentLosingStreak">Current Loss Streak:</string>
 
 </resources>

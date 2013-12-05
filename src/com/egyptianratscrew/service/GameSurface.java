@@ -2,14 +2,8 @@ package com.egyptianratscrew.service;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-
-import com.egyptianratscrew.R;
-import com.egyptianratscrew.dto.Card;
 
 /**
  * This is a custom surface view that is used as the card table. This view implements Runnable to constantly redraw the
@@ -28,61 +22,14 @@ public class GameSurface extends SurfaceView implements Runnable {
 	private boolean GAME_STARTED = false;
 	private Canvas canvas = null;
 
-	private Game game;
+	private Game2 game;
 
-	public GameSurface(Context context, Game game) {
+	public GameSurface(Context context, Game2 game) {
 		super(context);
 		this.context = context;
 		this.game = game;
 		holder = getHolder();
 		setFocusable(true);
-	}
-
-	/**
-	 * This method is used to draw all the components of the game. The card locations will first be set, then the
-	 * playCard method will be called to check if there are any cards that need to be removed. After all of those
-	 * methods have ran, the onDraw method for each card in both player's hands and the middle stack will be called so
-	 * that the cards can be drawn on the canvas.
-	 * 
-	 * @param canvas
-	 *            The canvas that the cards will be drawn on.
-	 */
-	public void drawGame(Canvas canvas) {
-		Card card = new Card(context);
-		Paint paint = new Paint();
-		paint.setStyle(Style.FILL);
-		paint.setColor(Color.BLACK);
-		paint.setTextSize(30);
-
-		canvas.drawColor(context.getResources().getColor(R.color.green));	// Set the background color of the canvas
-		game.setCardLocations(this);	// Set the coordinates of each card in the deck
-		game.displayCards();			// Check if any cards need to be played by either player
-
-		if (game.player1.getTopCard() != null) {
-			game.player1.getTopCard().onDraw(canvas);
-			canvas.drawText("Card Count: " + game.player1.getHand().size(), game.player1.getTopCard().getX() - 200,
-					game.player1.getTopCard().getY() + game.player1.getTopCard().getHeight() - 10, paint);
-		}
-		if (game.player2.getTopCard() != null) {
-			game.player2.getTopCard().onDraw(canvas);
-			canvas.drawText("Card Count: " + game.player2.getHand().size(), game.player2.getTopCard().getWidth() + 10,
-					game.player2.getTopCard().getHeight(), paint);
-		}
-
-		if (game.player1.myTurn())
-			canvas.drawText("Player 1's turn!!!", 10, (this.getHeight() / 2) + card.getHeight(), paint);
-		if (game.player2.myTurn())
-			canvas.drawText("Player 2's turn!!!", 10, (this.getHeight() / 2) - card.getHeight(), paint);
-		if (game.slappable())
-			canvas.drawText("SLAP!!!", 10, this.getHeight() / 2, paint);
-		if (game.numberOfChances > 0)
-			canvas.drawText("Chances to play card: " + game.numberOfChances, 10,
-					(this.getHeight() / 2) + card.getHeight() + 50, paint);
-
-		for (int i = 0; i < game.theStack.size(); i++) {			// Draw every card in the middle stack
-			Card c = game.theStack.get(i);
-			c.onDraw(canvas);
-		}
 	}
 
 	@Override
@@ -94,7 +41,8 @@ public class GameSurface extends SurfaceView implements Runnable {
 			try {
 				canvas = holder.lockCanvas(null);
 				synchronized (this) {
-					drawGame(canvas);	// Called constantly while the game is running
+					game.setCardListeners(this);
+					game.drawGame(canvas);	// Called constantly while the game is running
 				}
 			} finally {
 				if (canvas != null) {
@@ -106,6 +54,7 @@ public class GameSurface extends SurfaceView implements Runnable {
 
 	public void pause() {
 		GAME_RUNNING = false;
+		game.setStarted(false);
 		while (true) {
 			try {
 				thread.join();
@@ -119,6 +68,7 @@ public class GameSurface extends SurfaceView implements Runnable {
 
 	public void resume() {
 		GAME_RUNNING = true;
+		// game.setStarted(true);
 		thread = new Thread(this);
 		thread.start();
 	}
