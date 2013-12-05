@@ -13,6 +13,7 @@ import com.egyptianratscrew.dao.IGameFinishedListener;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
+import com.egyptianratscrew.dto.CardDeck;
 import com.egyptianratscrew.service.Game2;
 import com.egyptianratscrew.service.GameSurface;
 
@@ -60,6 +61,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		game = new Game2(true, user, 3, cardBack, this);
 		game.registerGameFinishedListener(this);
 
+
 		// setting the relative layout of table
 		table = (RelativeLayout) findViewById(R.id.Table);
 		tableCardSurface = new GameSurface(this, game);
@@ -68,14 +70,16 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	}
 
 	@Override
-	public void onGameFinished(final Game2 game) {
-		runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				updateStatistics(game);
-			}
-		});
-
+	public void onGameFinished(Game2 game) {
+//		runOnUiThread(new Runnable() {
+//
+//			@Override
+//			public void run() {
+//				
+//			}
+//		});
+		updateStatistics(game);
+		Intent winnerIntent = new Intent(this, WinnerActivity.class);
 		startActivity(new Intent(context, WinnerActivity.class));
 	}
 
@@ -88,12 +92,14 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		IUser winner = null;
 		IUser loser = null;
 		// player 1 wins the game and set the winner to the winner and loser to player 2
-		if (game.player1.hasAllCards()) {
+		if (game.player1.hasAllCards() || 
+				(game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			winner = game.player1.getUser();
 			loser = game.player2.getUser();
 		}
 		// player 2 winner and player 1 loser
-		else if (game.player2.hasAllCards()) {
+		else if (game.player2.hasAllCards()|| 
+				(game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			winner = game.player2.getUser();
 			loser = game.player1.getUser();
 		}
@@ -103,6 +109,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 			t.show();
 			// handle error
 			StartGame();
+			return;
 		}
 		// setting information about the winner
 		winner.setTotalGames(winner.getTotalGames() + 1);

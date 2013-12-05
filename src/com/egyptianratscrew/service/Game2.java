@@ -258,8 +258,19 @@ public class Game2 {
 		theStack = new ArrayList<Card>();
 		// Reset the number of chances to play a letter card if a player has those chances
 		player.setTillFace(0);
-		getOtherPlayer(player).setTillFace(0);
+		player.setMyTurn(true);
+		IPlayer playerB = getOtherPlayer(player);
+		playerB.setTillFace(0);
+		playerB.setMyTurn(false);
+		
 		SLAPPED = false;
+		
+		if (player2.myTurn()) {
+			// Start a new timer for the computer's turn
+			// TIME_BETWEEN_TURNS???
+			Timer player2TurnTask = new Timer();
+			player2TurnTask.schedule(new Player2TurnTask(), DELAY_INTERVAL);
+		}
 	}
 
 	class Player2TurnTask extends TimerTask {
@@ -325,14 +336,6 @@ public class Game2 {
 	 * @param player
 	 */
 	public void checkWinner() {
-		if (player1.getHand().size() == cardDeck.size()) {
-			declareWinner(player1);
-			return;
-		}
-		if (player2.getHand().size() == cardDeck.size()) {
-			declareWinner(player2);
-			return;
-		}
 		if (player1.getHand().isEmpty() && player1.myTurn()) {
 			if (!slappable()) {
 				declareWinner(player2);
@@ -344,6 +347,14 @@ public class Game2 {
 				declareWinner(getOtherPlayer(player1));
 				return;
 			}
+		}
+		if (player1.getHand().size() == cardDeck.size()) {
+			declareWinner(player1);
+			return;
+		}
+		if (player2.getHand().size() == cardDeck.size()) {
+			declareWinner(player2);
+			return;
 		}
 	}
 
