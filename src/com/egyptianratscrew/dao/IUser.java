@@ -3,6 +3,7 @@ package com.egyptianratscrew.dao;
 import java.io.Serializable;
 
 public interface IUser extends Serializable {
+	//getter and setter for the IUser
 	public int getUserId();
 
 	public void setUserId(int userId);

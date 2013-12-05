@@ -46,7 +46,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 	public DatabaseAdapter(Context context) {
 		super(context, DB_NAME, null, DB_VERSION);
 	}
-
+	//this will create the database on the first time
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String createUserTable = String
@@ -58,6 +58,7 @@ public class DatabaseAdapter extends SQLiteOpenHelper {
 		db.execSQL(createUserTable);
 	}
 
+	//Update the database if needed
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		Log.i(TAG, "Droping database tables");
