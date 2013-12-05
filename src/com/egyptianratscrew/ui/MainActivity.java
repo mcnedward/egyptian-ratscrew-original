@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.DefaultPicture;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
@@ -149,6 +150,7 @@ public class MainActivity extends Activity {
 		Intent gameIntent = new Intent(this, GameActivity.class);
 		// UserArrayWrapper wrapper = new UserArrayWrapper(new IUser[] { new UserStub() });
 		// gameIntent.putExtra("Users", wrapper);
+		gameIntent.putExtra("CardBack", DefaultPicture.getImage(this));
 		startActivity(gameIntent);
 	}
 
