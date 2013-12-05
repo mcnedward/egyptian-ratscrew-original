@@ -24,6 +24,7 @@ import com.egyptianratscrew.dto.Card;
 import com.egyptianratscrew.dto.CardDeck;
 
 public class GameSurfaceView extends SurfaceView implements Runnable {
+	//declaring variables 
 	private static String TAG = "GameSurfaceView";	// Tag for logging
 
 	Thread thread = null;
@@ -44,7 +45,10 @@ public class GameSurfaceView extends SurfaceView implements Runnable {
 	private float bottomX;
 	private float bottomY;
 	
-
+/**
+ * setting the surface of the game
+ * @param context
+ */
 	public GameSurfaceView(Context context) {
 		super(context);
 		holder = getHolder();
