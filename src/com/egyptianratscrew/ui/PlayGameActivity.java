@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.egyptianratscrew.R;
+import com.egyptianratscrew.dao.DefaultPicture;
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dao.UserArrayWrapper;
@@ -62,8 +63,9 @@ public class PlayGameActivity extends Activity {
 	public void PlayNewGame(View view) {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
+		if (cardBack == null)
+			cardBack = DefaultPicture.getImage(this);
 		game.putExtra("CardBack", cardBack);
-		game.putExtra("Users", new UserArrayWrapper(new IUser[] { user }));
 		game.putExtra("User", user);
 		startActivity(game);
 	}
