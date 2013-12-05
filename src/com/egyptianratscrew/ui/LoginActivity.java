@@ -36,7 +36,10 @@ public class LoginActivity extends Activity {
 		return true;
 	}
 
-	//the login button is click
+	/**
+	 * the login button is click
+	 * @param v
+	 */
 	public void LoginClicked(View v) {
 		//declaring the username and password
 		String userName = edtUserName.getText().toString().trim();
@@ -88,7 +91,10 @@ public class LoginActivity extends Activity {
 
 	}
 
-	//if reset clicked then clear everything to start over
+	/**
+	 * if reset clicked then clear everything to start over
+	 * @param v
+	 */
 	public void ClearClicked(View v) {
 		edtUserName.setText("");
 		edtPassword.setText("");

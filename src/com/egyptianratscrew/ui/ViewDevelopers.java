@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 
 /**
- 
- * 
+ * Setting the activity and viewing the developers
+ * @author Julie
+ *
  */
 
 public class ViewDevelopers extends Activity {

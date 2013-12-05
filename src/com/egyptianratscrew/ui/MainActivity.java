@@ -46,7 +46,9 @@ public class MainActivity extends Activity {
 	public static IUser user = null;
 
 	
-	//creating the screens
+	/**
+	 * creating the screens
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -74,19 +76,28 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	// starting activity of fbLogin
+	/**
+	 * starting activity of fbLogin
+	 * @param view of facebook
+	 */
 	public void fbLogin(View view) {
 		Intent fblogin = new Intent(this, fbLoginActivity.class);
 		startActivityForResult(fblogin, FB_REQUEST);
 	}
 
-	//starting activity with credentials
+	/**
+	 * starting activity with credentials
+	 * @param v
+	 */
 	public void LoginWithCredentials(View v) {
 		Intent loginIntent = new Intent(this, LoginActivity.class);
 		startActivityForResult(loginIntent, LOGIN_REQUEST);
 	}
 
-	// starting activity of user
+	/**
+	 *  starting activity of user
+	 * @param view
+	 */
 	public void startNewUser(View view) {
 		Intent user = new Intent(this, RegisterActivity.class);
 		startActivityForResult(user, NEW_USER_REQUEST);
@@ -134,6 +145,10 @@ public class MainActivity extends Activity {
 		startActivity(loginIntent);
 	}
 
+	/**
+	 * Start the game
+	 * @param v
+	 */
 	public void StartGame(View v) {
 		Intent gameIntent = new Intent(this, GameActivity.class);
 		// UserArrayWrapper wrapper = new UserArrayWrapper(new IUser[] { new UserStub() });
@@ -141,6 +156,10 @@ public class MainActivity extends Activity {
 		startActivity(gameIntent);
 	}
 
+	/**
+	 * Logout of the game
+	 * @param v
+	 */
 	public void Logout(View v) {
 		AlertDialog.Builder confirm = new AlertDialog.Builder(this);
 		AlertDialog confirmDialog;
@@ -187,7 +206,10 @@ public class MainActivity extends Activity {
 	
 
 	
-
+/**
+ * 
+ * @param hide buttons that not being use
+ */
 	public void hideButtons(boolean hide) {
 		Button btnUserRegister = (Button) findViewById(R.id.btnUserRegister);
 		Button btnFBLogin = (Button) findViewById(R.id.btnFBLogin);
@@ -201,6 +223,9 @@ public class MainActivity extends Activity {
 
 		TextView txtUserInfo = (TextView) findViewById(R.id.txtUserInfo);
 
+		/**
+		 * Hide certain buttons that are not being used
+		 */
 		if (hide) {
 			btnUserRegister.setVisibility(View.GONE);
 			btnFBLogin.setVisibility(View.GONE);
@@ -212,6 +237,10 @@ public class MainActivity extends Activity {
 			btnPicture.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
 			txtUserInfo.setText("Logged in as " + user);
+			
+			/**
+			 * Hide certain buttons that are not being used
+			 */
 		} else {
 			btnUserRegister.setVisibility(View.VISIBLE);
 			btnFBLogin.setVisibility(View.VISIBLE);

@@ -34,7 +34,10 @@ public class CardBackSelectActivity extends Activity {
 		//setting the thumbnail to be able to find
 		thumbnail = (ImageView) findViewById(R.id.imgThumbnail);
 	}
-	
+	/**
+	 * open an existing image to use for the card
+	 * @param v
+	 */
 	public void OpenExistingImageClick(View v) {
 		// we want to pick something.
 		Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
@@ -56,7 +59,10 @@ public class CardBackSelectActivity extends Activity {
 		
 	}
 	
-	//the takenewpicture method and start the activity of the camera_request
+	/**
+	 * the takenewpicture method and start the activity of the camera_request
+	 * @param v
+	 */
 	public void TakeNewPicture(View v)
 	{
 		
@@ -65,7 +71,10 @@ public class CardBackSelectActivity extends Activity {
 		startActivityForResult(cameraIntent, CAMERA_REQUEST);
 	}
 	
-	//save a picture
+	/**
+	 * save a picture
+	 * @param v
+	 */
 	public void SavePicture(View v)
 	{
 		Intent intentMessage=new Intent();

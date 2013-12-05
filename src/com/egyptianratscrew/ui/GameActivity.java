@@ -63,7 +63,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 	/**
 	 * 
-	 * @param game
+	 * @param game to update the Statistic of the game
 	 */
 	private void updateSatistics(Game game) {
 		IUser winner = null;

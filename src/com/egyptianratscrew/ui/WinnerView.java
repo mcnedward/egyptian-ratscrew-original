@@ -11,6 +11,11 @@ import android.view.View;
 
 import com.egyptianratscrew.R;
 
+/**
+ * Setting the screen when the game is won
+ * @author Julie
+ *
+ */
 public class WinnerView extends View {
 
 	// setting the variables
