@@ -173,6 +173,7 @@ public class MainActivity extends Activity {
 		Intent cardIntent = new Intent(this, CardBackSelectActivity.class);
 		startActivity(cardIntent);
 	}
+	
 
 	/**
 	 * 
