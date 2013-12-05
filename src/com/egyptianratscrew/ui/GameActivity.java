@@ -58,6 +58,10 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		t.show();
 	}
 	
+	/**
+	 * 
+	 * @param game
+	 */
 	private void updateSatistics(Game game){
 		IUser winner = null;
 		IUser loser = null;

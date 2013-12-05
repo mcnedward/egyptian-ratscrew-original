@@ -403,7 +403,7 @@ public class Game {
 	}
 
 	/**
-	 * returns IPlayer the coresponds with playerID
+	 * returns IPlayer the corresponds with playerID
 	 * 
 	 * @param playerID
 	 * @return
