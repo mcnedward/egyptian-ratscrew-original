@@ -7,6 +7,7 @@ import android.widget.TextView;
 
 import com.egyptianratscrew.R;
 import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 
 /**
@@ -22,6 +23,7 @@ public class ViewStatistics extends Activity {
 	private final static String TAG = "ViewStatistics";
 
 	private IUser user;
+	private RatscrewDatabase db;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +31,9 @@ public class ViewStatistics extends Activity {
 		setContentView(R.layout.statistics);
 
 		user = (User) getIntent().getExtras().getSerializable("User");
-		displayUserData(user);
+		db = new RatscrewDatabase(this);
+		IUser u = db.getUserById(user.getUserId());
+		displayUserData(u);
 	}
 
 	@Override
