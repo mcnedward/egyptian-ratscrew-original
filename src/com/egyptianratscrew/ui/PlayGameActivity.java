@@ -55,7 +55,7 @@ public class PlayGameActivity extends Activity {
 		Intent game = new Intent(this, GameActivity.class);
 		game.putExtra("Difficulty", difficulty);
 		game.putExtra("CardBack", cardBack);
-		game.putExtra("Users", new UserArrayWrapper(new IUser[] { user }));
+		game.putExtra("User", user );
 		startActivity(game);
 	}
 	
