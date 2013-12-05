@@ -37,16 +37,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/btnTestGame"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:enabled="true"
-        android:maxHeight="@dimen/Button"
-        android:onClick="StartGame"
-        android:text="@string/btnTestGame"
-        android:visibility="visible" />
-
-    <Button
         android:id="@+id/btnUserRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

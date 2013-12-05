@@ -113,30 +113,30 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 			StartGame();
 			return;
 		}
-		// setting information about the winner
-		winner.setTotalGames(winner.getTotalGames() + 1);
-		winner.setNumberOfWins(winner.getNumberOfWins() + 1);
-		winner.setCurrentWinningStreak(winner.getCurrentWinningStreak() + 1);
-		winner.setCurrentLosingStreak(0);
-		if (winner.getHighestWinningStreak() < winner.getCurrentWinningStreak()) {
-			winner.setHighestWinningStreak(winner.getCurrentWinningStreak());
-		}
-		// setting information about the loser
-		loser.setTotalGames(loser.getTotalGames() + 1);
-		loser.setNumberOfLosses(loser.getNumberOfLosses() + 1);
-		loser.setCurrentLosingStreak(loser.getCurrentLosingStreak() + 1);
-		loser.setCurrentWinningStreak(0);
-		if (loser.getHighestLosingStreak() < loser.getCurrentLosingStreak()) {
-			loser.setHighestLosingStreak(loser.getCurrentLosingStreak());
-		}
-
-		// updating information given the game results
-		if (winner.getUserId() != 0) {
-			db.updateUser(winner);
-		}
-		if (loser.getUserId() != 0) {
-			db.updateUser(loser);
-		}
+		// // setting information about the winner
+		// winner.setTotalGames(winner.getTotalGames() + 1);
+		// winner.setNumberOfWins(winner.getNumberOfWins() + 1);
+		// winner.setCurrentWinningStreak(winner.getCurrentWinningStreak() + 1);
+		// winner.setCurrentLosingStreak(0);
+		// if (winner.getHighestWinningStreak() < winner.getCurrentWinningStreak()) {
+		// winner.setHighestWinningStreak(winner.getCurrentWinningStreak());
+		// }
+		// // setting information about the loser
+		// loser.setTotalGames(loser.getTotalGames() + 1);
+		// loser.setNumberOfLosses(loser.getNumberOfLosses() + 1);
+		// loser.setCurrentLosingStreak(loser.getCurrentLosingStreak() + 1);
+		// loser.setCurrentWinningStreak(0);
+		// if (loser.getHighestLosingStreak() < loser.getCurrentLosingStreak()) {
+		// loser.setHighestLosingStreak(loser.getCurrentLosingStreak());
+		// }
+		//
+		// // updating information given the game results
+		// if (winner.getUserId() != 0) {
+		// db.updateUser(winner);
+		// }
+		// if (loser.getUserId() != 0) {
+		// db.updateUser(loser);
+		// }
 
 	}
 
