@@ -83,6 +83,15 @@
         android:visibility="gone" />
 
     <Button
+        android:id="@+id/btnPicture"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btnPicture"
+        android:onClick="CardBackSelectActivity"
+        android:visibility="gone" />
+
+    <Button
         android:id="@+id/btnLogout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

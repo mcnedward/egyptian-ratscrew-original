@@ -180,6 +180,11 @@ public class MainActivity extends Activity {
 		startActivity(developerIntent);
 	}
 	
+	public void CardBackSelectActivity(View v){
+		Intent cardIntent = new Intent(this, CardBackSelectActivity.class);
+		startActivity(cardIntent);
+	}
+	
 
 	
 
@@ -190,12 +195,9 @@ public class MainActivity extends Activity {
 		Button btnLogout = (Button) findViewById(R.id.btnLogout);
 		Button btnStatistics = (Button) findViewById(R.id.btnStatistics);
 		Button btnRule = (Button) findViewById(R.id.btnRule);
+		Button btnPicture = (Button) findViewById(R.id.btnPicture);
 		Button btnDeveloper = (Button) findViewById(R.id.btnDeveloper);
 	
-		
-		
-		
-		
 
 		TextView txtUserInfo = (TextView) findViewById(R.id.txtUserInfo);
 
@@ -207,9 +209,8 @@ public class MainActivity extends Activity {
 			btnStatistics.setVisibility(View.VISIBLE);
 			btnRule.setVisibility(View.VISIBLE);
 			btnDeveloper.setVisibility(View.VISIBLE);
+			btnPicture.setVisibility(View.VISIBLE);
 			txtUserInfo.setVisibility(View.VISIBLE);
-			
-			
 			txtUserInfo.setText("Logged in as " + user);
 		} else {
 			btnUserRegister.setVisibility(View.VISIBLE);
@@ -219,6 +220,7 @@ public class MainActivity extends Activity {
 			btnStatistics.setVisibility(View.GONE);
 			btnRule.setVisibility(View.GONE);
 			btnDeveloper.setVisibility(View.GONE);
+			btnPicture.setVisibility(View.GONE);
 			txtUserInfo.setVisibility(View.GONE);
 			
 			
