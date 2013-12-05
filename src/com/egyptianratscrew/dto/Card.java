@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 
+import com.egyptianratscrew.dao.DefaultPicture;
+
 /**
  * Card Class
  * <p>
@@ -46,8 +48,7 @@ public class Card {
 	 * This creates a blank, face down card.
 	 */
 	public Card(Context context) {
-		resourceId = context.getResources().getIdentifier("b2fv", "drawable", context.getPackageName());
-		bitmap = BitmapFactory.decodeResource(context.getResources(), resourceId);
+		bitmap = DefaultPicture.getImage(context);
 		this.height = bitmap.getHeight();
 		this.width = bitmap.getWidth();
 	}
