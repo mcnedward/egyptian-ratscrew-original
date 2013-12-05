@@ -28,6 +28,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	private Bitmap cardBack;
 	private IUser user;
 
+	private boolean onePlayer = true;
+
 	// creating the content view of game_layout
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +57,9 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 				// TODO: Do something with the value of isNew.
 			}
+			if (extras.containsKey("test")) {
+				onePlayer = false;
+			}
 		}
 		StartGame();
 
@@ -62,7 +67,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 	private void StartGame() {
 		context = this;
-		game = new Game(true, user, 3, cardBack, this);
+		game = new Game(onePlayer, user, 3, cardBack, this);
 		game.registerGameFinishedListener(this);
 
 		// setting the relative layout of table
