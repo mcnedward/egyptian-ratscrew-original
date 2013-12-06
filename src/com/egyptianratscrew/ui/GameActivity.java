@@ -28,8 +28,10 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	private Context context;
 	private Bitmap cardBack;
 	private IUser user;
+	private boolean realdeck;
 
-	private Boolean onePlayer;
+	//two player not implemented
+	private Boolean onePlayer = true;
 
 	// creating the content view of game_layout
 	@Override
@@ -37,7 +39,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_layout);
 
-		onePlayer = (Boolean) this.getIntent().getBooleanExtra("test", true);
+		realdeck = (boolean) this.getIntent().getBooleanExtra("RealDeck", true);
 		
 		// using the database
 		db = new RatscrewDatabase(this);
@@ -63,7 +65,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 
 	private void StartGame() {
 		context = this;
-		game = new Game(onePlayer, user, 3, cardBack, this);
+		game = new Game(onePlayer, user, 3, realdeck, cardBack, this);
 		game.registerGameFinishedListener(this);
 
 		// setting the relative layout of table
@@ -103,7 +105,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 				|| (game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			db.userLoses(game.player2.getUser());
 		}
-		// game tied or not finished
+		// game not finished
 		else {
 			Toast t = Toast.makeText(this, "Error, Game Not Finished.", Toast.LENGTH_LONG);
 			t.show();

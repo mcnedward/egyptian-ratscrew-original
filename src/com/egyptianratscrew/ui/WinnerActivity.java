@@ -23,8 +23,8 @@ public class WinnerActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		InputStream is = null;
 		IPlayer player1 = (IPlayer) this.getIntent().getSerializableExtra("Player");
-		try {is = getAssets().open("playing_cards_animation.gif");}
-		catch (IOException ex) {ex.printStackTrace();}
+//		try {is = getAssets().open("playing_cards_animation.gif");}
+//		catch (IOException ex) {ex.printStackTrace();}
 		setContentView(new WinnerView(this,is, player1));
 		
 		Timer winnerDisplayTimer = new Timer();

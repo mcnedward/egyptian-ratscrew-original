@@ -68,7 +68,7 @@ public class Game {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(Boolean onePlayerGame, IUser u, int difficulty, Bitmap cardBack, Context con) {
+	public Game(boolean onePlayerGame, IUser u, int difficulty, boolean realdeck, Bitmap cardBack, Context con) {
 		this.context = con;
 		this.user = u;
 		db = new RatscrewDatabase(context);
@@ -84,12 +84,14 @@ public class Game {
 		} else {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
 		}
-		player2 = new HumanPlayer(null);
+		//two player not implemented yet
+		//if (onePlayerGame)
+			player2 = new HumanPlayer(null);
 		
 		player1.setWinner(null);
 		player2.setWinner(null);
 
-		if (onePlayerGame == null)
+		if (!realdeck)
 			CardDeck.setRealdeck(false);
 		else
 			CardDeck.setRealdeck(true);

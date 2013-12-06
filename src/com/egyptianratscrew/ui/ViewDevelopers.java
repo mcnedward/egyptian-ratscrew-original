@@ -44,8 +44,7 @@ public class ViewDevelopers extends Activity {
 		game.putExtra("Difficulty", 3);
 		Bitmap cardBack = DefaultPicture.getImage(this);
 		game.putExtra("CardBack", cardBack);
-		Boolean b = null;
-		game.putExtra("test", b);
+		game.putExtra("RealDeck", false);
 		startActivity(game);
 	}
 
