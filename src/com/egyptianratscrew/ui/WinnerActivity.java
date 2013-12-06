@@ -10,7 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.egyptianratscrew.dao.IUser;
+import com.egyptianratscrew.dto.IPlayer;
 
 public class WinnerActivity extends Activity {
 
@@ -22,25 +22,28 @@ public class WinnerActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		InputStream is = null;
-		IUser winner = (IUser) this.getIntent().getSerializableExtra("User");
+		IPlayer player1 = (IPlayer) this.getIntent().getSerializableExtra("Player");
 		try {is = getAssets().open("playing_cards_animation.gif");}
 		catch (IOException ex) {ex.printStackTrace();}
-		setContentView(new WinnerView(this,is, winner));
+		setContentView(new WinnerView(this,is, player1));
 		
 		Timer winnerDisplayTimer = new Timer();
-		winnerDisplayTimer.schedule(new WinnerDisplayTask(this), DELAY_INTERVAL);
+		winnerDisplayTimer.schedule(new WinnerDisplayTask(this,this), DELAY_INTERVAL);
 	}
 	class WinnerDisplayTask extends TimerTask {
 
 		private Context mContext;
-		public WinnerDisplayTask(Context context) {
+		private Activity activity;
+		public WinnerDisplayTask(final Activity activity, Context context) {
 			mContext = context;
+			this.activity = activity;
 		}
 
 		@Override
 		public void run() {
 			Intent playGameIntent = new Intent(mContext, PlayGameActivity.class);
 			playGameIntent.putExtra("User", MainActivity.loggedInUser);
+			activity.finish();
 			startActivity(playGameIntent);
 		}
 	}

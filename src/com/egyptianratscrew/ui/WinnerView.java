@@ -1,8 +1,8 @@
 package com.egyptianratscrew.ui;
 
 import java.io.InputStream;
-import java.util.Timer;
 import java.util.TimerTask;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -12,7 +12,8 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.view.View;
-import com.egyptianratscrew.dao.IUser;
+
+import com.egyptianratscrew.dto.IPlayer;
 
 /**
  * Setting the screen when the game is won
@@ -21,6 +22,10 @@ import com.egyptianratscrew.dao.IUser;
  */
 public class WinnerView extends View {
 
+	private static final String WINNER = "Winner!";
+	private static final String LOSER = "Loser!";
+	private static final String CONGRATULATIONS = "Congratulations, ";
+	private static final String SORRY = "So sorry, ";
 	private static final int DELAY_INTERVAL = 2000;
 	// setting the variables
 	private Movie mMovie;
@@ -28,20 +33,18 @@ public class WinnerView extends View {
 	private String username;
 	private boolean Blink;
 	private Canvas canvas;
+	private Boolean won;
 
 
-	public WinnerView(Context context, InputStream is, IUser winner) {
+	public WinnerView(Context context, InputStream is, IPlayer player1) {
 		// if winnerview is called then play the animated cards
 		super(context);
 		setFocusable(true);
 		Blink = true;
-		if (winner == null)
-			username = "Player";
-		else
-			username = winner.getUserName();
-		
-		Timer BlinkTimer = new Timer();
-		BlinkTimer.schedule(new BlinkTask(), DELAY_INTERVAL,DELAY_INTERVAL);
+		username = player1.getUser().getUserName();
+		won = player1.isWinner();
+//		Timer BlinkTimer = new Timer();
+//		BlinkTimer.schedule(new BlinkTask(), DELAY_INTERVAL,DELAY_INTERVAL);
 		
 		//is = context.getResources().openRawResource(R.drawable.playing_cards_animation);
 		//mMovie = Movie.decodeStream(is);
@@ -88,9 +91,20 @@ public class WinnerView extends View {
 		else
 			paint.setColor(Color.MAGENTA);
 		
+		String message;
+		String message2;
+		if (won){
+			message = CONGRATULATIONS;
+			message2 = WINNER;
+		}
+		else{
+			message = SORRY;
+			message2 = LOSER;
+		}
 		
-		canvas.drawText("Congratulations, " + username, canvas.getWidth()/2,canvas.getHeight()/2, paint);
-		canvas.drawText("Winner!", canvas.getWidth()/2 ,(canvas.getHeight()/2)+ paint.ascent(), paint);
+		
+		canvas.drawText(message + username, canvas.getWidth()/2,canvas.getHeight()/2, paint);
+		canvas.drawText(message2, canvas.getWidth()/2 ,(canvas.getHeight()/2)+ paint.ascent(), paint);
 	}
 
 	class BlinkTask extends TimerTask {

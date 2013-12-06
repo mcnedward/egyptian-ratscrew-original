@@ -1,11 +1,12 @@
 package com.egyptianratscrew.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.egyptianratscrew.dao.IUser;
 
-public interface IPlayer {
+public interface IPlayer extends Serializable{
 	// declaring variables
 	public String getName();
 
@@ -41,4 +42,8 @@ public interface IPlayer {
 	public IUser getUser();
 
 	void setHand(ArrayList<Card> list);
+	
+	public Boolean isWinner();
+	
+	public void setWinner(Boolean won);
 }

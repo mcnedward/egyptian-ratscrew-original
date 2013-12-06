@@ -9,13 +9,22 @@ public class CardDeck {
 
 	public List<Card> cardDeck;
 	protected Context context;
+	private static boolean realdeck;
 
-	public static int DeckSize(boolean onePlayer) {
-		if (!onePlayer) {
+	public static int DeckSize() {
+		if (!realdeck) {
 			return testdeck.length;
 		} else {
 			return deck.length;
 		}
+	}
+	
+	public static boolean realDeck(){
+		return realdeck;
+	}
+	
+	public static void setRealdeck(boolean real_deck){
+		realdeck = real_deck;
 	}
 
 	// TODO This is the real deck that should be used in the final app
@@ -33,52 +42,16 @@ public class CardDeck {
 	public CardDeck(Context context) {
 		// Loop through all cards in the deck and assign values
 		cardDeck = new ArrayList<Card>();
-		for (int x = 0; x < deck.length; x++) {
-			String suit = deck[x].substring(0, 1);
-			String type = deck[x].substring(1);
+		String[] tmpDeck = null;
+		if (realdeck)
+			tmpDeck = deck;
+		else
+			tmpDeck = testdeck;
+		for (int x = 0; x < tmpDeck.length; x++) {
+			String suit = tmpDeck[x].substring(0, 1);
+			String type = tmpDeck[x].substring(1);
 			int value = 0;
-			String imageName = deck[x];
-
-			// Set the suit of the card
-			if (suit.equals("s"))
-				suit = "Spades";
-			else if (suit.equals("c"))
-				suit = "Clubs";
-			else if (suit.equals("d"))
-				suit = "Diamonds";
-			else if (suit.equals("h"))
-				suit = "Hearts";
-
-			// Check the type of the card and set accordingly
-			if (type.equals("j")) {
-				type = "Jack";
-				value = 10;
-			} else if (type.equals("q")) {
-				type = "Queen";
-				value = 10;
-			} else if (type.equals("k")) {
-				type = "King";
-				value = 10;
-			} else if (type.equals("a")) {
-				type = "Ace";
-				value = 11;
-			} else
-				value = Integer.parseInt(type);
-
-			Card card = new Card(type, value, suit, imageName, context);
-			// adding a card to the deck
-			cardDeck.add(card);
-		}
-	}
-
-	public CardDeck(Context context, boolean onePlayergame) {
-		// Loop through all cards in the deck and assign values
-		cardDeck = new ArrayList<Card>();
-		for (int x = 0; x < testdeck.length; x++) {
-			String suit = testdeck[x].substring(0, 1);
-			String type = testdeck[x].substring(1);
-			int value = 0;
-			String imageName = testdeck[x];
+			String imageName = tmpDeck[x];
 
 			// Set the suit of the card
 			if (suit.equals("s"))

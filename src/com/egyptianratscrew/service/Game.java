@@ -68,7 +68,7 @@ public class Game {
 	 * @param onePlayerGame
 	 * @param names
 	 */
-	public Game(boolean onePlayerGame, IUser u, int difficulty, Bitmap cardBack, Context con) {
+	public Game(Boolean onePlayerGame, IUser u, int difficulty, Bitmap cardBack, Context con) {
 		this.context = con;
 		this.user = u;
 		db = new RatscrewDatabase(context);
@@ -85,13 +85,16 @@ public class Game {
 			player1 = new HumanPlayer(new User("Player", "1", "Player 1", "player1@gmail.com", "password"));
 		}
 		player2 = new HumanPlayer(null);
+		
+		player1.setWinner(null);
+		player2.setWinner(null);
 
+		if (onePlayerGame == null)
+			CardDeck.setRealdeck(false);
+		else
+			CardDeck.setRealdeck(true);
 		// Create the deck of cards
-		if (onePlayerGame) {
-			cd = new CardDeck(context);
-		} else {
-			cd = new CardDeck(context, false);
-		}
+		cd = new CardDeck(context);
 		cardDeck = cd.cardDeck;
 	}
 
@@ -367,6 +370,8 @@ public class Game {
 	public void declareWinner(final IPlayer player) {
 
 		GAME_STARTED = false;
+		player.setWinner(true);
+		getOtherPlayer(player).setWinner(false);
 		GameFinished(this);
 
 	}
