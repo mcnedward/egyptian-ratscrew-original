@@ -10,8 +10,12 @@ public class CardDeck {
 	public List<Card> cardDeck;
 	protected Context context;
 
-	public static int DeckSize() {
-		return deck.length;
+	public static int DeckSize(boolean onePlayer) {
+		if (!onePlayer) {
+			return testdeck.length;
+		} else {
+			return deck.length;
+		}
 	}
 
 	// TODO This is the real deck that should be used in the final app

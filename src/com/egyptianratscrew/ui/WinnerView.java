@@ -28,6 +28,7 @@ public class WinnerView extends View {
 	private long mMovieStart;
 	private String username;
 	private boolean Blink;
+	private Canvas canvas;
 
 
 	public WinnerView(Context context, InputStream is, IUser winner) {
@@ -41,7 +42,7 @@ public class WinnerView extends View {
 			username = winner.getUserName();
 		
 		Timer BlinkTimer = new Timer();
-		BlinkTimer.schedule(new BlinkTask(), DELAY_INTERVAL,DELAY_INTERVAL);
+		BlinkTimer.schedule(new BlinkTask(canvas), DELAY_INTERVAL,DELAY_INTERVAL);
 		
 		//is = context.getResources().openRawResource(R.drawable.playing_cards_animation);
 		//mMovie = Movie.decodeStream(is);
@@ -49,7 +50,8 @@ public class WinnerView extends View {
 
 	@Override
 	protected void onDraw(Canvas canvas) {
-		BackupDraw(canvas);
+		this.canvas = canvas;
+		BackupDraw(this.canvas);
 		return;
 		
 //		canvas.drawColor(Color.TRANSPARENT);
@@ -94,7 +96,7 @@ public class WinnerView extends View {
 
 	class BlinkTask extends TimerTask {
 
-		public BlinkTask() {
+		public BlinkTask(final Canvas canvas) {
 		}
 
 		@Override
@@ -103,6 +105,8 @@ public class WinnerView extends View {
 				Blink = false;
 			else
 				Blink = true;
+			if (canvas != null)
+				onDraw(canvas);
 		}
 	}
 }
