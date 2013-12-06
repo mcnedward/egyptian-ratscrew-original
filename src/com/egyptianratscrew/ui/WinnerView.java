@@ -3,7 +3,7 @@ package com.egyptianratscrew.ui;
 import java.io.InputStream;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -12,7 +12,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Align;
 import android.graphics.Paint.Style;
 import android.view.View;
-
 import com.egyptianratscrew.dao.IUser;
 
 /**
@@ -99,6 +98,7 @@ public class WinnerView extends View {
 		public BlinkTask(final Canvas canvas) {
 		}
 
+		@SuppressLint("WrongCall")
 		@Override
 		public void run() {
 			if (Blink)
