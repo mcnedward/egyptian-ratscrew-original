@@ -1,12 +1,13 @@
 package com.egyptianratscrew.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.UserStub;
 
-public class PlayerStub implements IPlayer {
+public class PlayerStub implements IPlayer, Serializable {
 	// declaring variables
 	private String playerName;
 	private List<Card> hand;
@@ -14,6 +15,7 @@ public class PlayerStub implements IPlayer {
 	private int tillFace;
 	private int playerID;
 	private IUser user;
+	private Boolean won;
 
 	public PlayerStub(int id) {
 		// setting the user to the UserStub information
@@ -24,6 +26,8 @@ public class PlayerStub implements IPlayer {
 		playerID = id;
 		// hand is a new ArrayList
 		hand = new ArrayList<Card>();
+		
+		won = null;
 	}
 
 	@Override
@@ -123,5 +127,16 @@ public class PlayerStub implements IPlayer {
 	public void setHand(ArrayList<Card> list) {
 		// TODO Auto-generated method stub
 
+	}
+	@Override
+	public Boolean isWinner() {
+		// TODO Auto-generated method stub
+		return won;
+	}
+
+	@Override
+	public void setWinner(Boolean won) {
+		// TODO Auto-generated method stub
+		this.won = won;
 	}
 }

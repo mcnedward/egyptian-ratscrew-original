@@ -1,12 +1,13 @@
 package com.egyptianratscrew.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.User;
 
-public class HumanPlayer implements IPlayer {
+public class HumanPlayer implements IPlayer, Serializable  {
 	// declare variable and values
 	private static final String TAG = "HumanPlayer";
 
@@ -16,6 +17,7 @@ public class HumanPlayer implements IPlayer {
 	private int tillFace;
 	private int playerID;
 	private IUser user;
+	private Boolean won;
 
 	/**
 	 * 
@@ -35,6 +37,7 @@ public class HumanPlayer implements IPlayer {
 		playerName = this.user.getUserName();
 		playerID = this.user.getUserId();
 		hand = new ArrayList<Card>();
+		won = null;
 	}
 
 	/**
@@ -102,7 +105,7 @@ public class HumanPlayer implements IPlayer {
 
 	@Override
 	public boolean hasAllCards() {
-		if (hand.size() == 11) {
+		if (hand.size() == CardDeck.DeckSize()) {
 			return true;
 		} else {
 			return false;
@@ -138,5 +141,17 @@ public class HumanPlayer implements IPlayer {
 	@Override
 	public IUser getUser() {
 		return user;
+	}
+
+	@Override
+	public Boolean isWinner() {
+		// TODO Auto-generated method stub
+		return won;
+	}
+
+	@Override
+	public void setWinner(Boolean won) {
+		this.won = won;
+		
 	}
 }

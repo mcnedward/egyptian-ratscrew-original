@@ -14,6 +14,7 @@ import com.egyptianratscrew.dao.IUser;
 import com.egyptianratscrew.dao.RatscrewDatabase;
 import com.egyptianratscrew.dao.User;
 import com.egyptianratscrew.dto.CardDeck;
+import com.egyptianratscrew.dto.IPlayer;
 import com.egyptianratscrew.service.Game;
 import com.egyptianratscrew.service.GameSurface;
 
@@ -28,7 +29,7 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	private Bitmap cardBack;
 	private IUser user;
 
-	private boolean onePlayer = true;
+	private Boolean onePlayer;
 
 	// creating the content view of game_layout
 	@Override
@@ -36,13 +37,8 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.game_layout);
 
-		// UserArrayWrapper wrapper = (UserArrayWrapper) this.getIntent().getSerializableExtra("Users");
-
-		// game = new Game(true, this.getIntent().getIntExtra("Difficulty",3),
-		// wrapper.getUsers(),
-		// this);
-		// {this.getIntent().getStringExtra(Player1Name),this);
-
+		onePlayer = (Boolean) this.getIntent().getBooleanExtra("test", true);
+		
 		// using the database
 		db = new RatscrewDatabase(this);
 
@@ -85,9 +81,9 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		//
 		// }
 		// });
-		IUser winner = updateStatistics(game);
+		updateStatistics(game);
 		Intent winnerIntent = new Intent(this, WinnerActivity.class);
-		winnerIntent.putExtra("User", winner);
+		winnerIntent.putExtra("Player", game.player1);
 		startActivity(winnerIntent);
 	}
 
@@ -96,21 +92,15 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 	 * @param game
 	 *            to update the Statistic of the game
 	 */
-	private IUser updateStatistics(Game game) {
-		IUser winner = null;
-		IUser loser = null;
+	private void updateStatistics(Game game) {
 		// player 1 wins the game and set the winner to the winner and loser to player 2
-		if (game.player1.getHand().size() == CardDeck.DeckSize(onePlayer)
-				|| (game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize(onePlayer)) {
-			winner = game.player1.getUser();
-			loser = game.player2.getUser();
+		if (game.player1.hasAllCards()
+				|| (game.player1.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			db.userWins(game.player1.getUser());
 		}
 		// player 2 winner and player 1 loser
-		else if (game.player2.getHand().size() == CardDeck.DeckSize(onePlayer)
-				|| (game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize(onePlayer)) {
-			winner = game.player2.getUser();
-			loser = game.player1.getUser();
+		else if (game.player2.hasAllCards()
+				|| (game.player2.getHand().size() + game.theStack.size()) == CardDeck.DeckSize()) {
 			db.userLoses(game.player2.getUser());
 		}
 		// game tied or not finished
@@ -119,7 +109,6 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 			t.show();
 			// handle error
 			StartGame();
-			return null;
 		}
 		// setting information about the winner
 		// winner.setTotalGames(winner.getTotalGames() + 1);
@@ -145,8 +134,6 @@ public class GameActivity extends Activity implements IGameFinishedListener {
 		// if (loser.getUserId() != 0) {
 		// db.updateUser(loser);
 		// }
-
-		return winner;
 
 	}
 
