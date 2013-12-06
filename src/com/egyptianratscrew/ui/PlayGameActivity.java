@@ -67,6 +67,7 @@ public class PlayGameActivity extends Activity {
 			cardBack = DefaultPicture.getImage(this);
 		game.putExtra("CardBack", cardBack);
 		game.putExtra("User", user);
+		game.putExtra("RealDeck", true);
 		startActivity(game);
 	}
 
