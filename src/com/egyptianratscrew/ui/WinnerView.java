@@ -41,7 +41,7 @@ public class WinnerView extends View {
 			username = winner.getUserName();
 		
 		Timer BlinkTimer = new Timer();
-		BlinkTimer.schedule(new BlinkTask(canvas), DELAY_INTERVAL,DELAY_INTERVAL);
+		BlinkTimer.schedule(new BlinkTask(), DELAY_INTERVAL,DELAY_INTERVAL);
 		
 		//is = context.getResources().openRawResource(R.drawable.playing_cards_animation);
 		//mMovie = Movie.decodeStream(is);
@@ -95,7 +95,7 @@ public class WinnerView extends View {
 
 	class BlinkTask extends TimerTask {
 
-		public BlinkTask(final Canvas canvas) {
+		public BlinkTask() {
 		}
 
 		@SuppressLint("WrongCall")
